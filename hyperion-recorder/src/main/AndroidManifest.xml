@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.willowtreeapps.hyperion.recorder">
+
+    <application>
+
+        <provider
+            android:name=".RecorderFileProvider"
+            android:authorities="com.willowtreeapps.hyperion.recorder.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,7 @@
+include ':hyperion-sample', ':hyperion-tile', ':hyperion-location', ':hyperion-disk', ':hyperion-recorder',
+        ':hyperion-core',
+        ':hyperion-attr',
+        ':hyperion-measurement',
+        ':hyperion-attr-recyclerview',
+        ':hyperion-attr-appcompat',
+        ':hyperion-attr-design'

@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.willowtreeapps.hyperion">
+
+    <application>
+        <provider
+            android:authorities="com.willowtreeapps.hyperion"
+            android:name=".core.HyperionInitProvider"
+            android:exported="false" />
+    </application>
+
+</manifest>
