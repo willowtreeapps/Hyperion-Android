@@ -2,27 +2,12 @@ package com.willowtreeapps.hyperion.core;
 
 import android.support.annotation.Px;
 
-import javax.inject.Inject;
+public interface AttributeTranslator {
 
-@ActivityScope
-public class AttributeTranslator {
+    String translateDp(int dp);
 
-    private final Measurements measurements;
+    String translatePx(@Px int px);
 
-    @Inject
-    AttributeTranslator(Measurements measurements) {
-        this.measurements = measurements;
-    }
+    String translatePxToSp(float px);
 
-    public String translateDp(int dp) {
-        return dp + " dp, " + measurements.toPx(dp) + " px";
-    }
-
-    public String translatePx(@Px int px) {
-        return measurements.toDp(px) + " dp, " + px + " px";
-    }
-
-    public String translatePxToSp(float px) {
-        return measurements.toSp(px) + " sp, " + px + " px";
-    }
 }

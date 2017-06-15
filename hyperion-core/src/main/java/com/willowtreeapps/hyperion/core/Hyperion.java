@@ -2,22 +2,29 @@ package com.willowtreeapps.hyperion.core;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.util.SimpleArrayMap;
+import android.support.annotation.NonNull;
+import android.view.View;
+
+import com.willowtreeapps.hyperion.core.internal.AppComponent;
 
 public final class Hyperion {
 
-    private static final SimpleArrayMap<Activity, Interceptor> interceptors = new SimpleArrayMap<>();
-
     public static void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        interceptors.get(activity).onActivityResult(requestCode, resultCode, data);
+        AppComponent.Holder.getInstance().getLifecycleListener()
+                .onActivityResult(activity, requestCode, resultCode, data);
     }
 
-    static void retainInterceptor(Activity activity, Interceptor interceptor) {
-        interceptors.put(activity, interceptor);
+    @NonNull
+    public static View createPluginView(Activity activity) {
+        return AppComponent.Holder.getInstance().getLifecycleListener().createPluginView(activity);
     }
 
-    static void releaseInterceptor(Activity activity) {
-        interceptors.remove(activity);
+    public static boolean isEmbeddedDrawerEnabled() {
+        return AppComponent.Holder.getInstance().getLifecycleListener().isEmbeddedDrawerEnabled();
+    }
+
+    public static void setEmbeddedDrawerEnabled(boolean enabled) {
+        AppComponent.Holder.getInstance().getLifecycleListener().setEmbeddedDrawerEnabled(enabled);
     }
 
     private Hyperion() {

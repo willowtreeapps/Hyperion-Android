@@ -4,7 +4,7 @@
     <application>
         <provider
             android:authorities="com.willowtreeapps.hyperion"
-            android:name=".core.HyperionInitProvider"
+            android:name=".core.internal.HyperionInitProvider"
             android:exported="false" />
     </application>
 

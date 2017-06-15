@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="FrameLayout">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.willowtreeapps.hyperion.attr.AttributeDetailView
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:clipToPadding="true"
+            android:background="@color/ha_off_white"
+            android:elevation="24dp"
+            android:requiresFadingEdge="vertical"
+            app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+            app:behavior_peekHeight="48dp"
+            app:behavior_hideable="true"
+            tools:ignore="UnusedAttribute" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</merge>

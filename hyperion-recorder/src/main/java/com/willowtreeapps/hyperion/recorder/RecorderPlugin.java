@@ -5,12 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.auto.service.AutoService;
-import com.willowtreeapps.hyperion.core.ComponentContextWrapper;
-import com.willowtreeapps.hyperion.core.DrawerView;
-import com.willowtreeapps.hyperion.core.HyperionCore;
-import com.willowtreeapps.hyperion.core.HyperionCoreComponent;
-import com.willowtreeapps.hyperion.core.Plugin;
-import com.willowtreeapps.hyperion.core.PluginComponent;
+import com.willowtreeapps.hyperion.core.internal.ComponentContextWrapper;
+import com.willowtreeapps.hyperion.core.internal.Dagger;
+import com.willowtreeapps.hyperion.core.internal.HyperionCoreComponent;
 
 
 @AutoService(Plugin.class)
@@ -24,7 +21,7 @@ public class RecorderPlugin extends Plugin {
 
     @Override
     public PluginComponent createComponent(@NonNull Context context) {
-        HyperionCoreComponent hyperionCoreComponent = HyperionCore.getComponent(context);
+        HyperionCoreComponent hyperionCoreComponent = Dagger.getComponent(context);
         RecorderComponent component = DaggerRecorderComponent.builder()
                 .hyperionCoreComponent(hyperionCoreComponent)
                 .recorderModule(new RecorderModule())

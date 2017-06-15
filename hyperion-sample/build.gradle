@@ -24,8 +24,5 @@ dependencies {
     debugCompile project(':hyperion-core')
     debugCompile project(':hyperion-attr')
     debugCompile project(':hyperion-measurement')
-    debugCompile project(':hyperion-location')
-    debugCompile project(':hyperion-disk')
-    debugCompile project(':hyperion-recorder')
     testCompile 'junit:junit:4.12'
 }

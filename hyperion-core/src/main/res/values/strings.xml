@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Hyperion</string>
-    <string name="cd_close">Close</string>
+    <public name="hype_core" type="string">Hyperion Core</public>
+    <string name="hype_plugin_load_failure">Failed to load plugins.\\n%s</string>
 </resources>

@@ -34,12 +34,14 @@
     <EditText
         android:id="@+id/edit_path"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:imeOptions="actionDone"/>
 
     <EditText
         android:id="@+id/edit_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:imeOptions="actionGo"/>
 
     <Button
         android:id="@+id/file_button"

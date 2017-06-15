@@ -1,11 +1,9 @@
 package com.willowtreeapps.hyperion.location;
 
-import com.willowtreeapps.hyperion.core.HyperionCoreComponent;
-import com.willowtreeapps.hyperion.core.PluginScope;
+import com.willowtreeapps.hyperion.core.internal.HyperionCoreComponent;
 
 import dagger.Component;
 
-@PluginScope
 @Component(modules = LocationModule.class, dependencies = HyperionCoreComponent.class)
 interface LocationComponent {
 }

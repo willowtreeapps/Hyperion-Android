@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Hyperion</string>
-    <string name="cd_visual">Visual Value</string>
+    <string name="ha_cd_visual">Visual Value</string>
+    <string name="ha_plugin_name">Attribute Inspector</string>
 </resources>

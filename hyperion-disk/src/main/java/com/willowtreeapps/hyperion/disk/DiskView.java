@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,8 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.willowtreeapps.hyperion.core.DrawerView;
-import com.willowtreeapps.hyperion.core.HyperionCore;
+import com.willowtreeapps.hyperion.core.internal.Dagger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,7 +31,7 @@ public class DiskView extends DrawerView implements Files.Listener {
 
     public DiskView(@NonNull Context context) {
         super(context);
-        HyperionCore.<DiskComponent>getComponent(context).inject(this);
+        Dagger.<DiskComponent>getComponent(context).inject(this);
         inflate(context, R.layout.view_disk, this);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         adapter = new Adapter();

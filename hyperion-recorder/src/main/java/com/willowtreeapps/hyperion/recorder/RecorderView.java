@@ -22,9 +22,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.willowtreeapps.hyperion.core.ActivityResults;
-import com.willowtreeapps.hyperion.core.DrawerView;
-import com.willowtreeapps.hyperion.core.HyperionCore;
+import com.willowtreeapps.hyperion.core.internal.ActivityResults;
+import com.willowtreeapps.hyperion.core.internal.Dagger;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,7 +63,7 @@ public class RecorderView extends DrawerView implements ActivityResults.Listener
 
     public RecorderView(@NonNull Context context) {
         super(context);
-        HyperionCore.<RecorderComponent>getComponent(context).inject(this);
+        Dagger.<RecorderComponent>getComponent(context).inject(this);
 
         mediaRecorder = new MediaRecorder();
         projectionManager = (MediaProjectionManager) context

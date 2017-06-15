@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="overlay_edge">30dp</dimen>
+    <dimen name="hype_overlay_edge">30dp</dimen>
 </resources>

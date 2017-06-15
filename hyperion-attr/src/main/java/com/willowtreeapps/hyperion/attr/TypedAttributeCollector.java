@@ -20,8 +20,8 @@ public abstract class TypedAttributeCollector<T extends View> {
         return this.type.isAssignableFrom(type);
     }
 
-    String name() {
-        return type.getSimpleName();
+    Class<T> getType() {
+        return type;
     }
 
     @NonNull

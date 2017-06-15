@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="selection_primary">#FC561F</color>
-    <color name="selection_secondary">#1272E1</color>
+    <color name="hm_selection_primary">#FC561F</color>
+    <color name="hm_selection_secondary">#1272E1</color>
 </resources>

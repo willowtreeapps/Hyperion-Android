@@ -2,49 +2,58 @@ package com.willowtreeapps.hyperion.attr;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.AttrRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.willowtreeapps.hyperion.core.DrawerView;
-import com.willowtreeapps.hyperion.core.HyperionCore;
-import com.willowtreeapps.hyperion.core.Target;
+import com.willowtreeapps.hyperion.core.ViewTarget;
+import com.willowtreeapps.hyperion.core.plugins.ExtensionProvider;
+import com.willowtreeapps.hyperion.core.plugins.PluginExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-class AttributeDetailView extends DrawerView implements Target.Observer {
+class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
 
     static final int ITEM_HEADER = 1;
     static final int ITEM_ATTRIBUTE = 2;
 
+    private final ViewTarget target;
     private final AttributeAdapter adapter;
+    private final AttributeLoader attributeLoader;
 
-    @Inject Target target;
-    @Inject AttributeCollector attributeCollector;
+    public AttributeDetailView(@NonNull Context context) {
+        this(context, null);
+    }
 
-    public AttributeDetailView(Context context) {
-        super(context);
-        HyperionCore.<AttributeInspectorComponent>getComponent(context).inject(this);
+    public AttributeDetailView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
 
+    public AttributeDetailView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        PluginExtension extension = ExtensionProvider.get(context);
+        target = extension.getViewTarget();
         adapter = new AttributeAdapter();
-        RecyclerView view = new RecyclerView(context);
-        view.setHasFixedSize(true);
-        view.setLayoutManager(new LinearLayoutManager(context));
-        view.setAdapter(adapter);
-        view.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-        addView(view);
+        attributeLoader = new AttributeLoader(extension.getAttributeTranslator());
+
+        setHasFixedSize(true);
+        setLayoutManager(new LinearLayoutManager(context));
+        setAdapter(adapter);
+        addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
     }
 
     @Override
-    protected void onAttachedToWindow() {
+    public void onAttachedToWindow() {
         super.onAttachedToWindow();
         target.registerObserver(this);
     }
@@ -57,7 +66,7 @@ class AttributeDetailView extends DrawerView implements Target.Observer {
 
     @Override
     public void onTargetChanged(View target) {
-        List<Section<ViewAttribute>> sections = attributeCollector.collect(target);
+        List<Section<ViewAttribute>> sections = attributeLoader.getAttributesForView(target);
         List<AttributeDetailItem> items = toItems(sections);
         adapter.setItems(items);
     }
@@ -86,10 +95,10 @@ class AttributeDetailView extends DrawerView implements Target.Observer {
             View itemView;
             switch (viewType) {
                 case ITEM_ATTRIBUTE:
-                    itemView = inflater.inflate(R.layout.item_attribute, parent, false);
+                    itemView = inflater.inflate(R.layout.ha_item_attribute, parent, false);
                     return new AttributeViewHolder(itemView);
                 case ITEM_HEADER:
-                    itemView = inflater.inflate(R.layout.item_header, parent, false);
+                    itemView = inflater.inflate(R.layout.ha_item_header, parent, false);
                     return new HeaderViewHolder(itemView);
                 default:
                     throw new IllegalStateException("Did not recognize view type: " + viewType);
