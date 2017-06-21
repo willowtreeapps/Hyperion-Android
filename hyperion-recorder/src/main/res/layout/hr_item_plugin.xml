@@ -10,13 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="@string/ha_plugin_name"
+        android:text="@string/hr_plugin_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
-    <CheckBox
-        android:id="@+id/checkbox"
+    <ToggleButton
+        android:id="@+id/toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"/>
+        android:layout_gravity="end"
+        android:text="@string/hr_record"/>
 
 </FrameLayout>

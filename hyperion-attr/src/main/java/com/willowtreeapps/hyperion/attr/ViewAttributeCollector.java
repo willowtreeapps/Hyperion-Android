@@ -3,6 +3,7 @@ package com.willowtreeapps.hyperion.attr;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 
 import com.google.auto.service.AutoService;
@@ -10,7 +11,6 @@ import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @AutoService(TypedAttributeCollector.class)
 public class ViewAttributeCollector extends TypedAttributeCollector<View> {
@@ -21,7 +21,7 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
 
     @NonNull
     @Override
-    public List<ViewAttribute> collect(View view, AttributeTranslator attributeTranslator) {
+    public List<ViewAttribute> collect(final View view, AttributeTranslator attributeTranslator) {
         List<ViewAttribute> attributes = new ArrayList<>();
 
         Rect rect = new Rect();
@@ -61,7 +61,13 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            attributes.add(new ViewAttribute<>("TransitionName", view.getTransitionName()));
+            attributes.add(new MutableStringViewAttribute("TransitionName", view.getTransitionName()) {
+                @Override
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                protected void mutate(CharSequence value) {
+                    view.setTransitionName(value.toString());
+                }
+            });
             attributes.add(new ViewAttribute<>("Elevation", view.getElevation()));
         }
 

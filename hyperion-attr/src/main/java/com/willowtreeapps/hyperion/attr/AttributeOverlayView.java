@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
@@ -17,7 +18,7 @@ import com.willowtreeapps.hyperion.core.ViewTarget;
 import com.willowtreeapps.hyperion.core.plugins.ExtensionProvider;
 import com.willowtreeapps.hyperion.core.plugins.PluginExtension;
 
-public class AttributeOverlayView extends FrameLayout {
+public class AttributeOverlayView extends FrameLayout implements ViewTreeObserver.OnPreDrawListener {
 
     private final BottomSheetBehavior bottomSheetBehavior;
     private final ViewGroup contentRoot;
@@ -55,6 +56,18 @@ public class AttributeOverlayView extends FrameLayout {
 
         setWillNotDraw(false);
         setClickable(false);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        getViewTreeObserver().addOnPreDrawListener(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        getViewTreeObserver().removeOnPreDrawListener(this);
     }
 
     @Override
@@ -110,5 +123,14 @@ public class AttributeOverlayView extends FrameLayout {
         if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
+    }
+
+    @Override
+    public boolean onPreDraw() {
+        View current = target.getTarget();
+        if (current != null) {
+            measurementHelper.getScreenLocation(this, current, rect);
+        }
+        return true;
     }
 }

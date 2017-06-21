@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 public class ViewAttribute<T> implements AttributeDetailItem {
 
     private final String key;
-    private final @Nullable T value;
+    protected @Nullable T value;
     private final @Nullable Drawable drawable;
 
     public ViewAttribute(String key, @NonNull T value) {

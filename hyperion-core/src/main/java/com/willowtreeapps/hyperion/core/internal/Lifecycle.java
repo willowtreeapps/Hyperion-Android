@@ -59,7 +59,7 @@ public class Lifecycle extends LifecycleAdapter {
     }
 
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        components.get(activity).getActivityResults()
+        ((ActivityResultsImpl) components.get(activity).getActivityResults())
                 .notifyActivityResult(requestCode, resultCode, data);
     }
 

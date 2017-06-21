@@ -3,6 +3,7 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Activity;
 import android.util.DisplayMetrics;
 
+import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;

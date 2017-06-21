@@ -18,10 +18,15 @@ public class EditTextAttributeCollector extends TypedAttributeCollector<EditText
 
     @NonNull
     @Override
-    public List<ViewAttribute> collect(EditText view, AttributeTranslator attributeTranslator) {
+    public List<ViewAttribute> collect(final EditText view, AttributeTranslator attributeTranslator) {
         List<ViewAttribute> attributes = new ArrayList<>();
 
-        attributes.add(new ViewAttribute<>("FreezesText", view.getFreezesText()));
+        attributes.add(new MutableBooleanViewAttribute("FreezesText", view.getFreezesText()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setFreezesText(value);
+            }
+        });
 
         return attributes;
     }

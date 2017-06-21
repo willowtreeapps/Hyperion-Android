@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:background="@drawable/ha_attribute_background"
+    android:stateListAnimator="@animator/ha_attribute_selection">
+
+    <include layout="@layout/ha_item_attribute"/>
+
+    <com.willowtreeapps.hyperion.attr.ExpandableLayout
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:ha_parallax="0.5">
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="@dimen/ha_width_mutable_string_field"
+            android:layout_height="wrap_content"
+            android:hint="@string/ha_enter_value"
+            android:inputType="text"/>
+
+    </com.willowtreeapps.hyperion.attr.ExpandableLayout>
+
+</LinearLayout>

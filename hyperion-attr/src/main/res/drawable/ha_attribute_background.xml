@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:constantSize="true"
+    android:enterFadeDuration="@android:integer/config_shortAnimTime"
+    android:exitFadeDuration="@android:integer/config_shortAnimTime">
+
+    <item android:state_activated="true" android:drawable="@color/ha_selected_attribute_background" />
+    <item android:drawable="@color/ha_attribute_background" />
+
+</selector>

@@ -31,6 +31,11 @@ public abstract class PluginModule {
         onDestroy();
     }
 
+    protected <T> T getSystemService(String name) {
+        //noinspection unchecked
+        return (T) context.getSystemService(name);
+    }
+
     protected void onDestroy() {
 
     }

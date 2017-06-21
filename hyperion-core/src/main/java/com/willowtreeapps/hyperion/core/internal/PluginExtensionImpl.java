@@ -1,8 +1,10 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
+import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
@@ -22,8 +24,14 @@ class PluginExtensionImpl implements PluginExtension {
 
     @NonNull
     @Override
+    public Activity getActivity() {
+        return component.getActivity();
+    }
+
+    @NonNull
+    @Override
     public ViewGroup getContentRoot() {
-        return (ViewGroup) component.getActivity().findViewById(android.R.id.content);
+        return (ViewGroup) getActivity().findViewById(android.R.id.content);
     }
 
     @NonNull
@@ -36,6 +44,12 @@ class PluginExtensionImpl implements PluginExtension {
     @Override
     public DrawerContainer getDrawerContainer() {
         return pluginView;
+    }
+
+    @NonNull
+    @Override
+    public ActivityResults getActivityResults() {
+        return component.getActivityResults();
     }
 
     @NonNull

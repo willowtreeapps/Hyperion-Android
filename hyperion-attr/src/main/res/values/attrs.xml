@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ha_ExpandableLayout">
+        <attr name="ha_duration" format="integer" />
+        <attr name="ha_expanded" format="boolean" />
+        <attr name="ha_parallax" format="float" />
+        <attr name="ha_layout_expandable" format="boolean" />
+        <attr name="android:orientation"/>
+    </declare-styleable>
+</resources>

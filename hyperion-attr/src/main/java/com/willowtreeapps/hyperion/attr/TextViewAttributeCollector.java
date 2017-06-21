@@ -21,11 +21,21 @@ public class TextViewAttributeCollector extends TypedAttributeCollector<TextView
 
     @NonNull
     @Override
-    public List<ViewAttribute> collect(TextView view, AttributeTranslator attributeTranslator) {
+    public List<ViewAttribute> collect(final TextView view, AttributeTranslator attributeTranslator) {
         List<ViewAttribute> attributes = new ArrayList<>();
 
-        attributes.add(new ViewAttribute<>("Text", view.getText().toString()));
-        attributes.add(new ViewAttribute<>("Hint", view.getHint()));
+        attributes.add(new MutableStringViewAttribute("Text", view.getText().toString()) {
+            @Override
+            protected void mutate(CharSequence value) {
+                view.setText(value);
+            }
+        });
+        attributes.add(new MutableStringViewAttribute("Hint", view.getHint()) {
+            @Override
+            protected void mutate(CharSequence value) {
+                view.setHint(value);
+            }
+        });
         attributes.add(new ViewAttribute<>("TextColor",
                 new ColorValue(view.getCurrentTextColor()),
                 new ColorDrawable(view.getCurrentTextColor())));

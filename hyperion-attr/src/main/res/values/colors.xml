@@ -2,4 +2,6 @@
 <resources>
     <color name="ha_off_white">#FAFAFA</color>
     <color name="ha_selection">#8078909C</color>
+    <color name="ha_selected_attribute_background">#ffffffff</color>
+    <color name="ha_attribute_background">@android:color/transparent</color>
 </resources>

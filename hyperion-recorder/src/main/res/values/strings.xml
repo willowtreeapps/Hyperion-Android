@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">Hyperion</string>
+    <public name="hr_recorder" type="string">Hyperion Recorder</public>
     <string name="share">Share</string>
+    <string name="hr_record">Record</string>
+    <string name="hr_recording">Recording</string>
+    <string name="hr_plugin_name">Recorder</string>
 </resources>

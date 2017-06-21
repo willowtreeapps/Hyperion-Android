@@ -2,20 +2,14 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.content.Intent;
 
+import com.willowtreeapps.hyperion.core.ActivityResults;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-@ActivityScope
-public class ActivityResults {
+class ActivityResultsImpl implements ActivityResults {
 
     private final List<Listener> listeners = new ArrayList<>();
-
-    @Inject
-    ActivityResults() {
-
-    }
 
     public void register(Listener listener) {
         listeners.add(listener);
@@ -29,10 +23,6 @@ public class ActivityResults {
         for (Listener listener : listeners) {
             listener.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    public interface Listener {
-        void onActivityResult(int requestCode, int resultCode, Intent data);
     }
 
 }

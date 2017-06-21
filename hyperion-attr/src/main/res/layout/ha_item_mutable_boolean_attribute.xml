@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
-    android:gravity="center_vertical"
-    android:clickable="false">
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/key_text"
@@ -21,21 +20,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/value_text"
+    <Switch
+        android:id="@+id/boolean_switch"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:text="56dp - 145px"/>
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/ha_cd_visual" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
