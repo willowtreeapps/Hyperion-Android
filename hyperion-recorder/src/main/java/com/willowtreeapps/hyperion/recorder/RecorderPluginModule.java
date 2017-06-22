@@ -37,12 +37,17 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
         View view = layoutInflater.inflate(R.layout.hr_item_plugin, parent, false);
         toggleButton = (ToggleButton) view.findViewById(R.id.toggle);
         toggleButton.setOnClickListener(this);
+        toggleButton.setChecked(RecordingManager.isRecording());
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getExtension().getDrawerContainer().addView(R.layout.hr_view_videos);
             }
         });
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            view.setEnabled(false);
+            toggleButton.setEnabled(false);
+        }
         return view;
     }
 

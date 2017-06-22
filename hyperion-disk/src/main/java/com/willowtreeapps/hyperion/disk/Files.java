@@ -1,6 +1,8 @@
 package com.willowtreeapps.hyperion.disk;
 
 import android.os.FileObserver;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import java.io.File;
@@ -8,17 +10,49 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-class Files extends FileObserver {
+class Files {
 
-    private final CopyOnWriteArrayList<Listener> listeners = new CopyOnWriteArrayList<>();
-    private final File dir;
+    private static final Handler main = new Handler(Looper.getMainLooper());
+    private final String root;
+    private String path;
     private List<File> files;
-    private boolean watching;
+    private FileObserver observer;
+    private final CopyOnWriteArrayList<Listener> listeners = new CopyOnWriteArrayList<>();
 
-    Files(String path) {
-        super(path);
-        this.dir = new File(path);
+    Files(String root) {
+        this.root = root;
+        setPath(root);
         updateFiles();
+    }
+
+    boolean atRoot() {
+        return root.equals(path);
+    }
+
+    void pop() {
+        setPath(path.substring(0, path.lastIndexOf('/')));
+    }
+
+    void setPath(String path) {
+        this.path = path;
+        if (observer != null) {
+            observer.stopWatching();
+        }
+        updateFiles();
+        notifyFiles();
+        observer = new FileObserver(path) {
+            @Override
+            public void onEvent(int event, String path) {
+                switch (event & ALL_EVENTS) {
+                    case MODIFY:
+                    case CREATE:
+                    case DELETE:
+                        updateFiles();
+                        notifyFiles();
+                }
+            }
+        };
+        toggleObserver();
     }
 
     @NonNull
@@ -26,40 +60,40 @@ class Files extends FileObserver {
         return files;
     }
 
-    @Override
-    public void onEvent(int event, String path) {
-        switch (event & ALL_EVENTS) {
-            case MODIFY:
-            case CREATE:
-            case DELETE:
-                updateFiles();
-                notifyFiles();
-        }
-    }
-
     private void updateFiles() {
-        files = Arrays.asList(dir.listFiles());
+        File file = new File(path);
+        files = Arrays.asList(file.listFiles());
     }
 
     private void notifyFiles() {
-        for (Listener listener : listeners) {
-            listener.onFilesChanged(files);
-        }
+        main.post(new Runnable() {
+            @Override
+            public void run() {
+                for (Listener listener : listeners) {
+                    listener.onFilesChanged(files);
+                }
+            }
+        });
     }
 
     void addListener(Listener listener) {
         listeners.add(listener);
+        toggleObserver();
         listener.onFilesChanged(files);
-        if (!watching && listeners.size() > 0) {
-            watching = true;
-            startWatching();
-        }
     }
 
     void removeListener(Listener listener) {
         listeners.remove(listener);
-        if (listeners.isEmpty()) {
-            stopWatching();
+        toggleObserver();
+    }
+
+    private void toggleObserver() {
+        if (observer != null) {
+            if (listeners.isEmpty()) {
+                observer.stopWatching();
+            } else {
+                observer.startWatching();
+            }
         }
     }
 

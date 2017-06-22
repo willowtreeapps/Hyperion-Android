@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Hyperion</string>
+    <public name="hd_disk" type="string">Hyperion-Disk</public>
+    <string name="hd_plugin_name">File Explorer</string>
+    <string name="hd_up">..</string>
+    <string name="hd_share">Share</string>
+    <string name="hd_delete">Delete</string>
 </resources>

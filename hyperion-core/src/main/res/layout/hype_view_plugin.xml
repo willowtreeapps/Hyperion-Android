@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:showDividers="middle"
-            android:divider="@android:drawable/divider_horizontal_dark"/>
+            android:showDividers="middle|end"
+            android:divider="?android:dividerHorizontal"/>
 
     </ScrollView>
 
