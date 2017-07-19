@@ -1,3 +1,4 @@
+rootProject.name = 'hyperion'
 include ':hyperion-sample',
         ':hyperion-tile',
         ':hyperion-core',
