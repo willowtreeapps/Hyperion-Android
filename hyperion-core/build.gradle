@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply from: '../publish.gradle'
 
+group = "com.willowtreeapps.hyperion.core"
+version = project.version
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
