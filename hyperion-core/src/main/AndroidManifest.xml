@@ -3,7 +3,7 @@
 
     <application>
         <provider
-            android:authorities="com.willowtreeapps.hyperion"
+            android:authorities="${applicationId}.HyperionInitProvider"
             android:name=".internal.HyperionInitProvider"
             android:exported="false" />
     </application>
