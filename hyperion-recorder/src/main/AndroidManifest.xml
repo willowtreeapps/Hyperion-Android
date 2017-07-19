@@ -4,7 +4,7 @@
     <application>
         <provider
             android:name=".RecorderFileProvider"
-            android:authorities="com.willowtreeapps.hyperion.recorder.fileprovider"
+            android:authorities="${applicationId}.RecorderFileProvider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data

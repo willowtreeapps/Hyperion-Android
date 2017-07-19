@@ -4,7 +4,7 @@
     <application>
         <provider
             android:name=".DiskFileProvider"
-            android:authorities="com.willowtreeapps.hyperion.disk.fileprovider"
+            android:authorities="${applicationId}.DiskFileProvider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data
