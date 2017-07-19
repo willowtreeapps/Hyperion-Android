@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.willowtreeapps.hyperion.R;
+import com.willowtreeapps.hyperion.core.R;
 
 public class HyperionDrawerFragment extends Fragment {
 

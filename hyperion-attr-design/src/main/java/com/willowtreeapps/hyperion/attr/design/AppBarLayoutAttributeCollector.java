@@ -1,12 +1,12 @@
-package com.willowtreeapps.hyperion.design;
+package com.willowtreeapps.hyperion.attr.design;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 
 import com.google.auto.service.AutoService;
+import com.willowtreeapps.hyperion.core.AttributeTranslator;
 import com.willowtreeapps.hyperion.attr.TypedAttributeCollector;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,0 +1,60 @@
+apply plugin: 'com.github.dcendents.android-maven'
+
+project.afterEvaluate {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: artifactoryReleaseUrl) {
+                    authentication(userName: artifactoryUser, password: artifactoryPassword)
+                }
+                snapshotRepository(url: artifactorySnapshotUrl) {
+                    authentication(userName: artifactoryUser, password: artifactoryPassword)
+                }
+            }
+        }
+    }
+
+    //Config and deps for UML doclet:
+    configurations { umljavadoc }
+    dependencies { umljavadoc 'org.umlgraph:umlgraph:5.6' }
+
+    task androidJavadocs(type: Javadoc) {
+
+        title = "$project.name $version API"
+        description "Generates Javadoc for $name."
+        source = files(android.sourceSets.main.java.srcDirs, project.android.libraryVariants.collect {it.javaCompile.source})
+        classpath = files(
+                project.android.libraryVariants.collect {it.javaCompile.classpath.files},
+                project.android.getBootClasspath())
+        destinationDir = file("${buildDir}/doc/javadoc")
+
+        //Set up for UML doclet.
+        options.docletpath = configurations.umljavadoc.toList()
+        options.doclet = "org.umlgraph.doclet.UmlGraphDoc"
+
+        options {
+            links "http://docs.oracle.com/javase/7/docs/api/",
+                    "https://docs.oracle.com/javaee/7/api/",
+                    "http://google.github.io/dagger/api/2.10/"
+            linksOffline "http://d.android.com/reference", "${project.android.sdkDirectory}/docs/reference"
+        }
+        exclude '**/BuildConfig.java'
+        exclude '**/R.java'
+        failOnError false
+    }
+
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    artifacts {
+        archives androidSourcesJar
+        archives androidJavadocsJar
+    }
+}

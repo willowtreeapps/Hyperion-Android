@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.willowtreeapps.hyperion.R;
+import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.core.plugins.DrawerContainer;
 import com.willowtreeapps.hyperion.core.plugins.PluginExtension;
 import com.willowtreeapps.hyperion.core.plugins.PluginModule;

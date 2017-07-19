@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.willowtreeapps.hyperion.R;
+import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.core.plugins.OnOverlayViewChangedListener;
 import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
 

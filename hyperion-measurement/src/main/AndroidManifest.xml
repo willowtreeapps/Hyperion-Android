@@ -1,7 +1,1 @@
-<manifest package="com.willowtreeapps.hyperion.measurement">
-
-    <application>
-
-    </application>
-
-</manifest>
+<manifest package="com.willowtreeapps.hyperion.measurement"/>

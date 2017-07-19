@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.willowtreeapps.hyperion.R;
+import com.willowtreeapps.hyperion.core.R;
 
 public class HyperionDrawerLayout extends DrawerLayout {
 
