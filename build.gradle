@@ -1,5 +1,10 @@
-project.ext.set("group", 'com.willowtreeapps.hyperion')
-project.ext.set("version", '0.1')
+project.ext.set("compileSdkVersion", 25)
+project.ext.set("buildToolsVersion", "25.0.3")
+project.ext.set("minSdkVersion", 15)
+project.ext.set("targetSdkVersion", 25)
+
+project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
+project.ext.set("libraryVersion", '0.1')
 
 buildscript {
     repositories {
@@ -22,4 +27,12 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+def Integer buildVersionCode() {
+    if (project.hasProperty('versionCode')) {
+        return project.properties.versionCode.toInteger()
+    } else {
+        return 9999;
+    }
 }
