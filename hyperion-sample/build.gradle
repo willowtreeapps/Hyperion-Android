@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
@@ -11,6 +12,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,6 +28,7 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     debugCompile project(':hyperion-core')
+    releaseCompile project(':hyperion-core-no-op')
     debugCompile project(':hyperion-attr')
     debugCompile project(':hyperion-measurement')
     debugCompile project(':hyperion-recorder')

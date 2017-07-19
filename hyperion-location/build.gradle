@@ -16,6 +16,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     resourcePrefix 'hl_'
 }
 
