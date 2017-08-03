@@ -143,12 +143,13 @@ public class VideosView extends FrameLayout {
 
         @Override
         public void onClick(View v) {
+            Context context = v.getContext();
             Intent intent = new Intent(Intent.ACTION_SEND);
             Uri uri = FileProvider.getUriForFile(
-                    v.getContext(), "com.willowtreeapps.hyperion.recorder.fileprovider", file);
+                    context, context.getPackageName() + ".RecorderFileProvider", file);
             intent.setType("video/mp4");
             intent.putExtra(Intent.EXTRA_STREAM, uri);
-            v.getContext().startActivity(Intent.createChooser(intent, "Share file with..."));
+            context.startActivity(Intent.createChooser(intent, "Share file with..."));
         }
     }
 }
