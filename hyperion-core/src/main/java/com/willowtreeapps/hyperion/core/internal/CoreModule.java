@@ -18,12 +18,6 @@ class CoreModule {
 
     @Provides
     @ActivityScope
-    ActivityResults provideActivityResults() {
-        return new ActivityResultsImpl();
-    }
-
-    @Provides
-    @ActivityScope
     ViewTarget provideViewTarget() {
         return new ViewTargetImpl();
     }
