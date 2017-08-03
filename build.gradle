@@ -1,5 +1,5 @@
-project.ext.set("compileSdkVersion", 25)
-project.ext.set("buildToolsVersion", "25.0.3")
+project.ext.set("compileSdkVersion", 26)
+project.ext.set("buildToolsVersion", "26.0.1")
 project.ext.set("minSdkVersion", 15)
 project.ext.set("targetSdkVersion", 25)
 
