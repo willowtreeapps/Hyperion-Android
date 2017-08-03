@@ -2,6 +2,7 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,9 +19,7 @@ public class Lifecycle extends LifecycleAdapter {
     private boolean embeddedDrawerEnabled = true;
 
     @Override
-    public void onActivityStarted(Activity activity) {
-
-        // TODO Support SDK fragments
+    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         AppCompatActivity appCompatActivity = (AppCompatActivity) activity;
         FragmentManager fragmentManager = appCompatActivity.getSupportFragmentManager();
 
@@ -30,7 +29,7 @@ public class Lifecycle extends LifecycleAdapter {
             fragment = new HyperionOverlayFragment();
             fragmentManager.beginTransaction()
                     .add(android.R.id.content, fragment, OVERLAY_TAG)
-                    .commitNow();
+                    .commit();
         }
 
         CoreComponent component = DaggerCoreComponent.builder()
@@ -45,7 +44,7 @@ public class Lifecycle extends LifecycleAdapter {
         if (embeddedDrawerEnabled && fragmentManager.findFragmentByTag(DRAWER_TAG) == null) {
             fragmentManager.beginTransaction()
                     .add(android.R.id.content, new HyperionDrawerFragment(), DRAWER_TAG)
-                    .commitNow();
+                    .commit();
         }
     }
 
@@ -54,7 +53,7 @@ public class Lifecycle extends LifecycleAdapter {
     }
 
     @Override
-    public void onActivityStopped(Activity activity) {
+    public void onActivityDestroyed(Activity activity) {
         components.remove(activity);
     }
 
