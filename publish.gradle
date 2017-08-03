@@ -1,14 +1,16 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
 project.afterEvaluate {
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                repository(url: artifactoryReleaseUrl) {
-                    authentication(userName: artifactoryUser, password: artifactoryPassword)
-                }
-                snapshotRepository(url: artifactorySnapshotUrl) {
-                    authentication(userName: artifactoryUser, password: artifactoryPassword)
+    if (project.hasProperty('artifactoryUser') && project.hasProperty('artifactoryPassword')) {
+        uploadArchives {
+            repositories {
+                mavenDeployer {
+                    repository(url: artifactoryReleaseUrl) {
+                        authentication(userName: artifactoryUser, password: artifactoryPassword)
+                    }
+                    snapshotRepository(url: artifactorySnapshotUrl) {
+                        authentication(userName: artifactoryUser, password: artifactoryPassword)
+                    }
                 }
             }
         }
