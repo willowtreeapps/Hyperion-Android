@@ -68,7 +68,7 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
     private void startRecording() {
         try {
             RecordingManager.prepare(getContext());
-            RecordingManager.requestStart(getExtension().getActivity(), REQUEST_CODE);
+            RecordingManager.requestStart(getExtension().getActivityResults(), REQUEST_CODE);
         } catch (RecordingException ex) {
             ex.printStackTrace();
             // TODO

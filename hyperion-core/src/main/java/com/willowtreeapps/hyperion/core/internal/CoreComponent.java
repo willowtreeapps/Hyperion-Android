@@ -14,7 +14,8 @@ import dagger.Component;
 @Component(modules = {
         CoreModule.class,
         ActivityModule.class,
-        OverlayModule.class
+        OverlayModule.class,
+        ActivityResultModule.class
 }, dependencies = {
         AppComponent.class
 })

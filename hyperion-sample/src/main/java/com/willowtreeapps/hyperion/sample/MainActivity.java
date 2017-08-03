@@ -1,7 +1,6 @@
 package com.willowtreeapps.hyperion.sample;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.willowtreeapps.hyperion.core.Hyperion;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -32,19 +29,10 @@ public class MainActivity extends AppCompatActivity {
                             openFileOutput(editPath.getText().toString(), Context.MODE_PRIVATE));
                     outputStreamWriter.write(editContent.getText().toString());
                     outputStreamWriter.close();
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     Log.e("Exception", "File write failed: " + e.toString());
                 }
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (BuildConfig.DEBUG) {
-            Hyperion.onActivityResult(this, requestCode, resultCode, data);
-        }
     }
 }

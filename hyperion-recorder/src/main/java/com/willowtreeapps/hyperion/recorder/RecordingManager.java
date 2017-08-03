@@ -17,6 +17,8 @@ import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.WindowManager;
 
+import com.willowtreeapps.hyperion.core.ActivityResults;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -86,8 +88,8 @@ final class RecordingManager {
         }
     }
 
-    static void requestStart(@NonNull Activity activity, int requestCode) {
-        activity.startActivityForResult(projectionManager.createScreenCaptureIntent(), requestCode);
+    static void requestStart(ActivityResults activityResults, int requestCode) {
+        activityResults.startActivityForResult(projectionManager.createScreenCaptureIntent(), requestCode);
     }
 
     static void start(int resultCode, Intent data) {

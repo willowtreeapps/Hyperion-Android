@@ -14,6 +14,7 @@ public class Lifecycle extends LifecycleAdapter {
 
     private static final String OVERLAY_TAG = "hyperion_overlay";
     private static final String DRAWER_TAG = "hyperion_drawer";
+    private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
 
     private final SimpleArrayMap<Activity, CoreComponent> components = new SimpleArrayMap<>();
     private boolean embeddedDrawerEnabled = true;
@@ -25,10 +26,20 @@ public class Lifecycle extends LifecycleAdapter {
 
         HyperionOverlayFragment fragment = (HyperionOverlayFragment)
                 fragmentManager.findFragmentByTag(OVERLAY_TAG);
+
         if (fragment == null) {
             fragment = new HyperionOverlayFragment();
             fragmentManager.beginTransaction()
                     .add(android.R.id.content, fragment, OVERLAY_TAG)
+                    .commit();
+        }
+
+        ActivityResultsFragment activityResultsFragment = (ActivityResultsFragment)
+                fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+        if (activityResultsFragment == null) {
+            activityResultsFragment = new ActivityResultsFragment();
+            fragmentManager.beginTransaction()
+                    .add(activityResultsFragment, ACTIVITY_RESULT_TAG)
                     .commit();
         }
 
@@ -37,6 +48,7 @@ public class Lifecycle extends LifecycleAdapter {
                 .coreModule(new CoreModule())
                 .activityModule(new ActivityModule(activity))
                 .overlayModule(new OverlayModule(fragment))
+                .activityResultModule(new ActivityResultModule(activityResultsFragment))
                 .build();
 
         components.put(activity, component);
@@ -55,11 +67,6 @@ public class Lifecycle extends LifecycleAdapter {
     @Override
     public void onActivityDestroyed(Activity activity) {
         components.remove(activity);
-    }
-
-    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        ((ActivityResultsImpl) components.get(activity).getActivityResults())
-                .notifyActivityResult(requestCode, resultCode, data);
     }
 
     public boolean isEmbeddedDrawerEnabled() {
