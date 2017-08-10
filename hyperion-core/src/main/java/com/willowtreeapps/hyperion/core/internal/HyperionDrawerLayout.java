@@ -1,18 +1,23 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.support.annotation.Px;
-import android.support.v4.widget.DrawerLayout;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
-import com.willowtreeapps.hyperion.core.R;
+public class HyperionDrawerLayout extends FrameLayout implements ShakeDetector.OnShakeListener {
 
-public class HyperionDrawerLayout extends DrawerLayout {
-
-    private final @Px int drawerEdge;
     private View drawerView;
+
+    private boolean drawerShown = true;
+
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private ShakeDetector shakeDetector;
 
     public HyperionDrawerLayout(Context context) {
         this(context, null);
@@ -24,7 +29,12 @@ public class HyperionDrawerLayout extends DrawerLayout {
 
     public HyperionDrawerLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        drawerEdge = getResources().getDimensionPixelSize(R.dimen.hype_overlay_edge);
+        setAlpha(0.9f);
+
+        sensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        shakeDetector = new ShakeDetector();
+        shakeDetector.setOnShakeListener(this);
     }
 
     @Override
@@ -35,16 +45,54 @@ public class HyperionDrawerLayout extends DrawerLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        super.onTouchEvent(event);
+        if (isTouchOutside(event)) {
+            closeDrawer();
+            return super.onTouchEvent(event);
+        }
 
-        return !isTouchingDrawerEdge(event)
-                || isDrawerOpen(drawerView)
-                || isDrawerVisible(drawerView);
+        return isDrawerShown();
     }
 
-    private boolean isTouchingDrawerEdge(MotionEvent event) {
-        return event.getX() < getWidth() - drawerEdge
-                && event.getAction() == MotionEvent.ACTION_DOWN;
+    public boolean isDrawerShown() {
+        return drawerShown;
     }
 
+    private void closeDrawer() {
+        if (drawerShown) {
+            drawerShown = false;
+            ObjectAnimator.ofFloat(this, "translationX",
+                    drawerView.getWidth()).setDuration(1000).start();
+        }
+    }
+
+    private void openDrawer() {
+        if (!drawerShown) {
+            drawerShown = true;
+            ObjectAnimator.ofFloat(this, "translationX",
+                    0).setDuration(1000).start();
+        }
+    }
+
+    /**
+     * If the tap is outside (to the left) of the drawer
+     */
+    private boolean isTouchOutside(MotionEvent event) {
+        return event.getX() < drawerView.getX();
+    }
+
+    public void onShake() {
+        openDrawer();
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        sensorManager.unregisterListener(shakeDetector);
+    }
 }
