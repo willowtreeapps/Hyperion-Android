@@ -60,7 +60,7 @@ public class HyperionDrawerLayout extends FrameLayout implements ShakeDetector.O
     private void closeDrawer() {
         if (drawerShown) {
             drawerShown = false;
-            ObjectAnimator.ofFloat(this, "translationX",
+            ObjectAnimator.ofFloat(this, TRANSLATION_X,
                     drawerView.getWidth()).setDuration(1000).start();
         }
     }
@@ -68,7 +68,7 @@ public class HyperionDrawerLayout extends FrameLayout implements ShakeDetector.O
     private void openDrawer() {
         if (!drawerShown) {
             drawerShown = true;
-            ObjectAnimator.ofFloat(this, "translationX",
+            ObjectAnimator.ofFloat(this, TRANSLATION_X,
                     0).setDuration(1000).start();
         }
     }

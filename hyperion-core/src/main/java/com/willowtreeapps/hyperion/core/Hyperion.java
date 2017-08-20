@@ -8,8 +8,11 @@ import com.willowtreeapps.hyperion.core.internal.AppComponent;
 
 public final class Hyperion {
 
-    private static final int SHAKE = 0;
-    private static final int TWOFINGER_DOUBLETAP = 1;
+    /**
+     * Bit flags for activating Hyperion drawer
+     */
+    public static final int SHAKE = 0;
+    public static final int TWOFINGER_DOUBLETAP = 1;
 
     @NonNull
     public static View createPluginView(Activity activity) {
@@ -29,16 +32,20 @@ public final class Hyperion {
     }
 
     /**
-     * Lets user specify which activation gesture to use
-     * Only using shake for now
+     * Lets user specify which activation gesture(s) to use
+     * Combine multiple options with |
+     * Ex. "SHAKE|TWOFINGER_DOUBLETAP"
+     *
+     * Currently not working and shake hard coded in HyperionDrawerLayout
      */
-    private void setDefaultActivationGesture(int gestureType) {
+    private void setDefaultActivationGesture(int gestureTypes) {
         //TODO later
-        switch (gestureType) {
-            case TWOFINGER_DOUBLETAP:
-                break;
-            default:    //SHAKE
-                break;
+        if ((gestureTypes & SHAKE) == SHAKE) {
+            //TODO: activate shake detector
+        }
+
+        if ((gestureTypes & TWOFINGER_DOUBLETAP) == TWOFINGER_DOUBLETAP) {
+            //TODO: activate two finger double tap detector
         }
     }
 }
