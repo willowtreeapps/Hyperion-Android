@@ -8,11 +8,17 @@ import android.view.ViewConfiguration;
  * Timeout is from first finger down to last finger up (extra time added to prevent false detection)
  * Relies on the class holding this object to send it the touch events
  */
-public abstract class TwoFingerDoubleTapDetector {
+public class TwoFingerDoubleTapDetector {
     private final int TIMEOUT = ViewConfiguration.getDoubleTapTimeout() + 100;
     private long firstDownTime = 0;
     private boolean separateTouches = false;
     private byte twoFingerTapCount = 0;
+
+    private TwoFingerDoubleTapListener listener;
+
+    public void setListener(TwoFingerDoubleTapListener listener) {
+        this.listener = listener;
+    }
 
     private void reset(long time) {
         firstDownTime = time;
@@ -43,7 +49,9 @@ public abstract class TwoFingerDoubleTapDetector {
                 if (!separateTouches)
                     separateTouches = true;
                 else if (twoFingerTapCount == 2 && event.getEventTime() - firstDownTime < TIMEOUT) {
-                    onTwoFingerDoubleTap();
+                    if (listener != null) {
+                        listener.onTwoFingerDoubleTap();
+                    }
                     firstDownTime = 0;
                     return true;
                 }
@@ -52,5 +60,7 @@ public abstract class TwoFingerDoubleTapDetector {
         return false;
     }
 
-    public abstract void onTwoFingerDoubleTap();
+    public interface TwoFingerDoubleTapListener {
+        void onTwoFingerDoubleTap();
+    }
 }

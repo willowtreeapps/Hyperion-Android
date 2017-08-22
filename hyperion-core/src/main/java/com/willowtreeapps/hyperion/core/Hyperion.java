@@ -13,6 +13,7 @@ public final class Hyperion {
      */
     public static final int SHAKE = 0;
     public static final int TWOFINGER_DOUBLETAP = 1;
+    public static final int THREEFINGER_OR_GREATER = 2;
 
     @NonNull
     public static View createPluginView(Activity activity) {
@@ -46,6 +47,10 @@ public final class Hyperion {
 
         if ((gestureTypes & TWOFINGER_DOUBLETAP) == TWOFINGER_DOUBLETAP) {
             //TODO: activate two finger double tap detector
+        }
+
+        if ((gestureTypes & THREEFINGER_OR_GREATER) == THREEFINGER_OR_GREATER) {
+            //TODO: activate three+ finger tap detector
         }
     }
 }
