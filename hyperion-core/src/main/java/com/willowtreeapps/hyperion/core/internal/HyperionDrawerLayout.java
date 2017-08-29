@@ -1,6 +1,8 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.support.annotation.Px;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
@@ -9,10 +11,14 @@ import android.view.View;
 
 import com.willowtreeapps.hyperion.core.R;
 
-public class HyperionDrawerLayout extends DrawerLayout {
+public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.OnShakeListener {
 
     private final @Px int drawerEdge;
     private View drawerView;
+
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private ShakeDetector shakeDetector;
 
     public HyperionDrawerLayout(Context context) {
         this(context, null);
@@ -25,12 +31,36 @@ public class HyperionDrawerLayout extends DrawerLayout {
     public HyperionDrawerLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         drawerEdge = getResources().getDimensionPixelSize(R.dimen.hype_overlay_edge);
+        addShakeDetector();
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         drawerView = getChildAt(1);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (sensorManager != null && shakeDetector != null && accelerometer != null) {
+            sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+        }
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (sensorManager != null && shakeDetector != null) {
+            sensorManager.unregisterListener(shakeDetector);
+        }
+    }
+
+    public void addShakeDetector() {
+        sensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        shakeDetector = new ShakeDetector();
+        shakeDetector.setOnShakeListener(this);
     }
 
     @Override
@@ -47,4 +77,8 @@ public class HyperionDrawerLayout extends DrawerLayout {
                 && event.getAction() == MotionEvent.ACTION_DOWN;
     }
 
+    @Override
+    public void onShake() {
+        openDrawer(drawerView);
+    }
 }
