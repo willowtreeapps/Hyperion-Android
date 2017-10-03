@@ -1,7 +1,7 @@
 project.ext.set("compileSdkVersion", 26)
-project.ext.set("buildToolsVersion", "26.0.1")
+project.ext.set("buildToolsVersion", "26.0.2")
 project.ext.set("minSdkVersion", 15)
-project.ext.set("targetSdkVersion", 25)
+project.ext.set("targetSdkVersion", 26)
 
 project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
 project.ext.set("libraryVersion", '0.1-SNAPSHOT')
@@ -10,6 +10,10 @@ buildscript {
 
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 
     dependencies {
@@ -24,6 +28,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 }
 
