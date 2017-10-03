@@ -29,7 +29,7 @@ public class HyperionOverlayFragment extends Fragment implements OverlayContaine
         final Activity activity = getActivity();
         final CoreComponent component = AppComponent.Holder.getInstance()
                 .getLifecycleListener().getComponent(activity);
-        return inflater.cloneInContext(new ComponentContextWrapper(activity, component))
+        return inflater.cloneInContext(new ComponentContextThemeWrapper(activity, component))
                 .inflate(R.layout.hype_fragment_overlay, container, false);
     }
 

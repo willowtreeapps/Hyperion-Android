@@ -18,7 +18,7 @@ public class HyperionDrawerFragment extends Fragment {
         final Activity activity = getActivity();
         final CoreComponent component = AppComponent.Holder.getInstance()
                 .getLifecycleListener().getComponent(activity);
-        return inflater.cloneInContext(new ComponentContextWrapper(activity, component))
+        return inflater.cloneInContext(new ComponentContextThemeWrapper(activity, component))
                 .inflate(R.layout.hype_fragment_drawer, container, false);
     }
 

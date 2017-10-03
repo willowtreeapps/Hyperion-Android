@@ -1,7 +1,6 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -104,6 +103,6 @@ public class Lifecycle extends LifecycleAdapter {
             throw new IllegalStateException("Could not locate Hyperion component for given activity. Is the Activity stopped?");
         }
 
-        return new HyperionPluginView(new ComponentContextWrapper(activity, component));
+        return new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));
     }
 }
