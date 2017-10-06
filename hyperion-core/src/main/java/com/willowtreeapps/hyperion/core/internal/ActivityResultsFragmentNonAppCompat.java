@@ -1,14 +1,14 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.app.Fragment;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityResultsFragment extends Fragment implements ActivityResults {
+public class ActivityResultsFragmentNonAppCompat extends Fragment implements ActivityResults {
 
     private final List<Listener> listeners = new ArrayList<>();
 
