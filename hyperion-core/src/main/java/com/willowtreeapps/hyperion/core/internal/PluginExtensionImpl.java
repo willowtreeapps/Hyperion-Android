@@ -37,7 +37,7 @@ class PluginExtensionImpl implements PluginExtension {
     @NonNull
     @Override
     public OverlayContainer getOverlayContainer() {
-        return component.getOverlayFragment();
+        return component.getOverlayContainer();
     }
 
     @NonNull

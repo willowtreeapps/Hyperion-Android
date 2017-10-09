@@ -7,6 +7,7 @@ import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
+import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
 
 import dagger.Component;
 
@@ -29,7 +30,7 @@ interface CoreComponent {
 
     Activity getActivity();
 
-    HyperionOverlayFragment getOverlayFragment();
+    OverlayContainer getOverlayContainer();
 
     ActivityResults getActivityResults();
 

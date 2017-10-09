@@ -1,20 +1,22 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
+
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 class OverlayModule {
 
-    private final HyperionOverlayFragment fragment;
+    private final OverlayContainer container;
 
-    OverlayModule(HyperionOverlayFragment fragment) {
-        this.fragment = fragment;
+    OverlayModule(OverlayContainer container) {
+        this.container = container;
     }
 
     @Provides
-    HyperionOverlayFragment provideOverlayFragment() {
-        return this.fragment;
+    OverlayContainer provideOverlayContainer() {
+        return this.container;
     }
 
 }

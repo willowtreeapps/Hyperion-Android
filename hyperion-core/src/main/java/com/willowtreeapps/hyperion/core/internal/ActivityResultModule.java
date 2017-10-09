@@ -7,14 +7,14 @@ import dagger.Provides;
 
 @Module
 class ActivityResultModule {
-    private final ActivityResultsFragment fragment;
+    private final ActivityResults results;
 
-    public ActivityResultModule(ActivityResultsFragment fragment) {
-        this.fragment = fragment;
+    public ActivityResultModule(ActivityResults results) {
+        this.results = results;
     }
 
     @Provides
     public ActivityResults providesActivityResults() {
-        return fragment;
+        return results;
     }
 }
