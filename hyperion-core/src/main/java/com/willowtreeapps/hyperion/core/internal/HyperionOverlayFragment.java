@@ -1,10 +1,10 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +34,7 @@ public class HyperionOverlayFragment extends Fragment implements OverlayContaine
 
     @Override
     public void setOverlayView(@LayoutRes int view) {
-        helper.setOverlayView(view, LayoutInflater.from(getContext()));
+        helper.setOverlayView(view, LayoutInflater.from(getActivity()));
     }
 
     @Nullable

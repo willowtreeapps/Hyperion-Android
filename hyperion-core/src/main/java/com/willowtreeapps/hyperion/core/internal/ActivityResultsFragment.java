@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.app.Fragment;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
 

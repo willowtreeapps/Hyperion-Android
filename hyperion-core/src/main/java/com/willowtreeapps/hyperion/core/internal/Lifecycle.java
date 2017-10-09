@@ -28,6 +28,26 @@ public class Lifecycle extends LifecycleAdapter {
 
         if (activity instanceof AppCompatActivity) {
             FragmentManager fragmentManager = ((AppCompatActivity) activity).getSupportFragmentManager();
+            fragment = (HyperionOverlaySupportFragment)
+                    fragmentManager.findFragmentByTag(OVERLAY_TAG);
+
+            if (fragment == null) {
+                fragment = new HyperionOverlaySupportFragment();
+                fragmentManager.beginTransaction()
+                        .add(android.R.id.content, (HyperionOverlaySupportFragment) fragment, OVERLAY_TAG)
+                        .commit();
+            }
+
+            results = (ActivityResultsSupportFragment)
+                    fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+            if (results == null) {
+                results = new ActivityResultsSupportFragment();
+                fragmentManager.beginTransaction()
+                        .add((ActivityResultsSupportFragment) results, ACTIVITY_RESULT_TAG)
+                        .commit();
+            }
+        } else {    //not support
+            android.app.FragmentManager fragmentManager = activity.getFragmentManager();
             fragment = (HyperionOverlayFragment)
                     fragmentManager.findFragmentByTag(OVERLAY_TAG);
 
@@ -46,26 +66,6 @@ public class Lifecycle extends LifecycleAdapter {
                         .add((ActivityResultsFragment) results, ACTIVITY_RESULT_TAG)
                         .commit();
             }
-        } else {    //not appcompat
-            android.app.FragmentManager fragmentManager = activity.getFragmentManager();
-            fragment = (HyperionOverlayFragmentNonAppCompat)
-                    fragmentManager.findFragmentByTag(OVERLAY_TAG);
-
-            if (fragment == null) {
-                fragment = new HyperionOverlayFragmentNonAppCompat();
-                fragmentManager.beginTransaction()
-                        .add(android.R.id.content, (HyperionOverlayFragmentNonAppCompat) fragment, OVERLAY_TAG)
-                        .commit();
-            }
-
-            results = (ActivityResultsFragmentNonAppCompat)
-                    fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
-            if (results == null) {
-                results = new ActivityResultsFragmentNonAppCompat();
-                fragmentManager.beginTransaction()
-                        .add((ActivityResultsFragmentNonAppCompat) results, ACTIVITY_RESULT_TAG)
-                        .commit();
-            }
         }
 
         CoreComponent component = DaggerCoreComponent.builder()
@@ -82,14 +82,14 @@ public class Lifecycle extends LifecycleAdapter {
             FragmentManager fragmentManager = ((AppCompatActivity) activity).getSupportFragmentManager();
             if (embeddedDrawerEnabled && fragmentManager.findFragmentByTag(DRAWER_TAG) == null) {
                 fragmentManager.beginTransaction()
-                        .add(android.R.id.content, new HyperionDrawerFragment(), DRAWER_TAG)
+                        .add(android.R.id.content, new HyperionDrawerSupportFragment(), DRAWER_TAG)
                         .commit();
             }
         } else {
             android.app.FragmentManager fragmentManager = activity.getFragmentManager();
             if (embeddedDrawerEnabled && fragmentManager.findFragmentByTag(DRAWER_TAG) == null) {
                 fragmentManager.beginTransaction()
-                        .add(android.R.id.content, new HyperionDrawerFragmentNonAppCompat(), DRAWER_TAG)
+                        .add(android.R.id.content, new HyperionDrawerFragment(), DRAWER_TAG)
                         .commit();
             }
         }
@@ -120,7 +120,7 @@ public class Lifecycle extends LifecycleAdapter {
             if (enabled) {
                 if (fragmentManager.findFragmentByTag(DRAWER_TAG) == null) {
                     fragmentManager.beginTransaction()
-                            .add(android.R.id.content, new HyperionDrawerFragment(), DRAWER_TAG)
+                            .add(android.R.id.content, new HyperionDrawerSupportFragment(), DRAWER_TAG)
                             .commit();
                 }
             } else {

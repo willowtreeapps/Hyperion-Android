@@ -1,10 +1,10 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.willowtreeapps.hyperion.core.plugins.OnOverlayViewChangedListener;
 import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
 
-public class HyperionOverlayFragmentNonAppCompat extends Fragment implements OverlayContainer {
+public class HyperionOverlaySupportFragment extends Fragment implements OverlayContainer {
 
     private HyperionOverlayFragmentHelper helper = new HyperionOverlayFragmentHelper();
 
@@ -34,7 +34,7 @@ public class HyperionOverlayFragmentNonAppCompat extends Fragment implements Ove
 
     @Override
     public void setOverlayView(@LayoutRes int view) {
-        helper.setOverlayView(view, LayoutInflater.from(getActivity()));
+        helper.setOverlayView(view, LayoutInflater.from(getContext()));
     }
 
     @Nullable
