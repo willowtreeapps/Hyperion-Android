@@ -6,6 +6,7 @@ import android.hardware.SensorManager;
 import android.support.annotation.Px;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -38,6 +39,14 @@ public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.
     protected void onFinishInflate() {
         super.onFinishInflate();
         drawerView = getChildAt(1);
+
+        //set margins if needed to fit system windows
+        Pair<Integer, Integer> margins = FitWindowHelper.getFitWindowMargins(getContext());
+        if (!(margins.first == 0 && margins.second == 0) && getLayoutParams() != null) {
+            MarginLayoutParams lp = new MarginLayoutParams(getLayoutParams());
+            lp.setMargins(0, margins.first, 0, margins.second);
+            setLayoutParams(lp);
+        }
     }
 
     @Override

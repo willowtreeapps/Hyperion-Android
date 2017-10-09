@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,14 @@ class HyperionOverlayFragmentHelper {
 
     void onViewCreated(View view) {
         container = view.findViewById(R.id.container);
+
+        //set margins if needed to fit system windows
+        Pair<Integer, Integer> margins = FitWindowHelper.getFitWindowMargins(view.getContext());
+        if (!(margins.first == 0 && margins.second == 0) && container.getLayoutParams() != null) {
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(container.getLayoutParams());
+            lp.setMargins(0, margins.first, 0, margins.second);
+            container.setLayoutParams(lp);
+        }
     }
 
     View getInflatedView(Activity activity, LayoutInflater inflater, @Nullable ViewGroup container) {
