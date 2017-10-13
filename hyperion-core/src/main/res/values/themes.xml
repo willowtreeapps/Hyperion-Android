@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Hype_Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Hype.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/hype_white</item>
         <item name="colorAccent">@color/hype_willowtree_enabled</item>
         <item name="android:textColorPrimary">@color/hype_willowtree_text</item>
