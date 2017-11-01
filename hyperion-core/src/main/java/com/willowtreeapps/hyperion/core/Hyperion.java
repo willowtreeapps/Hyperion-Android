@@ -37,7 +37,7 @@ public final class Hyperion {
      * Embedded drawer is enabled by default.
      *
      * @see #isEmbeddedDrawerEnabled()
-     * @param enabled
+     * @param enabled true if enabling, false otherwise.
      */
     public static void setEmbeddedDrawerEnabled(boolean enabled) {
         AppComponent.Holder.getInstance().getLifecycle().setEmbeddedDrawerEnabled(enabled);
@@ -57,7 +57,7 @@ public final class Hyperion {
      * Shake gesture is disabled by default.
      *
      * @see #isShakeGestureEnabled()
-     * @param enabled
+     * @param enabled true if enabling, false otherwise.
      */
     public static void setShakeGestureEnabled(boolean enabled) {
         AppComponent.Holder.getInstance().getLifecycle().setShakeGestureEnabled(enabled);

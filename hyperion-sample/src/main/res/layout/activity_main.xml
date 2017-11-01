@@ -9,27 +9,27 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test1"/>
+        android:text="@string/test1"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test2"/>
+        android:text="@string/test2"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test3"/>
+        android:text="@string/test3"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test4"/>
+        android:text="@string/test4"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test5"/>
+        android:text="@string/test5"/>
 
     <EditText
         android:id="@+id/edit_path"
@@ -47,19 +47,19 @@
         android:id="@+id/file_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Write to file"/>
+        android:text="@string/write_to_file"/>
 
     <Switch
         android:id="@+id/drawer_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Toggle Drawer"/>
+        android:text="@string/toggle_drawer_enabled"/>
 
     <Switch
         android:id="@+id/shake_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Toggle Shake"/>
+        android:text="@string/toggle_shake_to_open"/>
 
     <Space
         android:layout_width="0dp"
@@ -74,13 +74,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Test6"/>
+            android:text="@string/test6"/>
 
     </FrameLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_lock_power_off"/>
+        android:src="@android:drawable/ic_lock_power_off"
+        android:contentDescription="@string/test_image"/>
 
 </LinearLayout>
