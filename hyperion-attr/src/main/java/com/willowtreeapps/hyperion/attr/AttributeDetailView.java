@@ -20,8 +20,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.core.ViewTarget;
-import com.willowtreeapps.hyperion.core.plugins.ExtensionProvider;
-import com.willowtreeapps.hyperion.core.plugins.PluginExtension;
+import com.willowtreeapps.hyperion.core.plugins.v1.ExtensionProvider;
+import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 
 import java.util.ArrayList;
 import java.util.List;

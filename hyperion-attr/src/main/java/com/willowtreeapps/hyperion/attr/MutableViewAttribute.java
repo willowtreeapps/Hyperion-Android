@@ -2,7 +2,7 @@ package com.willowtreeapps.hyperion.attr;
 
 import android.support.annotation.NonNull;
 
-abstract class MutableViewAttribute<T> extends ViewAttribute<T> {
+public abstract class MutableViewAttribute<T> extends ViewAttribute<T> {
 
     private boolean activated;
 

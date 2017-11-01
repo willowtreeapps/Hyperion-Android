@@ -6,8 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 
-import com.willowtreeapps.hyperion.core.plugins.ExtensionProvider;
-import com.willowtreeapps.hyperion.core.plugins.PluginExtension;
+import com.willowtreeapps.hyperion.core.plugins.v1.ExtensionProvider;
+import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 
 class PluginExtensionContextWrapper extends ContextWrapper {
 

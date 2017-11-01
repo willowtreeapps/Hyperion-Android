@@ -1,5 +1,7 @@
 package com.willowtreeapps.hyperion.attr;
 
+import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;

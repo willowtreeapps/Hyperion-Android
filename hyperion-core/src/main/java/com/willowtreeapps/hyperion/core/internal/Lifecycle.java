@@ -7,7 +7,7 @@ import android.support.v4.util.SimpleArrayMap;
 import android.view.View;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
-import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
+import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
 
 public class Lifecycle extends LifecycleAdapter {
 

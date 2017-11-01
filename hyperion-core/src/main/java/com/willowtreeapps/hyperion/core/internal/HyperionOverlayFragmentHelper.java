@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.willowtreeapps.hyperion.core.R;
-import com.willowtreeapps.hyperion.core.plugins.OnOverlayViewChangedListener;
+import com.willowtreeapps.hyperion.core.plugins.v1.OnOverlayViewChangedListener;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,10 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
 import java.util.List;
@@ -16,11 +17,11 @@ public abstract class TypedAttributeCollector<T extends View> {
         this.type = type;
     }
 
-    boolean acceptsType(Class<?> type) {
+    public final boolean acceptsType(Class<?> type) {
         return this.type.isAssignableFrom(type);
     }
 
-    Class<T> getType() {
+    public final Class<T> getType() {
         return type;
     }
 

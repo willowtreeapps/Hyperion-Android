@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.annotation.SuppressLint;
 

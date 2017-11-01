@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
+import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
 
 import dagger.Module;
 import dagger.Provides;

@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.willowtreeapps.hyperion.core.internal.AppComponent;
-import com.willowtreeapps.hyperion.core.plugins.Plugin;
+import com.willowtreeapps.hyperion.core.plugins.v1.Plugin;
 
 public final class Hyperion {
 

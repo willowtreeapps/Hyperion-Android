@@ -8,6 +8,6 @@ public interface AttributeTranslator {
 
     String translatePx(@Px int px);
 
-    String translatePxToSp(float px);
+    String translatePxToSp(int px);
 
 }

@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -6,6 +6,8 @@ import android.support.annotation.RequiresApi;
 import android.view.ViewGroup;
 
 import com.google.auto.service.AutoService;
+import com.willowtreeapps.hyperion.attr.MutableBooleanViewAttribute;
+import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
 import java.util.ArrayList;

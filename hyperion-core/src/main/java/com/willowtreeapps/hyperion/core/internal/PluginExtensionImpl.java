@@ -8,9 +8,9 @@ import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
-import com.willowtreeapps.hyperion.core.plugins.DrawerContainer;
-import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
-import com.willowtreeapps.hyperion.core.plugins.PluginExtension;
+import com.willowtreeapps.hyperion.core.plugins.v1.DrawerContainer;
+import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
+import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 
 class PluginExtensionImpl implements PluginExtension {
 

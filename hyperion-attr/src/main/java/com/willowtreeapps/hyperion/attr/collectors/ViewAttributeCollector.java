@@ -1,12 +1,18 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
+import android.content.res.ColorStateList;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 
 import com.google.auto.service.AutoService;
+import com.willowtreeapps.hyperion.attr.MutableBooleanViewAttribute;
+import com.willowtreeapps.hyperion.attr.MutableStringViewAttribute;
+import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
 import java.util.ArrayList;
@@ -49,6 +55,44 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
         attributes.add(new ViewAttribute<>("LocalRight", String.valueOf(rect.right)));
         attributes.add(new ViewAttribute<>("LocalBottom", String.valueOf(rect.bottom)));
 
+        attributes.add(new ViewAttribute<>("Clickable", view.isClickable()));
+        attributes.add(new ViewAttribute<>("LongClickable", view.isLongClickable()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            attributes.add(new ViewAttribute<>("ContextClickable", view.isContextClickable()));
+        }
+        attributes.add(new MutableBooleanViewAttribute("Enabled", view.isEnabled()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setEnabled(value);
+            }
+        });
+        attributes.add(new MutableBooleanViewAttribute("Activated", view.isActivated()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setActivated(value);
+            }
+        });
+        attributes.add(new MutableBooleanViewAttribute("Selected", view.isSelected()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setSelected(value);
+            }
+        });
+        attributes.add(new ViewAttribute<>("AttachedToWindow", ViewCompat.isAttachedToWindow(view)));
+        attributes.add(new ViewAttribute<>("Dirty", view.isDirty()));
+
+        attributes.add(new MutableBooleanViewAttribute("IsFocusable", view.isFocusable()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setFocusable(value);
+            }
+        });
+        attributes.add(new MutableBooleanViewAttribute("IsFocusableInTouchMode", view.isFocusableInTouchMode()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setFocusableInTouchMode(value);
+            }
+        });
         attributes.add(new ViewAttribute<>("HasFocus", view.hasFocus()));
         attributes.add(new ViewAttribute<>("HasFocusable", view.hasFocusable()));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -70,6 +114,22 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
             });
             attributes.add(new ViewAttribute<>("Elevation", view.getElevation()));
         }
+
+        attributes.add(new ViewAttribute<>("BackgroundTintMode",
+                new PorterDuffModeValue(ViewCompat.getBackgroundTintMode(view))));
+
+        ColorStateList tintColor = ViewCompat.getBackgroundTintList(view);
+        int tintColorInt;
+
+        if (tintColor == null) {
+            tintColorInt = 0x000;
+        } else {
+            tintColorInt = tintColor.getColorForState(view.getDrawableState(), tintColor.getDefaultColor());
+        }
+
+        attributes.add(new ViewAttribute<>("BackgroundTintColor",
+                new ColorValue(tintColorInt),
+                new ColorDrawable(tintColorInt)));
 
         return attributes;
     }

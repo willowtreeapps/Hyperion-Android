@@ -10,7 +10,7 @@ public class ViewAttribute<T> implements AttributeDetailItem {
     protected @Nullable T value;
     private final @Nullable Drawable drawable;
 
-    public ViewAttribute(String key, @NonNull T value) {
+    public ViewAttribute(String key, @Nullable T value) {
         this.key = key;
         this.value = value;
         this.drawable = null;

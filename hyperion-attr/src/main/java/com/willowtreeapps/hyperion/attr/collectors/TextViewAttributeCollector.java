@@ -1,10 +1,13 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.TextViewCompat;
 import android.widget.TextView;
 
 import com.google.auto.service.AutoService;
+import com.willowtreeapps.hyperion.attr.MutableStringViewAttribute;
+import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
 import java.util.ArrayList;
@@ -44,7 +47,13 @@ public class TextViewAttributeCollector extends TypedAttributeCollector<TextView
                 new ColorDrawable(view.getCurrentHintTextColor())));
         attributes.add(new ViewAttribute<>("Typeface", view.getTypeface()));
         attributes.add(new ViewAttribute<>("TextSize",
-                attributeTranslator.translatePxToSp(view.getTextSize())));
+                attributeTranslator.translatePxToSp((int) view.getTextSize())));
+        attributes.add(new ViewAttribute<>("AutoSizeMaxTextSize",
+                TextViewCompat.getAutoSizeMaxTextSize(view)));
+        attributes.add(new ViewAttribute<>("AutoSizeMinTextSize",
+                TextViewCompat.getAutoSizeMinTextSize(view)));
+        attributes.add(new ViewAttribute<>("AutoSizeStepGranularity",
+                TextViewCompat.getAutoSizeStepGranularity(view)));
         attributes.add(new ViewAttribute<>("Gravity", new GravityValue(view.getGravity())));
         attributes.add(new ViewAttribute<>("ImeAction", view.getImeActionId()));
         attributes.add(new ViewAttribute<>("ImeActionLabel", view.getImeActionLabel()));
