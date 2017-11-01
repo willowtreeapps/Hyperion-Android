@@ -24,4 +24,13 @@ public final class Hyperion {
         // no-op
     }
 
+    public static boolean isShakeGestureEnabled() {
+        // no-op
+        return false;
+    }
+
+    public static void setShakeGestureEnabled(boolean enabled) {
+        // no-op
+    }
+
 }

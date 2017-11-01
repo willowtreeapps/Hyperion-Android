@@ -3,10 +3,7 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.util.SimpleArrayMap;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
@@ -20,52 +17,26 @@ public class Lifecycle extends LifecycleAdapter {
 
     private final SimpleArrayMap<Activity, CoreComponent> components = new SimpleArrayMap<>();
     private boolean embeddedDrawerEnabled = true;
+    private boolean shakeGestureEnabled = false;
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        OverlayContainer fragment;
-        ActivityResults results;
+        FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
 
-        if (activity instanceof AppCompatActivity) {
-            FragmentManager fragmentManager = ((AppCompatActivity) activity).getSupportFragmentManager();
-            fragment = (HyperionOverlaySupportFragment)
-                    fragmentManager.findFragmentByTag(OVERLAY_TAG);
+        OverlayContainer fragment = fragmentManager.findFragmentByTag(OVERLAY_TAG);
+        if (fragment == null) {
+            fragment = fragmentManager.isSupport() ? new HyperionOverlaySupportFragment() : new HyperionOverlayFragment();
+            fragmentManager.beginTransaction()
+                    .add(android.R.id.content, fragment, OVERLAY_TAG)
+                    .commit();
+        }
 
-            if (fragment == null) {
-                fragment = new HyperionOverlaySupportFragment();
-                fragmentManager.beginTransaction()
-                        .add(android.R.id.content, (HyperionOverlaySupportFragment) fragment, OVERLAY_TAG)
-                        .commit();
-            }
-
-            results = (ActivityResultsSupportFragment)
-                    fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
-            if (results == null) {
-                results = new ActivityResultsSupportFragment();
-                fragmentManager.beginTransaction()
-                        .add((ActivityResultsSupportFragment) results, ACTIVITY_RESULT_TAG)
-                        .commit();
-            }
-        } else {    //not support
-            android.app.FragmentManager fragmentManager = activity.getFragmentManager();
-            fragment = (HyperionOverlayFragment)
-                    fragmentManager.findFragmentByTag(OVERLAY_TAG);
-
-            if (fragment == null) {
-                fragment = new HyperionOverlayFragment();
-                fragmentManager.beginTransaction()
-                        .add(android.R.id.content, (HyperionOverlayFragment) fragment, OVERLAY_TAG)
-                        .commit();
-            }
-
-            results = (ActivityResultsFragment)
-                    fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
-            if (results == null) {
-                results = new ActivityResultsFragment();
-                fragmentManager.beginTransaction()
-                        .add((ActivityResultsFragment) results, ACTIVITY_RESULT_TAG)
-                        .commit();
-            }
+        ActivityResults results = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+        if (results == null) {
+            results = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
+            fragmentManager.beginTransaction()
+                    .add(results, ACTIVITY_RESULT_TAG)
+                    .commit();
         }
 
         CoreComponent component = DaggerCoreComponent.builder()
@@ -78,20 +49,12 @@ public class Lifecycle extends LifecycleAdapter {
 
         components.put(activity, component);
 
-        if (activity instanceof AppCompatActivity) {
-            FragmentManager fragmentManager = ((AppCompatActivity) activity).getSupportFragmentManager();
-            if (embeddedDrawerEnabled && fragmentManager.findFragmentByTag(DRAWER_TAG) == null) {
-                fragmentManager.beginTransaction()
-                        .add(android.R.id.content, new HyperionDrawerSupportFragment(), DRAWER_TAG)
-                        .commit();
-            }
-        } else {
-            android.app.FragmentManager fragmentManager = activity.getFragmentManager();
-            if (embeddedDrawerEnabled && fragmentManager.findFragmentByTag(DRAWER_TAG) == null) {
-                fragmentManager.beginTransaction()
-                        .add(android.R.id.content, new HyperionDrawerFragment(), DRAWER_TAG)
-                        .commit();
-            }
+        HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
+        if (drawer == null && embeddedDrawerEnabled) {
+            drawer = fragmentManager.isSupport() ? new HyperionDrawerSupportFragment() : new HyperionDrawerFragment();
+            fragmentManager.beginTransaction()
+                    .add(android.R.id.content, drawer, DRAWER_TAG)
+                    .commit();
         }
     }
 
@@ -114,20 +77,36 @@ public class Lifecycle extends LifecycleAdapter {
         int count = components.size();
         for (int i = 0; i < count; i++) {
             Activity activity = components.keyAt(i);
-            AppCompatActivity appCompatActivity = (AppCompatActivity) activity;
-            FragmentManager fragmentManager = appCompatActivity.getSupportFragmentManager();
-
+            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
+            HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
             if (enabled) {
-                if (fragmentManager.findFragmentByTag(DRAWER_TAG) == null) {
+                if (drawer == null) {
+                    drawer = fragmentManager.isSupport() ? new HyperionDrawerSupportFragment() : new HyperionDrawerFragment();
                     fragmentManager.beginTransaction()
-                            .add(android.R.id.content, new HyperionDrawerSupportFragment(), DRAWER_TAG)
+                            .add(android.R.id.content, drawer, DRAWER_TAG)
                             .commit();
                 }
-            } else {
-                Fragment fragment = fragmentManager.findFragmentByTag(DRAWER_TAG);
+            } else if (drawer != null) {
                 fragmentManager.beginTransaction()
-                        .remove(fragment)
+                        .remove(drawer)
                         .commit();
+            }
+        }
+    }
+
+    public boolean isShakeGestureEnabled() {
+        return this.shakeGestureEnabled;
+    }
+
+    public void setShakeGestureEnabled(boolean enabled) {
+        this.shakeGestureEnabled = enabled;
+        int count = components.size();
+        for (int i = 0; i < count; i++) {
+            Activity activity = components.keyAt(i);
+            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
+            HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
+            if (drawer != null) {
+                drawer.getLayout().setShakeGestureEnabled(enabled);
             }
         }
     }
@@ -136,7 +115,7 @@ public class Lifecycle extends LifecycleAdapter {
     public View createPluginView(Activity activity) {
         CoreComponent component = components.get(activity);
         if (component == null) {
-            throw new IllegalStateException("Could not locate Hyperion component for given activity. Is the Activity stopped?");
+            throw new IllegalStateException("Could not locate Hyperion component for given activity. Is the Activity destroyed?");
         }
 
         return new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));

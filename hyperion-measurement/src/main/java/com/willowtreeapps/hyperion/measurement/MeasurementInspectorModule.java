@@ -29,7 +29,7 @@ class MeasurementInspectorModule extends PluginModule
     public View createPluginView(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.hm_item_plugin, parent, false);
         view.setOnClickListener(this);
-        checkBox = (CheckBox) view.findViewById(R.id.checkbox);
+        checkBox = view.findViewById(R.id.checkbox);
 
         View overlayView = overlay.getOverlayView();
         checkBox.setChecked(overlayView != null && OVERLAY_TAG.equals(overlayView.getTag()));

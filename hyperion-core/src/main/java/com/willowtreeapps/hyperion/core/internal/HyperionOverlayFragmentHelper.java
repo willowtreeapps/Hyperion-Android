@@ -36,7 +36,7 @@ class HyperionOverlayFragmentHelper {
 
     View getInflatedView(Activity activity, LayoutInflater inflater, @Nullable ViewGroup container) {
         final CoreComponent component = AppComponent.Holder.getInstance()
-                .getLifecycleListener().getComponent(activity);
+                .getLifecycle().getComponent(activity);
         return inflater.cloneInContext(new ComponentContextThemeWrapper(activity, component))
                 .inflate(R.layout.hype_fragment_overlay, container, false);
     }

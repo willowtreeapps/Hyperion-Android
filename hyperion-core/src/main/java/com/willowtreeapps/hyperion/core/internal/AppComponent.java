@@ -12,7 +12,7 @@ import dagger.Component;
 public interface AppComponent {
 
     Application getApplication();
-    Lifecycle getLifecycleListener();
+    Lifecycle getLifecycle();
 
     final class Holder {
         private static volatile AppComponent INSTANCE;
