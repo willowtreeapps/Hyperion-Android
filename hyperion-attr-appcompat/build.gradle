@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 apply from: '../publish.gradle'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode buildVersionCode()
+        versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -20,8 +20,8 @@ android {
 }
 
 dependencies {
-    compile project(':hyperion-attr')
-    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc2'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    testCompile 'junit:junit:4.12'
+    implementation project(':hyperion-attr')
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
 }

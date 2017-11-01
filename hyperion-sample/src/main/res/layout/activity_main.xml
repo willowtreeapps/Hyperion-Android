@@ -49,6 +49,18 @@
         android:layout_height="wrap_content"
         android:text="Write to file"/>
 
+    <Switch
+        android:id="@+id/drawer_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toggle Drawer"/>
+
+    <Switch
+        android:id="@+id/shake_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toggle Shake"/>
+
     <Space
         android:layout_width="0dp"
         android:layout_height="0dp"

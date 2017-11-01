@@ -61,7 +61,7 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
     protected void onFinishInflate() {
         super.onFinishInflate();
         final Context context = getContext();
-        recycler = (RecyclerView) findViewById(R.id.recycler);
+        recycler = findViewById(R.id.recycler);
         View close = findViewById(R.id.close);
         close.setOnClickListener(new OnClickListener() {
             @Override

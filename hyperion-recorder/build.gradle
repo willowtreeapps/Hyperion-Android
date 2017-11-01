@@ -25,8 +25,9 @@ android {
 }
 
 dependencies {
-    compile project(':hyperion-core')
-    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc2'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    testCompile 'junit:junit:4.12'
+    implementation project(':hyperion-core')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
 }

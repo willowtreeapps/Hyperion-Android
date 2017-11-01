@@ -26,12 +26,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    debugCompile project(':hyperion-core')
-    releaseCompile project(':hyperion-core-no-op')
-    debugCompile project(':hyperion-attr')
-    debugCompile project(':hyperion-measurement')
-    debugCompile project(':hyperion-recorder')
-    debugCompile project(':hyperion-disk')
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    debugImplementation project(':hyperion-core')
+    releaseImplementation project(':hyperion-core-no-op')
+    debugImplementation project(':hyperion-attr')
+    debugImplementation project(':hyperion-measurement')
+    debugImplementation project(':hyperion-recorder')
+    debugImplementation project(':hyperion-disk')
+    testImplementation 'junit:junit:4.12'
 }

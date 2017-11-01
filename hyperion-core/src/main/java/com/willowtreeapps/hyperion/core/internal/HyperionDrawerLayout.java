@@ -4,6 +4,7 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.support.annotation.Px;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.util.Pair;
@@ -17,6 +18,7 @@ public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.
     private final @Px int drawerEdge;
     private View drawerView;
 
+    private boolean shakeGestureEnabled;
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private ShakeDetector shakeDetector;
@@ -52,7 +54,7 @@ public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (sensorManager != null && shakeDetector != null && accelerometer != null) {
+        if (shakeGestureEnabled) {
             sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
         }
     }
@@ -60,7 +62,7 @@ public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if (sensorManager != null && shakeDetector != null) {
+        if (shakeGestureEnabled) {
             sensorManager.unregisterListener(shakeDetector);
         }
     }
@@ -70,6 +72,21 @@ public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         shakeDetector = new ShakeDetector();
         shakeDetector.setOnShakeListener(this);
+    }
+
+    public boolean isShakeGestureEnabled() {
+        return shakeGestureEnabled;
+    }
+
+    public void setShakeGestureEnabled(boolean shakeGestureEnabled) {
+        this.shakeGestureEnabled = shakeGestureEnabled;
+        if (ViewCompat.isAttachedToWindow(this)) {
+            if (shakeGestureEnabled) {
+                sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+            } else {
+                sensorManager.unregisterListener(shakeDetector);
+            }
+        }
     }
 
     @Override

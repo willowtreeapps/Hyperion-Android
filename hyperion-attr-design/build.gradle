@@ -20,8 +20,8 @@ android {
 }
 
 dependencies {
-    compile project(':hyperion-attr')
+    implementation project(':hyperion-attr')
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc2'
-    compile 'com.android.support:design:26.1.0'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:design:26.1.0'
+    testImplementation 'junit:junit:4.12'
 }
