@@ -5,6 +5,7 @@ import android.support.v4.widget.CompoundButtonCompat;
 import android.widget.CompoundButton;
 
 import com.google.auto.service.AutoService;
+import com.willowtreeapps.hyperion.attr.MutableBooleanViewAttribute;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
@@ -20,10 +21,15 @@ public class CompoundButtonAttributeCollector extends TypedAttributeCollector<Co
 
     @NonNull
     @Override
-    public List<ViewAttribute> collect(CompoundButton view, AttributeTranslator attributeTranslator) {
+    public List<ViewAttribute> collect(final CompoundButton view, AttributeTranslator attributeTranslator) {
         List<ViewAttribute> attributes = new ArrayList<>();
 
-        attributes.add(new ViewAttribute<>("Checked", view.isChecked()));
+        attributes.add(new MutableBooleanViewAttribute("Checked", view.isChecked()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setChecked(value);
+            }
+        });
         attributes.add(new ViewAttribute<Void>("ButtonDrawable",
                 CompoundButtonCompat.getButtonDrawable(view)));
 

@@ -142,7 +142,7 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
 
         private HeaderViewHolder(View itemView) {
             super(itemView);
-            text = (TextView) itemView.findViewById(R.id.text);
+            text = itemView.findViewById(R.id.text);
         }
 
         @Override
@@ -159,22 +159,16 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
 
         private AttributeViewHolder(View itemView) {
             super(itemView);
-            keyText = (TextView) itemView.findViewById(R.id.key_text);
-            valueText = (TextView) itemView.findViewById(R.id.value_text);
-            image = (ImageView) itemView.findViewById(R.id.image);
+            keyText = itemView.findViewById(R.id.key_text);
+            valueText = itemView.findViewById(R.id.value_text);
+            image = itemView.findViewById(R.id.image);
         }
 
         @Override
         void onDataChanged(ViewAttribute data) {
             keyText.setText(data.getKey());
 
-            Object value = data.getValue();
-            if (value != null) {
-                valueText.setText(value.toString());
-                valueText.setVisibility(View.VISIBLE);
-            } else {
-                valueText.setVisibility(View.INVISIBLE);
-            }
+            valueText.setText(data.getDisplayValue());
 
             Drawable drawable = data.getDrawable();
             if (drawable != null) {
@@ -195,8 +189,8 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
 
         private MutableStringAttributeViewHolder(View itemView) {
             super(itemView);
-            detail = (ExpandableLayout) itemView.findViewById(R.id.detail);
-            editText = (EditText) itemView.findViewById(R.id.edit_text);
+            detail = itemView.findViewById(R.id.detail);
+            editText = itemView.findViewById(R.id.edit_text);
             editText.addTextChangedListener(this);
             itemView.setOnClickListener(this);
         }
@@ -216,7 +210,7 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
             boolean activated = data.isActivated();
             itemView.setActivated(activated);
             detail.setExpanded(activated, false);
-            editText.setText(data.getValue());
+            editText.setText(data.getDisplayValue());
         }
 
         @Override
@@ -247,8 +241,8 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
 
         private MutableBooleanAttributeViewHolder(View itemView) {
             super(itemView);
-            keyText = (TextView) itemView.findViewById(R.id.key_text);
-            booleanSwitch = (Switch) itemView.findViewById(R.id.boolean_switch);
+            keyText = itemView.findViewById(R.id.key_text);
+            booleanSwitch = itemView.findViewById(R.id.boolean_switch);
             booleanSwitch.setOnClickListener(this);
         }
 

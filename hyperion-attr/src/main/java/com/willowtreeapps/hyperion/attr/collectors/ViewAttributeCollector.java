@@ -1,8 +1,6 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
-import android.content.res.ColorStateList;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -33,7 +31,7 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
         Rect rect = new Rect();
         String value;
 
-        attributes.add(new ViewAttribute<>("Id", new IdValue(view.getResources(), view.getId())));
+        attributes.add(new ViewAttribute<>("Id", new ResourceValue(view.getResources(), view.getId())));
 
         value = attributeTranslator.translatePx(view.getHeight());
         attributes.add(new ViewAttribute<>("Height", value));
@@ -55,8 +53,18 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
         attributes.add(new ViewAttribute<>("LocalRight", String.valueOf(rect.right)));
         attributes.add(new ViewAttribute<>("LocalBottom", String.valueOf(rect.bottom)));
 
-        attributes.add(new ViewAttribute<>("Clickable", view.isClickable()));
-        attributes.add(new ViewAttribute<>("LongClickable", view.isLongClickable()));
+        attributes.add(new MutableBooleanViewAttribute("Clickable", view.isClickable()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setClickable(value);
+            }
+        });
+        attributes.add(new MutableBooleanViewAttribute("LongClickable", view.isLongClickable()) {
+            @Override
+            protected void mutate(Boolean value) {
+                view.setLongClickable(value);
+            }
+        });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             attributes.add(new ViewAttribute<>("ContextClickable", view.isContextClickable()));
         }
@@ -118,18 +126,12 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
         attributes.add(new ViewAttribute<>("BackgroundTintMode",
                 new PorterDuffModeValue(ViewCompat.getBackgroundTintMode(view))));
 
-        ColorStateList tintColor = ViewCompat.getBackgroundTintList(view);
-        int tintColorInt;
+        attributes.add(Collectors.createColorAttribute(
+                view, "BackgroundTint", ViewCompat.getBackgroundTintList(view)));
 
-        if (tintColor == null) {
-            tintColorInt = 0x000;
-        } else {
-            tintColorInt = tintColor.getColorForState(view.getDrawableState(), tintColor.getDefaultColor());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            attributes.add(new ViewAttribute<>("AccessibilityClassName", view.getAccessibilityClassName()));
         }
-
-        attributes.add(new ViewAttribute<>("BackgroundTintColor",
-                new ColorValue(tintColorInt),
-                new ColorDrawable(tintColorInt)));
 
         return attributes;
     }

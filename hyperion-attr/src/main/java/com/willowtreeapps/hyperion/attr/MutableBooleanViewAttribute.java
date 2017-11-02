@@ -8,7 +8,7 @@ public abstract class MutableBooleanViewAttribute extends MutableViewAttribute<B
     }
 
     boolean getBoolean() {
-        Boolean bool = getValue();
+        Boolean bool = value;
         return bool == null ? false : bool;
     }
 

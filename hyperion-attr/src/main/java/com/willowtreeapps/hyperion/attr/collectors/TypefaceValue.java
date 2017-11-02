@@ -2,7 +2,9 @@ package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.graphics.Typeface;
 
-public class TypefaceValue {
+import com.willowtreeapps.hyperion.attr.AttributeValue;
+
+public class TypefaceValue implements AttributeValue {
 
     private final Typeface typeface;
 
@@ -11,7 +13,7 @@ public class TypefaceValue {
     }
 
     @Override
-    public String toString() {
+    public CharSequence getDisplayValue() {
         // TODO sift through assets to get the name.
         return typeface.toString();
     }

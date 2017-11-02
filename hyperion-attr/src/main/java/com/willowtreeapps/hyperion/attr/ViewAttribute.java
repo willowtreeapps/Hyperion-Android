@@ -32,9 +32,17 @@ public class ViewAttribute<T> implements AttributeDetailItem {
         return this.key;
     }
 
-    @Nullable
-    T getValue() {
-        return this.value;
+    @NonNull
+    CharSequence getDisplayValue() {
+        if (value == null) {
+            return "";
+        }
+
+        if (value instanceof AttributeValue) {
+            return ((AttributeValue) value).getDisplayValue();
+        }
+
+        return this.value.toString();
     }
 
     @Nullable

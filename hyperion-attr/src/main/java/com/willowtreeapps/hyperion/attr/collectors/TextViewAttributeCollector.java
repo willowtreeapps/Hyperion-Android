@@ -1,11 +1,13 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.TextViewCompat;
 import android.widget.TextView;
 
 import com.google.auto.service.AutoService;
+import com.willowtreeapps.hyperion.attr.AttributeValue;
 import com.willowtreeapps.hyperion.attr.MutableStringViewAttribute;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
@@ -55,14 +57,35 @@ public class TextViewAttributeCollector extends TypedAttributeCollector<TextView
         attributes.add(new ViewAttribute<>("AutoSizeStepGranularity",
                 TextViewCompat.getAutoSizeStepGranularity(view)));
         attributes.add(new ViewAttribute<>("Gravity", new GravityValue(view.getGravity())));
+
         attributes.add(new ViewAttribute<>("ImeAction", view.getImeActionId()));
         attributes.add(new ViewAttribute<>("ImeActionLabel", view.getImeActionLabel()));
         attributes.add(new ViewAttribute<>("ImeOptions", new ImeOptionsValue(view.getImeOptions())));
 
+        attributes.add(new ViewAttribute<>("CompoundPaddingLeft",
+                attributeTranslator.translatePx(view.getCompoundPaddingLeft())));
+        attributes.add(new ViewAttribute<>("CompoundPaddingTop",
+                attributeTranslator.translatePx(view.getCompoundPaddingTop())));
+        attributes.add(new ViewAttribute<>("CompoundPaddingRight",
+                attributeTranslator.translatePx(view.getCompoundPaddingRight())));
+        attributes.add(new ViewAttribute<>("CompoundPaddingBottom",
+                attributeTranslator.translatePx(view.getCompoundPaddingBottom())));
+
+        attributes.add(new ViewAttribute<>("CompoundDrawable",
+                attributeTranslator.translatePx(view.getCompoundDrawablePadding())));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            attributes.add(Collectors.createColorAttribute(view, "CompoundDrawableTint",
+                    view.getCompoundDrawableTintList()));
+            attributes.add(new ViewAttribute<>("CompoundDrawableTintMode",
+                    new PorterDuffModeValue(view.getCompoundDrawableTintMode())));
+
+        }
+
         return attributes;
     }
 
-    private static class ImeOptionsValue {
+    private static class ImeOptionsValue implements AttributeValue {
 
         private final int imeOptions;
 
@@ -71,7 +94,7 @@ public class TextViewAttributeCollector extends TypedAttributeCollector<TextView
         }
 
         @Override
-        public String toString() {
+        public CharSequence getDisplayValue() {
             StringBuilder sb = new StringBuilder();
             if (imeOptions == IME_ACTION_UNSPECIFIED) {
                 sb.append("UNSPECIFIED|");

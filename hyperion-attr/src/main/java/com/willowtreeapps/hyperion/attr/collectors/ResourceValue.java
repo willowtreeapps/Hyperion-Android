@@ -1,20 +1,22 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.content.res.Resources;
-import android.support.annotation.IdRes;
+import android.support.annotation.AnyRes;
 
-public class IdValue {
+import com.willowtreeapps.hyperion.attr.AttributeValue;
+
+public class ResourceValue implements AttributeValue {
 
     private final Resources resources;
-    private final @IdRes int id;
+    private final @AnyRes int id;
 
-    public IdValue(Resources resources, @IdRes int id) {
+    public ResourceValue(Resources resources, @AnyRes int id) {
         this.resources = resources;
         this.id = id;
     }
 
     @Override
-    public String toString() {
+    public CharSequence getDisplayValue() {
         if (id > 0) {
             return resources.getResourceEntryName(id);
         } else {

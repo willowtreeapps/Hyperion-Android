@@ -5,6 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 
 import com.google.auto.service.AutoService;
+import com.willowtreeapps.hyperion.attr.AttributeValue;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
@@ -46,7 +47,7 @@ public class DrawerLayoutAttributeCollector extends TypedAttributeCollector<Draw
         return attributes;
     }
 
-    private static class DrawerLayoutLockModeValue {
+    private static class DrawerLayoutLockModeValue implements AttributeValue {
 
         private final int mode;
 
@@ -55,7 +56,7 @@ public class DrawerLayoutAttributeCollector extends TypedAttributeCollector<Draw
         }
 
         @Override
-        public String toString() {
+        public CharSequence getDisplayValue() {
             switch (mode) {
                 case DrawerLayout.LOCK_MODE_UNLOCKED:
                     return "Unlocked";
