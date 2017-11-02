@@ -1,8 +1,10 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.view.ViewGroup;
 
-public class LayoutModeValue {
+import com.willowtreeapps.hyperion.attr.AttributeValue;
+
+public class LayoutModeValue implements AttributeValue {
 
     private final int mode;
 
@@ -11,7 +13,7 @@ public class LayoutModeValue {
     }
 
     @Override
-    public String toString() {
+    public CharSequence getDisplayValue() {
         switch (mode) {
             case ViewGroup.LAYOUT_MODE_CLIP_BOUNDS:
                 return "CLIP_BOUNDS";

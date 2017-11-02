@@ -15,8 +15,8 @@ import android.widget.FrameLayout;
 
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
-import com.willowtreeapps.hyperion.core.plugins.ExtensionProvider;
-import com.willowtreeapps.hyperion.core.plugins.PluginExtension;
+import com.willowtreeapps.hyperion.core.plugins.v1.ExtensionProvider;
+import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 
 public class AttributeOverlayView extends FrameLayout implements ViewTreeObserver.OnPreDrawListener {
 

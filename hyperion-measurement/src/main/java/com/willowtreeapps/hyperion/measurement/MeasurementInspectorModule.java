@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-import com.willowtreeapps.hyperion.core.plugins.OnOverlayViewChangedListener;
-import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
-import com.willowtreeapps.hyperion.core.plugins.PluginModule;
+import com.willowtreeapps.hyperion.core.plugins.v1.OnOverlayViewChangedListener;
+import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
+import com.willowtreeapps.hyperion.core.plugins.v1.PluginModule;
 
 class MeasurementInspectorModule extends PluginModule
         implements View.OnClickListener, OnOverlayViewChangedListener {

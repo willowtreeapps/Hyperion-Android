@@ -1,5 +1,6 @@
-package com.willowtreeapps.hyperion.core.plugins;
+package com.willowtreeapps.hyperion.core.plugins.v1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -8,8 +9,9 @@ public final class ExtensionProvider {
     public static final String NAME = "extension";
 
     @NonNull
+    @SuppressLint("WrongConstant")
     public static PluginExtension get(@NonNull Context context) {
-        //noinspection WrongConstant
+        //noinspection WrongConstant, ConstantConditions
         return (PluginExtension) context.getSystemService(NAME);
     }
 

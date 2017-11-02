@@ -13,7 +13,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
-import com.willowtreeapps.hyperion.core.plugins.PluginModule;
+import com.willowtreeapps.hyperion.core.plugins.v1.PluginModule;
 
 import static android.app.Activity.RESULT_OK;
 

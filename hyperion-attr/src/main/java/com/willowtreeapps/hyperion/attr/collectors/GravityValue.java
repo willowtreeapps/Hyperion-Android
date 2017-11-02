@@ -1,10 +1,12 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.annotation.SuppressLint;
 
+import com.willowtreeapps.hyperion.attr.AttributeValue;
+
 import static android.view.Gravity.*;
 
-public class GravityValue {
+public class GravityValue implements AttributeValue {
 
     private final int gravity;
 
@@ -16,9 +18,9 @@ public class GravityValue {
         return this.gravity;
     }
 
-    @SuppressLint("RtlHardcoded")
     @Override
-    public String toString() {
+    @SuppressLint("RtlHardcoded")
+    public CharSequence getDisplayValue() {
         StringBuilder sb = new StringBuilder();
         if ((gravity & START) == START) {
             sb.append("Start|");
@@ -43,5 +45,4 @@ public class GravityValue {
         }
         return sb.toString();
     }
-
 }

@@ -24,7 +24,7 @@ class AttributeTranslatorImpl implements AttributeTranslator {
         return measurementHelper.toDp(px) + " dp, " + px + " px";
     }
 
-    public String translatePxToSp(float px) {
+    public String translatePxToSp(int px) {
         return measurementHelper.toSp(px) + " sp, " + px + " px";
     }
 

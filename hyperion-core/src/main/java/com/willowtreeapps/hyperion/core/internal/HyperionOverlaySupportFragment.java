@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.willowtreeapps.hyperion.core.plugins.OnOverlayViewChangedListener;
-import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
+import com.willowtreeapps.hyperion.core.plugins.v1.OnOverlayViewChangedListener;
+import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
 
 public class HyperionOverlaySupportFragment extends Fragment implements OverlayContainer {
 

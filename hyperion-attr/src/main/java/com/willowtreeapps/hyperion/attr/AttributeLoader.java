@@ -2,6 +2,7 @@ package com.willowtreeapps.hyperion.attr;
 
 import android.view.View;
 
+import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 
 import java.util.ArrayList;

@@ -9,5 +9,4 @@ include ':hyperion-sample',
         ':hyperion-recorder',
         ':hyperion-attr',
         ':hyperion-attr-recyclerview',
-        ':hyperion-attr-appcompat',
         ':hyperion-attr-design'

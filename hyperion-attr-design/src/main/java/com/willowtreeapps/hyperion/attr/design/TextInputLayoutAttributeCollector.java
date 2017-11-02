@@ -5,7 +5,7 @@ import android.support.design.widget.TextInputLayout;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
-import com.willowtreeapps.hyperion.attr.TypedAttributeCollector;
+import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
 
 import java.util.ArrayList;

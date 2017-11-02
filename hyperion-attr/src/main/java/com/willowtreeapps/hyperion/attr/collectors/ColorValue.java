@@ -1,8 +1,10 @@
-package com.willowtreeapps.hyperion.attr;
+package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.support.annotation.ColorInt;
 
-public class ColorValue {
+import com.willowtreeapps.hyperion.attr.AttributeValue;
+
+public class ColorValue implements AttributeValue {
 
     private final @ColorInt int color;
 
@@ -15,7 +17,7 @@ public class ColorValue {
     }
 
     @Override
-    public String toString() {
+    public CharSequence getDisplayValue() {
         return "#" + Integer.toHexString(color);
     }
 }

@@ -7,7 +7,7 @@ import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
-import com.willowtreeapps.hyperion.core.plugins.OverlayContainer;
+import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
 
 import dagger.Component;
 

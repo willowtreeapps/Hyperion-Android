@@ -2,13 +2,13 @@ package com.willowtreeapps.hyperion.attr;
 
 import android.support.annotation.NonNull;
 
-abstract class MutableBooleanViewAttribute extends MutableViewAttribute<Boolean> {
-    MutableBooleanViewAttribute(String key, @NonNull Boolean value) {
+public abstract class MutableBooleanViewAttribute extends MutableViewAttribute<Boolean> {
+    public MutableBooleanViewAttribute(String key, @NonNull Boolean value) {
         super(key, value);
     }
 
     boolean getBoolean() {
-        Boolean bool = getValue();
+        Boolean bool = value;
         return bool == null ? false : bool;
     }
 

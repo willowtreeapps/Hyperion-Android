@@ -10,7 +10,7 @@ public class ViewAttribute<T> implements AttributeDetailItem {
     protected @Nullable T value;
     private final @Nullable Drawable drawable;
 
-    public ViewAttribute(String key, @NonNull T value) {
+    public ViewAttribute(String key, @Nullable T value) {
         this.key = key;
         this.value = value;
         this.drawable = null;
@@ -32,9 +32,17 @@ public class ViewAttribute<T> implements AttributeDetailItem {
         return this.key;
     }
 
-    @Nullable
-    T getValue() {
-        return this.value;
+    @NonNull
+    CharSequence getDisplayValue() {
+        if (value == null) {
+            return "";
+        }
+
+        if (value instanceof AttributeValue) {
+            return ((AttributeValue) value).getDisplayValue();
+        }
+
+        return this.value.toString();
     }
 
     @Nullable
