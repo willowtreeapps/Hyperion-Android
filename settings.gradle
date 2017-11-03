@@ -8,5 +8,7 @@ include ':hyperion-sample',
         ':hyperion-disk',
         ':hyperion-recorder',
         ':hyperion-attr',
+        ':hyperion-attr-support-v4',
+        ':hyperion-attr-appcompat-v7',
         ':hyperion-attr-recyclerview',
         ':hyperion-attr-design'

@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+apply from: '../publish.gradle'
+
+group = project.libraryGroup
+version = project.libraryVersion
+
+android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode buildVersionCode()
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    resourcePrefix 'ha_'
+
+}
+
+dependencies {
+    compileOnly project(':hyperion-core')
+    compileOnly project(':hyperion-attr')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+}

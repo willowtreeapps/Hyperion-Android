@@ -1,6 +1,7 @@
 package com.willowtreeapps.hyperion.attr;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 public abstract class MutableViewAttribute<T> extends ViewAttribute<T> {
 
@@ -11,11 +12,15 @@ public abstract class MutableViewAttribute<T> extends ViewAttribute<T> {
     }
 
     void setValue(T value) {
-        this.value = value;
-        mutate(value);
+        try {
+            mutate(value);
+            this.value = value;
+        } catch (Exception e) {
+            Log.e("Hyperion", "Error mutating view", e);
+        }
     }
 
-    protected abstract void mutate(T value);
+    protected abstract void mutate(T value) throws Exception;
 
     boolean isActivated() {
         return this.activated;
