@@ -3,6 +3,7 @@ package com.willowtreeapps.hyperion.attr;
 import android.support.annotation.NonNull;
 
 public abstract class MutableStringViewAttribute extends MutableViewAttribute<CharSequence> {
+
     public MutableStringViewAttribute(String key, @NonNull CharSequence value) {
         super(key, value);
     }

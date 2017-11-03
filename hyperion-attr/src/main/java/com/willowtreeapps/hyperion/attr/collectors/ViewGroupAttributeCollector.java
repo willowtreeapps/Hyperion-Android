@@ -59,6 +59,8 @@ public class ViewGroupAttributeCollector extends TypedAttributeCollector<ViewGro
                 }
             });
         }
+
+        attributes.add(new ViewAttribute<>("DelayChildPressed", view.shouldDelayChildPressedState()));
         return attributes;
     }
 }

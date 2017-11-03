@@ -39,6 +39,8 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
         value = attributeTranslator.translatePx(view.getWidth());
         attributes.add(new ViewAttribute<>("Width", value));
 
+        attributes.add(new ViewAttribute<>("Baseline", view.getBaseline()));
+
         view.getGlobalVisibleRect(rect);
 
         attributes.add(new ViewAttribute<>("GlobalLeft", String.valueOf(rect.left)));
@@ -52,6 +54,10 @@ public class ViewAttributeCollector extends TypedAttributeCollector<View> {
         attributes.add(new ViewAttribute<>("LocalTop", String.valueOf(rect.top)));
         attributes.add(new ViewAttribute<>("LocalRight", String.valueOf(rect.right)));
         attributes.add(new ViewAttribute<>("LocalBottom", String.valueOf(rect.bottom)));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            attributes.add(new ViewAttribute<>("InLayout", view.isInLayout()));
+        }
 
         attributes.add(new MutableBooleanViewAttribute("Clickable", view.isClickable()) {
             @Override

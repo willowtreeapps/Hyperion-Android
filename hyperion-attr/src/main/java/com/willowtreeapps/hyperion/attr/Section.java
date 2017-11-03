@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-class Section<T> implements Comparable<Section> {
+class Section<T> implements Comparable<Section<?>> {
 
     private Class<?> type;
     private List<T> list;
@@ -23,7 +23,7 @@ class Section<T> implements Comparable<Section> {
     }
 
     @Override
-    public int compareTo(@NonNull Section o) {
+    public int compareTo(@NonNull Section<?> o) {
         if (type.isAssignableFrom(o.type)) {
             return 1;
         }
