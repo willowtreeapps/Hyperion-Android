@@ -6,6 +6,7 @@ import android.support.annotation.Px;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 
@@ -13,6 +14,7 @@ class MeasurementHelperImpl implements MeasurementHelper {
 
     private static final int[] OUT_LOCATION = new int[2];
     private final DisplayMetrics displayMetrics;
+    private final Rect rect = new Rect();
 
     MeasurementHelperImpl(DisplayMetrics displayMetrics) {
         this.displayMetrics = displayMetrics;
@@ -81,6 +83,21 @@ class MeasurementHelperImpl implements MeasurementHelper {
     public int toSp(float px) {
         float scaledDensity = displayMetrics.scaledDensity;
         return (int) (px / scaledDensity);
+    }
+
+    public View findTarget(View globalView, View root, float x, float y) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            int count = parent.getChildCount();
+            for (int i = 0; i < count; i++) {
+                View child = parent.getChildAt(i);
+                getScreenLocation(globalView, child, rect);
+                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                    return findTarget(globalView, child, x, y);
+                }
+            }
+        }
+        return root;
     }
 
 }

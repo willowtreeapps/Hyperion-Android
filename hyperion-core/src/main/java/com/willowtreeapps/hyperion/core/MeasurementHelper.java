@@ -28,4 +28,5 @@ public interface MeasurementHelper {
 
     int toSp(float px);
 
+    View findTarget(View globalView, View root, float x, float y);
 }

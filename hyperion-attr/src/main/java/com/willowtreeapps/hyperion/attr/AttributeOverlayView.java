@@ -30,7 +30,7 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
     AttributeOverlayView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.ha_view_attribute_overlay, this, true);
-        AttributeDetailView detailView = (AttributeDetailView) findViewById(R.id.bottom_sheet);
+        AttributeDetailView detailView = findViewById(R.id.bottom_sheet);
 
         PluginExtension extension = ExtensionProvider.get(context);
         contentRoot = extension.getContentRoot();
@@ -84,7 +84,7 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
         if (event.getAction() == MotionEvent.ACTION_UP) {
             float x = event.getX();
             float y = event.getY();
-            View touchTarget = findTarget(contentRoot, x, y);
+            View touchTarget = measurementHelper.findTarget(this, contentRoot, x, y);
 
             View newTarget;
             if (target.getTarget() == touchTarget) {
@@ -99,21 +99,6 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
         }
 
         return super.onTouchEvent(event);
-    }
-
-    private View findTarget(View root, float x, float y) {
-        if (root instanceof ViewGroup) {
-            ViewGroup parent = (ViewGroup) root;
-            int count = parent.getChildCount();
-            for (int i = 0; i < count; i++) {
-                View child = parent.getChildAt(i);
-                measurementHelper.getScreenLocation(this, child, rect);
-                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-                    return findTarget(child, x, y);
-                }
-            }
-        }
-        return root;
     }
 
     private void setTarget(View view) {
