@@ -3,9 +3,18 @@
 
     <style name="Hype.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/hype_white</item>
-        <item name="colorAccent">@color/hype_willowtree_enabled</item>
-        <item name="android:textColorPrimary">@color/hype_willowtree_text</item>
-        <item name="android:textColorSecondary">@color/hype_willowtree_disabled</item>
+        <item name="colorAccent">@color/hype_enabled</item>
+        <item name="android:textColorPrimary">@color/hype_text</item>
+        <item name="android:textColorSecondary">@color/hype_disabled</item>
+    </style>
+
+    <style name="Hype.Base.Drawer">
+        <item name="android:windowBackground">@color/hype_drawer_background</item>
+        <item name="android:textColorPrimary">@color/hype_drawer_text</item>
+    </style>
+
+    <style name="Hype.Base.Inspect">
+        <item name="android:windowBackground">@color/hype_inspect_background</item>
     </style>
 
 </resources>

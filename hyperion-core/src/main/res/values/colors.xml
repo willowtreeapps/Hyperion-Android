@@ -4,8 +4,10 @@
     <color name="hype_light_gray">#FAFAFA</color>
     <color name="hype_text_gray">#B4B4B4</color>
 
-    <color name="hype_willowtree_enabled">#1BD9C4</color>
-    <color name="hype_willowtree_disabled">#979799</color>
-    <color name="hype_willowtree_text">#223547</color>
-    <color name="hype_willowtree_accent">#1C77C3</color>
+    <color name="hype_enabled">#2f5df0</color>
+    <color name="hype_disabled">#e6e6e6</color>
+    <color name="hype_text">#223547</color>
+    <color name="hype_drawer_background">#F4F5F7</color>
+    <color name="hype_drawer_text">#8e8e93</color>
+    <color name="hype_inspect_background">#737373</color>
 </resources>
