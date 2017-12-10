@@ -85,19 +85,41 @@ class MeasurementHelperImpl implements MeasurementHelper {
         return (int) (px / scaledDensity);
     }
 
+    /**
+     * Finds the view clicked on
+     * Goes through all children and looks for the deepest one
+     */
     public View findTarget(View globalView, View root, float x, float y) {
         if (root instanceof ViewGroup) {
             ViewGroup parent = (ViewGroup) root;
-            int count = parent.getChildCount();
-            for (int i = 0; i < count; i++) {
+            int deepestIndex = 0;
+            int deepestCount = 0;
+
+            for (int i = 0; i < parent.getChildCount(); i++) {
                 View child = parent.getChildAt(i);
                 getScreenLocation(globalView, child, rect);
+                //if this view was clicked
                 if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-                    return findTarget(globalView, child, x, y);
+                    int childCount = getTotalChildren(child);
+                    if (childCount > deepestCount) {
+                        deepestCount = childCount;
+                        deepestIndex = i;
+                    }
                 }
             }
+            return findTarget(globalView, parent.getChildAt(deepestIndex), x, y);
         }
         return root;
     }
 
+    private int getTotalChildren(View root) {
+        int deepest = 0;
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                deepest = Math.max(deepest, getTotalChildren(parent.getChildAt(i)));
+            }
+        }
+        return deepest + 1;
+    }
 }
