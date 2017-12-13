@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
@@ -45,7 +46,7 @@ class MeasurementOverlayView extends FrameLayout {
     private StaticLayout measurementHeightText;
     /* Used for nested measurementHelper */
     private StaticLayout measurementLeftText;
-    private StaticLayout measurementTopText;
+    private TextView measurementTopText;
     private StaticLayout measurementRightText;
     private StaticLayout measurementBottomText;
 
@@ -68,7 +69,7 @@ class MeasurementOverlayView extends FrameLayout {
         paintPrimary.setStrokeWidth(6f);
 
         paintSecondary = new Paint();
-        paintSecondary.setColor(ContextCompat.getColor(context, R.color.hm_selection_secondary));
+        paintSecondary.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
         paintSecondary.setStyle(Paint.Style.STROKE);
         paintSecondary.setStrokeWidth(6f);
 
@@ -100,8 +101,12 @@ class MeasurementOverlayView extends FrameLayout {
             return;
         }
 
+        //rectangle around target
         canvas.drawRect(rectPrimary, paintPrimary);
 
+        /*
+         * Start guidelines
+         */
         // top-left to top
         path.reset();
         path.moveTo(rectPrimary.left, 0);
@@ -149,6 +154,10 @@ class MeasurementOverlayView extends FrameLayout {
         path.moveTo(rectPrimary.right, rectPrimary.top);
         path.lineTo(getRight(), rectPrimary.top);
         canvas.drawPath(path, paintDashed);
+
+        /*
+         * End guidelines
+         */
 
         if (rectSecondary == null) {
             // draw width measurement text
@@ -249,8 +258,9 @@ class MeasurementOverlayView extends FrameLayout {
                 // top inside
                 canvas.drawLine(inside.centerX(), outside.top, inside.centerX(), inside.top, paintPrimary);
                 if (measurementTopText != null) {
+                    measurementTopText.layout(0, 0, 300, 100);
                     canvas.save();
-                    canvas.translate(inside.centerX() + measurementTextOffset,
+                    canvas.translate(inside.centerX() + measurementTextOffset - 175,
                             (outside.top + inside.top) / 2 - (measurementTopText.getHeight() / 2));
                     measurementTopText.draw(canvas);
                     canvas.restore();
@@ -402,12 +412,11 @@ class MeasurementOverlayView extends FrameLayout {
             measurementTopText = null;
             return;
         }
-        Spannable text = new SpannableString(measurementHelper.toDp(measurement) + "dp");
-        text.setSpan(new BackgroundColorSpan(Color.WHITE),
-                0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int width = (int) paintText.measureText(text, 0, text.length());
-        measurementTopText = new StaticLayout(text, paintText, width,
-                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
+
+        measurementTopText = new TextView(getContext());
+        ViewGroup.LayoutParams params = new LayoutParams(measurement, ViewGroup.LayoutParams.WRAP_CONTENT);
+        measurementTopText.setLayoutParams(params);
+        measurementTopText.setBackgroundResource(R.drawable.hm_rounded_measurement);
     }
 
     private void setRightMeasurementText(@Px int measurement) {
