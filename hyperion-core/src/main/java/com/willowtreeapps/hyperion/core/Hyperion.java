@@ -54,13 +54,22 @@ public final class Hyperion {
     }
 
     /**
-     * Shake gesture is disabled by default.
+     * Shake gesture is enabled by default.
      *
      * @see #isShakeGestureEnabled()
      * @param enabled true if enabling, false otherwise.
      */
     public static void setShakeGestureEnabled(boolean enabled) {
         AppComponent.Holder.getInstance().getLifecycle().setShakeGestureEnabled(enabled);
+    }
+
+    /**
+     * Set the sensitivity threshold of shake detection in G's. Default is 3
+     *
+     * @param sensitivity Sensitivity of shake detection in G's. Lower is easier to activate.
+     */
+    public static void setShakeGestureSensitivity(float sensitivity) {
+        AppComponent.Holder.getInstance().getLifecycle().setShakeGestureSensitivity(sensitivity);
     }
 
     private Hyperion() {

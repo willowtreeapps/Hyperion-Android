@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
  */
 public class ShakeDetector implements SensorEventListener {
 
-    private static final float SHAKE_THRESHOLD_GRAVITY = 2.5F;
+    private static float shakeThresholdGravity = 3F;
     private static final int SHAKE_SPACING_TIME_MS = 500;
 
     private OnShakeListener listener;
@@ -22,6 +22,10 @@ public class ShakeDetector implements SensorEventListener {
 
     public interface OnShakeListener {
         public void onShake();
+    }
+
+    public void setShakeGestureSensitivity(float sensitivity) {
+        shakeThresholdGravity = sensitivity;
     }
 
     @Override
@@ -43,7 +47,7 @@ public class ShakeDetector implements SensorEventListener {
             // gForce will be close to 1 when there is no movement
             float gForce = (float) Math.sqrt(gX * gX + gY * gY + gZ * gZ);
 
-            if (gForce > SHAKE_THRESHOLD_GRAVITY) {
+            if (gForce > shakeThresholdGravity) {
                 final long now = System.currentTimeMillis();
                 // ignore shake events too close to each other (500ms)
                 if (shakeTimestamp + SHAKE_SPACING_TIME_MS > now) {
