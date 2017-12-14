@@ -439,13 +439,14 @@ class MeasurementOverlayView extends FrameLayout {
     }
 
     /**
-     * Lays out textview to text width + 50
-     * Fixed height of 75 for 1 line
+     * Lays out textview to (text dimensions + padding) * system font scale
      *
      * @param tv The TextView to layout
      */
     private void layoutTextView(TextView tv) {
-        tv.layout(0, 0, (int) paintText.measureText(
-                tv.getText(), 0, tv.getText().length()) + 50, 75);
+        float fontScale = getResources().getConfiguration().fontScale;
+        Rect bounds = new Rect();
+        paintText.getTextBounds(tv.getText().toString().toCharArray(), 0, tv.getText().length(), bounds);
+        tv.layout(0, 0, (int) ((bounds.width() + 50) * fontScale), (int) ((bounds.height() + 33) * fontScale));
     }
 }

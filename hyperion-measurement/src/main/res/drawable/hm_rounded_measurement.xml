@@ -6,5 +6,6 @@
 
     <solid android:color="@color/hype_white" />
 
-    <corners android:radius="38dp" />
+    <!-- any value over half height just caps at half -->
+    <corners android:radius="9999dp" />
 </shape>
