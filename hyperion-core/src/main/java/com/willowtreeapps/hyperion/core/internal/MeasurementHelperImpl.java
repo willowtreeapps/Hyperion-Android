@@ -6,6 +6,7 @@ import android.support.annotation.Px;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 
@@ -13,6 +14,7 @@ class MeasurementHelperImpl implements MeasurementHelper {
 
     private static final int[] OUT_LOCATION = new int[2];
     private final DisplayMetrics displayMetrics;
+    private final Rect rect = new Rect();
 
     MeasurementHelperImpl(DisplayMetrics displayMetrics) {
         this.displayMetrics = displayMetrics;
@@ -83,4 +85,43 @@ class MeasurementHelperImpl implements MeasurementHelper {
         return (int) (px / scaledDensity);
     }
 
+    /**
+     * Finds the view clicked on
+     * Goes through all children and looks for the deepest one
+     */
+    public View findTarget(View globalView, View root, float x, float y) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            int deepestIndex = -1;
+            int deepestCount = -1;
+
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                View child = parent.getChildAt(i);
+                getScreenLocation(globalView, child, rect);
+                //if this view was clicked
+                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                    int childCount = getTotalChildren(child);
+                    if (childCount > deepestCount) {
+                        deepestCount = childCount;
+                        deepestIndex = i;
+                    }
+                }
+            }
+            if (deepestIndex >= 0) {
+                return findTarget(globalView, parent.getChildAt(deepestIndex), x, y);
+            }
+        }
+        return root;
+    }
+
+    private int getTotalChildren(View root) {
+        int deepest = 0;
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                deepest = Math.max(deepest, getTotalChildren(parent.getChildAt(i)));
+            }
+        }
+        return deepest + 1;
+    }
 }

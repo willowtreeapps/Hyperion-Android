@@ -60,7 +60,7 @@ class MeasurementOverlayView extends FrameLayout {
         paintDashed.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
         paintDashed.setStyle(Paint.Style.STROKE);
         paintDashed.setStrokeWidth(4f);
-        paintDashed.setPathEffect(new DashPathEffect(new float[] {10, 20}, 0));
+        paintDashed.setPathEffect(new DashPathEffect(new float[]{10, 20}, 0));
 
         paintPrimary = new Paint();
         paintPrimary.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
@@ -226,7 +226,7 @@ class MeasurementOverlayView extends FrameLayout {
                 outside = rectSecondary;
                 inside = rectPrimary;
             }
-            
+
             if (inside != null && outside != null) {
                 // left inside
                 canvas.drawLine(outside.left, inside.centerY(), inside.left, inside.centerY(), paintPrimary);
@@ -278,7 +278,7 @@ class MeasurementOverlayView extends FrameLayout {
         if (event.getAction() == MotionEvent.ACTION_UP) {
             float x = event.getX();
             float y = event.getY();
-            View touchTarget = findTarget(contentRoot, x, y);
+            View touchTarget = measurementHelper.findTarget(this, contentRoot, x, y);
 
             // reset selection if target is root or same target.
             if (contentRoot == touchTarget || target.getTarget() == touchTarget) {
@@ -296,21 +296,6 @@ class MeasurementOverlayView extends FrameLayout {
         }
 
         return super.onTouchEvent(event);
-    }
-
-    private View findTarget(View root, float x, float y) {
-        if (root instanceof ViewGroup) {
-            ViewGroup parent = (ViewGroup) root;
-            int count = parent.getChildCount();
-            for (int i = 0; i < count; i++) {
-                View child = parent.getChildAt(i);
-                measurementHelper.getScreenLocation(this, child, outRect);
-                if (x >= outRect.left && x <= outRect.right && y >= outRect.top && y <= outRect.bottom) {
-                    return findTarget(child, x, y);
-                }
-            }
-        }
-        return root;
     }
 
     private void setPrimaryTarget(View view) {
