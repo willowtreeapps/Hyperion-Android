@@ -92,8 +92,8 @@ class MeasurementHelperImpl implements MeasurementHelper {
     public View findTarget(View globalView, View root, float x, float y) {
         if (root instanceof ViewGroup) {
             ViewGroup parent = (ViewGroup) root;
-            int deepestIndex = 0;
-            int deepestCount = 0;
+            int deepestIndex = -1;
+            int deepestCount = -1;
 
             for (int i = 0; i < parent.getChildCount(); i++) {
                 View child = parent.getChildAt(i);
@@ -107,7 +107,9 @@ class MeasurementHelperImpl implements MeasurementHelper {
                     }
                 }
             }
-            return findTarget(globalView, parent.getChildAt(deepestIndex), x, y);
+            if (deepestIndex >= 0) {
+                return findTarget(globalView, parent.getChildAt(deepestIndex), x, y);
+            }
         }
         return root;
     }
