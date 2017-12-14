@@ -440,13 +440,22 @@ class MeasurementOverlayView extends FrameLayout {
 
     /**
      * Lays out textview to (text dimensions + padding) * system font scale
+     * Padding based on screen density
      *
      * @param tv The TextView to layout
      */
     private void layoutTextView(TextView tv) {
-        float fontScale = getResources().getConfiguration().fontScale;
+        final float fontScale = getResources().getConfiguration().fontScale;
+
+        /*
+         * Multiplier for padding based on phone density
+         * Density of 2 does not need padding
+         */
+        final float densityMultiplier = getContext().getResources().getDisplayMetrics().density - 2;
+
         Rect bounds = new Rect();
         paintText.getTextBounds(tv.getText().toString().toCharArray(), 0, tv.getText().length(), bounds);
-        tv.layout(0, 0, (int) ((bounds.width() + 50) * fontScale), (int) ((bounds.height() + 33) * fontScale));
+        tv.layout(0, 0, (int) ((bounds.width() + (33 * densityMultiplier)) * fontScale),
+                (int) ((bounds.height() + (22 * densityMultiplier)) * fontScale));
     }
 }
