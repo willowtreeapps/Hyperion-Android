@@ -2,24 +2,19 @@ package com.willowtreeapps.hyperion.measurement;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.support.annotation.Px;
 import android.support.v4.content.ContextCompat;
-import android.text.Layout;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.text.style.BackgroundColorSpan;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
@@ -37,17 +32,18 @@ class MeasurementOverlayView extends FrameLayout {
     private final Paint paintPrimary;
     private final Paint paintSecondary;
     private final TextPaint paintText;
-    private final @Px int measurementTextOffset;
+    private final @Px
+    int measurementTextOffset;
 
     private Rect rectPrimary;
     private Rect rectSecondary;
-    private StaticLayout measurementWidthText;
-    private StaticLayout measurementHeightText;
+    private TextView measurementWidthText;
+    private TextView measurementHeightText;
     /* Used for nested measurementHelper */
-    private StaticLayout measurementLeftText;
-    private StaticLayout measurementTopText;
-    private StaticLayout measurementRightText;
-    private StaticLayout measurementBottomText;
+    private TextView measurementLeftText;
+    private TextView measurementTopText;
+    private TextView measurementRightText;
+    private TextView measurementBottomText;
 
     MeasurementOverlayView(Context context) {
         super(context);
@@ -60,7 +56,7 @@ class MeasurementOverlayView extends FrameLayout {
         paintDashed.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
         paintDashed.setStyle(Paint.Style.STROKE);
         paintDashed.setStrokeWidth(4f);
-        paintDashed.setPathEffect(new DashPathEffect(new float[] {10, 20}, 0));
+        paintDashed.setPathEffect(new DashPathEffect(new float[]{10, 20}, 0));
 
         paintPrimary = new Paint();
         paintPrimary.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
@@ -68,7 +64,7 @@ class MeasurementOverlayView extends FrameLayout {
         paintPrimary.setStrokeWidth(6f);
 
         paintSecondary = new Paint();
-        paintSecondary.setColor(ContextCompat.getColor(context, R.color.hm_selection_secondary));
+        paintSecondary.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
         paintSecondary.setStyle(Paint.Style.STROKE);
         paintSecondary.setStrokeWidth(6f);
 
@@ -100,8 +96,12 @@ class MeasurementOverlayView extends FrameLayout {
             return;
         }
 
+        //rectangle around target
         canvas.drawRect(rectPrimary, paintPrimary);
 
+        /*
+         * Start guidelines
+         */
         // top-left to top
         path.reset();
         path.moveTo(rectPrimary.left, 0);
@@ -149,6 +149,9 @@ class MeasurementOverlayView extends FrameLayout {
         path.moveTo(rectPrimary.right, rectPrimary.top);
         path.lineTo(getRight(), rectPrimary.top);
         canvas.drawPath(path, paintDashed);
+        /*
+         * End guidelines
+         */
 
         if (rectSecondary == null) {
             // draw width measurement text
@@ -226,13 +229,17 @@ class MeasurementOverlayView extends FrameLayout {
                 outside = rectSecondary;
                 inside = rectPrimary;
             }
-            
+
+            /*
+             * Start measurement views
+             */
             if (inside != null && outside != null) {
                 // left inside
                 canvas.drawLine(outside.left, inside.centerY(), inside.left, inside.centerY(), paintPrimary);
                 if (measurementLeftText != null) {
                     canvas.save();
-                    canvas.translate((outside.left + inside.left) / 2, inside.centerY() - measurementTextOffset - measurementLeftText.getHeight());
+                    canvas.translate((outside.left + inside.left) / 2 - measurementRightText.getWidth() / 2,
+                            inside.centerY() - measurementRightText.getHeight() / 2);
                     measurementLeftText.draw(canvas);
                     canvas.restore();
                 }
@@ -241,7 +248,8 @@ class MeasurementOverlayView extends FrameLayout {
                 canvas.drawLine(outside.right, inside.centerY(), inside.right, inside.centerY(), paintPrimary);
                 if (measurementRightText != null) {
                     canvas.save();
-                    canvas.translate((outside.right + inside.right) / 2, inside.centerY() - measurementTextOffset - measurementRightText.getHeight());
+                    canvas.translate((outside.right + inside.right) / 2 - measurementRightText.getWidth() / 2,
+                            inside.centerY() - measurementRightText.getHeight() / 2);
                     measurementRightText.draw(canvas);
                     canvas.restore();
                 }
@@ -250,8 +258,8 @@ class MeasurementOverlayView extends FrameLayout {
                 canvas.drawLine(inside.centerX(), outside.top, inside.centerX(), inside.top, paintPrimary);
                 if (measurementTopText != null) {
                     canvas.save();
-                    canvas.translate(inside.centerX() + measurementTextOffset,
-                            (outside.top + inside.top) / 2 - (measurementTopText.getHeight() / 2));
+                    canvas.translate(inside.centerX() - measurementTopText.getWidth() / 2,
+                            (outside.top + inside.top) / 2 - measurementTopText.getHeight() / 2);
                     measurementTopText.draw(canvas);
                     canvas.restore();
                 }
@@ -260,12 +268,15 @@ class MeasurementOverlayView extends FrameLayout {
                 canvas.drawLine(inside.centerX(), outside.bottom, inside.centerX(), inside.bottom, paintPrimary);
                 if (measurementBottomText != null) {
                     canvas.save();
-                    canvas.translate(inside.centerX() + measurementTextOffset,
-                            (outside.bottom + inside.bottom) / 2 - (measurementBottomText.getHeight() / 2));
+                    canvas.translate(inside.centerX() - measurementBottomText.getWidth() / 2,
+                            (outside.bottom + inside.bottom) / 2 - measurementBottomText.getHeight() / 2);
                     measurementBottomText.draw(canvas);
                     canvas.restore();
                 }
             }
+            /*
+             * End measurement views
+             */
         }
     }
 
@@ -363,12 +374,7 @@ class MeasurementOverlayView extends FrameLayout {
             measurementWidthText = null;
             return;
         }
-        Spannable widthText = new SpannableString(measurementHelper.toDp(measurement) + "dp");
-        widthText.setSpan(new BackgroundColorSpan(Color.WHITE),
-                0, widthText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int width = (int) paintText.measureText(widthText, 0, widthText.length());
-        measurementWidthText = new StaticLayout(widthText, paintText, width,
-                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
+        measurementWidthText = makeMeasurementView(measurement);
     }
 
     private void setHeightMeasurementText(@Px int measurement) {
@@ -376,12 +382,7 @@ class MeasurementOverlayView extends FrameLayout {
             measurementHeightText = null;
             return;
         }
-        Spannable heightText = new SpannableString(measurementHelper.toDp(measurement) + "dp");
-        heightText.setSpan(new BackgroundColorSpan(Color.WHITE),
-                0, heightText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int width = (int) paintText.measureText(heightText, 0, heightText.length());
-        measurementHeightText = new StaticLayout(heightText, paintText, width,
-                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
+        measurementHeightText = makeMeasurementView(measurement);
     }
 
     private void setLeftMeasurementText(@Px int measurement) {
@@ -389,12 +390,7 @@ class MeasurementOverlayView extends FrameLayout {
             measurementLeftText = null;
             return;
         }
-        Spannable text = new SpannableString(measurementHelper.toDp(measurement) + "dp");
-        text.setSpan(new BackgroundColorSpan(Color.WHITE),
-                0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int width = (int) paintText.measureText(text, 0, text.length());
-        measurementLeftText = new StaticLayout(text, paintText, width,
-                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
+        measurementLeftText = makeMeasurementView(measurement);
     }
 
     private void setTopMeasurementText(@Px int measurement) {
@@ -402,12 +398,7 @@ class MeasurementOverlayView extends FrameLayout {
             measurementTopText = null;
             return;
         }
-        Spannable text = new SpannableString(measurementHelper.toDp(measurement) + "dp");
-        text.setSpan(new BackgroundColorSpan(Color.WHITE),
-                0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int width = (int) paintText.measureText(text, 0, text.length());
-        measurementTopText = new StaticLayout(text, paintText, width,
-                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
+        measurementTopText = makeMeasurementView(measurement);
     }
 
     private void setRightMeasurementText(@Px int measurement) {
@@ -415,12 +406,7 @@ class MeasurementOverlayView extends FrameLayout {
             measurementRightText = null;
             return;
         }
-        Spannable text = new SpannableString(measurementHelper.toDp(measurement) + "dp");
-        text.setSpan(new BackgroundColorSpan(Color.WHITE),
-                0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int width = (int) paintText.measureText(text, 0, text.length());
-        measurementRightText = new StaticLayout(text, paintText, width,
-                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
+        measurementRightText = makeMeasurementView(measurement);
     }
 
     private void setBottomMeasurementText(@Px int measurement) {
@@ -428,11 +414,48 @@ class MeasurementOverlayView extends FrameLayout {
             measurementBottomText = null;
             return;
         }
-        Spannable text = new SpannableString(measurementHelper.toDp(measurement) + "dp");
-        text.setSpan(new BackgroundColorSpan(Color.WHITE),
-                0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        int width = (int) paintText.measureText(text, 0, text.length());
-        measurementBottomText = new StaticLayout(text, paintText, width,
-                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
+        measurementBottomText = makeMeasurementView(measurement);
+    }
+
+    /**
+     * Prepares a TextView to display a measurement
+     * Centers text
+     * Sets text with "dp" suffix
+     * Sets selection color as text color
+     * Sets TextView background
+     * Lays out view
+     *
+     * @param measurement The measurement to display in the created TextView
+     */
+    private TextView makeMeasurementView(@Px int measurement) {
+        TextView tv = new TextView(getContext());
+        tv.setGravity(Gravity.CENTER);
+        String text = measurementHelper.toDp(measurement) + "dp";
+        tv.setText(text);
+        tv.setTextColor(getResources().getColor(R.color.hm_selection_primary));
+        tv.setBackgroundResource(R.drawable.hm_rounded_measurement);
+        layoutTextView(tv);
+        return tv;
+    }
+
+    /**
+     * Lays out textview to (text dimensions + padding) * system font scale
+     * Padding based on screen density
+     *
+     * @param tv The TextView to layout
+     */
+    private void layoutTextView(TextView tv) {
+        final float fontScale = getResources().getConfiguration().fontScale;
+
+        /*
+         * Multiplier for padding based on phone density
+         * Density of 2 does not need padding
+         */
+        final float densityMultiplier = getContext().getResources().getDisplayMetrics().density - 2;
+
+        Rect bounds = new Rect();
+        paintText.getTextBounds(tv.getText().toString().toCharArray(), 0, tv.getText().length(), bounds);
+        tv.layout(0, 0, (int) ((bounds.width() + (33 * densityMultiplier)) * fontScale),
+                (int) ((bounds.height() + (22 * densityMultiplier)) * fontScale));
     }
 }
