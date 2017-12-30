@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
  */
 public class ShakeDetector implements SensorEventListener {
 
-    private static float shakeThresholdGravity = 3F;
+    private static float shakeThresholdGravity = 3.0F;
     private static final int SHAKE_SPACING_TIME_MS = 500;
 
     private OnShakeListener listener;
@@ -21,7 +21,7 @@ public class ShakeDetector implements SensorEventListener {
     }
 
     public interface OnShakeListener {
-        public void onShake();
+        void onShake();
     }
 
     public void setShakeGestureSensitivity(float sensitivity) {

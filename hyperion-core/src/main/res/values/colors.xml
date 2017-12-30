@@ -7,7 +7,8 @@
     <color name="hype_enabled">#2f5df0</color>
     <color name="hype_disabled">#e6e6e6</color>
     <color name="hype_text">#223547</color>
-    <color name="hype_drawer_background">#F4F5F7</color>
+    <color name="hype_menu_background">#F4F5F7</color>
     <color name="hype_drawer_text">#8e8e93</color>
     <color name="hype_inspect_background">#737373</color>
+    <color name="hype_divider">#E6E6E6</color>
 </resources>

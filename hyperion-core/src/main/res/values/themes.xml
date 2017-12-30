@@ -6,10 +6,11 @@
         <item name="colorAccent">@color/hype_enabled</item>
         <item name="android:textColorPrimary">@color/hype_text</item>
         <item name="android:textColorSecondary">@color/hype_disabled</item>
+        <item name="android:listDivider">@drawable/hype_horizontal_divider</item>
     </style>
 
     <style name="Hype.Base.Drawer">
-        <item name="android:windowBackground">@color/hype_drawer_background</item>
+        <item name="android:windowBackground">@color/hype_menu_background</item>
         <item name="android:textColorPrimary">@color/hype_drawer_text</item>
     </style>
 

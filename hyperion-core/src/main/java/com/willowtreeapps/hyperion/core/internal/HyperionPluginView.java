@@ -6,7 +6,6 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.transition.Slide;
 import android.transition.TransitionManager;
@@ -50,8 +49,7 @@ public class HyperionPluginView extends FrameLayout implements DrawerContainer {
         component.inject(this);
         inflate(context, R.layout.hype_view_plugin, this);
 
-        setBackgroundColor(ContextCompat.getColor(context, R.color.hype_white));
-        pluginListContainer = (LinearLayout) findViewById(R.id.plugin_list_container);
+        pluginListContainer = findViewById(R.id.plugin_list_container);
         pluginExtension = new PluginExtensionImpl(component, this);
     }
 
