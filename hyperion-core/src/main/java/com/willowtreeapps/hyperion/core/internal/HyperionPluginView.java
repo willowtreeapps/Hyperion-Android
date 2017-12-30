@@ -1,23 +1,17 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.AttrRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
-import android.transition.Slide;
-import android.transition.TransitionManager;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.willowtreeapps.hyperion.core.R;
-import com.willowtreeapps.hyperion.core.plugins.v1.DrawerContainer;
 import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 import com.willowtreeapps.hyperion.core.plugins.v1.PluginModule;
 
@@ -25,7 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class HyperionPluginView extends FrameLayout implements DrawerContainer {
+public class HyperionPluginView extends FrameLayout {
 
     private final LinearLayout pluginListContainer;
     private final PluginExtension pluginExtension;
@@ -94,19 +88,5 @@ public class HyperionPluginView extends FrameLayout implements DrawerContainer {
                 module.destroy();
             }
         }
-    }
-
-    @Override
-    public void addView(@LayoutRes int view) {
-        final Context context = getContext();
-        LayoutInflater inflater = LayoutInflater.from(context)
-                .cloneInContext(new PluginExtensionContextWrapper(context, pluginExtension));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            TransitionManager.beginDelayedTransition(this);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            TransitionManager.beginDelayedTransition(this, new Slide(Gravity.BOTTOM));
-        }
-        inflater.inflate(view, this, true);
     }
 }

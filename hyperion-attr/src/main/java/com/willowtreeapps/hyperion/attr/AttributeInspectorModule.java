@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 
 import com.willowtreeapps.hyperion.core.plugins.v1.OnOverlayViewChangedListener;
 import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
@@ -16,7 +15,7 @@ class AttributeInspectorModule extends PluginModule
 
     private static final String OVERLAY_TAG = "attribute_inspector_overlay";
     private OverlayContainer overlay;
-    private CheckBox checkBox;
+    private View view;
 
     @Override
     protected void onCreate() {
@@ -29,10 +28,10 @@ class AttributeInspectorModule extends PluginModule
     public View createPluginView(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.ha_item_plugin, parent, false);
         view.setOnClickListener(this);
-        checkBox = (CheckBox) view.findViewById(R.id.checkbox);
 
         View overlayView = overlay.getOverlayView();
-        checkBox.setChecked(overlayView != null && OVERLAY_TAG.equals(overlayView.getTag()));
+        view.setSelected(overlayView != null && OVERLAY_TAG.equals(overlayView.getTag()));
+        this.view = view;
         return view;
     }
 
@@ -55,6 +54,6 @@ class AttributeInspectorModule extends PluginModule
 
     @Override
     public void onOverlayViewChanged(@Nullable View view) {
-        checkBox.setChecked(view != null && OVERLAY_TAG.equals(view.getTag()));
+        this.view.setSelected(view != null && OVERLAY_TAG.equals(view.getTag()));
     }
 }

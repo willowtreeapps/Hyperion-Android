@@ -36,7 +36,6 @@ public class VideosView extends FrameLayout {
     private static final Executor exec = Executors.newCachedThreadPool();
     private static final Handler main = new Handler(Looper.getMainLooper());
 
-    private View close;
     private RecyclerView recyclerView;
 
     public VideosView(@NonNull Context context) {
@@ -49,20 +48,14 @@ public class VideosView extends FrameLayout {
 
     public VideosView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        inflate(context, R.layout.hr_view_videos, this);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         final Context context = getContext();
-        close = findViewById(R.id.close);
-        close.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ViewGroup) getParent()).removeView(VideosView.this);
-            }
-        });
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new VideosAdapter(context));
     }
@@ -114,9 +107,9 @@ public class VideosView extends FrameLayout {
         private VideoViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            nameText = (TextView) itemView.findViewById(R.id.name);
-            dateText = (TextView) itemView.findViewById(R.id.date);
-            thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail);
+            nameText = itemView.findViewById(R.id.name);
+            dateText = itemView.findViewById(R.id.date);
+            thumbnail = itemView.findViewById(R.id.thumbnail);
         }
 
         private void bind(final File file) {

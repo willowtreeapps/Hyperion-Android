@@ -2,6 +2,7 @@
     package="com.willowtreeapps.hyperion.disk">
 
     <application>
+        <activity android:name=".FileExplorerActivity"/>
         <provider
             android:name=".DiskFileProvider"
             android:authorities="${applicationId}.DiskFileProvider"

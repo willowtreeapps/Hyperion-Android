@@ -4,6 +4,7 @@
     <color name="hype_light_gray">#FAFAFA</color>
     <color name="hype_text_gray">#B4B4B4</color>
 
+    <color name="hype_blue">#2b57f4</color>
     <color name="hype_enabled">#2f5df0</color>
     <color name="hype_disabled">#e6e6e6</color>
     <color name="hype_text">#223547</color>

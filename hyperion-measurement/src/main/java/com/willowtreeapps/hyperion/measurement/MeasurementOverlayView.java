@@ -53,23 +53,23 @@ class MeasurementOverlayView extends FrameLayout {
         measurementHelper = extension.getMeasurementHelper();
 
         paintDashed = new Paint();
-        paintDashed.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
+        paintDashed.setColor(ContextCompat.getColor(context, R.color.hype_blue));
         paintDashed.setStyle(Paint.Style.STROKE);
         paintDashed.setStrokeWidth(4f);
         paintDashed.setPathEffect(new DashPathEffect(new float[]{10, 20}, 0));
 
         paintPrimary = new Paint();
-        paintPrimary.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
+        paintPrimary.setColor(ContextCompat.getColor(context, R.color.hype_blue));
         paintPrimary.setStyle(Paint.Style.STROKE);
         paintPrimary.setStrokeWidth(6f);
 
         paintSecondary = new Paint();
-        paintSecondary.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
+        paintSecondary.setColor(ContextCompat.getColor(context, R.color.hype_blue));
         paintSecondary.setStyle(Paint.Style.STROKE);
         paintSecondary.setStrokeWidth(6f);
 
         paintText = new TextPaint();
-        paintText.setColor(ContextCompat.getColor(context, R.color.hm_selection_primary));
+        paintText.setColor(ContextCompat.getColor(context, R.color.hype_blue));
         paintText.setTextSize(45);
         paintText.setStyle(Paint.Style.FILL_AND_STROKE);
         paintText.setStrokeWidth(2);
@@ -432,7 +432,7 @@ class MeasurementOverlayView extends FrameLayout {
         tv.setGravity(Gravity.CENTER);
         String text = measurementHelper.toDp(measurement) + "dp";
         tv.setText(text);
-        tv.setTextColor(getResources().getColor(R.color.hm_selection_primary));
+        tv.setTextColor(getResources().getColor(R.color.hype_blue));
         tv.setBackgroundResource(R.drawable.hm_rounded_measurement);
         layoutTextView(tv);
         return tv;

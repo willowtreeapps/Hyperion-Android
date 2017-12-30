@@ -45,6 +45,7 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
 
     public FileExplorerView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        inflate(context, R.layout.hd_view_file_explorer, this);
         try {
             PackageManager pm = context.getPackageManager();
             String name = context.getPackageName();
@@ -62,13 +63,6 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
         super.onFinishInflate();
         final Context context = getContext();
         recycler = findViewById(R.id.recycler);
-        View close = findViewById(R.id.close);
-        close.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ViewGroup) getParent()).removeView(FileExplorerView.this);
-            }
-        });
         adapter = new Adapter();
         recycler.setLayoutManager(new LinearLayoutManager(context));
         recycler.setAdapter(adapter);
@@ -153,9 +147,9 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
             super(itemView);
             this.files = files;
             itemView.setOnClickListener(this);
-            image = (ImageView) itemView.findViewById(R.id.image);
-            text = (TextView) itemView.findViewById(R.id.name);
-            date = (TextView) itemView.findViewById(R.id.date);
+            image = itemView.findViewById(R.id.image);
+            text = itemView.findViewById(R.id.name);
+            date = itemView.findViewById(R.id.date);
             options = itemView.findViewById(R.id.options);
             options.setOnClickListener(new OnClickListener() {
                 @Override
