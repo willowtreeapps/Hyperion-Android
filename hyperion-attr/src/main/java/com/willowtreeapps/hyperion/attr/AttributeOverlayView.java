@@ -30,7 +30,7 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
     AttributeOverlayView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.ha_view_attribute_overlay, this, true);
-        AttributeDetailView detailView = (AttributeDetailView) findViewById(R.id.bottom_sheet);
+        AttributeDetailView detailView = findViewById(R.id.bottom_sheet);
 
         PluginExtension extension = ExtensionProvider.get(context);
         contentRoot = extension.getContentRoot();

@@ -1,13 +1,6 @@
 <resources>
     <string name="app_name">Hyperion</string>
-    <string name="test1">Test1</string>
-    <string name="test2">Test2</string>
-    <string name="test3">Test3</string>
-    <string name="test4">Test4</string>
-    <string name="test5">Test5</string>
-    <string name="write_to_file">Write to file</string>
-    <string name="toggle_drawer_enabled">Toggle Drawer enabled</string>
-    <string name="toggle_shake_to_open">Toggle Shake to open</string>
-    <string name="test6">Test6</string>
-    <string name="test_image">Test image</string>
+    <string name="cd_logo">Logo</string>
+    <string name="welcome">Welcome to\nHyperion</string>
+    <string name="description">An in-app QA and design\nreview menu with a built-in\nplugin system</string>
 </resources>

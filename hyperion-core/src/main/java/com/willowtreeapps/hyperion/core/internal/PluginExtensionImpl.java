@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
+import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.core.ViewTarget;
 import com.willowtreeapps.hyperion.core.plugins.v1.DrawerContainer;
 import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
@@ -31,7 +32,8 @@ class PluginExtensionImpl implements PluginExtension {
     @NonNull
     @Override
     public ViewGroup getContentRoot() {
-        return (ViewGroup) getActivity().findViewById(android.R.id.content);
+        final HyperionOverlayLayout overlayLayout = getActivity().findViewById(R.id.hyperion_overlay);
+        return (ViewGroup) overlayLayout.getChildAt(0);
     }
 
     @NonNull
