@@ -104,6 +104,10 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
 
     @Override
     public void onShake() {
+        expand();
+    }
+
+    public void expand() {
         if (!isMenuOpen()) {
             final int width = getMeasuredWidth();
             int offset = width - (width / 3);
