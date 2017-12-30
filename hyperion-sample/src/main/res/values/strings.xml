@@ -3,4 +3,17 @@
     <string name="cd_logo">Logo</string>
     <string name="welcome">Welcome to\nHyperion</string>
     <string name="description">An in-app QA and design\nreview menu with a built-in\nplugin system</string>
+    <string name="gestures_title">Using Hyperion</string>
+    <string name="gestures_shake">Shake phone to expand Hyperion plugins menu</string>
+    <string name="manual_open">Press to expand the menu manually</string>
+    <string name="or">or</string>
+    <string name="open">Open</string>
+    <string name="this_version">What’s in this version?</string>
+    <string name="measurement_tool">Measurement Tool</string>
+    <string name="attributes_inspector">Attributes Inspector</string>
+    <string name="screen_recorder">Screen Recorder</string>
+    <string name="file_explorer">File Explorer</string>
+    <string name="add_or_remove">Add or remove plugins based on your workflow</string>
+    <string name="cd_plugin_image">Plugin Image</string>
+    <string name="cd_chevron">Chevron</string>
 </resources>

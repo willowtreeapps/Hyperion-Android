@@ -25,7 +25,6 @@
         android:textSize="40sp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
-        android:textColor="#4a4a4a"
         android:lineSpacingExtra="2sp"
         android:text="@string/welcome"/>
 

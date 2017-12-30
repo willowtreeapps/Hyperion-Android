@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.R;
+import com.willowtreeapps.hyperion.core.plugins.v1.HyperionIgnore;
 
 public class Lifecycle extends LifecycleAdapter {
 
@@ -19,58 +20,69 @@ public class Lifecycle extends LifecycleAdapter {
 
     private final SimpleArrayMap<Activity, CoreComponent> components = new SimpleArrayMap<>();
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private boolean embeddedDrawerEnabled = true;
+    private float sensitivity = 3.0f;
 
     @Override
     public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                // reorganize the layout
-                final ViewGroup contentViewRoot = activity.findViewById(android.R.id.content);
-                final View contentView = contentViewRoot.getChildAt(0);
-                // prevent clicking through to menu behind content
-                contentView.setClickable(true);
-                contentViewRoot.removeView(contentView);
-
-                // embed content view within overlay
-                final HyperionOverlayLayout overlayLayout = new HyperionOverlayLayout(activity);
-                overlayLayout.setId(R.id.hyperion_overlay);
-                overlayLayout.addView(contentView);
-
-                // embed overlay + content within menu
-                final HyperionMenuLayout menuLayout = new HyperionMenuLayout(activity);
-                menuLayout.setId(R.id.hyperion_menu);
-                contentViewRoot.addView(menuLayout);
-
-                FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
-
-                ActivityResults results = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
-                if (results == null) {
-                    results = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
-                    fragmentManager.beginTransaction()
-                            .add(results, ACTIVITY_RESULT_TAG)
-                            .commit();
+        HyperionIgnore ignore = activity.getClass().getAnnotation(HyperionIgnore.class);
+        if (ignore == null) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    install(activity);
                 }
+            });
+        }
+    }
 
-                CoreComponent component = DaggerCoreComponent.builder()
-                        .appComponent(AppComponent.Holder.getInstance())
-                        .coreModule(new CoreModule())
-                        .activityModule(new ActivityModule(activity))
-                        .overlayModule(new OverlayModule(overlayLayout))
-                        .activityResultModule(new ActivityResultModule(results))
-                        .build();
+    private void install(Activity activity) {
+        // reorganize the layout
+        final ViewGroup contentViewRoot = activity.findViewById(android.R.id.content);
+        final View contentView = contentViewRoot.getChildAt(0);
+        if (contentViewRoot.getChildCount() < 1) {
+            // no content, abort install
+            return;
+        }
+        // prevent clicking through to menu behind content
+        contentView.setClickable(true);
+        contentViewRoot.removeView(contentView);
 
-                components.put(activity, component);
+        // embed content view within overlay
+        final HyperionOverlayLayout overlayLayout = new HyperionOverlayLayout(activity);
+        overlayLayout.setId(R.id.hyperion_overlay);
+        overlayLayout.addView(contentView);
 
-                // embed plugins list into menu
-                final Context coreContext = new ComponentContextThemeWrapper(activity, component);
-                final HyperionPluginView pluginView = new HyperionPluginView(coreContext);
-                pluginView.setId(R.id.hyperion_plugins);
-                menuLayout.addView(pluginView);
-                menuLayout.addView(overlayLayout);
-            }
-        });
+        // embed overlay + content within menu
+        final HyperionMenuLayout menuLayout = new HyperionMenuLayout(activity);
+        menuLayout.setId(R.id.hyperion_menu);
+        contentViewRoot.addView(menuLayout);
+
+        FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
+
+        ActivityResults results = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+        if (results == null) {
+            results = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
+            fragmentManager.beginTransaction()
+                    .add(results, ACTIVITY_RESULT_TAG)
+                    .commit();
+        }
+
+        CoreComponent component = DaggerCoreComponent.builder()
+                .appComponent(AppComponent.Holder.getInstance())
+                .coreModule(new CoreModule())
+                .activityModule(new ActivityModule(activity))
+                .overlayModule(new OverlayModule(overlayLayout))
+                .activityResultModule(new ActivityResultModule(results))
+                .build();
+
+        components.put(activity, component);
+
+        // embed plugins list into menu
+        final Context coreContext = new ComponentContextThemeWrapper(activity, component);
+        final HyperionPluginView pluginView = new HyperionPluginView(coreContext);
+        pluginView.setId(R.id.hyperion_plugins);
+        menuLayout.addView(pluginView);
+        menuLayout.addView(overlayLayout);
     }
 
     CoreComponent getComponent(Activity activity) {
@@ -82,12 +94,22 @@ public class Lifecycle extends LifecycleAdapter {
         components.remove(activity);
     }
 
+    public float getShakeGestureSensitivity() {
+        return sensitivity;
+    }
+
     public void setShakeGestureSensitivity(float sensitivity) {
+        this.sensitivity = sensitivity;
         for (int i = 0; i < components.size(); i++) {
             final Activity activity = components.keyAt(i);
             final HyperionMenuLayout menu = activity.findViewById(R.id.hyperion_menu);
             menu.setShakeGestureSensitivity(sensitivity);
         }
+    }
+
+    public void open(Activity activity) {
+        final HyperionMenuLayout menu = activity.findViewById(R.id.hyperion_menu);
+        menu.expand();
     }
 
     @NonNull
