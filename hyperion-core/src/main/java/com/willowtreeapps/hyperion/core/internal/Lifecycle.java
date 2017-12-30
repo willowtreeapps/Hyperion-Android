@@ -1,61 +1,74 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
-import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
+import com.willowtreeapps.hyperion.core.R;
 
 public class Lifecycle extends LifecycleAdapter {
 
-    private static final String OVERLAY_TAG = "hyperion_overlay";
-    private static final String DRAWER_TAG = "hyperion_drawer";
     private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
 
     private final SimpleArrayMap<Activity, CoreComponent> components = new SimpleArrayMap<>();
+    private final Handler handler = new Handler(Looper.getMainLooper());
     private boolean embeddedDrawerEnabled = true;
-    private boolean shakeGestureEnabled = true;
 
     @Override
-    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
+    public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                // reorganize the layout.
+                final ViewGroup contentViewRoot = activity.findViewById(android.R.id.content);
+                final View contentView = contentViewRoot.getChildAt(0);
+                contentViewRoot.removeView(contentView);
 
-        OverlayContainer fragment = fragmentManager.findFragmentByTag(OVERLAY_TAG);
-        if (fragment == null) {
-            fragment = fragmentManager.isSupport() ? new HyperionOverlaySupportFragment() : new HyperionOverlayFragment();
-            fragmentManager.beginTransaction()
-                    .add(android.R.id.content, fragment, OVERLAY_TAG)
-                    .commit();
-        }
+                // embed content view within overlay
+                final HyperionOverlayLayout overlayLayout = new HyperionOverlayLayout(activity);
+                overlayLayout.setId(R.id.hyperion_overlay);
+                overlayLayout.addView(contentView);
 
-        ActivityResults results = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
-        if (results == null) {
-            results = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
-            fragmentManager.beginTransaction()
-                    .add(results, ACTIVITY_RESULT_TAG)
-                    .commit();
-        }
+                // embed overlay + content within menu
+                final HyperionMenuLayout menuLayout = new HyperionMenuLayout(activity);
+                menuLayout.setId(R.id.hyperion_menu);
+                contentViewRoot.addView(menuLayout);
 
-        CoreComponent component = DaggerCoreComponent.builder()
-                .appComponent(AppComponent.Holder.getInstance())
-                .coreModule(new CoreModule())
-                .activityModule(new ActivityModule(activity))
-                .overlayModule(new OverlayModule(fragment))
-                .activityResultModule(new ActivityResultModule(results))
-                .build();
+                FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
 
-        components.put(activity, component);
+                ActivityResults results = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+                if (results == null) {
+                    results = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
+                    fragmentManager.beginTransaction()
+                            .add(results, ACTIVITY_RESULT_TAG)
+                            .commit();
+                }
 
-        HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
-        if (drawer == null && embeddedDrawerEnabled) {
-            drawer = fragmentManager.isSupport() ? new HyperionDrawerSupportFragment() : new HyperionDrawerFragment();
-            fragmentManager.beginTransaction()
-                    .add(android.R.id.content, drawer, DRAWER_TAG)
-                    .commit();
-        }
+                CoreComponent component = DaggerCoreComponent.builder()
+                        .appComponent(AppComponent.Holder.getInstance())
+                        .coreModule(new CoreModule())
+                        .activityModule(new ActivityModule(activity))
+                        .overlayModule(new OverlayModule(overlayLayout))
+                        .activityResultModule(new ActivityResultModule(results))
+                        .build();
+
+                components.put(activity, component);
+
+                // embed plugins list into menu
+                final Context coreContext = new ComponentContextThemeWrapper(activity, component);
+                final HyperionPluginView pluginView = new HyperionPluginView(coreContext);
+                pluginView.setId(R.id.hyperion_plugins);
+                menuLayout.addView(pluginView);
+                menuLayout.addView(overlayLayout);
+            }
+        });
     }
 
     CoreComponent getComponent(Activity activity) {
@@ -67,58 +80,11 @@ public class Lifecycle extends LifecycleAdapter {
         components.remove(activity);
     }
 
-    public boolean isEmbeddedDrawerEnabled() {
-        return embeddedDrawerEnabled;
-    }
-
-    public void setEmbeddedDrawerEnabled(boolean enabled) {
-        this.embeddedDrawerEnabled = enabled;
-
-        int count = components.size();
-        for (int i = 0; i < count; i++) {
-            Activity activity = components.keyAt(i);
-            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
-            HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
-            if (enabled) {
-                if (drawer == null) {
-                    drawer = fragmentManager.isSupport() ? new HyperionDrawerSupportFragment() : new HyperionDrawerFragment();
-                    fragmentManager.beginTransaction()
-                            .add(android.R.id.content, drawer, DRAWER_TAG)
-                            .commit();
-                }
-            } else if (drawer != null) {
-                fragmentManager.beginTransaction()
-                        .remove(drawer)
-                        .commit();
-            }
-        }
-    }
-
-    public boolean isShakeGestureEnabled() {
-        return this.shakeGestureEnabled;
-    }
-
-    public void setShakeGestureEnabled(boolean enabled) {
-        this.shakeGestureEnabled = enabled;
-        int count = components.size();
-        for (int i = 0; i < count; i++) {
-            Activity activity = components.keyAt(i);
-            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
-            HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
-            if (drawer != null) {
-                drawer.getLayout().setShakeGestureEnabled(enabled);
-            }
-        }
-    }
-
     public void setShakeGestureSensitivity(float sensitivity) {
         for (int i = 0; i < components.size(); i++) {
-            Activity activity = components.keyAt(i);
-            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
-            HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
-            if (drawer != null) {
-                drawer.getLayout().setShakeGestureSensitivity(sensitivity);
-            }
+            final Activity activity = components.keyAt(i);
+            final HyperionMenuLayout menu = activity.findViewById(R.id.hyperion_menu);
+            menu.setShakeGestureSensitivity(sensitivity);
         }
     }
 

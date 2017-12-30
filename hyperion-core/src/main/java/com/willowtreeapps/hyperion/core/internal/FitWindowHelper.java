@@ -1,6 +1,5 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Pair;

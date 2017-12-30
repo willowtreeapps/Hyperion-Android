@@ -23,45 +23,45 @@ public final class Hyperion {
         return AppComponent.Holder.getInstance().getLifecycle().createPluginView(activity);
     }
 
-    /**
-     * Embedded drawer is enabled by default.
-     *
-     * @see #setEmbeddedDrawerEnabled(boolean)
-     * @return true if the embedded drawer is enabled, false otherwise.
-     */
-    public static boolean isEmbeddedDrawerEnabled() {
-        return AppComponent.Holder.getInstance().getLifecycle().isEmbeddedDrawerEnabled();
-    }
+//    /**
+//     * Embedded drawer is enabled by default.
+//     *
+//     * @see #setEmbeddedDrawerEnabled(boolean)
+//     * @return true if the embedded drawer is enabled, false otherwise.
+//     */
+//    public static boolean isEmbeddedDrawerEnabled() {
+//        return AppComponent.Holder.getInstance().getLifecycle().isEmbeddedDrawerEnabled();
+//    }
+//
+//    /**
+//     * Embedded drawer is enabled by default.
+//     *
+//     * @see #isEmbeddedDrawerEnabled()
+//     * @param enabled true if enabling, false otherwise.
+//     */
+//    public static void setEmbeddedDrawerEnabled(boolean enabled) {
+//        AppComponent.Holder.getInstance().getLifecycle().setEmbeddedDrawerEnabled(enabled);
+//    }
 
-    /**
-     * Embedded drawer is enabled by default.
-     *
-     * @see #isEmbeddedDrawerEnabled()
-     * @param enabled true if enabling, false otherwise.
-     */
-    public static void setEmbeddedDrawerEnabled(boolean enabled) {
-        AppComponent.Holder.getInstance().getLifecycle().setEmbeddedDrawerEnabled(enabled);
-    }
-
-    /**
-     * Shake gesture is disabled by default.
-     *
-     * @see #setShakeGestureEnabled(boolean)
-     * @return true if the shake to open gesture is enabled, false otherwise.
-     */
-    public static boolean isShakeGestureEnabled() {
-        return AppComponent.Holder.getInstance().getLifecycle().isShakeGestureEnabled();
-    }
-
-    /**
-     * Shake gesture is enabled by default.
-     *
-     * @see #isShakeGestureEnabled()
-     * @param enabled true if enabling, false otherwise.
-     */
-    public static void setShakeGestureEnabled(boolean enabled) {
-        AppComponent.Holder.getInstance().getLifecycle().setShakeGestureEnabled(enabled);
-    }
+//    /**
+//     * Shake gesture is disabled by default.
+//     *
+//     * @see #setShakeGestureEnabled(boolean)
+//     * @return true if the shake to open gesture is enabled, false otherwise.
+//     */
+//    public static boolean isShakeGestureEnabled() {
+//        return AppComponent.Holder.getInstance().getLifecycle().isShakeGestureEnabled();
+//    }
+//
+//    /**
+//     * Shake gesture is enabled by default.
+//     *
+//     * @see #isShakeGestureEnabled()
+//     * @param enabled true if enabling, false otherwise.
+//     */
+//    public static void setShakeGestureEnabled(boolean enabled) {
+//        AppComponent.Holder.getInstance().getLifecycle().setShakeGestureEnabled(enabled);
+//    }
 
     /**
      * Set the sensitivity threshold of shake detection in G's. Default is 3
