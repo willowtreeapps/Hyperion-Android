@@ -26,9 +26,11 @@ public class Lifecycle extends LifecycleAdapter {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                // reorganize the layout.
+                // reorganize the layout
                 final ViewGroup contentViewRoot = activity.findViewById(android.R.id.content);
                 final View contentView = contentViewRoot.getChildAt(0);
+                // prevent clicking through to menu behind content
+                contentView.setClickable(true);
                 contentViewRoot.removeView(contentView);
 
                 // embed content view within overlay
