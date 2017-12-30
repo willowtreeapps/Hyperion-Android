@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,13 +58,17 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
         setHasFixedSize(true);
         setLayoutManager(new LinearLayoutManager(context));
         setAdapter(adapter);
-        addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        DividerItemDecoration decoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+        //noinspection ConstantConditions
+        decoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.ha_detail_divider));
+        addItemDecoration(decoration);
     }
 
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         target.registerObserver(this);
+        onTargetChanged(target.getTarget());
     }
 
     @Override

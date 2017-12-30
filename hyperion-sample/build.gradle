@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
 
-    compileSdkVersion 27
-    buildToolsVersion "27.0.1"
     defaultConfig {
         applicationId "com.willowtreeapps.hyperion.sample"
-        minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode buildVersionCode()
+        versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 

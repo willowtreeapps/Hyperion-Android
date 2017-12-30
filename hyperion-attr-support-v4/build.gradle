@@ -22,7 +22,6 @@ android {
     }
 
     resourcePrefix 'ha_'
-
 }
 
 dependencies {

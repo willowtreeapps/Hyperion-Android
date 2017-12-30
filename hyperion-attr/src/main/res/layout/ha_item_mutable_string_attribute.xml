@@ -22,6 +22,7 @@
             android:id="@+id/edit_text"
             android:layout_width="@dimen/ha_width_mutable_string_field"
             android:layout_height="wrap_content"
+            android:textColor="@color/hype_white"
             android:hint="@string/ha_enter_value"
             android:inputType="text"/>
 

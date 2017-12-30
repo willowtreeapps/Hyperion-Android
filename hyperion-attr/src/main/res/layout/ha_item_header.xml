@@ -9,6 +9,7 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/hype_white"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
 </FrameLayout>

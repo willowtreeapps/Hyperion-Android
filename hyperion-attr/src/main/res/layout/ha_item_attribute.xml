@@ -13,6 +13,9 @@
         android:id="@+id/key_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/ha_attribute_key"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="Height"/>
 
@@ -26,6 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
+        android:ellipsize="end"
+        android:textColor="@color/hype_white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="56dp - 145px"/>
 

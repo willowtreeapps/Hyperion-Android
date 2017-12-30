@@ -4,14 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.design.widget.BottomSheetBehavior;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
+import android.support.v4.widget.PopupWindowCompat;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 
 import com.willowtreeapps.hyperion.core.MeasurementHelper;
 import com.willowtreeapps.hyperion.core.ViewTarget;
@@ -20,24 +22,23 @@ import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 
 public class AttributeOverlayView extends FrameLayout implements ViewTreeObserver.OnPreDrawListener {
 
-    private final BottomSheetBehavior bottomSheetBehavior;
+    private final AttributeDetailView detailView;
     private final ViewGroup contentRoot;
     private final ViewTarget target;
     private final MeasurementHelper measurementHelper;
     private final Rect rect = new Rect();
     private final Paint selectionPaint;
 
+    private PopupWindow currentDetailWindow;
+
     AttributeOverlayView(Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.ha_view_attribute_overlay, this, true);
-        AttributeDetailView detailView = findViewById(R.id.bottom_sheet);
 
+        detailView = new AttributeDetailView(getContext());
         PluginExtension extension = ExtensionProvider.get(context);
         contentRoot = extension.getContentRoot();
         target = extension.getViewTarget();
         measurementHelper = extension.getMeasurementHelper();
-
-        bottomSheetBehavior = BottomSheetBehavior.from(detailView);
 
         selectionPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         selectionPaint.setColor(ContextCompat.getColor(context, R.color.ha_selection));
@@ -117,12 +118,25 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
     }
 
     private void setTarget(View view) {
-        target.setTarget(view);
-
         measurementHelper.getScreenLocation(this, view, rect);
-        if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        if (currentDetailWindow != null) {
+            currentDetailWindow.dismiss();
         }
+
+        currentDetailWindow = createDetailWindowForView(view);
+        PopupWindowCompat.showAsDropDown(currentDetailWindow, view, 0, 24, Gravity.CENTER_HORIZONTAL);
+
+        target.setTarget(view);
+    }
+
+    private PopupWindow createDetailWindowForView(View view) {
+        final Context context = view.getContext();
+        final int width = (int) (getMeasuredWidth() * (4f / 5));
+        final int height = getMeasuredHeight() / 2;
+        PopupWindow popupWindow = new PopupWindow(detailView, width, height);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.ha_popup_background)));
+        return popupWindow;
     }
 
     @Override

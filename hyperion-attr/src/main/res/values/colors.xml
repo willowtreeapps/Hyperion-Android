@@ -4,4 +4,6 @@
     <color name="ha_selection">#8078909C</color>
     <color name="ha_selected_attribute_background">#ffffffff</color>
     <color name="ha_attribute_background">@android:color/transparent</color>
+    <color name="ha_popup_background">#737373</color>
+    <color name="ha_attribute_key">#cccccc</color>
 </resources>
