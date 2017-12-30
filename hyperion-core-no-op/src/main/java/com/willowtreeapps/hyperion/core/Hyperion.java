@@ -33,4 +33,8 @@ public final class Hyperion {
         // no-op
     }
 
+    public static void setShakeGestureSensitivity(float sensitivity) {
+        // no-op
+    }
+
 }

@@ -17,7 +17,7 @@ public class Lifecycle extends LifecycleAdapter {
 
     private final SimpleArrayMap<Activity, CoreComponent> components = new SimpleArrayMap<>();
     private boolean embeddedDrawerEnabled = true;
-    private boolean shakeGestureEnabled = false;
+    private boolean shakeGestureEnabled = true;
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -107,6 +107,17 @@ public class Lifecycle extends LifecycleAdapter {
             HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
             if (drawer != null) {
                 drawer.getLayout().setShakeGestureEnabled(enabled);
+            }
+        }
+    }
+
+    public void setShakeGestureSensitivity(float sensitivity) {
+        for (int i = 0; i < components.size(); i++) {
+            Activity activity = components.keyAt(i);
+            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
+            HyperionDrawer drawer = fragmentManager.findFragmentByTag(DRAWER_TAG);
+            if (drawer != null) {
+                drawer.getLayout().setShakeGestureSensitivity(sensitivity);
             }
         }
     }

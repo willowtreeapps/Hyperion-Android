@@ -18,7 +18,7 @@ public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.
     private final @Px int drawerEdge;
     private View drawerView;
 
-    private boolean shakeGestureEnabled;
+    private boolean shakeGestureEnabled = true;
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private ShakeDetector shakeDetector;
@@ -87,6 +87,10 @@ public class HyperionDrawerLayout extends DrawerLayout implements ShakeDetector.
                 sensorManager.unregisterListener(shakeDetector);
             }
         }
+    }
+
+    public void setShakeGestureSensitivity(float sensitivity) {
+        shakeDetector.setShakeGestureSensitivity(sensitivity);
     }
 
     @Override
