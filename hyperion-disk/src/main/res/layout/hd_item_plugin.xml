@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="131dp"
     android:padding="@dimen/hd_item_plugin_padding"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/hd_icon"
+        android:tint="@color/hype_plugin_color_selector"
+        android:duplicateParentState="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/hype_plugin_color_selector"
         android:text="@string/hd_plugin_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:duplicateParentState="true"/>
 
-</FrameLayout>
+</LinearLayout>

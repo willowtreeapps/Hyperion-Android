@@ -21,9 +21,6 @@ public interface PluginExtension {
     OverlayContainer getOverlayContainer();
 
     @NonNull
-    DrawerContainer getDrawerContainer();
-
-    @NonNull
     ActivityResults getActivityResults();
 
     @NonNull

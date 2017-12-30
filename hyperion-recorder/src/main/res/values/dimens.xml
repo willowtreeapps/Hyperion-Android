@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="ha_item_plugin_padding">12dp</dimen>
+    <dimen name="hr_item_plugin_padding">12dp</dimen>
 </resources>

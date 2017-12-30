@@ -1,5 +1,6 @@
 package com.willowtreeapps.hyperion.recorder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -10,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.plugins.v1.PluginModule;
@@ -23,7 +23,8 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
 
     private static final String TAG = "HyperionRecorder";
     private static final int REQUEST_CODE = 1000;
-    private ToggleButton toggleButton;
+
+    private View view;
 
     @Override
     protected void onCreate() {
@@ -35,19 +36,20 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
     @Override
     public View createPluginView(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.hr_item_plugin, parent, false);
-        toggleButton = (ToggleButton) view.findViewById(R.id.toggle);
-        toggleButton.setOnClickListener(this);
-        toggleButton.setChecked(RecordingManager.isRecording());
-        view.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(this);
+        view.setSelected(RecordingManager.isRecording());
+        View recordingsButton = view.findViewById(R.id.recordings_button);
+        recordingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getExtension().getDrawerContainer().addView(R.layout.hr_view_videos);
+                final Context context = v.getContext();
+                RecordingsActivity.start(context);
             }
         });
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             view.setEnabled(false);
-            toggleButton.setEnabled(false);
         }
+        this.view = view;
         return view;
     }
 
@@ -85,8 +87,7 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
 
     @Override
     public void onRecordingChanged(boolean recording) {
-        toggleButton.setChecked(recording);
-        toggleButton.setText(recording ? R.string.hr_recording : R.string.hr_record);
+        view.setSelected(recording);
     }
 
     @Override
@@ -98,7 +99,7 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
         if (resultCode != RESULT_OK) {
             Toast.makeText(getContext(),
                     "Screen Cast Permission Denied", Toast.LENGTH_SHORT).show();
-            toggleButton.setChecked(false);
+            view.setSelected(false);
             return;
         }
 

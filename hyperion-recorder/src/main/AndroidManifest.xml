@@ -2,6 +2,7 @@
     package="com.willowtreeapps.hyperion.recorder">
 
     <application>
+        <activity android:name=".RecordingsActivity"/>
         <provider
             android:name=".RecorderFileProvider"
             android:authorities="${applicationId}.RecorderFileProvider"

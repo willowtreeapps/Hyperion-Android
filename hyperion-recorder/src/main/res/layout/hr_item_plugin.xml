@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/ha_item_plugin_padding"
+    android:minHeight="131dp"
+    android:padding="@dimen/hr_item_plugin_padding"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:background="?attr/selectableItemBackground">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/hr_icon"
+        android:tint="@color/hype_plugin_color_selector"
+        android:duplicateParentState="true"/>
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/hype_plugin_color_selector"
         android:text="@string/hr_plugin_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:duplicateParentState="true"/>
 
-    <ToggleButton
-        android:id="@+id/toggle"
+    <Button
+        android:id="@+id/recordings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="@string/hr_record"/>
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:text="@string/hr_recordings"/>
 
-</FrameLayout>
+</LinearLayout>
