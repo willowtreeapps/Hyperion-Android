@@ -1,6 +1,20 @@
 package com.willowtreeapps.hyperion.sample;
 
-import android.support.v7.app.AppCompatActivity;
+public class AttributesInspectorActivity extends PluginActivity {
 
-public class AttributesInspectorActivity extends AppCompatActivity {
+    @Override
+    protected int getPluginImage() {
+        return R.drawable.attribute_inspector;
+    }
+
+    @Override
+    protected int getPluginTitle() {
+        return R.string.attributes_inspector;
+    }
+
+    @Override
+    protected int getPluginDescription() {
+        return R.string.attributes_inspector_desc;
+    }
+
 }

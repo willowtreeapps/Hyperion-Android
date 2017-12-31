@@ -1,6 +1,6 @@
 <resources>
-    <public name="hr_recorder" type="string">Hyperion Recorder</public>
-    <string name="share">Share</string>
+    <public name="hr_recorder" type="string">Hyperion-Recorder</public>
+    <string name="hr_share">Share</string>
     <string name="hr_record">Record</string>
     <string name="hr_recording">Recording</string>
     <string name="hr_plugin_name">Recorder</string>

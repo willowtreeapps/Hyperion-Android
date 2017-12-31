@@ -1,6 +1,20 @@
 package com.willowtreeapps.hyperion.sample;
 
-import android.support.v7.app.AppCompatActivity;
+public class ScreenRecorderActivity extends PluginActivity {
 
-public class ScreenRecorderActivity extends AppCompatActivity {
+    @Override
+    protected int getPluginImage() {
+        return R.drawable.screen_recorder;
+    }
+
+    @Override
+    protected int getPluginTitle() {
+        return R.string.screen_recorder;
+    }
+
+    @Override
+    protected int getPluginDescription() {
+        return R.string.screen_recorder_desc;
+    }
+
 }

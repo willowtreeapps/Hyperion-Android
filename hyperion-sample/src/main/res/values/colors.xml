@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1976D2</color>
-    <color name="colorAccent">#F44336</color>
+    <color name="hype_blue">#2b57f4</color>
+
+    <color name="colorPrimary">@color/hype_blue</color>
+    <color name="colorPrimaryDark">@color/dark_blue</color>
+    <color name="colorAccent">@color/hype_blue</color>
     <color name="white">#FFFFFF</color>
     <color name="darkGray">#212121</color>
     <color name="dark_blue">#2f5df0</color>
 
     <color name="text_gray">#4a4a4a</color>
+    <color name="text_light_gray">#8e8e93</color>
 </resources>

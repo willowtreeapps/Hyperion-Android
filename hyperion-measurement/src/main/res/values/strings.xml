@@ -1,3 +1,4 @@
 <resources>
+    <public name="hm_measurements" type="string">Hyperion-Measurements</public>
     <string name="hm_plugin_name">Measurement Inspector</string>
 </resources>

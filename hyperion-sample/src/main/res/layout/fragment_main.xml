@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="32dp"
     android:paddingBottom="32dp"
-    android:gravity="center_horizontal"
-    android:background="@color/white">
+    android:gravity="center_horizontal">
 
     <ImageView
         android:layout_width="100dp"

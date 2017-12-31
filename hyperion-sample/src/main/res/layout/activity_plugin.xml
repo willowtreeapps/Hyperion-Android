@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="32dp"
+    android:paddingBottom="32dp"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/plugin_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/cd_plugin_image"
+        android:scaleType="fitXY"
+        android:tint="@color/hype_blue"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
+
+    <TextView
+        android:id="@+id/plugin_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:textSize="30sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:lineSpacingExtra="24sp"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/plugin_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/text_light_gray"
+        android:gravity="center_horizontal"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"/>
+
+    <FrameLayout
+        android:id="@+id/back_button"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:background="@drawable/back_button_bg">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_arrow"
+            android:tint="@color/hype_blue"
+            android:contentDescription="@string/cd_back_arrow"/>
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -81,6 +81,7 @@ public class Lifecycle extends LifecycleAdapter {
         final Context coreContext = new ComponentContextThemeWrapper(activity, component);
         final HyperionPluginView pluginView = new HyperionPluginView(coreContext);
         pluginView.setId(R.id.hyperion_plugins);
+        pluginView.setAlpha(0.0f);
         menuLayout.addView(pluginView);
         menuLayout.addView(overlayLayout);
     }

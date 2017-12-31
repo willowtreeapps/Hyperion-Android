@@ -1,6 +1,20 @@
 package com.willowtreeapps.hyperion.sample;
 
-import android.support.v7.app.AppCompatActivity;
+public class MeasurementToolActivity extends PluginActivity {
 
-public class MeasurementToolActivity extends AppCompatActivity {
+    @Override
+    protected int getPluginImage() {
+        return R.drawable.measurement_tool;
+    }
+
+    @Override
+    protected int getPluginTitle() {
+        return R.string.measurement_tool;
+    }
+
+    @Override
+    protected int getPluginDescription() {
+        return R.string.measurement_tool_desc;
+    }
+
 }
