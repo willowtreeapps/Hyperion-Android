@@ -15,6 +15,8 @@
  */
 package com.google.auto.service;
 
+import android.support.annotation.Keep;
+
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -36,6 +38,7 @@ import java.lang.annotation.Target;
  *   <li>implement the interface type returned by {@code value()}
  * </ul>
  */
+@Keep // Added by WT. Prevent proguard / minify removing Service implementations.
 @Documented
 @Retention(SOURCE)
 @Target(TYPE)
