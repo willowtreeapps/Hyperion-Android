@@ -1,0 +1,1 @@
+-keep class * implements com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector

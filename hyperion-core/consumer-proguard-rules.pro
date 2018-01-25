@@ -1,0 +1,1 @@
+-keep class * implements com.willowtreeapps.hyperion.core.plugins.v1.Plugin

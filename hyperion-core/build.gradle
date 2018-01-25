@@ -13,19 +13,13 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode buildVersionCode()
         versionName version
+        consumerProguardFiles 'consumer-proguard-rules.pro'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
         abortOnError false
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
     resourcePrefix 'hype_'
