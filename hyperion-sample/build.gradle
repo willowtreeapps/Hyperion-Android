@@ -11,6 +11,8 @@ android {
         versionCode buildVersionCode()
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
     }
 
     lintOptions {
@@ -25,7 +27,6 @@ android {
         release {
             minifyEnabled true
             useProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'consumer-proguard-rules.txt'
         }
     }
 }
