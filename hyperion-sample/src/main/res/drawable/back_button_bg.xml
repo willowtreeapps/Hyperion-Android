@@ -4,7 +4,7 @@
         android:width="2dp"
         android:color="@color/hype_blue" />
 
-    <solid android:color="@color/hype_white" />
+    <solid android:color="@color/white" />
 
     <!-- any value over half height just caps at half -->
     <corners android:radius="9999dp" />

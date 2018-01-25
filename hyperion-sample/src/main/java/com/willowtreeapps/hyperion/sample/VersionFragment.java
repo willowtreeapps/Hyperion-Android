@@ -41,10 +41,10 @@ public class VersionFragment extends Fragment {
 
         static {
             list = new ArrayList<>(5);
-            list.add(new PluginInfo(R.drawable.hm_icon, R.string.measurement_tool, MeasurementToolActivity.class));
-            list.add(new PluginInfo(R.drawable.ha_icon, R.string.attributes_inspector, AttributesInspectorActivity.class));
-            list.add(new PluginInfo(R.drawable.hr_icon, R.string.screen_recorder, ScreenRecorderActivity.class));
-            list.add(new PluginInfo(R.drawable.hd_icon, R.string.file_explorer, FileExplorerActivity.class));
+            list.add(new PluginInfo(R.drawable.measurement_tool, R.string.measurement_tool, MeasurementToolActivity.class));
+            list.add(new PluginInfo(R.drawable.attribute_inspector, R.string.attributes_inspector, AttributesInspectorActivity.class));
+            list.add(new PluginInfo(R.drawable.screen_recorder, R.string.screen_recorder, ScreenRecorderActivity.class));
+            list.add(new PluginInfo(R.drawable.file_explorer, R.string.file_explorer, FileExplorerActivity.class));
             list.add(new PluginInfo(R.drawable.add, R.string.add_or_remove, null));
         }
 

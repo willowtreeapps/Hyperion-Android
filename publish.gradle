@@ -1,62 +1,143 @@
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'me.tatarka.gradle.pom'
 
-project.afterEvaluate {
-    if (project.hasProperty('artifactoryUser') && project.hasProperty('artifactoryPassword')) {
-        uploadArchives {
-            repositories {
-                mavenDeployer {
-                    repository(url: artifactoryReleaseUrl) {
-                        authentication(userName: artifactoryUser, password: artifactoryPassword)
-                    }
-                    snapshotRepository(url: artifactorySnapshotUrl) {
-                        authentication(userName: artifactoryUser, password: artifactoryPassword)
+def isAndroid = plugins.hasPlugin('com.android.library')
+
+ext {
+    pomFile = file("${project.buildDir}/generated-pom.xml")
+    isReleaseVersion = !(project.version =~ /-SNAPSHOT$/)
+}
+
+if (isAndroid) {
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+    }
+}
+
+task javadocsJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    if (isAndroid) {
+        from android.sourceSets.main.java.srcDirs
+    } else {
+        from sourceSets.main.allSource
+    }
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocsJar
+}
+
+signing {
+    required { signatory != null && project.ext.isReleaseVersion }
+    sign configurations.archives
+}
+
+def siteUrl = 'https://github.com/willowtreeapps/Hyperion-Android'
+def gitUrl = 'https://github.com/willowtreeapps/Hyperion-Android.git'
+
+pom {
+    name project.name
+    if (isAndroid) {
+        packaging 'aar'
+    }
+    description 'App Debugging & Inspection Tool for Android Edit'
+    url siteUrl
+
+    scm {
+        url siteUrl
+        connection gitUrl
+        developerConnection gitUrl
+    }
+
+    licenses {
+        license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
+        }
+    }
+
+    developers {
+        developer {
+            id 'kritarie'
+            name 'Sean Amos'
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            if (project.ext.isReleaseVersion) {
+                url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            } else {
+                url 'https://oss.sonatype.org/content/repositories/snapshots/'
+            }
+
+            credentials {
+                username = project.findProperty('sonatype.username')
+                password = project.findProperty('sonatype.password')
+            }
+        }
+    }
+
+    publications {
+        lib(MavenPublication) {
+            if (isAndroid) {
+                artifact "$buildDir/outputs/aar/${project.name}-release.aar"
+            } else {
+                from components.java
+            }
+
+            artifact sourcesJar
+            artifact javadocsJar
+
+            if (signing.required) {
+                // Sign the artifacts.
+                project.tasks.signArchives.signatureFiles.each {
+                    artifact(it) {
+                        def matcher = it.file =~ /-?(?<classifier>sources|javadoc)?\.(?<extension>jar|aar)\.asc$/
+                        if (matcher.find()) {
+                            classifier = matcher.group('classifier')
+                            extension = matcher.group('extension') + '.asc'
+                        }
                     }
                 }
             }
         }
     }
+}
 
-    //Config and deps for UML doclet:
-    configurations { umljavadoc }
-    dependencies { umljavadoc 'org.umlgraph:umlgraph:5.6' }
-
-    task androidJavadocs(type: Javadoc) {
-
-        title = "$project.name $version API"
-        description "Generates Javadoc for $name."
-        source = files(android.sourceSets.main.java.srcDirs, project.android.libraryVariants.collect {it.javaCompile.source})
-        classpath = files(
-                project.android.libraryVariants.collect {it.javaCompile.classpath.files},
-                project.android.getBootClasspath())
-        destinationDir = file("${buildDir}/doc/javadoc")
-
-        //Set up for UML doclet.
-        options.docletpath = configurations.umljavadoc.toList()
-        options.doclet = "org.umlgraph.doclet.UmlGraphDoc"
-
-        options {
-            links "http://docs.oracle.com/javase/7/docs/api/",
-                    "https://docs.oracle.com/javaee/7/api/",
-                    "http://google.github.io/dagger/api/2.10/"
-            linksOffline "http://d.android.com/reference", "${project.android.sdkDirectory}/docs/reference"
+if (signing.required) {
+    project.afterEvaluate {
+        // Sign the pom.xml.
+        publishing.publications.lib(MavenPublication) {
+            pom.withXml {
+                writeTo(project.ext.pomFile)
+                def pomAscFile = signing.sign(project.ext.pomFile).signatureFiles[0]
+                artifact(pomAscFile) {
+                    classifier = null
+                    extension = 'pom.asc'
+                }
+                project.ext.pomFile.delete()
+            }
         }
-        exclude '**/BuildConfig.java'
-        exclude '**/R.java'
-        failOnError false
+    }
+}
+
+model {
+    tasks.publishLibPublicationToMavenLocal {
+        dependsOn(project.tasks.signArchives)
     }
 
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        classifier = 'javadoc'
-        from androidJavadocs.destinationDir
-    }
-
-    task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-    artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
+    tasks.publishLibPublicationToMavenRepository {
+        dependsOn(project.tasks.signArchives)
     }
 }

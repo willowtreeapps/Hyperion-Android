@@ -32,7 +32,7 @@
         <View
             android:layout_width="20dp"
             android:layout_height="1dp"
-            android:background="@color/hype_text_gray"/>
+            android:background="@color/text_gray"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         <View
             android:layout_width="20dp"
             android:layout_height="1dp"
-            android:background="@color/hype_text_gray"/>
+            android:background="@color/text_gray"/>
 
     </LinearLayout>
 
