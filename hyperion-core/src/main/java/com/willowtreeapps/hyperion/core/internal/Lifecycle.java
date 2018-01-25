@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -110,6 +111,10 @@ public class Lifecycle extends LifecycleAdapter {
 
     public void open(Activity activity) {
         final HyperionMenuLayout menu = activity.findViewById(R.id.hyperion_menu);
+        if (menu == null) {
+            Log.d("Hyperion", "Could not find Hyperion menu in this activity.");
+            return;
+        }
         menu.expand();
     }
 
