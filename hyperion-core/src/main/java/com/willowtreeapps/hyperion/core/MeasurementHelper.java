@@ -19,7 +19,7 @@ public interface MeasurementHelper {
 
     int getRelativeBottom(@NonNull View view);
 
-    void getScreenLocation(@NonNull View globalView, @NonNull View view, Rect rect);
+    void getScreenLocation(@NonNull View view, Rect rect);
 
     @Px
     int toPx(int dp);

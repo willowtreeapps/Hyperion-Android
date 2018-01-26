@@ -57,16 +57,13 @@ class MeasurementHelperImpl implements MeasurementHelper {
         }
     }
 
-    public void getScreenLocation(@NonNull View globalView, @NonNull View view, Rect rect) {
-        int topOffset = displayMetrics.heightPixels - globalView.getMeasuredHeight();
-
+    public void getScreenLocation(@NonNull View view, Rect rect) {
         view.getLocationOnScreen(OUT_LOCATION);
 
-        OUT_LOCATION[1] -= topOffset;
         rect.left = OUT_LOCATION[0];
         rect.top = OUT_LOCATION[1];
-        rect.right = rect.left + view.getWidth();
-        rect.bottom = rect.top + view.getHeight();
+        rect.right = rect.left + view.getMeasuredWidth();
+        rect.bottom = rect.top + view.getMeasuredHeight();
     }
 
     @Px

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.PopupWindowCompat;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import com.willowtreeapps.hyperion.core.ViewTarget;
 import com.willowtreeapps.hyperion.core.plugins.v1.ExtensionProvider;
 import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 
-public class AttributeOverlayView extends FrameLayout implements ViewTreeObserver.OnPreDrawListener {
+class AttributeOverlayView extends FrameLayout implements ViewTreeObserver.OnPreDrawListener {
 
     private final AttributeDetailView detailView;
     private final ViewGroup contentRoot;
@@ -57,18 +58,32 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
 
         setWillNotDraw(false);
         setClickable(false);
+        setFocusable(true);
+        setFocusableInTouchMode(true);
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         getViewTreeObserver().addOnPreDrawListener(this);
+        requestFocus();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         getViewTreeObserver().removeOnPreDrawListener(this);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (currentDetailWindow != null && currentDetailWindow.isShowing()) {
+                currentDetailWindow.dismiss();
+                return true;
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 
     @Override
@@ -108,7 +123,7 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
             int count = parent.getChildCount();
             for (int i = 0; i < count; i++) {
                 View child = parent.getChildAt(i);
-                measurementHelper.getScreenLocation(this, child, rect);
+                measurementHelper.getScreenLocation(child, rect);
                 if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
                     return findTarget(child, x, y);
                 }
@@ -118,7 +133,7 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
     }
 
     private void setTarget(View view) {
-        measurementHelper.getScreenLocation(this, view, rect);
+        measurementHelper.getScreenLocation(view, rect);
 
         if (currentDetailWindow != null) {
             currentDetailWindow.dismiss();
@@ -143,7 +158,7 @@ public class AttributeOverlayView extends FrameLayout implements ViewTreeObserve
     public boolean onPreDraw() {
         View current = target.getTarget();
         if (current != null) {
-            measurementHelper.getScreenLocation(this, current, rect);
+            measurementHelper.getScreenLocation(current, rect);
         }
         return true;
     }
