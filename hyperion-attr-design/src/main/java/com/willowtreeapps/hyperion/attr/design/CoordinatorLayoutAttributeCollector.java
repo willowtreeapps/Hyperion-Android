@@ -14,7 +14,7 @@ import java.util.List;
 @AutoService(TypedAttributeCollector.class)
 public class CoordinatorLayoutAttributeCollector extends TypedAttributeCollector<CoordinatorLayout> {
 
-    protected CoordinatorLayoutAttributeCollector() {
+    public CoordinatorLayoutAttributeCollector() {
         super(CoordinatorLayout.class);
     }
 

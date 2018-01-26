@@ -14,7 +14,7 @@ import java.util.List;
 @AutoService(TypedAttributeCollector.class)
 public class AppBarLayoutAttributeCollector extends TypedAttributeCollector<AppBarLayout> {
 
-    protected AppBarLayoutAttributeCollector() {
+    public AppBarLayoutAttributeCollector() {
         super(AppBarLayout.class);
     }
 

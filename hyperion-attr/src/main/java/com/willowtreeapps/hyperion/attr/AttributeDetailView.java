@@ -196,7 +196,6 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
             super(itemView);
             detail = itemView.findViewById(R.id.detail);
             editText = itemView.findViewById(R.id.edit_text);
-            editText.addTextChangedListener(this);
             itemView.setOnClickListener(this);
         }
 
@@ -215,7 +214,9 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
             boolean activated = data.isActivated();
             itemView.setActivated(activated);
             detail.setExpanded(activated, false);
+            editText.removeTextChangedListener(this);
             editText.setText(data.getDisplayValue());
+            editText.addTextChangedListener(this);
         }
 
         @Override

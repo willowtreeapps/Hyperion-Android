@@ -14,7 +14,7 @@ import java.util.List;
 @AutoService(TypedAttributeCollector.class)
 public class TextInputLayoutAttributeCollector extends TypedAttributeCollector<TextInputLayout> {
 
-    protected TextInputLayoutAttributeCollector() {
+    public TextInputLayoutAttributeCollector() {
         super(TextInputLayout.class);
     }
 

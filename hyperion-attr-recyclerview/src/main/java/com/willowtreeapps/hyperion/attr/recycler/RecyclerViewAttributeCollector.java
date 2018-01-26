@@ -14,7 +14,7 @@ import java.util.List;
 @AutoService(TypedAttributeCollector.class)
 public class RecyclerViewAttributeCollector extends TypedAttributeCollector<RecyclerView> {
 
-    RecyclerViewAttributeCollector() {
+    public RecyclerViewAttributeCollector() {
         super(RecyclerView.class);
     }
 
