@@ -58,7 +58,7 @@ public class HyperionService extends Service {
                 .setContentText(getString(R.string.hype_notification_text, activity.getClass().getSimpleName()))
                 .setSubText(getString(R.string.hype_notification_subtext))
                 .setTicker(getString(R.string.hype_notification_title))
-                .setSmallIcon(R.drawable.hype_horizontal_divider) // tODO
+                .setSmallIcon(R.drawable.logo)
                 .setOngoing(true)
                 .build();
     }
