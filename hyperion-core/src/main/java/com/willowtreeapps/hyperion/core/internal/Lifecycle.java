@@ -62,15 +62,19 @@ public class Lifecycle extends LifecycleAdapter {
 
     private void install(final Activity activity) {
         // reorganize the layout
-        final ViewGroup contentViewRoot = activity.findViewById(android.R.id.content);
-        final View contentView = contentViewRoot.getChildAt(0);
-        if (contentViewRoot.getChildCount() < 1) {
+        final ViewGroup decorView = (ViewGroup) activity.getWindow().peekDecorView();
+        if (decorView == null) {
+            Log.d("Hyperion", "DecorView not available. Failed to install Hyperion.");
+            return;
+        }
+        final View contentView = decorView.getChildAt(0);
+        if (decorView.getChildCount() < 1) {
             // no content, abort install
             return;
         }
         // prevent clicking through to menu behind content
         contentView.setClickable(true);
-        contentViewRoot.removeView(contentView);
+        decorView.removeView(contentView);
 
         // embed content view within overlay
         final HyperionOverlayLayout overlayLayout = new HyperionOverlayLayout(activity);
@@ -80,7 +84,7 @@ public class Lifecycle extends LifecycleAdapter {
         // embed overlay + content within menu
         final HyperionMenuLayout menuLayout = new HyperionMenuLayout(activity);
         menuLayout.setId(R.id.hyperion_menu);
-        contentViewRoot.addView(menuLayout);
+        decorView.addView(menuLayout);
 
         FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
 
