@@ -6,6 +6,9 @@
             android:authorities="${applicationId}.HyperionInitProvider"
             android:name=".internal.HyperionInitProvider"
             android:exported="false" />
+        <service
+            android:name=".internal.HyperionService"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,8 +22,30 @@ public class Lifecycle extends LifecycleAdapter {
     private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
 
     private final SimpleArrayMap<Activity, CoreComponent> components = new SimpleArrayMap<>();
+    private final SimpleArrayMap<Activity, ServiceConnection> connections = new SimpleArrayMap<>();
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private Activity foregroundActivity;
     private float sensitivity = 3.0f;
+
+    @Override
+    public void onActivityResumed(Activity activity) {
+        foregroundActivity = activity;
+        final ServiceConnection connection = getServiceConnection(activity);
+        foregroundActivity.bindService(
+                new Intent(activity, HyperionService.class),
+                connection,
+                Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    public void onActivityPaused(Activity activity) {
+        if (foregroundActivity == activity) {
+            final ServiceConnection connection = getServiceConnection(activity);
+            foregroundActivity.unbindService(connection);
+            connections.remove(activity);
+            foregroundActivity = null;
+        }
+    }
 
     @Override
     public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
@@ -36,7 +60,7 @@ public class Lifecycle extends LifecycleAdapter {
         }
     }
 
-    private void install(Activity activity) {
+    private void install(final Activity activity) {
         // reorganize the layout
         final ViewGroup contentViewRoot = activity.findViewById(android.R.id.content);
         final View contentView = contentViewRoot.getChildAt(0);
@@ -89,6 +113,15 @@ public class Lifecycle extends LifecycleAdapter {
 
     CoreComponent getComponent(Activity activity) {
         return components.get(activity);
+    }
+
+    ServiceConnection getServiceConnection(Activity activity) {
+        ServiceConnection connection = connections.get(activity);
+        if (connection == null) {
+            connection = new HyperionService.Connection(activity);
+            connections.put(activity, connection);
+        }
+        return connection;
     }
 
     @Override
