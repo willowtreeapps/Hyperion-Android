@@ -1,6 +1,7 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
+import android.content.ServiceConnection;
 import android.util.DisplayMetrics;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
@@ -37,4 +38,6 @@ interface CoreComponent {
     DisplayMetrics getDisplayMetrics();
 
     ViewTarget getViewTarget();
+
+    ServiceConnection getServiceConnection();
 }

@@ -1,5 +1,7 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.app.Activity;
+import android.content.ServiceConnection;
 import android.util.DisplayMetrics;
 
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
@@ -14,6 +16,12 @@ import dagger.Provides;
 
 @Module
 class CoreModule {
+
+    @Provides
+    @ActivityScope
+    ServiceConnection provideServiceConnection(Activity activity) {
+        return new HyperionService.Connection(activity);
+    }
 
     @Provides
     @ActivityScope

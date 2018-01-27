@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
@@ -22,15 +20,13 @@ public class Lifecycle extends LifecycleAdapter {
     private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
 
     private final SimpleArrayMap<Activity, CoreComponent> components = new SimpleArrayMap<>();
-    private final SimpleArrayMap<Activity, ServiceConnection> connections = new SimpleArrayMap<>();
-    private final Handler handler = new Handler(Looper.getMainLooper());
     private Activity foregroundActivity;
     private float sensitivity = 3.0f;
 
     @Override
     public void onActivityResumed(Activity activity) {
         foregroundActivity = activity;
-        final ServiceConnection connection = getServiceConnection(activity);
+        final ServiceConnection connection = getComponent(activity).getServiceConnection();
         foregroundActivity.bindService(
                 new Intent(activity, HyperionService.class),
                 connection,
@@ -40,9 +36,8 @@ public class Lifecycle extends LifecycleAdapter {
     @Override
     public void onActivityPaused(Activity activity) {
         if (foregroundActivity == activity) {
-            final ServiceConnection connection = getServiceConnection(activity);
+            final ServiceConnection connection = getComponent(activity).getServiceConnection();
             foregroundActivity.unbindService(connection);
-            connections.remove(activity);
             foregroundActivity = null;
         }
     }
@@ -51,22 +46,13 @@ public class Lifecycle extends LifecycleAdapter {
     public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
         HyperionIgnore ignore = activity.getClass().getAnnotation(HyperionIgnore.class);
         if (ignore == null) {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    install(activity);
-                }
-            });
+            install(activity);
         }
     }
 
     private void install(final Activity activity) {
         // reorganize the layout
-        final ViewGroup decorView = (ViewGroup) activity.getWindow().peekDecorView();
-        if (decorView == null) {
-            Log.d("Hyperion", "DecorView not available. Failed to install Hyperion.");
-            return;
-        }
+        final ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         final View contentView = decorView.getChildAt(0);
         if (decorView.getChildCount() < 1) {
             // no content, abort install
@@ -117,15 +103,6 @@ public class Lifecycle extends LifecycleAdapter {
 
     CoreComponent getComponent(Activity activity) {
         return components.get(activity);
-    }
-
-    ServiceConnection getServiceConnection(Activity activity) {
-        ServiceConnection connection = connections.get(activity);
-        if (connection == null) {
-            connection = new HyperionService.Connection(activity);
-            connections.put(activity, connection);
-        }
-        return connection;
     }
 
     @Override
