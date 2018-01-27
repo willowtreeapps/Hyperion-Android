@@ -17,6 +17,7 @@ import android.util.Property;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
@@ -42,6 +43,8 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     private final Sensor accelerometer;
     private final ShakeDetector shakeDetector;
 
+    private View pluginView;
+    private View overlayView;
     private boolean menuOpen = false;
 
     public HyperionMenuLayout(Context context) {
@@ -116,6 +119,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
                     })
                     .start();
             ViewCompat.animate(pluginView)
+                    .withLayer()
                     .alpha(0.0f)
                     .translationX(160.0f)
                     .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
@@ -125,6 +129,11 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
             alpha.start();
         }
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        return super.onApplyWindowInsets(insets);
     }
 
     @Override
@@ -153,6 +162,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
                     })
                     .start();
             ViewCompat.animate(pluginView)
+                    .withLayer()
                     .alpha(1.0f)
                     .translationX(0.0f)
                     .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
@@ -176,11 +186,17 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     }
 
     private View getPluginView() {
-        return findViewById(R.id.hyperion_plugins);
+        if (pluginView == null) {
+            pluginView = findViewById(R.id.hyperion_plugins);
+        }
+        return pluginView;
     }
 
     private View getOverlayView() {
-        return findViewById(R.id.hyperion_overlay);
+        if (overlayView == null) {
+            overlayView = findViewById(R.id.hyperion_overlay);
+        }
+        return overlayView;
     }
 
     private boolean isMenuOpen() {
