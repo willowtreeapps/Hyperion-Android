@@ -16,7 +16,7 @@ class PluginExtensionContextWrapper extends ContextWrapper {
     @Nullable
     private LayoutInflater inflater;
 
-    public PluginExtensionContextWrapper(@NonNull Context base, @NonNull PluginExtension extension) {
+    PluginExtensionContextWrapper(@NonNull Context base, @NonNull PluginExtension extension) {
         super(base);
         this.extension = extension;
     }

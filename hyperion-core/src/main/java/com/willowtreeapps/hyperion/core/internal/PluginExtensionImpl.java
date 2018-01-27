@@ -15,11 +15,9 @@ import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
 class PluginExtensionImpl implements PluginExtension {
 
     private final CoreComponent component;
-    private final HyperionPluginView pluginView;
 
-    PluginExtensionImpl(CoreComponent component, HyperionPluginView pluginView) {
+    PluginExtensionImpl(CoreComponent component) {
         this.component = component;
-        this.pluginView = pluginView;
     }
 
     @NonNull

@@ -9,12 +9,12 @@ import dagger.Provides;
 class ActivityResultModule {
     private final ActivityResults results;
 
-    public ActivityResultModule(ActivityResults results) {
+    ActivityResultModule(ActivityResults results) {
         this.results = results;
     }
 
     @Provides
-    public ActivityResults providesActivityResults() {
+    ActivityResults providesActivityResults() {
         return results;
     }
 }

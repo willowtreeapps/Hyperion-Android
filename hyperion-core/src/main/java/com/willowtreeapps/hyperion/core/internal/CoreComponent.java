@@ -2,7 +2,6 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.ServiceConnection;
-import android.util.DisplayMetrics;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.AttributeTranslator;
@@ -34,8 +33,6 @@ interface CoreComponent {
     OverlayContainer getOverlayContainer();
 
     ActivityResults getActivityResults();
-
-    DisplayMetrics getDisplayMetrics();
 
     ViewTarget getViewTarget();
 

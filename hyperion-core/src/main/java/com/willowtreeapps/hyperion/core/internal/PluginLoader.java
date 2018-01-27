@@ -1,5 +1,6 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.support.annotation.AnyThread;
 import android.support.annotation.WorkerThread;
 
 import com.willowtreeapps.hyperion.core.plugins.v1.Plugin;
@@ -24,6 +25,7 @@ class PluginLoader {
         this.mainThreadExecutor = mainThreadExecutor;
     }
 
+    @AnyThread
     void load(final Callback<List<PluginModule>> callback) {
         workerThreadExecutor.execute(new Runnable() {
             @Override

@@ -10,7 +10,7 @@ import android.view.View;
 final class ActivityUtil {
 
     @Nullable
-    public static Activity findActivity(@NonNull View view) {
+    static Activity findActivity(@NonNull View view) {
         View v = view;
         Activity activity = findActivity(v.getContext());
         while (activity == null) {
@@ -24,7 +24,7 @@ final class ActivityUtil {
     }
 
     @Nullable
-    public static Activity findActivity(@NonNull Context context) {
+    static Activity findActivity(@NonNull Context context) {
         Context c = context;
         // assume the context is a FragmentActivity, or a wrapper around a FragmentActivity
         // keep unwrapping the context until you find a FragmentActivity

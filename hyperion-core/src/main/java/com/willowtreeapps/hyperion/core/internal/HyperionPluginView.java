@@ -44,7 +44,7 @@ public class HyperionPluginView extends FrameLayout {
         inflate(context, R.layout.hype_view_plugin, this);
 
         pluginListContainer = findViewById(R.id.plugin_list_container);
-        pluginExtension = new PluginExtensionImpl(component, this);
+        pluginExtension = new PluginExtensionImpl(component);
     }
 
     @Override

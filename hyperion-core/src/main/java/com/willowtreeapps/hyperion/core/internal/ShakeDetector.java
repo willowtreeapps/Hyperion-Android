@@ -8,7 +8,7 @@ import android.hardware.SensorManager;
 /**
  * Detects a shake to open the side drawer
  */
-public class ShakeDetector implements SensorEventListener {
+class ShakeDetector implements SensorEventListener {
 
     private static float shakeThresholdGravity = 3.0F;
     private static final int SHAKE_SPACING_TIME_MS = 500;
@@ -16,7 +16,7 @@ public class ShakeDetector implements SensorEventListener {
     private OnShakeListener listener;
     private long shakeTimestamp;
 
-    public void setOnShakeListener(OnShakeListener listener) {
+    void setOnShakeListener(OnShakeListener listener) {
         this.listener = listener;
     }
 
@@ -24,7 +24,7 @@ public class ShakeDetector implements SensorEventListener {
         void onShake();
     }
 
-    public void setShakeGestureSensitivity(float sensitivity) {
+    void setShakeGestureSensitivity(float sensitivity) {
         shakeThresholdGravity = sensitivity;
     }
 
