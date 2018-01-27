@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:padding="64dp"
     android:gravity="center_horizontal">
 
     <TextView
@@ -17,9 +17,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:textSize="14sp"
         android:lineSpacingExtra="3sp"
+        android:drawableLeft="@drawable/shake"
+        android:drawableStart="@drawable/shake"
+        android:drawablePadding="8dp"
         android:text="@string/gestures_shake"/>
 
     <LinearLayout
