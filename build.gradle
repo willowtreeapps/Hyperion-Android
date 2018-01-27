@@ -4,7 +4,7 @@ project.ext.set("minSdkVersion", 15)
 project.ext.set("targetSdkVersion", 27)
 
 project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
-project.ext.set("libraryVersion", '0.9.1')
+project.ext.set("libraryVersion", '0.9.2')
 
 buildscript {
 
