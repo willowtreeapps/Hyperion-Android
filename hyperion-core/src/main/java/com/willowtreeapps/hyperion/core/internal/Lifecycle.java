@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.R;
-import com.willowtreeapps.hyperion.core.plugins.v1.HyperionIgnore;
 
 public class Lifecycle extends LifecycleAdapter {
 
@@ -44,13 +43,6 @@ public class Lifecycle extends LifecycleAdapter {
 
     @Override
     public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
-        HyperionIgnore ignore = activity.getClass().getAnnotation(HyperionIgnore.class);
-        if (ignore == null) {
-            install(activity);
-        }
-    }
-
-    private void install(final Activity activity) {
         // reorganize the layout
         final ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         final View contentView = decorView.getChildAt(0);
