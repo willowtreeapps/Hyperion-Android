@@ -32,12 +32,12 @@ Download via Maven:
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
   <artifactId>hyperion-core</artifactId>
-  <version>0.9.1</version>
+  <version>0.9.4</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.willowtreeapps.hyperion:hyperion-core:0.9.3'
+compile 'com.willowtreeapps.hyperion:hyperion-core:0.9.4'
 ```
 
 Usage
@@ -46,11 +46,11 @@ Usage
 Include the core library along with any number of plugins.
 
 ```groovy
-debugCompile 'com.willowtreeapps.hyperion:hyperion-core:0.9.3'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-attr:0.9.3'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.3'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-disk:0.9.3'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.3'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-core:0.9.4'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-attr:0.9.4'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.4'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-disk:0.9.4'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.4'
 ```
 
 ## Adding Plugins
