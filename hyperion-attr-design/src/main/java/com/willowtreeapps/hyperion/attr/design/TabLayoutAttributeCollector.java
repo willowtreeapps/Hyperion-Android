@@ -8,7 +8,7 @@ import com.willowtreeapps.hyperion.attr.AttributeValue;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.attr.collectors.Collectors;
 import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 
 import java.util.ArrayList;
 import java.util.List;

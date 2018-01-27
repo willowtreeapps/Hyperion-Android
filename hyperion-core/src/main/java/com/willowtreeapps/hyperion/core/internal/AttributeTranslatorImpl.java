@@ -2,8 +2,8 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.support.annotation.Px;
 
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
-import com.willowtreeapps.hyperion.core.MeasurementHelper;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
 
 import javax.inject.Inject;
 

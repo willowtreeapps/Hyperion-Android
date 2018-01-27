@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.core.plugins.v1;
+package com.willowtreeapps.hyperion.plugin.v1;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

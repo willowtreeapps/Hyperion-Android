@@ -16,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.willowtreeapps.hyperion.core.MeasurementHelper;
-import com.willowtreeapps.hyperion.core.ViewTarget;
-import com.willowtreeapps.hyperion.core.plugins.v1.ExtensionProvider;
-import com.willowtreeapps.hyperion.core.plugins.v1.PluginExtension;
+import com.willowtreeapps.hyperion.plugin.v1.ExtensionProvider;
+import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
+import com.willowtreeapps.hyperion.plugin.v1.PluginExtension;
+import com.willowtreeapps.hyperion.plugin.v1.ViewTarget;
 
 class MeasurementOverlayView extends FrameLayout {
 

@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.core.plugins.v1;
+package com.willowtreeapps.hyperion.plugin.v1;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;

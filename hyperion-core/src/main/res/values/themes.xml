@@ -11,7 +11,7 @@
 
     <style name="Hype.Base.Drawer">
         <item name="android:windowBackground">@color/hype_menu_background</item>
-        <item name="android:textColorPrimary">@color/hype_drawer_text</item>
+        <item name="android:textColorPrimary">@color/hype_plugin_text</item>
     </style>
 
     <style name="Hype.Base.Inspect">

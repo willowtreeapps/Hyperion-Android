@@ -6,7 +6,7 @@ import android.widget.FrameLayout;
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.MutableBooleanViewAttribute;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 
 import java.util.ArrayList;
 import java.util.List;

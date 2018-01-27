@@ -3,7 +3,7 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Fragment;
 import android.content.Intent;
 
-import com.willowtreeapps.hyperion.core.ActivityResults;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 
 import java.util.ArrayList;
 import java.util.List;

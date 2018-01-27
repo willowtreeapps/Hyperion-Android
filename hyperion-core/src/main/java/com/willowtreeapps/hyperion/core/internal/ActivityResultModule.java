@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import com.willowtreeapps.hyperion.core.ActivityResults;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 
 import dagger.Module;
 import dagger.Provides;

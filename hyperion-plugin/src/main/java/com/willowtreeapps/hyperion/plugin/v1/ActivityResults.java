@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.core;
+package com.willowtreeapps.hyperion.plugin.v1;
 
 import android.content.Intent;
 import android.os.Bundle;

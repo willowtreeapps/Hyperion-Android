@@ -11,8 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.willowtreeapps.hyperion.core.ActivityResults;
 import com.willowtreeapps.hyperion.core.R;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 
 public class Lifecycle extends LifecycleAdapter {
 
@@ -76,7 +76,6 @@ public class Lifecycle extends LifecycleAdapter {
 
         CoreComponent component = DaggerCoreComponent.builder()
                 .appComponent(AppComponent.Holder.getInstance())
-                .coreModule(new CoreModule())
                 .activityModule(new ActivityModule(activity))
                 .overlayModule(new OverlayModule(overlayLayout))
                 .activityResultModule(new ActivityResultModule(results))

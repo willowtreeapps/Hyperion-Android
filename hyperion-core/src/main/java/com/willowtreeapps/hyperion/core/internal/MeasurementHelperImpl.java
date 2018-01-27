@@ -7,13 +7,16 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.willowtreeapps.hyperion.core.MeasurementHelper;
+import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
+
+import javax.inject.Inject;
 
 class MeasurementHelperImpl implements MeasurementHelper {
 
     private static final int[] OUT_LOCATION = new int[2];
     private final DisplayMetrics displayMetrics;
 
+    @Inject
     MeasurementHelperImpl(DisplayMetrics displayMetrics) {
         this.displayMetrics = displayMetrics;
     }

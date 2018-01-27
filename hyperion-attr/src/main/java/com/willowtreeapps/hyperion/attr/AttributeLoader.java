@@ -3,7 +3,7 @@ package com.willowtreeapps.hyperion.attr;
 import android.view.View;
 
 import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 
 import java.util.ArrayList;
 import java.util.Collections;

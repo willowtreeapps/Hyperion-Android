@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    compileOnly project(':hyperion-core')
+    compileOnly project(':hyperion-plugin')
     compileOnly project(':hyperion-attr')
     implementation 'com.android.support:appcompat-v7:27.0.2'
 }

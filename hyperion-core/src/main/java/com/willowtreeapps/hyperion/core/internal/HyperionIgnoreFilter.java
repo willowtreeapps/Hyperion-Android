@@ -5,7 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.util.SimpleArrayMap;
 
-import com.willowtreeapps.hyperion.core.plugins.v1.HyperionIgnore;
+import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 
 class HyperionIgnoreFilter implements Application.ActivityLifecycleCallbacks {
 

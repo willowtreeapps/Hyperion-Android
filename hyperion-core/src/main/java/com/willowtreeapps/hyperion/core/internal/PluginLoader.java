@@ -3,8 +3,8 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.support.annotation.AnyThread;
 import android.support.annotation.WorkerThread;
 
-import com.willowtreeapps.hyperion.core.plugins.v1.Plugin;
-import com.willowtreeapps.hyperion.core.plugins.v1.PluginModule;
+import com.willowtreeapps.hyperion.plugin.v1.Plugin;
+import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import java.util.ArrayList;
 import java.util.List;

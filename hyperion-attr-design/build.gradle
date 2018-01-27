@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    compileOnly project(':hyperion-core')
+    compileOnly project(':hyperion-plugin')
     implementation project(':hyperion-attr')
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
     implementation 'com.android.support:design:27.0.2'

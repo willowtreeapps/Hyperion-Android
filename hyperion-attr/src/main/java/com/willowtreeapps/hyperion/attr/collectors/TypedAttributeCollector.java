@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 
 import java.util.List;
 

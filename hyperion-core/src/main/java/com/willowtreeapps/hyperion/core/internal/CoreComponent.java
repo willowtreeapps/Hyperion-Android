@@ -3,11 +3,11 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Activity;
 import android.content.ServiceConnection;
 
-import com.willowtreeapps.hyperion.core.ActivityResults;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
-import com.willowtreeapps.hyperion.core.MeasurementHelper;
-import com.willowtreeapps.hyperion.core.ViewTarget;
-import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
+import com.willowtreeapps.hyperion.plugin.v1.OverlayContainer;
+import com.willowtreeapps.hyperion.plugin.v1.ViewTarget;
 
 import dagger.Component;
 

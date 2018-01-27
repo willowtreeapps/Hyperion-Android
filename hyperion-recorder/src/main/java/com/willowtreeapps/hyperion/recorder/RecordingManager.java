@@ -1,6 +1,5 @@
 package com.willowtreeapps.hyperion.recorder;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.DisplayManager;
@@ -17,7 +16,7 @@ import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.WindowManager;
 
-import com.willowtreeapps.hyperion.core.ActivityResults;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 
 import java.io.File;
 import java.io.IOException;

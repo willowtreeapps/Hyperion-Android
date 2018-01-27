@@ -2,56 +2,50 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.ServiceConnection;
-import android.util.DisplayMetrics;
 
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
-import com.willowtreeapps.hyperion.core.MeasurementHelper;
-import com.willowtreeapps.hyperion.core.ViewTarget;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
+import com.willowtreeapps.hyperion.plugin.v1.ViewTarget;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-class CoreModule {
+abstract class CoreModule {
 
     @Provides
     @ActivityScope
-    ServiceConnection provideServiceConnection(Activity activity) {
+    static ServiceConnection provideServiceConnection(Activity activity) {
         return new HyperionService.Connection(activity);
     }
 
-    @Provides
+    @Binds
     @ActivityScope
-    ViewTarget provideViewTarget() {
-        return new ViewTargetImpl();
-    }
+    abstract ViewTarget bindViewTarget(ViewTargetImpl viewTarget);
 
-    @Provides
+    @Binds
     @ActivityScope
-    MeasurementHelper provideMeasurementHelper(DisplayMetrics displayMetrics) {
-        return new MeasurementHelperImpl(displayMetrics);
-    }
+    abstract MeasurementHelper bindMeasurementHelper(MeasurementHelperImpl measurementHelper);
 
-    @Provides
+    @Binds
     @ActivityScope
-    AttributeTranslator provideAttributeTranslator(MeasurementHelper measurementHelper) {
-        return new AttributeTranslatorImpl(measurementHelper);
-    }
+    abstract AttributeTranslator bindAttributeTranslator(AttributeTranslatorImpl attributeTranslator);
 
     @Provides
     @ActivityScope
     @Worker
-    Executor provideWorkerThreadExecutor() {
+    static Executor provideWorkerThreadExecutor() {
         return Executors.newSingleThreadExecutor();
     }
 
     @Provides
     @ActivityScope
     @Main
-    Executor provideUiThreadExecutor() {
+    static Executor provideUiThreadExecutor() {
         return new UiThreadExecutor();
     }
 

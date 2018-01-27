@@ -7,8 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.willowtreeapps.hyperion.core.plugins.v1.OnOverlayViewChangedListener;
-import com.willowtreeapps.hyperion.core.plugins.v1.OverlayContainer;
+import com.willowtreeapps.hyperion.plugin.v1.OnOverlayViewChangedListener;
+import com.willowtreeapps.hyperion.plugin.v1.OverlayContainer;
 
 import java.util.ArrayList;
 import java.util.List;

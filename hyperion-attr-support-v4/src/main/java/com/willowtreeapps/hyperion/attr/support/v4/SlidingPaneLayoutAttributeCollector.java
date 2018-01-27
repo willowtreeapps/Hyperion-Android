@@ -6,7 +6,7 @@ import android.support.v4.widget.SlidingPaneLayout;
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
 import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 
 import java.util.ArrayList;
 import java.util.List;

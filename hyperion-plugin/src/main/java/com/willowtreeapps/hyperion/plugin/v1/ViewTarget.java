@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.core;
+package com.willowtreeapps.hyperion.plugin.v1;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

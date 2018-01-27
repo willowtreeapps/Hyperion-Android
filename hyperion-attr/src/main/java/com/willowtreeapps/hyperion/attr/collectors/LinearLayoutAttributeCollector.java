@@ -10,7 +10,7 @@ import com.willowtreeapps.hyperion.attr.AttributeValue;
 import com.willowtreeapps.hyperion.attr.MutableBooleanViewAttribute;
 import com.willowtreeapps.hyperion.attr.MutableStringViewAttribute;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;
-import com.willowtreeapps.hyperion.core.AttributeTranslator;
+import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 
 import java.util.ArrayList;
 import java.util.List;

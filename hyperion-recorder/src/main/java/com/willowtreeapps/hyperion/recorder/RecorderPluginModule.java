@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.willowtreeapps.hyperion.core.ActivityResults;
-import com.willowtreeapps.hyperion.core.plugins.v1.PluginModule;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
+import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import static android.app.Activity.RESULT_OK;
 
