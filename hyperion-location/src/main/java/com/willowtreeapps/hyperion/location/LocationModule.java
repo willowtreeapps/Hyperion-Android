@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.willowtreeapps.hyperion.core.plugins.v1.PluginModule;
+import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 class LocationModule extends PluginModule {
 
