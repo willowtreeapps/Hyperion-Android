@@ -14,6 +14,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.util.IntProperty;
 import android.util.Property;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -63,6 +64,8 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
         shakeDetector.setOnShakeListener(this);
         setBackgroundColor(ContextCompat.getColor(context, R.color.hype_menu_background));
         getBackground().setAlpha(0);
+        setFocusable(true);
+        setFocusableInTouchMode(true);
     }
 
     @Override
@@ -92,6 +95,15 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     }
 
     @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && isMenuOpen()) {
+            collapse();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int offset = (int) ((getMeasuredWidth() * 0.8f) / 3f);
         final float x = ev.getX();
@@ -102,31 +114,8 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            final View pluginView = getPluginView();
-            final View overlayView = getOverlayView();
-            ViewCompat.animate(overlayView)
-                    .translationX(0)
-                    .scaleX(1.0f)
-                    .scaleY(1.0f)
-                    .translationZ(0.0f)
-                    .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
-                    .setListener(new ViewPropertyAnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(View view) {
-                            ViewCompat.setBackground(overlayView, null);
-                            menuOpen = false;
-                        }
-                    })
-                    .start();
-            ViewCompat.animate(pluginView)
-                    .withLayer()
-                    .alpha(0.0f)
-                    .translationX(160.0f)
-                    .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
-                    .start();
-            ObjectAnimator alpha = ObjectAnimator.ofInt(this, BACKGROUND_ALPHA, 0);
-            alpha.setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR);
-            alpha.start();
+            collapse();
+            return true;
         }
         return super.onTouchEvent(event);
     }
@@ -157,6 +146,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
                     .setListener(new ViewPropertyAnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(View view) {
+                            requestFocus();
                             menuOpen = true;
                         }
                     })
@@ -183,6 +173,35 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
                 ViewCompat.setBackground(overlayView, decor.getBackground());
             }
         }
+    }
+
+    public void collapse() {
+        final View pluginView = getPluginView();
+        final View overlayView = getOverlayView();
+        ViewCompat.animate(overlayView)
+                .translationX(0)
+                .scaleX(1.0f)
+                .scaleY(1.0f)
+                .translationZ(0.0f)
+                .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
+                .setListener(new ViewPropertyAnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        ViewCompat.setBackground(overlayView, null);
+                        clearFocus();
+                        menuOpen = false;
+                    }
+                })
+                .start();
+        ViewCompat.animate(pluginView)
+                .withLayer()
+                .alpha(0.0f)
+                .translationX(160.0f)
+                .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
+                .start();
+        ObjectAnimator alpha = ObjectAnimator.ofInt(this, BACKGROUND_ALPHA, 0);
+        alpha.setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR);
+        alpha.start();
     }
 
     private View getPluginView() {
