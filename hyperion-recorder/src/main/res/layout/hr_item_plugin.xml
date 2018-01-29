@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="131dp"
-    android:padding="@dimen/hr_item_plugin_padding"
+    android:padding="@dimen/hype_plugin_padding"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:background="?attr/selectableItemBackground">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/hype_plugin_icon_size"
+        android:layout_height="@dimen/hype_plugin_icon_size"
         android:layout_marginRight="28dp"
         android:layout_marginEnd="28dp"
         android:src="@drawable/hr_icon"

@@ -5,12 +5,15 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.WindowInsetsCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.willowtreeapps.hyperion.core.BuildConfig;
 import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
@@ -41,13 +44,28 @@ public class HyperionPluginView extends FrameLayout {
         super(context, attrs, defStyleAttr);
         CoreComponent component = ComponentProvider.get(context);
         component.inject(this);
+
         inflate(context, R.layout.hype_view_plugin, this);
+        final TextView versionText = findViewById(R.id.version_text);
+        versionText.setText(context.getString(R.string.hype_version_text, BuildConfig.VERSION_NAME));
 
         pluginListContainer = findViewById(R.id.plugin_list_container);
         pluginExtension = new PluginExtensionImpl(component);
+        setFitsSystemWindows(true);
         setId(R.id.hyperion_plugins);
         ViewCompat.setImportantForAccessibility(
                 this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        ViewCompat.setOnApplyWindowInsetsListener(this, new android.support.v4.view.OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
+                setPadding(
+                        insets.getSystemWindowInsetLeft(),
+                        insets.getSystemWindowInsetTop(),
+                        insets.getSystemWindowInsetRight(),
+                        insets.getSystemWindowInsetBottom());
+                return insets;
+            }
+        });
     }
 
     @Override

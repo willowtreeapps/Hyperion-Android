@@ -12,7 +12,7 @@
         android:layout_width="100dp"
         android:layout_height="140dp"
         android:scaleType="fitCenter"
-        android:background="@color/light_gray"/>
+        android:background="@color/hr_light_gray"/>
 
     <TextView
         android:id="@+id/name"

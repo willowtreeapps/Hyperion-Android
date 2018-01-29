@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="ha_item_plugin_padding">12dp</dimen>
     <dimen name="ha_width_mutable_string_field">180dp</dimen>
     <dimen name="ha_z_card">2dp</dimen>
 </resources>

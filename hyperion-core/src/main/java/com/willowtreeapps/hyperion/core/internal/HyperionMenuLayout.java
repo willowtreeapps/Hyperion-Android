@@ -19,7 +19,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowInsets;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
@@ -129,11 +128,6 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
             return true;
         }
         return super.onTouchEvent(event);
-    }
-
-    @Override
-    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        return super.onApplyWindowInsets(insets);
     }
 
     @Override
