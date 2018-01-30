@@ -22,12 +22,12 @@ import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.plugin.v1.ExtensionProvider;
 import com.willowtreeapps.hyperion.plugin.v1.PluginExtension;
-import com.willowtreeapps.hyperion.plugin.v1.ViewTarget;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
+class AttributeDetailView extends RecyclerView {
 
     static final int ITEM_HEADER = 1;
     static final int ITEM_ATTRIBUTE = 2;
@@ -36,7 +36,6 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
     static final int ITEM_MUTABLE_BOOLEAN_ATTRIBUTE = 5;
     static final int ITEM_MUTABLE_SELECTION_ATTRIBUTE = 6;
 
-    private final ViewTarget target;
     private final AttributeAdapter adapter;
     private final AttributeLoader attributeLoader;
 
@@ -51,7 +50,6 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
     public AttributeDetailView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         PluginExtension extension = ExtensionProvider.get(context);
-        target = extension.getViewTarget();
         adapter = new AttributeAdapter();
         attributeLoader = new AttributeLoader(extension.getAttributeTranslator());
 
@@ -64,24 +62,14 @@ class AttributeDetailView extends RecyclerView implements ViewTarget.Observer {
         addItemDecoration(decoration);
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        target.registerObserver(this);
-        onTargetChanged(target.getTarget());
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        target.unregisterObserver(this);
-    }
-
-    @Override
-    public void onTargetChanged(View target) {
-        List<Section<ViewAttribute>> sections = attributeLoader.getAttributesForView(target);
-        List<AttributeDetailItem> items = toItems(sections);
-        adapter.setItems(items);
+    public void setTarget(View target) {
+        if (target != null) {
+            List<Section<ViewAttribute>> sections = attributeLoader.getAttributesForView(target);
+            List<AttributeDetailItem> items = toItems(sections);
+            adapter.setItems(items);
+        } else {
+            adapter.setItems(Collections.<AttributeDetailItem>emptyList());
+        }
     }
 
     private List<AttributeDetailItem> toItems(List<Section<ViewAttribute>> sections) {

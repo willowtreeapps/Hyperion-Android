@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.willowtreeapps.hyperion.core.R;
-import com.willowtreeapps.hyperion.plugin.v1.PluginExtension;
+import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public class HyperionPluginView extends FrameLayout {
 
     private final LinearLayout pluginListContainer;
-    private final PluginExtension pluginExtension;
+    private final PluginExtensionImpl pluginExtension;
 
     @Inject
     PluginLoader pluginLoader;
@@ -50,6 +50,7 @@ public class HyperionPluginView extends FrameLayout {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        pluginExtension.setHyperionMenu((HyperionMenu) getParent());
         pluginLoader.load(new Callback<List<PluginModule>>() {
             @Override
             public void call(Try<List<PluginModule>> result) {
@@ -88,5 +89,6 @@ public class HyperionPluginView extends FrameLayout {
                 module.destroy();
             }
         }
+        pluginExtension.setHyperionMenu(null);
     }
 }

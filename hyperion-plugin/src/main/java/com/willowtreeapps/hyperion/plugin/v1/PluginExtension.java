@@ -2,6 +2,7 @@ package com.willowtreeapps.hyperion.plugin.v1;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 
 public interface PluginExtension {
@@ -19,12 +20,12 @@ public interface PluginExtension {
     ActivityResults getActivityResults();
 
     @NonNull
-    ViewTarget getViewTarget();
-
-    @NonNull
     AttributeTranslator getAttributeTranslator();
 
     @NonNull
     MeasurementHelper getMeasurementHelper();
+
+    @Nullable
+    HyperionMenu getHyperionMenu();
 
 }

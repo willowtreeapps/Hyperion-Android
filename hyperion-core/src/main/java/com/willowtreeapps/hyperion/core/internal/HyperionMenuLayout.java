@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MarginLayoutParamsCompat;
@@ -23,8 +24,14 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
 import com.willowtreeapps.hyperion.core.R;
+import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
+import com.willowtreeapps.hyperion.plugin.v1.MenuState;
+import com.willowtreeapps.hyperion.plugin.v1.OnMenuStateChangedListener;
 
-public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnShakeListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnShakeListener, HyperionMenu {
 
     private static final Interpolator EXPAND_COLLAPSE_INTERPOLATOR = new FastOutSlowInInterpolator();
     private static final Property<HyperionMenuLayout, Integer> BACKGROUND_ALPHA =
@@ -43,10 +50,11 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     private final SensorManager sensorManager;
     private final Sensor accelerometer;
     private final ShakeDetector shakeDetector;
+    private final List<OnMenuStateChangedListener> listeners = new ArrayList<>(4);
 
     private View pluginView;
     private View overlayView;
-    private boolean menuOpen = false;
+    private MenuState menuState = MenuState.CLOSE;
 
     public HyperionMenuLayout(Context context) {
         this(context, null);
@@ -132,6 +140,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
 
     public void expand() {
         if (!isMenuOpen()) {
+            setMenuState(MenuState.OPENING);
             final View pluginView = getPluginView();
             final View overlayView = getOverlayView();
             pluginView.setTranslationX(160.0f);
@@ -147,7 +156,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
                         @Override
                         public void onAnimationEnd(View view) {
                             requestFocus();
-                            menuOpen = true;
+                            setMenuState(MenuState.OPEN);
                         }
                     })
                     .start();
@@ -176,32 +185,35 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     }
 
     public void collapse() {
-        final View pluginView = getPluginView();
-        final View overlayView = getOverlayView();
-        ViewCompat.animate(overlayView)
-                .translationX(0)
-                .scaleX(1.0f)
-                .scaleY(1.0f)
-                .translationZ(0.0f)
-                .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
-                .setListener(new ViewPropertyAnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(View view) {
-                        ViewCompat.setBackground(overlayView, null);
-                        clearFocus();
-                        menuOpen = false;
-                    }
-                })
-                .start();
-        ViewCompat.animate(pluginView)
-                .withLayer()
-                .alpha(0.0f)
-                .translationX(160.0f)
-                .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
-                .start();
-        ObjectAnimator alpha = ObjectAnimator.ofInt(this, BACKGROUND_ALPHA, 0);
-        alpha.setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR);
-        alpha.start();
+        if (isMenuOpen()) {
+            setMenuState(MenuState.CLOSING);
+            final View pluginView = getPluginView();
+            final View overlayView = getOverlayView();
+            ViewCompat.animate(overlayView)
+                    .translationX(0)
+                    .scaleX(1.0f)
+                    .scaleY(1.0f)
+                    .translationZ(0.0f)
+                    .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
+                    .setListener(new ViewPropertyAnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(View view) {
+                            ViewCompat.setBackground(overlayView, null);
+                            clearFocus();
+                            setMenuState(MenuState.CLOSE);
+                        }
+                    })
+                    .start();
+            ViewCompat.animate(pluginView)
+                    .withLayer()
+                    .alpha(0.0f)
+                    .translationX(160.0f)
+                    .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
+                    .start();
+            ObjectAnimator alpha = ObjectAnimator.ofInt(this, BACKGROUND_ALPHA, 0);
+            alpha.setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR);
+            alpha.start();
+        }
     }
 
     private View getPluginView() {
@@ -219,6 +231,30 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     }
 
     private boolean isMenuOpen() {
-        return menuOpen;
+        return menuState == MenuState.OPEN;
+    }
+
+    @Override
+    public MenuState getMenuState() {
+        return menuState;
+    }
+
+    public void setMenuState(MenuState menuState) {
+        if (this.menuState != menuState) {
+            this.menuState = menuState;
+            for (OnMenuStateChangedListener listener : listeners) {
+                listener.onMenuStateChanged(menuState);
+            }
+        }
+    }
+
+    @Override
+    public void addOnMenuStateChangedListener(@NonNull OnMenuStateChangedListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public boolean removeOnMenuStateChangedListener(@NonNull OnMenuStateChangedListener listener) {
+        return listeners.remove(listener);
     }
 }

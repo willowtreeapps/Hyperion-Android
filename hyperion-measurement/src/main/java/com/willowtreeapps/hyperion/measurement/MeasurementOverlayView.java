@@ -19,12 +19,10 @@ import android.widget.TextView;
 import com.willowtreeapps.hyperion.plugin.v1.ExtensionProvider;
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
 import com.willowtreeapps.hyperion.plugin.v1.PluginExtension;
-import com.willowtreeapps.hyperion.plugin.v1.ViewTarget;
 
 class MeasurementOverlayView extends FrameLayout {
 
     private final ViewGroup contentRoot;
-    private final ViewTarget target;
     private final MeasurementHelper measurementHelper;
     private final Path path = new Path();
     private final Rect outRect = new Rect();
@@ -35,6 +33,7 @@ class MeasurementOverlayView extends FrameLayout {
     private final @Px
     int measurementTextOffset;
 
+    private View currentView;
     private Rect rectPrimary;
     private Rect rectSecondary;
     private TextView measurementWidthText;
@@ -49,7 +48,6 @@ class MeasurementOverlayView extends FrameLayout {
         super(context);
         PluginExtension extension = ExtensionProvider.get(context);
         contentRoot = extension.getContentRoot();
-        target = extension.getViewTarget();
         measurementHelper = extension.getMeasurementHelper();
 
         paintDashed = new Paint();
@@ -75,17 +73,6 @@ class MeasurementOverlayView extends FrameLayout {
         paintText.setStrokeWidth(2);
 
         measurementTextOffset = getResources().getDimensionPixelSize(R.dimen.hm_measurement_text_offset);
-
-        final View current = target.getTarget();
-        if (current != null) {
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    setPrimaryTarget(current);
-                    invalidate();
-                }
-            });
-        }
 
         setWillNotDraw(false);
     }
@@ -292,8 +279,8 @@ class MeasurementOverlayView extends FrameLayout {
             View touchTarget = findTarget(contentRoot, x, y);
 
             // reset selection if target is root or same target.
-            if (contentRoot == touchTarget || target.getTarget() == touchTarget) {
-                target.setTarget(null);
+            if (contentRoot == touchTarget || currentView == touchTarget) {
+                currentView = null;
                 rectPrimary = null;
                 rectSecondary = null;
             } else if (rectPrimary == null) {
@@ -325,7 +312,7 @@ class MeasurementOverlayView extends FrameLayout {
     }
 
     private void setPrimaryTarget(View view) {
-        target.setTarget(view);
+        currentView = view;
         rectPrimary = new Rect();
         measurementHelper.getScreenLocation(view, rectPrimary);
 
