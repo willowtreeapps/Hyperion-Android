@@ -3,6 +3,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="46dp"
+    android:paddingRight="46dp"
     android:minHeight="120dp"
     android:gravity="center_vertical"
     android:background="?attr/selectableItemBackground">
@@ -22,11 +24,5 @@
         android:layout_weight="1"
         android:textSize="14sp"
         android:lineSpacingExtra="3sp"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_chevron"
-        android:contentDescription="@string/cd_chevron"/>
 
 </LinearLayout>
