@@ -60,6 +60,7 @@ public class HyperionService extends Service {
                 .setTicker(getString(R.string.hype_notification_title))
                 .setSmallIcon(R.drawable.logo)
                 .setOngoing(true)
+                .setVibrate(new long[] { 0 })
                 .build();
     }
 
@@ -76,6 +77,8 @@ public class HyperionService extends Service {
             channel.setDescription(getString(R.string.hype_notification_channel_description));
             channel.enableLights(true);
             channel.setLightColor(Color.BLUE);
+            channel.enableVibration(false);
+            channel.setImportance(NotificationManager.IMPORTANCE_LOW);
             notificationManager.createNotificationChannel(channel);
         }
     }

@@ -87,6 +87,9 @@ class AttributeOverlayView extends FrameLayout {
             for (int i = 0; i < count; i++) {
                 View child = parent.getChildAt(i);
                 measurementHelper.getScreenLocation(child, rect);
+                if (child.getVisibility() != VISIBLE) {
+                    continue;
+                }
                 if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
                     return findTarget(child, x, y);
                 }

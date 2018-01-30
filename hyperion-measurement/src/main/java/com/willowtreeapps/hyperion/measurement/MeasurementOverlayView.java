@@ -303,6 +303,9 @@ class MeasurementOverlayView extends FrameLayout {
             for (int i = 0; i < count; i++) {
                 View child = parent.getChildAt(i);
                 measurementHelper.getScreenLocation(child, outRect);
+                if (child.getVisibility() != VISIBLE) {
+                    continue;
+                }
                 if (x >= outRect.left && x <= outRect.right && y >= outRect.top && y <= outRect.bottom) {
                     return findTarget(child, x, y);
                 }
