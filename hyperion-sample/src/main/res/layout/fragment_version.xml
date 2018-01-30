@@ -4,11 +4,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="46dp">
+    android:paddingTop="46dp"
+    android:paddingBottom="46dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="23dp"
         android:textSize="30sp"
         android:textColor="@android:color/black"
         android:text="@string/this_version" />
