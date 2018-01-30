@@ -5,7 +5,6 @@ import android.content.ServiceConnection;
 
 import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
-import com.willowtreeapps.hyperion.plugin.v1.ViewTarget;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -22,10 +21,6 @@ abstract class CoreModule {
     static ServiceConnection provideServiceConnection(Activity activity) {
         return new HyperionService.Connection(activity);
     }
-
-    @Binds
-    @ActivityScope
-    abstract ViewTarget bindViewTarget(ViewTargetImpl viewTarget);
 
     @Binds
     @ActivityScope

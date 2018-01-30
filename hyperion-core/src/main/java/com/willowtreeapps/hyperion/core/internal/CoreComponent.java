@@ -7,7 +7,6 @@ import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
 import com.willowtreeapps.hyperion.plugin.v1.OverlayContainer;
-import com.willowtreeapps.hyperion.plugin.v1.ViewTarget;
 
 import dagger.Component;
 
@@ -33,8 +32,6 @@ interface CoreComponent {
     OverlayContainer getOverlayContainer();
 
     ActivityResults getActivityResults();
-
-    ViewTarget getViewTarget();
 
     ServiceConnection getServiceConnection();
 }
