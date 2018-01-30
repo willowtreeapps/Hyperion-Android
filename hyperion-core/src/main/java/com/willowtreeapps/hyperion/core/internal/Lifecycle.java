@@ -50,8 +50,6 @@ public class Lifecycle extends LifecycleAdapter {
             // no content, abort install
             return;
         }
-        // prevent clicking through to menu behind content
-        contentView.setClickable(true);
         decorView.removeView(contentView);
 
         // embed content view within overlay
