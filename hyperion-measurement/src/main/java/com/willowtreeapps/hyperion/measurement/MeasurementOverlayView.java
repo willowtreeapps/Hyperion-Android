@@ -297,6 +297,9 @@ class MeasurementOverlayView extends FrameLayout {
     }
 
     private View findTarget(View root, float x, float y) {
+        // we consider the "best target" to be the view width the smallest width / height
+        // whose location on screen is within the given touch area.
+        View bestTarget = root;
         if (root instanceof ViewGroup) {
             ViewGroup parent = (ViewGroup) root;
             int count = parent.getChildCount();
@@ -307,11 +310,14 @@ class MeasurementOverlayView extends FrameLayout {
                     continue;
                 }
                 if (x >= outRect.left && x <= outRect.right && y >= outRect.top && y <= outRect.bottom) {
-                    return findTarget(child, x, y);
+                    final View target = findTarget(child, x, y);
+                    if (target.getWidth() <= bestTarget.getWidth() && target.getHeight() <= bestTarget.getHeight()) {
+                        bestTarget = target;
+                    }
                 }
             }
         }
-        return root;
+        return bestTarget;
     }
 
     private void setPrimaryTarget(View view) {

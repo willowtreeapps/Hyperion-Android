@@ -22,7 +22,7 @@ class AttributeOverlayView extends FrameLayout {
 
     private final ViewGroup contentRoot;
     private final MeasurementHelper measurementHelper;
-    private final Rect rect = new Rect();
+    private final Rect outRect = new Rect();
     private final Paint selectionPaint;
 
     private View currentView;
@@ -51,7 +51,7 @@ class AttributeOverlayView extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawRect(rect, selectionPaint);
+        canvas.drawRect(outRect, selectionPaint);
     }
 
     @Override
@@ -81,26 +81,32 @@ class AttributeOverlayView extends FrameLayout {
     }
 
     private View findTarget(View root, float x, float y) {
+        // we consider the "best target" to be the view width the smallest width / height
+        // whose location on screen is within the given touch area.
+        View bestTarget = root;
         if (root instanceof ViewGroup) {
             ViewGroup parent = (ViewGroup) root;
             int count = parent.getChildCount();
             for (int i = 0; i < count; i++) {
                 View child = parent.getChildAt(i);
-                measurementHelper.getScreenLocation(child, rect);
+                measurementHelper.getScreenLocation(child, outRect);
                 if (child.getVisibility() != VISIBLE) {
                     continue;
                 }
-                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-                    return findTarget(child, x, y);
+                if (x >= outRect.left && x <= outRect.right && y >= outRect.top && y <= outRect.bottom) {
+                    final View target = findTarget(child, x, y);
+                    if (target.getWidth() <= bestTarget.getWidth() && target.getHeight() <= bestTarget.getHeight()) {
+                        bestTarget = target;
+                    }
                 }
             }
         }
-        return root;
+        return bestTarget;
     }
 
     private void setTarget(View view) {
         currentView = view;
-        measurementHelper.getScreenLocation(view, rect);
+        measurementHelper.getScreenLocation(view, outRect);
 
         dismissPopupIfNeeded();
 
