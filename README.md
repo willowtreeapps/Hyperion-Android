@@ -14,7 +14,7 @@ Calling all developers!!! Be one of the first to create a third-party plugin. Th
 To create your own plugin, implement the Plugin interface and expose the implementation as a service. The plugins made available in this repository leverage Google's [AutoService][1] annotation processor to generate the service metadata and simplify the process.
 
 ## How To Show Hyperion Plugin List
-Once Hyperion is integrated into your app, simply shake your phone to activate. If you are running your app on an emulator, you can manually open the menu by calling `Hyperion.open(Activity activity)`. A feature is in development that will display a notification with actions available for opening the menu.
+Once Hyperion is integrated into your app, simply shake your phone to activate. If you are running your app on an emulator, you can manually open the menu by calling `Hyperion.open(Activity activity)`. You can also open the menu by selecting the foreground notification that appears while the client app is in the foreground.
 
 ## Sample App
 Want to learn how to use Hyperion? The sample app will teach you!
@@ -32,12 +32,12 @@ Download via Maven:
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
   <artifactId>hyperion-core</artifactId>
-  <version>0.9.6</version>
+  <version>0.9.7</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.willowtreeapps.hyperion:hyperion-core:0.9.6'
+compile 'com.willowtreeapps.hyperion:hyperion-core:0.9.7'
 ```
 
 Usage
@@ -46,11 +46,11 @@ Usage
 Include the core library along with any number of plugins.
 
 ```groovy
-debugCompile 'com.willowtreeapps.hyperion:hyperion-core:0.9.6'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-attr:0.9.6'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.6'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-disk:0.9.6'
-debugCompile 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.6'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-core:0.9.7'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-attr:0.9.7'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.7'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-disk:0.9.7'
+debugCompile 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.7'
 ```
 
 ## Adding Plugins
