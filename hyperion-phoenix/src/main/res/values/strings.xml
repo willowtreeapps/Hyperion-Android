@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public name="hp_phoenix" type="string">Hyperion-Phoenix</public>
+    <string name="hp_plugin_name">Phoenix</string>
+    <string name="hp_clear_cache">Clear Cache</string>
+    <string name="hp_clear_data">Clear Data</string>
+    <string name="hp_restart_self">Restart Self</string>
+    <string name="hp_content_desc_overflow">More</string>
+</resources>

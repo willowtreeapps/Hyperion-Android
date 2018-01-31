@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="131dp"
+    android:padding="@dimen/hp_item_plugin_padding"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="28dp"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/hp_icon"
+            android:tint="@color/hype_plugin_color_selector"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/hype_plugin_color_selector"
+            android:text="@string/hp_plugin_name"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/button_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/hp_ic_overflow"
+            android:tint="@color/hype_plugin_text"
+            android:contentDescription="@string/hp_content_desc_overflow"/>
+
+    </FrameLayout>
+
+</FrameLayout>

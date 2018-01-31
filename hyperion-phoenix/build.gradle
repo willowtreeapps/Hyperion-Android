@@ -21,12 +21,11 @@ android {
         abortOnError false
     }
 
-    resourcePrefix 'ha_'
+    resourcePrefix 'hp_'
 }
 
 dependencies {
-    compileOnly project(':hyperion-plugin')
-    compileOnly project(':hyperion-attr')
+    api project(':hyperion-plugin')
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
-    implementation 'com.android.support:design:27.0.2'
 }
