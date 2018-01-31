@@ -44,5 +44,5 @@ dependencies {
     debugImplementation project(':hyperion-measurement')
     debugImplementation project(':hyperion-recorder')
     debugImplementation project(':hyperion-disk')
-    testImplementation 'junit:junit:4.12'
+    debugImplementation project(':hyperion-phoenix')
 }

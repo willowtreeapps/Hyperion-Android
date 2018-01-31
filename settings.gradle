@@ -1,7 +1,8 @@
 rootProject.name = 'hyperion'
-include ':hyperion-sample', ':hyperion-plugin',
+include ':hyperion-sample',
         ':hyperion-core',
         ':hyperion-core-no-op',
+        ':hyperion-plugin',
         ':hyperion-measurement',
         ':hyperion-location',
         ':hyperion-disk',
@@ -10,4 +11,5 @@ include ':hyperion-sample', ':hyperion-plugin',
         ':hyperion-attr-support-v4',
         ':hyperion-attr-appcompat-v7',
         ':hyperion-attr-recyclerview',
-        ':hyperion-attr-design'
+        ':hyperion-attr-design',
+        ':hyperion-phoenix'

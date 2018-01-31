@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_item_clear_cache"
+        android:title="@string/hp_clear_cache"
+        android:checkable="true"/>
+
+    <item
+        android:id="@+id/menu_item_clear_data"
+        android:title="@string/hp_clear_data"
+        android:checkable="true"/>
+
+    <item
+        android:id="@+id/menu_item_restart_self"
+        android:title="@string/hp_restart_self"
+        android:checkable="true"/>
+
+</menu>

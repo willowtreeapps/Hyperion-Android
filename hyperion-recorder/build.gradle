@@ -29,5 +29,4 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.0.2'
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
     implementation 'com.android.support:recyclerview-v7:27.0.2'
-    testImplementation 'junit:junit:4.12'
 }

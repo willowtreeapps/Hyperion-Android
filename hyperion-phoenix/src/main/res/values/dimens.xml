@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hp_item_plugin_padding">12dp</dimen>
+    <dimen name="hp_switch_text_padding">4dp</dimen>
+</resources>
