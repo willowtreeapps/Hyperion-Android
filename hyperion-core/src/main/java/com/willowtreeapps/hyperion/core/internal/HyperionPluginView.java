@@ -73,7 +73,12 @@ public class HyperionPluginView extends FrameLayout {
 
     void setMenuState(MenuState menuState) {
         this.menuState = menuState;
-        setEnabled(menuState == MenuState.OPEN || menuState == MenuState.OPENING);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        // block touches while the menu is closed.
+        return menuState == MenuState.CLOSE || super.onInterceptTouchEvent(ev);
     }
 
     @Override
