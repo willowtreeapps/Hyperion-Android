@@ -51,7 +51,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     private final ShakeDetector shakeDetector;
     private final List<OnMenuStateChangedListener> listeners = new ArrayList<>(4);
 
-    private View pluginView;
+    private HyperionPluginView pluginView;
     private View overlayView;
     private MenuState menuState = MenuState.CLOSE;
 
@@ -213,7 +213,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
         }
     }
 
-    private View getPluginView() {
+    private HyperionPluginView getPluginView() {
         if (pluginView == null) {
             pluginView = findViewById(R.id.hyperion_plugins);
         }
@@ -239,6 +239,7 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
     public void setMenuState(MenuState menuState) {
         if (this.menuState != menuState) {
             this.menuState = menuState;
+            getPluginView().setMenuState(menuState);
             for (OnMenuStateChangedListener listener : listeners) {
                 listener.onMenuStateChanged(menuState);
             }
