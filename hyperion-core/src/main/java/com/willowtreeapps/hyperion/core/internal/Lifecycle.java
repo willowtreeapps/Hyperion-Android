@@ -54,12 +54,10 @@ public class Lifecycle extends LifecycleAdapter {
 
         // embed content view within overlay
         final HyperionOverlayLayout overlayLayout = new HyperionOverlayLayout(activity);
-        overlayLayout.setId(R.id.hyperion_overlay);
         overlayLayout.addView(contentView);
 
         // embed overlay + content within menu
         final HyperionMenuLayout menuLayout = new HyperionMenuLayout(activity);
-        menuLayout.setId(R.id.hyperion_menu);
         decorView.addView(menuLayout);
 
         FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
@@ -84,7 +82,6 @@ public class Lifecycle extends LifecycleAdapter {
         // embed plugins list into menu
         final Context coreContext = new ComponentContextThemeWrapper(activity, component);
         final HyperionPluginView pluginView = new HyperionPluginView(coreContext);
-        pluginView.setId(R.id.hyperion_plugins);
         pluginView.setAlpha(0.0f);
         menuLayout.addView(pluginView);
         menuLayout.addView(overlayLayout);
@@ -109,6 +106,12 @@ public class Lifecycle extends LifecycleAdapter {
             final Activity activity = components.keyAt(i);
             final HyperionMenuLayout menu = activity.findViewById(R.id.hyperion_menu);
             menu.setShakeGestureSensitivity(sensitivity);
+        }
+    }
+
+    public void open() {
+        if (foregroundActivity != null) {
+            open(foregroundActivity);
         }
     }
 

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.plugin.v1.OnOverlayViewChangedListener;
 import com.willowtreeapps.hyperion.plugin.v1.OverlayContainer;
 
@@ -19,6 +21,9 @@ public class HyperionOverlayLayout extends FrameLayout implements OverlayContain
 
     public HyperionOverlayLayout(@NonNull Context context) {
         super(context);
+        setId(R.id.hyperion_overlay);
+        ViewCompat.setImportantForAccessibility(
+                this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
 
     @Override

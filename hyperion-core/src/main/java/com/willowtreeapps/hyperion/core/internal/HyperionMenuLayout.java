@@ -74,6 +74,9 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
         getBackground().setAlpha(0);
         setFocusable(true);
         setFocusableInTouchMode(true);
+        setId(R.id.hyperion_menu);
+        ViewCompat.setImportantForAccessibility(
+                this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
 
     @Override
