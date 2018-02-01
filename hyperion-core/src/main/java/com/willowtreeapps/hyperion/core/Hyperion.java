@@ -43,9 +43,16 @@ public final class Hyperion {
     }
 
     /**
-     * Manually trigger the Hyperion menu embedded in the given Activity to open.
+     * Manually trigger the Hyperion menu embedded in the current foreground {@link Activity}
+     **/
+    public static void open() {
+        AppComponent.Holder.getInstance().getLifecycle().open();
+    }
+
+    /**
+     * Manually trigger the Hyperion menu embedded in the given {@link Activity} to open.
      *
-     * @param activity the Activity containing the menu to open.
+     * @param activity the {@link Activity} containing the menu to open.
      */
     public static void open(Activity activity) {
         AppComponent.Holder.getInstance().getLifecycle().open(activity);

@@ -45,6 +45,9 @@ public class HyperionPluginView extends FrameLayout {
 
         pluginListContainer = findViewById(R.id.plugin_list_container);
         pluginExtension = new PluginExtensionImpl(component);
+        setId(R.id.hyperion_plugins);
+        ViewCompat.setImportantForAccessibility(
+                this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
 
     @Override

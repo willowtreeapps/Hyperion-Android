@@ -18,8 +18,11 @@ public final class Hyperion {
         // no-op
     }
 
-    public static void open(Activity activity) {
+    public static void open() {
         // no-op
     }
 
+    public static void open(Activity activity) {
+        // no-op
+    }
 }
