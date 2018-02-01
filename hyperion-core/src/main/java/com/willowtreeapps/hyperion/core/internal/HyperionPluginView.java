@@ -8,6 +8,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.WindowInsetsCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.willowtreeapps.hyperion.core.BuildConfig;
 import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
+import com.willowtreeapps.hyperion.plugin.v1.MenuState;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import java.util.List;
@@ -31,6 +33,7 @@ public class HyperionPluginView extends FrameLayout {
     PluginLoader pluginLoader;
 
     private List<PluginModule> modules;
+    private MenuState menuState = MenuState.CLOSE;
 
     public HyperionPluginView(@NonNull Context context) {
         this(context, null);
@@ -66,6 +69,11 @@ public class HyperionPluginView extends FrameLayout {
                 return insets;
             }
         });
+    }
+
+    void setMenuState(MenuState menuState) {
+        this.menuState = menuState;
+        setEnabled(menuState == MenuState.OPEN || menuState == MenuState.OPENING);
     }
 
     @Override
