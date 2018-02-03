@@ -24,40 +24,40 @@ jobs:
           name: Check
           command: ./gradlew lintRelease
       - store_artifacts:
-          path: hyperion-core/build/outputs/aar
+          path: hyperion-core/build/outputs/aar/hyperion-core-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-core-no-op/build/outputs/aar
+          path: hyperion-core-no-op/build/outputs/aar/hyperion-core-no-op-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-plugin/build/outputs/aar
+          path: hyperion-plugin/build/outputs/aar/hyperion-plugin-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-attr/build/outputs/aar
+          path: hyperion-attr/build/outputs/aar/hyperion-attr-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-attr-appcompat-v7/build/outputs/aar
+          path: hyperion-attr-appcompat-v7/build/outputs/aar/hyperion-attr-appcompat-v7-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-attr-design/build/outputs/aar
+          path: hyperion-attr-design/build/outputs/aar/hyperion-attr-design-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-attr-recyclerview/build/outputs/aar
+          path: hyperion-attr-recyclerview/build/outputs/aar/hyperion-attr-recyclerview-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-attr-support-v4/build/outputs/aar
+          path: hyperion-attr-support-v4/build/outputs/aar/hyperion-attr-support-v4-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-disk/build/outputs/aar
+          path: hyperion-disk/build/outputs/aar/hyperion-disk-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-measurement/build/outputs/aar
+          path: hyperion-measurement/build/outputs/aar/hyperion-measurement-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-phoenix/build/outputs/aar
+          path: hyperion-phoenix/build/outputs/aar/hyperion-phoenix-release.aar
           destination: aar
       - store_artifacts:
-          path: hyperion-recorder/build/outputs/aar
+          path: hyperion-recorder/build/outputs/aar/hyperion-recorder-release.aar
           destination: aar
 #      - store_test_results:
 #          path: app/build/test-results
