@@ -1,7 +1,7 @@
 # Hyperion
 
 ![Hyperion Logo](https://github.com/willowtreeapps/Hyperion-Android/art/Hyperion-Logo.png)
-[![CircleCI](https://circleci.com/gh/willowtreeapps/Hyperion-Android/tree/master.svg?style=svg&circle-token=3d0158d85c451692a4ce0ee18eb12617f67206eb)](https://circleci.com/gh/willowtreeapps/Hyperion-Android/tree/master)
+[![CircleCI](https://circleci.com/gh/willowtreeapps/Hyperion-Android.svg?style=svg&circle-token=3d0158d85c451692a4ce0ee18eb12617f67206eb)](https://circleci.com/gh/willowtreeapps/Hyperion-Android)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)]()
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 
