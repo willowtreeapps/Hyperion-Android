@@ -75,14 +75,3 @@ Hyperion is available under the MIT license. See the LICENSE file for more info.
 We build apps, responsive sites, bots—any digital product that lives on a screen—for the world’s leading companies. Our elite teams challenge themselves to build extraordinary experiences by bridging the latest strategy and design thinking with enterprise-grade software development.
 
 Interested in working on more unique projects like Hyperion? Check out our [careers page](http://willowtreeapps.com/careers?utm_campaign=hyperion-gh).
-
-Hyperion
-======
-
-An app debugging & inspection tool for Android.
-
-
-
-Read more about the built-in plugins in their individual module READMEs.
-
- [1]: https://github.com/google/auto/tree/master/service
