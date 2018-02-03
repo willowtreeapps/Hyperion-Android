@@ -2,6 +2,12 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Application;
 
+import com.willowtreeapps.hyperion.core.PublicControl;
+import com.willowtreeapps.hyperion.plugin.v1.ApplicationExtension;
+import com.willowtreeapps.hyperion.plugin.v1.Plugin;
+
+import java.util.ServiceLoader;
+
 import dagger.Component;
 
 @AppScope
@@ -12,19 +18,23 @@ import dagger.Component;
 public interface AppComponent {
 
     Application getApplication();
-    Lifecycle getLifecycle();
+    ApplicationExtension getApplicationExtension();
+    Application.ActivityLifecycleCallbacks getActivityLifecycleCallbacks();
+    PublicControl getPublicControl();
 
     final class Holder {
         private static volatile AppComponent INSTANCE;
 
-        static void init(Application application, Lifecycle lifecycle) {
+        static void init(Application application) {
             if (INSTANCE == null) {
                 synchronized (Holder.class) {
                     if (INSTANCE == null) {
                         INSTANCE = DaggerAppComponent.builder()
                                 .appModule(new AppModule(application))
-                                .lifecycleModule(new LifecycleModule(lifecycle))
                                 .build();
+                        for (Plugin plugin : ServiceLoader.load(Plugin.class)) {
+                            plugin.create(application, INSTANCE.getApplicationExtension());
+                        }
                     }
                 }
             }
@@ -38,5 +48,4 @@ public interface AppComponent {
             throw new AssertionError("No instances.");
         }
     }
-
 }

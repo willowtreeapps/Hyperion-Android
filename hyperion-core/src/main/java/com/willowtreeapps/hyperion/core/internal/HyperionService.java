@@ -108,7 +108,7 @@ public class HyperionService extends Service {
         public void onReceive(Context context, Intent intent) {
             final Activity activity = HyperionService.this.activity.get();
             if (activity != null) {
-                AppComponent.Holder.getInstance().getLifecycle().open(activity);
+                AppComponent.Holder.getInstance().getPublicControl().open(activity);
             }
         }
     }

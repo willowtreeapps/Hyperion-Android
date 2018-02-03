@@ -1,15 +1,12 @@
 package com.willowtreeapps.hyperion.location;
 
-import android.support.annotation.NonNull;
-
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 @AutoService(Plugin.class)
-public class LocationPlugin implements Plugin {
+public class LocationPlugin extends Plugin {
 
-    @NonNull
     @Override
     public PluginModule createPluginModule() {
         return new LocationModule();

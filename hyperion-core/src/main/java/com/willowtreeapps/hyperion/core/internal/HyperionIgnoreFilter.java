@@ -7,11 +7,15 @@ import android.support.v4.util.SimpleArrayMap;
 
 import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 
+import javax.inject.Inject;
+
+@AppScope
 class HyperionIgnoreFilter implements Application.ActivityLifecycleCallbacks {
 
     private final SimpleArrayMap<Class<?>, Boolean> cache = new SimpleArrayMap<>(5);
     private final Lifecycle lifecycle;
 
+    @Inject
     HyperionIgnoreFilter(Lifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }

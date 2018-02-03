@@ -12,9 +12,9 @@ public class HyperionInitProvider extends EmptyContentProvider {
             final Context context = getContext();
             // noinspection ConstantConditions
             final Application application = (Application) context.getApplicationContext();
-            final Lifecycle lifecycle = new Lifecycle();
-            AppComponent.Holder.init(application, lifecycle);
-            application.registerActivityLifecycleCallbacks(new HyperionIgnoreFilter(lifecycle));
+            AppComponent.Holder.init(application);
+            final AppComponent component = AppComponent.Holder.getInstance();
+            application.registerActivityLifecycleCallbacks(component.getActivityLifecycleCallbacks());
             return true;
         } catch (Exception e) {
             Log.e("Hyperion", "Init failed.", e);
