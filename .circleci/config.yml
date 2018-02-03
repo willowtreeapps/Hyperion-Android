@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/
+    working_directory: ./
     docker:
       - image: circleci/android:api-27-alpha
     environment:
@@ -21,8 +21,8 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Run Tests
-          command: ./gradlew lint test
+          name: Check
+          command: ./gradlew lintRelease
       - store_artifacts:
           path: app/build/reports
           destination: reports
