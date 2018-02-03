@@ -1,6 +1,9 @@
 # Hyperion
 
 ![Hyperion Logo](https://github.com/willowtreeapps/Hyperion-Android/art/Hyperion-Logo.png)
+[![CircleCI Build Status](https://circleci.com/gh/willowtreeapps/Hyperion-Android.svg?style=shield)](https://circleci.com/gh/willowtreeapps/Hyperion-Android)
+[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)]()
+[![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 
 # Hyperion - App Inspection Tool
 
