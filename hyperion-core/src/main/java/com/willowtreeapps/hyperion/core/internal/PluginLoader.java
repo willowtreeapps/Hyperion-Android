@@ -47,7 +47,9 @@ class PluginLoader {
         ServiceLoader<Plugin> loader = ServiceLoader.load(Plugin.class);
         for (Plugin plugin : loader) {
             PluginModule module = plugin.createPluginModule();
-            plugins.add(module);
+            if (module != null) {
+                plugins.add(module);
+            }
         }
         return plugins;
     }

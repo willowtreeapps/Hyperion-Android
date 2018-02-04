@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+apply from: '../publish.gradle'
+
+group = project.libraryGroup
+version = project.libraryVersion
+
+android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode buildVersionCode()
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    resourcePrefix 'hc_'
+}
+
+dependencies {
+    api project(':hyperion-plugin')
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
+}

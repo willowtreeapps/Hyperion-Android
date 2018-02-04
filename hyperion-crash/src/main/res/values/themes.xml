@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="hc_ActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/hype_blue</item>
+        <item name="colorPrimaryDark">@color/hype_blue</item>
+        <item name="colorAccent">@color/hype_blue</item>
+        <item name="android:windowBackground">@color/hype_white</item>
+    </style>
+</resources>

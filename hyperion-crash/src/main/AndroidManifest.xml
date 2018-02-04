@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.willowtreeapps.hyperion.crash">
+
+    <application>
+        <activity
+            android:name=".CrashActivity"
+            android:theme="@style/hc_ActivityTheme"
+            android:process=":crash" />
+    </application>
+
+</manifest>

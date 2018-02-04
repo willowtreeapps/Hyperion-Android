@@ -5,8 +5,7 @@
         <activity
             android:name=".ProcessPhoenix"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:process=":phoenix"
-            />
+            android:process=":phoenix" />
     </application>
 
 </manifest>

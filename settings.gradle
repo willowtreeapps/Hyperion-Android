@@ -12,4 +12,5 @@ include ':hyperion-sample',
         ':hyperion-attr-appcompat-v7',
         ':hyperion-attr-recyclerview',
         ':hyperion-attr-design',
-        ':hyperion-phoenix'
+        ':hyperion-phoenix',
+        ':hyperion-crash'
