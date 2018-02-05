@@ -11,14 +11,14 @@ public class CrashPlugin extends Plugin {
 
     @Override
     protected void onApplicationCreated(@NonNull Context context) {
-        Thread.UncaughtExceptionHandler handler = Thread.currentThread().getUncaughtExceptionHandler();
+        Thread.UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
         if (handler == null) {
             handler = new Handler(context);
         } else {
             handler = new Wrapper(handler, new Handler(context));
         }
 
-        Thread.currentThread().setUncaughtExceptionHandler(handler);
+        Thread.setDefaultUncaughtExceptionHandler(handler);
     }
 
     private static final class Handler implements Thread.UncaughtExceptionHandler {
