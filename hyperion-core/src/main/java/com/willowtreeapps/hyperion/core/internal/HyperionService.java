@@ -54,10 +54,8 @@ public class HyperionService extends Service {
     private Notification createNotification(Activity activity) {
         return new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentIntent(createContentPendingIntent())
-                .setContentTitle(getString(R.string.hype_notification_title))
-                .setContentText(getString(R.string.hype_notification_text, activity.getClass().getSimpleName()))
                 .setSubText(getString(R.string.hype_notification_subtext))
-                .setTicker(getString(R.string.hype_notification_title))
+                .setTicker("")
                 .setSmallIcon(R.drawable.logo)
                 .setOngoing(true)
                 .setVibrate(new long[] { 0 })
