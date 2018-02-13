@@ -71,8 +71,8 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
         shakeDetector.setOnShakeListener(this);
         setBackgroundColor(ContextCompat.getColor(context, R.color.hype_menu_background));
         getBackground().setAlpha(0);
-        setFocusable(true);
-        setFocusableInTouchMode(true);
+        setFocusable(false);
+        setFocusableInTouchMode(false);
         setId(R.id.hyperion_menu);
         ViewCompat.setImportantForAccessibility(
                 this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
@@ -152,6 +152,9 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
                     .setListener(new ViewPropertyAnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(View view) {
+                            // request focus so we can respond to key presses.
+                            setFocusable(true);
+                            setFocusableInTouchMode(true);
                             requestFocus();
                             setMenuState(MenuState.OPEN);
                         }
@@ -196,6 +199,9 @@ public class HyperionMenuLayout extends FrameLayout implements ShakeDetector.OnS
                         @Override
                         public void onAnimationEnd(View view) {
                             ViewCompat.setBackground(overlayView, null);
+                            // don't need to respond to key presses while we're closed, so clear it
+                            setFocusable(false);
+                            setFocusableInTouchMode(false);
                             clearFocus();
                             setMenuState(MenuState.CLOSE);
                         }
