@@ -8,3 +8,6 @@
 /captures
 .externalNativeBuild
 .idea
+*.project
+*.classpath
+*.prefs
