@@ -5,7 +5,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)]()
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 
-[!Hyperion Logo](https://github.com/willowtreeapps/Hyperion-Android/art/Hyperion-Logo.png)
+![Hyperion Logo](art/Hyperion-Logo.png)
 
 # Hyperion - App Inspection Tool
 
@@ -73,7 +73,7 @@ Hyperion has adopted a [code of conduct](CODE_OF_CONDUCT.md) defined by the [Con
 Hyperion is available under the MIT license. See the LICENSE file for more info.
 
 # About WillowTree!
-[!WillowTree Logo](https://github.com/willowtreeapps/Hyperion-Android/art/willowtree_logo.png)
+![WillowTree Logo](art/willowtree_logo.png)
 
 We build apps, responsive sites, bots—any digital product that lives on a screen—for the world’s leading companies. Our elite teams challenge themselves to build extraordinary experiences by bridging the latest strategy and design thinking with enterprise-grade software development.
 
