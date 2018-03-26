@@ -225,8 +225,8 @@ class MeasurementOverlayView extends FrameLayout {
                 canvas.drawLine(outside.left, inside.centerY(), inside.left, inside.centerY(), paintPrimary);
                 if (measurementLeftText != null) {
                     canvas.save();
-                    canvas.translate((outside.left + inside.left) / 2 - measurementRightText.getWidth() / 2,
-                            inside.centerY() - measurementRightText.getHeight() / 2);
+                    canvas.translate((outside.left + inside.left) / 2 - measurementLeftText.getWidth() / 2,
+                            inside.centerY() - measurementLeftText.getHeight() / 2);
                     measurementLeftText.draw(canvas);
                     canvas.restore();
                 }
