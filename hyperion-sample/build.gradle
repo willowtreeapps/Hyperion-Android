@@ -32,8 +32,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
+    implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')
     debugImplementation project(':hyperion-attr')
