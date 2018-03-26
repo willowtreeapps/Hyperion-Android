@@ -37,12 +37,12 @@ Download via Maven:
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
   <artifactId>hyperion-core</artifactId>
-  <version>0.9.18</version>
+  <version>0.9.19</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.18'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.19'
 ```
 
 Usage
@@ -51,13 +51,13 @@ Usage
 Include the core library along with any number of plugins.
 
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.18'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.18'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.18'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.18'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.18'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.18'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.18'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.19'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.19'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.19'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.19'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.19'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.19'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.19'
 ```
 
 ## Adding Plugins
