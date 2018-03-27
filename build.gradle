@@ -25,7 +25,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha07'
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha08'
         classpath "me.tatarka.gradle:pom:1.0"
     }
 }
@@ -33,11 +33,12 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
+        google()
     }
+}
+
+subprojects {
+    task moduleDependencies(type: DependencyReportTask) {}
 }
 
 task clean(type: Delete) {
