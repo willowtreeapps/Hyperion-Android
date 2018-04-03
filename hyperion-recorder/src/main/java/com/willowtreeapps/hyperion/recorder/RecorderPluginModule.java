@@ -99,6 +99,7 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
         if (resultCode != RESULT_OK) {
             Toast.makeText(getContext(),
                     "Screen Cast Permission Denied", Toast.LENGTH_SHORT).show();
+            RecordingManager.reset();
             view.setSelected(false);
             return;
         }
