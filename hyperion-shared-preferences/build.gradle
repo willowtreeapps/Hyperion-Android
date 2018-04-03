@@ -29,4 +29,5 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
+    implementation "com.android.support:design:${project.versionSupportLibrary}"
 }

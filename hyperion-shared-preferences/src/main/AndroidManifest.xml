@@ -4,6 +4,7 @@
     <application>
         <activity
             android:name=".SharedPreferencesViewerActivity"
+            android:theme="@style/hsp_SharedPreferencesViewerActivityTheme"
             android:windowSoftInputMode="stateHidden" />
     </application>
 
