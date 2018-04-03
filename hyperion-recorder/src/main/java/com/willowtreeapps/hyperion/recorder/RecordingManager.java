@@ -37,6 +37,7 @@ final class RecordingManager {
     private static DisplayMetrics displayMetrics;
 
     private static boolean recording;
+    private static String outputPath;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -56,7 +57,7 @@ final class RecordingManager {
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         createDirectoryIfNeeded(context);
         String videoId = UUID.randomUUID().toString();
-        String outputPath = context.getFilesDir().getPath() + "/hyperion_recorder/" + videoId + ".mp4";
+        outputPath = context.getFilesDir().getPath() + "/hyperion_recorder/" + videoId + ".mp4";
 
         try {
             //mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -105,6 +106,13 @@ final class RecordingManager {
                 displayMetrics.widthPixels, displayMetrics.heightPixels, displayMetrics.densityDpi,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
                 mediaRecorder.getSurface(), null /* Callbacks */, null /* Handler */);
+    }
+
+    static void reset() {
+        mediaRecorder.reset();
+        if (!new File(outputPath).delete()) {
+            Log.e(TAG, "Failed to remove placeholder " + outputPath);
+        }
     }
 
     static void stop() throws RecordingException {
