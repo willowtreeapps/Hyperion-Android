@@ -45,6 +45,11 @@ or Gradle:
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.19'
 ```
 
+If you reference Hyperion from your code, you should also compile the no-op artifact for release variants. For most users, this will not be necessary:
+```groovy
+releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.19'
+```
+
 Usage
 -----
 
