@@ -45,6 +45,7 @@ public class CrashActivity extends AppCompatActivity implements View.OnClickList
                 final Intent intent = new Intent(Intent.ACTION_SEND);
                 final String text = getExternalText();
                 intent.putExtra(Intent.EXTRA_TEXT, text);
+                intent.setType("text/plain");
                 startActivity(Intent.createChooser(intent, "Share"));
             }
         });
