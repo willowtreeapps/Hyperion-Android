@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.willowtreeapps.hyperion.sharedpreferences">
+
+    <application>
+        <activity
+            android:name=".SharedPreferencesViewerActivity"
+            android:theme="@style/hsp_SharedPreferencesViewerActivityTheme"
+            android:windowSoftInputMode="stateHidden" />
+    </application>
+
+</manifest>

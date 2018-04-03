@@ -46,4 +46,5 @@ dependencies {
     debugImplementation project(':hyperion-disk')
     debugImplementation project(':hyperion-phoenix')
     debugImplementation project(':hyperion-crash')
+    debugImplementation project(':hyperion-shared-preferences')
 }

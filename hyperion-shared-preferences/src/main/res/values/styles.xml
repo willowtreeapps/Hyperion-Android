@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="hsp_SharedPreferencesViewerActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/hype_white</item>
+        <item name="colorPrimary">@color/hsp_primary</item>
+        <item name="colorPrimaryDark">@color/hsp_primary_dark</item>
+        <item name="colorAccent">@color/hsp_accent</item>
+    </style>
+
+    <style name="hsp_ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+
+</resources>

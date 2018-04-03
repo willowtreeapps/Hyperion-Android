@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public name="hsp_shared_preferences" type="string">Hyperion-Shared-Preferences</public>
+    <string name="hsp_plugin_name">Shared Preferences</string>
+    <string name="hsp_preference_edit_text">Preference Value</string>
+    <string name="hsp_preference_edit_action_apply">Apply</string>
+</resources>
