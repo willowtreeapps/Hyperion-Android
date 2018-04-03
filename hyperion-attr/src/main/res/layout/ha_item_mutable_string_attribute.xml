@@ -2,12 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?attr/selectableItemBackground"
     android:background="@drawable/ha_attribute_background"
-    android:stateListAnimator="@animator/ha_attribute_selection">
+    android:stateListAnimator="@animator/ha_attribute_selection"
+    tools:ignore="UnusedAttribute">
 
     <include layout="@layout/ha_item_attribute"/>
 
@@ -20,11 +22,11 @@
 
         <EditText
             android:id="@+id/edit_text"
-            android:layout_width="@dimen/ha_width_mutable_string_field"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/hype_white"
+            android:textColor="@color/hype_plugin_text"
             android:hint="@string/ha_enter_value"
-            android:inputType="text"/>
+            android:inputType="text|textMultiLine|textImeMultiLine"/>
 
     </com.willowtreeapps.hyperion.attr.ExpandableLayout>
 
