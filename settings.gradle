@@ -14,4 +14,5 @@ include ':hyperion-sample',
         ':hyperion-attr-design',
         ':hyperion-phoenix',
         ':hyperion-crash',
-        ':hyperion-shared-preferences'
+        ':hyperion-shared-preferences',
+        ':hyperion-chuck'

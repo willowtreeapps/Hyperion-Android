@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+apply from: '../publish.gradle'
+
+group = project.libraryGroup
+version = project.libraryVersion
+
+android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        // we have to match the Chuck library here, which is 16
+        minSdkVersion 16
+        targetSdkVersion project.targetSdkVersion
+        versionCode buildVersionCode()
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    resourcePrefix 'hchuck_'
+}
+
+dependencies {
+    api project(':hyperion-plugin')
+    annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
+    api 'com.readystatesoftware.chuck:library:1.1.0'
+}

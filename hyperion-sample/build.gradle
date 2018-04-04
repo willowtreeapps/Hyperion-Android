@@ -34,6 +34,7 @@ android {
 dependencies {
     implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
+    implementation "com.android.support:design:${project.versionSupportLibrary}"
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')
     debugImplementation project(':hyperion-attr')
@@ -47,4 +48,5 @@ dependencies {
     debugImplementation project(':hyperion-phoenix')
     debugImplementation project(':hyperion-crash')
     debugImplementation project(':hyperion-shared-preferences')
+    debugImplementation project(':hyperion-chuck')
 }
