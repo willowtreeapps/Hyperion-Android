@@ -16,7 +16,7 @@ Hyperion is a hidden plugin drawer that can easily be integrated into any app. T
 ## Third-Party Plugins
 Calling all developers!!! Be one of the first to create a third-party plugin. The plugin creation guide is a work in progress, but if you are feeling ambitious you can reference the plugins we have already created.
 
-To create your own plugin, implement the Plugin interface and expose the implementation as a service. The plugins made available in this repository leverage Google's [AutoService][1] annotation processor to generate the service metadata and simplify the process.
+To create your own plugin, implement the Plugin interface and expose the implementation as a service. The plugins made available in this repository leverage Google's [AutoService](https://github.com/google/auto/tree/master/service) annotation processor to generate the service metadata and simplify the process.
 
 ## How To Show Hyperion Plugin List
 Once Hyperion is integrated into your app, simply shake your phone to activate. If you are running your app on an emulator, you can manually open the menu by calling `Hyperion.open(Activity activity)`. You can also open the menu by selecting the foreground notification that appears while the client app is in the foreground.
