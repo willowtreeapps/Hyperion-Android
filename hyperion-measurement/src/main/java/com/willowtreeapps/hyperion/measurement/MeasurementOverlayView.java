@@ -87,7 +87,7 @@ class MeasurementOverlayView extends FrameLayout {
         canvas.drawRect(rectPrimary, paintPrimary);
 
         /*
-         * Start guidelines
+         * guidelines
          */
         // top-left to top
         path.reset();
@@ -136,9 +136,6 @@ class MeasurementOverlayView extends FrameLayout {
         path.moveTo(rectPrimary.right, rectPrimary.top);
         path.lineTo(getRight(), rectPrimary.top);
         canvas.drawPath(path, paintDashed);
-        /*
-         * End guidelines
-         */
 
         if (rectSecondary == null) {
             // draw width measurement text
@@ -161,12 +158,15 @@ class MeasurementOverlayView extends FrameLayout {
         } else {
             canvas.drawRect(rectSecondary, paintSecondary);
 
+            /*
+             * view to view measurement views
+             */
             if (rectPrimary.bottom < rectSecondary.top) {
                 // secondary is below. draw vertical line.
                 canvas.drawLine(rectSecondary.centerX(), rectPrimary.bottom, rectSecondary.centerX(), rectSecondary.top, paintPrimary);
                 if (measurementHeightText != null) {
                     canvas.save();
-                    canvas.translate(rectSecondary.centerX() + measurementTextOffset,
+                    canvas.translate(rectSecondary.centerX() - measurementHeightText.getWidth() / 2,
                             (rectPrimary.bottom + rectSecondary.top) / 2 - (measurementHeightText.getHeight() / 2));
                     measurementHeightText.draw(canvas);
                     canvas.restore();
@@ -188,7 +188,7 @@ class MeasurementOverlayView extends FrameLayout {
                 canvas.drawLine(rectSecondary.centerX(), rectPrimary.top, rectSecondary.centerX(), rectSecondary.bottom, paintPrimary);
                 if (measurementHeightText != null) {
                     canvas.save();
-                    canvas.translate(rectSecondary.centerX() + measurementTextOffset,
+                    canvas.translate(rectSecondary.centerX() - measurementHeightText.getWidth() / 2,
                             (rectPrimary.top + rectSecondary.bottom) / 2 - (measurementHeightText.getHeight() / 2));
                     measurementHeightText.draw(canvas);
                     canvas.restore();
@@ -218,7 +218,7 @@ class MeasurementOverlayView extends FrameLayout {
             }
 
             /*
-             * Start measurement views
+             * parent to child measurement views
              */
             if (inside != null && outside != null) {
                 // left inside
@@ -261,9 +261,6 @@ class MeasurementOverlayView extends FrameLayout {
                     canvas.restore();
                 }
             }
-            /*
-             * End measurement views
-             */
         }
     }
 
