@@ -2,6 +2,8 @@
 
     package="com.willowtreeapps.hyperion.sample">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".SampleApplication"
         android:allowBackup="true"
