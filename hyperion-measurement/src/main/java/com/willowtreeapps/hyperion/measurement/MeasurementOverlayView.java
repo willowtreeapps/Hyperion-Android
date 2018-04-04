@@ -178,7 +178,7 @@ class MeasurementOverlayView extends FrameLayout {
                 if (measurementWidthText != null) {
                     canvas.save();
                     canvas.translate((rectPrimary.right + rectSecondary.left) / 2 - (measurementWidthText.getWidth() / 2),
-                            rectSecondary.centerY() - measurementTextOffset - measurementWidthText.getHeight());
+                            rectSecondary.centerY() - measurementWidthText.getHeight() / 2);
                     measurementWidthText.draw(canvas);
                     canvas.restore();
                 }
@@ -200,7 +200,7 @@ class MeasurementOverlayView extends FrameLayout {
                 if (measurementWidthText != null) {
                     canvas.save();
                     canvas.translate((rectPrimary.left + rectSecondary.right) / 2 - (measurementWidthText.getWidth() / 2),
-                            rectSecondary.centerY() - measurementTextOffset);
+                            rectSecondary.centerY() - measurementWidthText.getHeight() / 2);
                     measurementWidthText.draw(canvas);
                     canvas.restore();
                 }
