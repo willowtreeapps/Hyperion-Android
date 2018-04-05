@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.sharedpreferences.ui.navigation;
+package com.willowtreeapps.hyperion.sharedpreferences.detail;
 
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.sharedpreferences.R;
-import com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder.BooleanPreferenceViewHolder;
-import com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder.FloatPreferenceViewHolder;
-import com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder.IntPreferenceViewHolder;
-import com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder.LongPreferenceViewHolder;
-import com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder.PreferenceViewHolder;
-import com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder.StringPreferenceViewHolder;
-import com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder.StringSetPreferenceViewHolder;
+import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.BooleanPreferenceViewHolder;
+import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.FloatPreferenceViewHolder;
+import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.IntPreferenceViewHolder;
+import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.LongPreferenceViewHolder;
+import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.PreferenceViewHolder;
+import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.StringPreferenceViewHolder;
+import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.StringSetPreferenceViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class SharedPreferencesAdapter extends RecyclerView.Adapter<PreferenceViewHolder> {
+class SharedPreferencesDetailAdapter extends RecyclerView.Adapter<PreferenceViewHolder> {
 
     private static final int VIEW_TYPE_INTEGER = 1;
     private static final int VIEW_TYPE_LONG = 2;
@@ -32,7 +32,7 @@ class SharedPreferencesAdapter extends RecyclerView.Adapter<PreferenceViewHolder
 
     private final SharedPreferences sharedPreferences;
 
-    SharedPreferencesAdapter(SharedPreferences sharedPreferences) {
+    SharedPreferencesDetailAdapter(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
     }
 

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="hsp_SharedPreferencesViewerActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="hsp_SharedPreferencesActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/hype_white</item>
         <item name="colorPrimary">@color/hsp_primary</item>
         <item name="colorPrimaryDark">@color/hsp_primary_dark</item>
         <item name="colorAccent">@color/hsp_accent</item>
     </style>
 
-    <style name="hsp_ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="hsp_ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="hsp_ListItemContainer">
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">16dp</item>
     </style>
 
 </resources>

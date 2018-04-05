@@ -24,6 +24,10 @@ public class SampleApplication extends Application {
                 .putString("KEY_STRING", "Hello Hyperion!")
                 .putStringSet("KEY_STRING_SET", stringSet)
                 .apply();
-    }
 
+        getSharedPreferences("sample_prefs", MODE_PRIVATE)
+                .edit()
+                .putBoolean("KEY_BOOLEAN", true)
+                .apply();
+    }
 }

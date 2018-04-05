@@ -3,8 +3,12 @@
 
     <application>
         <activity
-            android:name=".SharedPreferencesViewerActivity"
-            android:theme="@style/hsp_SharedPreferencesViewerActivityTheme"
+            android:name=".list.SharedPreferencesListActivity"
+            android:theme="@style/hsp_SharedPreferencesActivityTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".detail.SharedPreferencesDetailActivity"
+            android:theme="@style/hsp_SharedPreferencesActivityTheme"
             android:windowSoftInputMode="stateHidden" />
     </application>
 

@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
+import com.willowtreeapps.hyperion.sharedpreferences.list.SharedPreferencesListActivity;
 
 class SharedPreferencesPluginModule extends PluginModule implements View.OnClickListener {
-
-    private static final String TAG = "HyperionSharedPreferences";
 
     @Nullable
     @Override
@@ -23,8 +22,7 @@ class SharedPreferencesPluginModule extends PluginModule implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getContext(), SharedPreferencesViewerActivity.class);
+        Intent intent = new Intent(getContext(), SharedPreferencesListActivity.class);
         getContext().startActivity(intent);
     }
-
 }
