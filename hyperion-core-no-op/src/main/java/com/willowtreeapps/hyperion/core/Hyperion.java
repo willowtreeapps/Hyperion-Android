@@ -25,4 +25,8 @@ public final class Hyperion {
     public static void open(Activity activity) {
         // no-op
     }
+
+    public static void setPluginSource(Object... pluginSource) {
+        // no-op
+    }
 }

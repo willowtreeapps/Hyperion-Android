@@ -9,31 +9,20 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-class ActivityModule {
-
-    private final Activity activity;
-
-    ActivityModule(Activity activity) {
-        this.activity = activity;
-    }
+abstract class ActivityModule {
 
     @Provides
-    Activity provideActivity() {
-        return this.activity;
-    }
-
-    @Provides
-    LayoutInflater provideLayoutInflater(Activity activity) {
+    static LayoutInflater provideLayoutInflater(Activity activity) {
         return LayoutInflater.from(activity);
     }
 
     @Provides
-    Resources provideResources(Activity activity) {
+    static Resources provideResources(Activity activity) {
         return activity.getResources();
     }
 
     @Provides
-    DisplayMetrics provideDisplayMetricd(Resources resources) {
+    static DisplayMetrics provideDisplayMetrics(Resources resources) {
         return resources.getDisplayMetrics();
     }
 

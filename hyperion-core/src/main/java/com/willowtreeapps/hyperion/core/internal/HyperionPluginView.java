@@ -20,7 +20,7 @@ import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
 import com.willowtreeapps.hyperion.plugin.v1.MenuState;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -32,7 +32,7 @@ public class HyperionPluginView extends FrameLayout {
     @Inject
     PluginLoader pluginLoader;
 
-    private List<PluginModule> modules;
+    private Set<PluginModule> modules;
     private MenuState menuState = MenuState.CLOSE;
 
     public HyperionPluginView(@NonNull Context context) {
@@ -85,20 +85,20 @@ public class HyperionPluginView extends FrameLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         pluginExtension.setHyperionMenu((HyperionMenu) getParent());
-        pluginLoader.load(new Callback<List<PluginModule>>() {
+        pluginLoader.load(new Callback<Plugins>() {
             @Override
-            public void call(Try<List<PluginModule>> result) {
+            public void call(Try<Plugins> result) {
                 if (ViewCompat.isAttachedToWindow(HyperionPluginView.this)) {
-                    update(result);
+                    populatePluginList(result);
                 }
             }
         });
     }
 
-    private void update(Try<List<PluginModule>> result) {
-
+    private void populatePluginList(Try<Plugins> result) {
         try {
-            modules = result.get();
+            final Plugins plugins = result.get();
+            modules = plugins.createModules();
         } catch (Throwable t) {
             // TODO
             t.printStackTrace();
