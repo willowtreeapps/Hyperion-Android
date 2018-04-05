@@ -74,6 +74,9 @@ Contributions are welcome. Please see the [Contributing guidelines](CONTRIBUTING
 
 Hyperion has adopted a [code of conduct](CODE_OF_CONDUCT.md) defined by the [Contributor Covenant](http://contributor-covenant.org), the same used by the [Swift language](https://swift.org) and countless other open source software teams.
 
+## Third Party Plugins
+The following are a list of third party plugins that integrate with Hyperion. Please make a pull request if you would like to see your plugin here:
+- [Hyperion-Chuck](https://github.com/Commit451/Hyperion-Chuck) - Plugin which adds a button to inspect OkHttp traffic using [Chuck](https://github.com/jgilfelt/chuck)
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
 
