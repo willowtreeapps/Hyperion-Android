@@ -43,19 +43,20 @@ class CoreComponentLifecycleDelegate extends LifecycleDelegate {
 
         FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
 
-        ActivityResults results = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
-        if (results == null) {
-            results = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
+        ActivityResults activityResults = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+        if (activityResults == null) {
+            activityResults = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
             fragmentManager.beginTransaction()
-                    .add(results, ACTIVITY_RESULT_TAG)
+                    .add(activityResults, ACTIVITY_RESULT_TAG)
                     .commit();
         }
 
         CoreComponent component = DaggerCoreComponent.builder()
                 .appComponent(AppComponent.Holder.getInstance())
-                .activityModule(new ActivityModule(activity))
-                .overlayModule(new OverlayModule(overlayLayout))
-                .activityResultModule(new ActivityResultModule(results))
+                .activity(activity)
+                .pluginSource(container.getPluginSource())
+                .overlayContainer(overlayLayout)
+                .activityResults(activityResults)
                 .build();
 
         container.putComponent(activity, component);

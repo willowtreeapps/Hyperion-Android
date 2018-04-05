@@ -3,6 +3,8 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Activity;
 import android.support.v4.util.ArrayMap;
 
+import com.willowtreeapps.hyperion.core.PluginSource;
+
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -11,10 +13,19 @@ import javax.inject.Inject;
 class CoreComponentContainer {
 
     private final ArrayMap<Activity, CoreComponent> components = new ArrayMap<>();
+    private PluginSource pluginSource;
 
     @Inject
     CoreComponentContainer() {
+        pluginSource = new ServiceLoaderPluginSource();
+    }
 
+    void setPluginSource(PluginSource pluginSource) {
+        this.pluginSource = pluginSource;
+    }
+
+    PluginSource getPluginSource() {
+        return pluginSource;
     }
 
     CoreComponent getComponent(Activity activity) {

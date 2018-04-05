@@ -40,6 +40,19 @@ public final class Hyperion {
         AppComponent.Holder.getInstance().getPublicControl().open(activity);
     }
 
+    /**
+     * Hook to manually register a plugin source.
+     * This API does not update the Hyperion menu retroactively,
+     * so clients should call this as early as possible.
+     *
+     * NOTE: For most users, the default {@link java.util.ServiceLoader} implementation will suffice.
+     *
+     * @param pluginSource the {@link PluginSource} invoked in place of the default implementation.
+     */
+    public static void setPlugins(PluginSource pluginSource) {
+        AppComponent.Holder.getInstance().getPublicControl().setPluginSource(pluginSource);
+    }
+
     private Hyperion() {
         throw new AssertionError("No instances.");
     }
