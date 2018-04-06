@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.viewholder;
+package com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder;
 
 import android.view.View;
 import android.widget.EditText;

@@ -1,11 +1,10 @@
-package com.willowtreeapps.hyperion.sharedpreferences.ui.navigation;
+package com.willowtreeapps.hyperion.sharedpreferences.detail;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
@@ -16,32 +15,34 @@ import static android.content.SharedPreferences.OnSharedPreferenceChangeListener
 
 public class SharedPreferencesNavigationView extends FrameLayout {
 
-    private final SharedPreferencesAdapter sharedPreferencesAdapter;
-    private final SharedPreferences sharedPreferences;
     private final PreferenceListener preferenceListener = new PreferenceListener();
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferencesDetailAdapter sharedPreferencesDetailAdapter;
+
     public SharedPreferencesNavigationView(@NonNull Context context) {
-        this(context, null);
+        super(context);
     }
 
     public SharedPreferencesNavigationView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
     }
 
     public SharedPreferencesNavigationView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sharedPreferencesAdapter = new SharedPreferencesAdapter(sharedPreferences);
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
+        final Activity activity = (Activity) getContext();
+        final String prefsName = activity.getIntent()
+                .getStringExtra(SharedPreferencesDetailActivity.KEY_PREFS_NAME);
+        sharedPreferences = getContext().getSharedPreferences(prefsName, Context.MODE_PRIVATE);
+        sharedPreferencesDetailAdapter = new SharedPreferencesDetailAdapter(sharedPreferences);
         RecyclerView recyclerView = findViewById(R.id.hsp_navigation_recycler);
-        recyclerView.setAdapter(sharedPreferencesAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(sharedPreferencesDetailAdapter);
 
         sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceListener);
     }
@@ -55,7 +56,7 @@ public class SharedPreferencesNavigationView extends FrameLayout {
     private class PreferenceListener implements OnSharedPreferenceChangeListener {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            sharedPreferencesAdapter.notifyKeyChanged(key);
+            sharedPreferencesDetailAdapter.notifyKeyChanged(key);
         }
     }
 }

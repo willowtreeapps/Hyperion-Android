@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true"
-    tools:context=".SharedPreferencesViewerActivity">
+    tools:context=".list.SharedPreferencesListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,17 +22,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.SharedPreferencesNavigationView
-        android:id="@+id/hsp_navigation_container"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hsp_prefs_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/hsp_navigation_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </com.willowtreeapps.hyperion.sharedpreferences.ui.navigation.SharedPreferencesNavigationView>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
 </android.support.design.widget.CoordinatorLayout>
