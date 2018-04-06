@@ -13,6 +13,10 @@
 
 Hyperion is a hidden plugin drawer that can easily be integrated into any app. The drawer sits discreetly 🙊 under the app so that it is there when you need it and out of the way when you don't. Hyperion plugins are designed to make inspection of your app quick and simple.
 
+Please see our annoucement [blog post](https://willowtreeapps.com/ideas/introducing-hyperion-for-android) for a feature showcase.
+
+![Demo Attribute inspector](https://images.ctfassets.net/3cttzl4i3k1h/1KhiROG0wcSi8QYa6iYGI0/0cd93ebf5a67012c09e16964032ea7e6/image2new.gif)
+
 ## Third-Party Plugins
 Be one of the first to create a third-party plugin. The plugin creation guide is a work in progress, but if you are feeling ambitious you can reference the plugins we have already created.
 
