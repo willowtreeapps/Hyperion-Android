@@ -1,6 +1,7 @@
 package com.willowtreeapps.hyperion.geigercounter;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.media.SoundPool;
@@ -8,10 +9,13 @@ import android.util.Log;
 import android.view.Choreographer;
 
 import static android.media.AudioManager.STREAM_SYSTEM;
+import static android.os.Build.VERSION_CODES.JELLY_BEAN;
 import static com.willowtreeapps.hyperion.geigercounter.GeigerCounterPlugin.LOG_TAG;
 
-@SuppressLint("NewApi")
+@TargetApi(DroppedFrameObserver.TARGET_API)
 public class DroppedFrameObserver implements Choreographer.FrameCallback {
+
+    public static final int TARGET_API = JELLY_BEAN;
 
     // Player for the Geiger counter tick sound
     private SoundPool soundPool;
@@ -66,20 +70,6 @@ public class DroppedFrameObserver implements Choreographer.FrameCallback {
         soundPool.play(tickSoundID, 1, 1, 1, 0, 1);
     }
 
-    private void logDroppedFrame(double frameIntervalSeconds) {
-        int frameIntervalMilliseconds = (int) (frameIntervalSeconds * 1000);
-        int hardwareFrameIntervalMilliseconds = (int) (hardwareFrameIntervalSeconds * 1000);
-
-        StringBuilder message = new StringBuilder();
-        message.append("Dropped frame: ");
-        message.append(frameIntervalMilliseconds);
-        message.append("ms vs. hardware ");
-        message.append(hardwareFrameIntervalMilliseconds);
-        message.append("ms");
-
-        Log.i(LOG_TAG, message.toString());
-    }
-
     // Choreographer.FrameCallback
 
     @Override
@@ -98,7 +88,6 @@ public class DroppedFrameObserver implements Choreographer.FrameCallback {
 
             if (droppedFrameIntervalSeconds < frameIntervalSeconds) {
                 playTickSound();
-                logDroppedFrame(frameIntervalSeconds);
             }
         }
 

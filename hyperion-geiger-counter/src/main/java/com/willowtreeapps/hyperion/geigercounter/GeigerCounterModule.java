@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
-class GeigerCounterModule extends PluginModule
-        implements View.OnClickListener {
+class GeigerCounterModule extends PluginModule implements View.OnClickListener {
 
     private View view;
     private DroppedFrameObserver observer;
@@ -19,7 +18,7 @@ class GeigerCounterModule extends PluginModule
     // Helpers
 
     private static boolean arePrerequisitesAvailable() {
-        return 16 <= Build.VERSION.SDK_INT;
+        return DroppedFrameObserver.TARGET_API <= Build.VERSION.SDK_INT;
     }
 
     // PluginModule
@@ -53,8 +52,12 @@ class GeigerCounterModule extends PluginModule
     @Override
     public void onClick(View v) {
         if (!arePrerequisitesAvailable()) {
-            String message = "Geiger Counter requires SDK version 16.";
-            Toast.makeText(getExtension().getActivity(), message, Toast.LENGTH_SHORT).show();
+            StringBuilder message = new StringBuilder();
+            message.append("Geiger Counter requires SDK version ");
+            message.append(DroppedFrameObserver.TARGET_API);
+            message.append(".");
+
+            Toast.makeText(getExtension().getActivity(), message.toString(), Toast.LENGTH_SHORT).show();
             return;
         }
 
