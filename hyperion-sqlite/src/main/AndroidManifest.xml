@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.willowtreeapps.hyperion.sqlite.browser">
+    package="com.willowtreeapps.hyperion.sqlite">
     <application>
-        <activity android:name="com.willowtreeapps.hyperion.sqlite.presentation.DatabaseListActivity"
+        <activity android:name=".presentation.DatabaseListActivity"
+            />
+        <activity android:name=".presentation.tables.TablesListActivity"
             />
     </application>
 </manifest>

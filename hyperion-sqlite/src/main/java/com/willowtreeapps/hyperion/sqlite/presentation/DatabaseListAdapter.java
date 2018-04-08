@@ -7,11 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.willowtreeapps.hyperion.sqlite.browser.R;
+import com.willowtreeapps.hyperion.sqlite.R;
+import com.willowtreeapps.hyperion.sqlite.presentation.tables.TablesListActivity;
 
 import java.util.List;
 
-public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapter.DatabaseItemViewHolder> {
+class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapter.DatabaseItemViewHolder> {
 
     private final List<String> databaseNames;
 
@@ -37,14 +38,16 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
         return databaseNames.size();
     }
 
-    static class DatabaseItemViewHolder extends RecyclerView.ViewHolder {
+    static class DatabaseItemViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
-        private TextView name;
+        private final TextView name;
 
         private String databaseName;
 
         DatabaseItemViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             name = itemView.findViewById(R.id.hsql_db_name);
         }
 
@@ -53,5 +56,9 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
             name.setText(dbName);
         }
 
+        @Override
+        public void onClick(View v) {
+            TablesListActivity.startActivity(v.getContext(), databaseName);
+        }
     }
 }
