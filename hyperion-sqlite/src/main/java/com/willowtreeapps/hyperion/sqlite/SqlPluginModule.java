@@ -1,5 +1,6 @@
 package com.willowtreeapps.hyperion.sqlite;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 import com.willowtreeapps.hyperion.sqlite.browser.R;
+import com.willowtreeapps.hyperion.sqlite.presentation.DatabaseListActivity;
 
 class SqlPluginModule extends PluginModule implements View.OnClickListener {
 
@@ -21,5 +23,6 @@ class SqlPluginModule extends PluginModule implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        getContext().startActivity(new Intent(getContext(), DatabaseListActivity.class));
     }
 }
