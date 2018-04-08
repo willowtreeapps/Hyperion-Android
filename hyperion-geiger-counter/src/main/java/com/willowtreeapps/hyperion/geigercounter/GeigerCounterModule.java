@@ -30,6 +30,27 @@ class GeigerCounterModule extends PluginModule
     private double hardwareFrameIntervalSeconds;
     private long lastTimestampNanoseconds = -1;
 
+    private void activate() {
+        deactivate();
+        Choreographer.getInstance().postFrameCallback(this);
+    }
+
+    private void deactivate() {
+        Choreographer.getInstance().removeFrameCallback(this);
+    }
+
+    private void setActive(boolean isActive) {
+        this.view.setSelected(isActive);
+
+        if (isActive) {
+            activate();
+        } else {
+            deactivate();
+        }
+    }
+
+    // PluginModule
+
     @Override
     protected void onCreate() {
         overlay = getExtension().getOverlayContainer();
@@ -45,18 +66,17 @@ class GeigerCounterModule extends PluginModule
             Log.e("Geiger Counter", exception.toString());
         }
         hardwareFrameIntervalSeconds = 1.0 / activity.getWindowManager().getDefaultDisplay().getRefreshRate();
-        Choreographer.getInstance().postFrameCallback(this);
     }
 
     @Nullable
     @Override
     public View createPluginView(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
-        View view = layoutInflater.inflate(R.layout.hgc_item_plugin, parent, false);
+        view = layoutInflater.inflate(R.layout.hgc_item_plugin, parent, false);
         view.setOnClickListener(this);
 
         View overlayView = overlay.getOverlayView();
-        view.setSelected(overlayView != null && OVERLAY_TAG.equals(overlayView.getTag()));
-        this.view = view;
+        setActive(overlayView != null && OVERLAY_TAG.equals(overlayView.getTag()));
+
         return view;
     }
 
@@ -64,8 +84,10 @@ class GeigerCounterModule extends PluginModule
     protected void onDestroy() {
         overlay.removeOnOverlayViewChangedListener(this);
 
-        Choreographer.getInstance().removeFrameCallback(this);
+        deactivate();
     }
+
+    // OnClickListener
 
     @Override
     public void onClick(View v) {
@@ -79,9 +101,11 @@ class GeigerCounterModule extends PluginModule
         }
     }
 
+    // OnOverlayViewChangedListener
+
     @Override
     public void onOverlayViewChanged(@Nullable View view) {
-        this.view.setSelected(view != null && OVERLAY_TAG.equals(view.getTag()));
+        setActive(view != null && OVERLAY_TAG.equals(view.getTag()));
     }
 
     // Choreographer.FrameCallback
