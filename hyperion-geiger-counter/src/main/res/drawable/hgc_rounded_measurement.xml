@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke
+        android:width="2dp"
+        android:color="@color/hype_enabled" />
+
+    <solid android:color="@color/hype_white" />
+
+    <!-- any value over half height just caps at half -->
+    <corners android:radius="9999dp" />
+</shape>

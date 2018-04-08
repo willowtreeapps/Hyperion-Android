@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hgc_measurement_text_offset">4dp</dimen>
+</resources>

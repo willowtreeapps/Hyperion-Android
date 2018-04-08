@@ -47,4 +47,5 @@ dependencies {
     debugImplementation project(':hyperion-phoenix')
     debugImplementation project(':hyperion-crash')
     debugImplementation project(':hyperion-shared-preferences')
+    debugImplementation project(':hyperion-geiger-counter')
 }
