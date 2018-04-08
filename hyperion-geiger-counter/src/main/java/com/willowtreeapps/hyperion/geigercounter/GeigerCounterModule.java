@@ -12,50 +12,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.willowtreeapps.hyperion.plugin.v1.OnOverlayViewChangedListener;
-import com.willowtreeapps.hyperion.plugin.v1.OverlayContainer;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 class GeigerCounterModule extends PluginModule
-        implements View.OnClickListener, OnOverlayViewChangedListener, Choreographer.FrameCallback {
-
-    private static final String OVERLAY_TAG = "geiger_counter_overlay";
-    private OverlayContainer overlay;
+        implements View.OnClickListener, Choreographer.FrameCallback {
 
     // Menu item in the Hyperion plugin list
     private View view;
+
+    private boolean isActive;
 
     private SoundPool soundPool;
     private int tickSoundID;
     private double hardwareFrameIntervalSeconds;
     private long lastTimestampNanoseconds = -1;
 
-    private void activate() {
-        deactivate();
-        Choreographer.getInstance().postFrameCallback(this);
-    }
-
-    private void deactivate() {
-        Choreographer.getInstance().removeFrameCallback(this);
-    }
-
     private void setActive(boolean isActive) {
-        this.view.setSelected(isActive);
+        view.setSelected(isActive);
 
         if (isActive) {
-            activate();
+            Choreographer.getInstance().removeFrameCallback(this);
+            Choreographer.getInstance().postFrameCallback(this);
         } else {
-            deactivate();
+            Choreographer.getInstance().removeFrameCallback(this);
         }
+
+        this.isActive = isActive;
     }
 
     // PluginModule
 
     @Override
     protected void onCreate() {
-        overlay = getExtension().getOverlayContainer();
-        overlay.addOnOverlayViewChangedListener(this);
-
         Activity activity = getExtension().getActivity();
 
         soundPool = new SoundPool(1, AudioManager.STREAM_SYSTEM, 0);
@@ -73,39 +61,19 @@ class GeigerCounterModule extends PluginModule
     public View createPluginView(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
         view = layoutInflater.inflate(R.layout.hgc_item_plugin, parent, false);
         view.setOnClickListener(this);
-
-        View overlayView = overlay.getOverlayView();
-        setActive(overlayView != null && OVERLAY_TAG.equals(overlayView.getTag()));
-
         return view;
     }
 
     @Override
     protected void onDestroy() {
-        overlay.removeOnOverlayViewChangedListener(this);
-
-        deactivate();
+        setActive(false);
     }
 
     // OnClickListener
 
     @Override
     public void onClick(View v) {
-        View currentOverlay = overlay.getOverlayView();
-        if (currentOverlay == null || !OVERLAY_TAG.equals(currentOverlay.getTag())) {
-            View newOverlay = new MeasurementOverlayView(getContext());
-            newOverlay.setTag(OVERLAY_TAG);
-            overlay.setOverlayView(newOverlay);
-        } else {
-            overlay.removeOverlayView();
-        }
-    }
-
-    // OnOverlayViewChangedListener
-
-    @Override
-    public void onOverlayViewChanged(@Nullable View view) {
-        setActive(view != null && OVERLAY_TAG.equals(view.getTag()));
+        setActive(!isActive);
     }
 
     // Choreographer.FrameCallback
