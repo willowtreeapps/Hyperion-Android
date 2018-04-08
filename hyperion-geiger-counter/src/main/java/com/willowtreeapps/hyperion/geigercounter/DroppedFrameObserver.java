@@ -33,7 +33,7 @@ public class DroppedFrameObserver implements Choreographer.FrameCallback {
     // Sentinel value indicating we have not yet received a frame callback since the observer was enabled
     private static long NEVER = -1;
 
-    DroppedFrameObserver(Activity activity) {
+    public DroppedFrameObserver(Activity activity) {
         soundPool = new SoundPool(1, STREAM_SYSTEM, 0);
         try {
             AssetFileDescriptor afd = activity.getAssets().openFd("sounds/GeigerCounterTick.wav");
@@ -50,7 +50,7 @@ public class DroppedFrameObserver implements Choreographer.FrameCallback {
         return isEnabled;
     }
 
-    void setEnabled(boolean isEnabled) {
+    public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
 
         Choreographer choreographer = Choreographer.getInstance();
