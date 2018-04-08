@@ -31,7 +31,7 @@ Want to learn how to use Hyperion? The sample app will teach you!
 Build the example project by cloning the repo, run `./gradlew assemble` from the root directory, then open in Android Studio and run.
 
 ## Requirements
-min SDK 16
+min SDK 15
 
 Download
 --------
