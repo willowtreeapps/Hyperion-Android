@@ -59,4 +59,9 @@ class PublicControlImpl implements PublicControl {
     public void setPluginSource(PluginSource pluginSource) {
         container.setPluginSource(pluginSource);
     }
+
+    @Override
+    public PluginSource getPluginSource() {
+        return container.getPluginSource();
+    }
 }
