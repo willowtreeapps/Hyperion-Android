@@ -13,4 +13,6 @@ public interface PublicControl {
     float getShakeGestureSensitivity();
 
     void setPluginSource(PluginSource pluginSource);
+
+    PluginSource getPluginSource();
 }

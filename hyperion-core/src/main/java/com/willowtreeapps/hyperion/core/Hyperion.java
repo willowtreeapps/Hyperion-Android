@@ -53,6 +53,14 @@ public final class Hyperion {
         AppComponent.Holder.getInstance().getPublicControl().setPluginSource(pluginSource);
     }
 
+    /**
+     * Get a plugin source.
+     * Clients can wrap and delegate the {@link PluginSource}.
+     */
+    public static PluginSource getPluginSource() {
+        return AppComponent.Holder.getInstance().getPublicControl().getPluginSource();
+    }
+
     private Hyperion() {
         throw new AssertionError("No instances.");
     }
