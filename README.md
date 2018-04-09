@@ -82,6 +82,8 @@ Hyperion has adopted a [code of conduct](CODE_OF_CONDUCT.md) defined by the [Con
 ## Third Party Plugins
 The following are a list of third party plugins that integrate with Hyperion. Please make a pull request if you would like to see your plugin here:
 - [Hyperion-Chuck](https://github.com/Commit451/Hyperion-Chuck) - Plugin which adds a button to inspect OkHttp traffic using [Chuck](https://github.com/jgilfelt/chuck)
+- [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which show screen of details about an application
+
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
 
