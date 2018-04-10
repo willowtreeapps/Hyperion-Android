@@ -1,26 +1,19 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import android.app.Activity;
 import android.content.ServiceConnection;
 
 import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 
 @Module
 abstract class CoreModule {
 
-    @Provides
+    @Binds
     @ActivityScope
-    static ServiceConnection provideServiceConnection(Activity activity) {
-        return new HyperionService.Connection(activity);
-    }
+    abstract ServiceConnection bindServiceConnection(HyperionService.Connection connection);
 
     @Binds
     @ActivityScope
@@ -29,19 +22,5 @@ abstract class CoreModule {
     @Binds
     @ActivityScope
     abstract AttributeTranslator bindAttributeTranslator(AttributeTranslatorImpl attributeTranslator);
-
-    @Provides
-    @ActivityScope
-    @Worker
-    static Executor provideWorkerThreadExecutor() {
-        return Executors.newSingleThreadExecutor();
-    }
-
-    @Provides
-    @ActivityScope
-    @Main
-    static Executor provideUiThreadExecutor() {
-        return new UiThreadExecutor();
-    }
 
 }
