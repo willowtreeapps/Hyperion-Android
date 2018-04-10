@@ -19,7 +19,7 @@ public class GeigerCounterPlugin extends Plugin {
     static final int API_VERSION = JELLY_BEAN;
     static final String LOG_TAG = "Hyperion Geiger Counter";
 
-    private static DroppedFrameObserver observer;
+    private static DroppedFrameDetector detector;
 
     // Plugin
 
@@ -36,12 +36,12 @@ public class GeigerCounterPlugin extends Plugin {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
 
-        observer = new DroppedFrameObserver(assetManager, display);
+        detector = new DroppedFrameDetector(assetManager, display);
     }
 
     @Override
     public PluginModule createPluginModule() {
-        return new GeigerCounterModule(observer);
+        return new GeigerCounterModule(detector);
     }
 
 }

@@ -10,33 +10,60 @@ import android.view.ViewGroup;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 @RequiresApi(GeigerCounterPlugin.API_VERSION)
-class GeigerCounterModule extends PluginModule implements View.OnClickListener {
+class GeigerCounterModule extends PluginModule implements View.OnClickListener, DroppedFrameDetectorObserver {
 
     private View view;
-    private DroppedFrameObserver observer;
+    private DroppedFrameDetector detector;
 
-    GeigerCounterModule(DroppedFrameObserver observer) {
-        this.observer = observer;
+    GeigerCounterModule(DroppedFrameDetector detector) {
+        this.detector = detector;
+    }
+
+    // Helpers
+
+    private void updateView(boolean detectorIsEnabled) {
+        if (view != null) {
+            view.setSelected(detectorIsEnabled);
+        }
     }
 
     // PluginModule
+
+    @Override
+    protected void onCreate() {
+        super.onCreate();
+
+        detector.addObserver(this);
+    }
 
     @Nullable
     @Override
     public View createPluginView(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
         view = layoutInflater.inflate(R.layout.hgc_item_plugin, parent, false);
         view.setOnClickListener(this);
-        view.setSelected(observer.isEnabled());
+        updateView(detector.isEnabled());
         return view;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        detector.removeObserver(this);
     }
 
     // OnClickListener
 
     @Override
     public void onClick(View v) {
-        boolean isObserverEnabled = !observer.isEnabled();
-        view.setSelected(isObserverEnabled);
-        observer.setEnabled(isObserverEnabled);
+        detector.setEnabled(!detector.isEnabled());
+    }
+
+    // DroppedFrameDetectorObserver
+
+    @Override
+    public void droppedFrameDetectorIsEnabledDidChange(DroppedFrameDetector detector, boolean isEnabled) {
+        updateView(isEnabled);
     }
 
 }

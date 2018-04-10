@@ -8,11 +8,16 @@ import android.util.Log;
 import android.view.Choreographer;
 import android.view.Display;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static android.media.AudioManager.STREAM_SYSTEM;
 import static com.willowtreeapps.hyperion.geigercounter.GeigerCounterPlugin.LOG_TAG;
 
 @RequiresApi(GeigerCounterPlugin.API_VERSION)
-class DroppedFrameObserver implements Choreographer.FrameCallback {
+class DroppedFrameDetector implements Choreographer.FrameCallback {
+
+    private Set<DroppedFrameDetectorObserver> observers;
 
     // Player for the Geiger counter tick sound
     private final SoundPool soundPool;
@@ -31,7 +36,9 @@ class DroppedFrameObserver implements Choreographer.FrameCallback {
     // Sentinel value indicating we have not yet received a frame callback since the observer was enabled
     private static final long NEVER = -1;
 
-    DroppedFrameObserver(AssetManager assetManager, Display display) {
+    DroppedFrameDetector(AssetManager assetManager, Display display) {
+        observers = new HashSet<>();
+
         soundPool = new SoundPool(1, STREAM_SYSTEM, 0);
         int tickSoundID;
         try {
@@ -63,6 +70,18 @@ class DroppedFrameObserver implements Choreographer.FrameCallback {
             choreographer.removeFrameCallback(this);
             lastTimestampNanoseconds = NEVER;
         }
+
+        for (DroppedFrameDetectorObserver observer : observers) {
+            observer.droppedFrameDetectorIsEnabledDidChange(this, isEnabled);
+        }
+    }
+
+    public void addObserver(DroppedFrameDetectorObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(DroppedFrameDetectorObserver observer) {
+        observers.remove(observer);
     }
 
     // Helpers
