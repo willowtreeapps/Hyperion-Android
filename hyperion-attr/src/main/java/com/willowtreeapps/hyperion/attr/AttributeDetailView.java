@@ -34,7 +34,6 @@ class AttributeDetailView extends RecyclerView {
     static final int ITEM_MUTABLE_COLOR_ATTRIBUTE = 3;
     static final int ITEM_MUTABLE_STRING_ATTRIBUTE = 4;
     static final int ITEM_MUTABLE_BOOLEAN_ATTRIBUTE = 5;
-    static final int ITEM_MUTABLE_SELECTION_ATTRIBUTE = 6;
 
     private final AttributeAdapter adapter;
     private final AttributeLoader attributeLoader;
@@ -91,7 +90,8 @@ class AttributeDetailView extends RecyclerView {
         }
 
         @Override
-        public DataViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        @NonNull
+        public DataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             View itemView;
             switch (viewType) {
@@ -113,7 +113,7 @@ class AttributeDetailView extends RecyclerView {
         }
 
         @Override
-        public void onBindViewHolder(DataViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull DataViewHolder holder, int position) {
             //noinspection unchecked
             holder.bind(items.get(position));
         }

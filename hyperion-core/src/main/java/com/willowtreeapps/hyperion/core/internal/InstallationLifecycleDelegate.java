@@ -11,19 +11,24 @@ import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 import javax.inject.Inject;
 
 @AppScope
-class CoreComponentLifecycleDelegate extends LifecycleDelegate {
+class InstallationLifecycleDelegate extends LifecycleDelegate {
 
     private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
 
     private final CoreComponentContainer container;
+    private final ApplicationInstaller applicationInstaller;
 
     @Inject
-    CoreComponentLifecycleDelegate(CoreComponentContainer container) {
+    InstallationLifecycleDelegate(CoreComponentContainer container,
+                                  ApplicationInstaller applicationInstaller) {
         this.container = container;
+        this.applicationInstaller = applicationInstaller;
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        applicationInstaller.installIfNeeded();
+
         // reorganize the layout
         final ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         final View contentView = decorView.getChildAt(0);
@@ -52,7 +57,7 @@ class CoreComponentLifecycleDelegate extends LifecycleDelegate {
         }
 
         CoreComponent component = DaggerCoreComponent.builder()
-                .appComponent(AppComponent.Holder.getInstance())
+                .appComponent(AppComponent.Holder.getInstance(activity))
                 .activity(activity)
                 .pluginSource(container.getPluginSource())
                 .overlayContainer(overlayLayout)

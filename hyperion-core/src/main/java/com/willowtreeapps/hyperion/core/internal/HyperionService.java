@@ -22,6 +22,8 @@ import com.willowtreeapps.hyperion.core.R;
 
 import java.lang.ref.WeakReference;
 
+import javax.inject.Inject;
+
 public class HyperionService extends Service {
 
     private static final int NOTIFICATION_ID = 0x400;
@@ -106,7 +108,8 @@ public class HyperionService extends Service {
         public void onReceive(Context context, Intent intent) {
             final Activity activity = HyperionService.this.activity.get();
             if (activity != null) {
-                AppComponent.Holder.getInstance().getPublicControl().open(activity);
+                AppComponent.Holder.getInstance(HyperionService.this)
+                        .getPublicControl().open(activity);
             }
         }
     }
@@ -117,11 +120,13 @@ public class HyperionService extends Service {
         }
     }
 
+    @ActivityScope
     static final class Connection implements ServiceConnection {
 
         private final Activity activity;
         private HyperionService service;
 
+        @Inject
         Connection(Activity activity) {
             this.activity = activity;
         }

@@ -32,7 +32,7 @@ public class HyperionPluginView extends FrameLayout {
     private final PluginExtensionImpl pluginExtension;
 
     @Inject
-    PluginLoader pluginLoader;
+    PluginRepository pluginRepository;
 
     private Set<PluginModule> modules;
     private MenuState menuState = MenuState.CLOSE;
@@ -87,28 +87,14 @@ public class HyperionPluginView extends FrameLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         pluginExtension.setHyperionMenu((HyperionMenu) getParent());
-        pluginLoader.load(new Callback<Plugins>() {
-            @Override
-            public void call(Try<Plugins> result) {
-                if (ViewCompat.isAttachedToWindow(HyperionPluginView.this)) {
-                    populatePluginList(result);
-                }
-            }
-        });
+        populatePluginList(pluginRepository.getPlugins());
     }
 
-    private void populatePluginList(Try<Plugins> result) {
-        try {
-            final Plugins plugins = result.get();
-            final Comparator<PluginModule> comparator = new AlphabeticalComparator(getContext());
-            final Set<PluginModule> sortedModules = new TreeSet<>(comparator);
-            sortedModules.addAll(plugins.createModules());
-            this.modules = sortedModules;
-        } catch (Throwable t) {
-            // TODO
-            t.printStackTrace();
-            return;
-        }
+    private void populatePluginList(Plugins plugins) {
+        final Comparator<PluginModule> comparator = new AlphabeticalComparator(getContext());
+        final Set<PluginModule> sortedModules = new TreeSet<>(comparator);
+        sortedModules.addAll(plugins.createModules());
+        this.modules = sortedModules;
 
         final Context context = new PluginExtensionContextWrapper(
                 getContext(), pluginExtension);

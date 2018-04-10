@@ -1,49 +1,47 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.willowtreeapps.hyperion.core.PublicControl;
 import com.willowtreeapps.hyperion.plugin.v1.ApplicationExtension;
-import com.willowtreeapps.hyperion.plugin.v1.Plugin;
 
-import java.util.ServiceLoader;
-
+import dagger.BindsInstance;
 import dagger.Component;
 
 @AppScope
-@Component(modules = {
-        AppModule.class,
-        LifecycleModule.class
-})
+@Component(modules = AppModule.class)
 public interface AppComponent {
 
     Application getApplication();
     ApplicationExtension getApplicationExtension();
     Application.ActivityLifecycleCallbacks getActivityLifecycleCallbacks();
     PublicControl getPublicControl();
+    PluginRepository getPluginRepository();
+
+    @Component.Builder
+    interface Builder {
+
+        @BindsInstance
+        Builder app(Application application);
+
+        AppComponent build();
+    }
 
     final class Holder {
-        private static volatile AppComponent INSTANCE;
+        private static volatile AppComponent instance;
 
-        static void init(Application application) {
-            if (INSTANCE == null) {
+        public static AppComponent getInstance(Context context) {
+            if (instance == null) {
                 synchronized (Holder.class) {
-                    if (INSTANCE == null) {
-                        INSTANCE = DaggerAppComponent.builder()
-                                .appModule(new AppModule(application))
+                    if (instance == null) {
+                        instance = DaggerAppComponent.builder()
+                                .app((Application) context.getApplicationContext())
                                 .build();
-                        for (Plugin plugin : ServiceLoader.load(Plugin.class)) {
-                            if (plugin.deviceMeetsMinimumApiRequirement()) {
-                                plugin.create(application, INSTANCE.getApplicationExtension());
-                            }
-                        }
                     }
                 }
             }
-        }
-
-        public static AppComponent getInstance() {
-            return INSTANCE;
+            return instance;
         }
 
         private Holder() {
