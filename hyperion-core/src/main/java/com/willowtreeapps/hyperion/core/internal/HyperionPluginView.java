@@ -20,7 +20,9 @@ import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
 import com.willowtreeapps.hyperion.plugin.v1.MenuState;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
+import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 
@@ -98,7 +100,10 @@ public class HyperionPluginView extends FrameLayout {
     private void populatePluginList(Try<Plugins> result) {
         try {
             final Plugins plugins = result.get();
-            modules = plugins.createModules();
+            final Comparator<PluginModule> comparator = new AlphabeticalComparator(getContext());
+            final Set<PluginModule> sortedModules = new TreeSet<>(comparator);
+            sortedModules.addAll(plugins.createModules());
+            this.modules = sortedModules;
         } catch (Throwable t) {
             // TODO
             t.printStackTrace();
@@ -124,5 +129,27 @@ public class HyperionPluginView extends FrameLayout {
             }
         }
         pluginExtension.setHyperionMenu(null);
+    }
+
+    private static final class AlphabeticalComparator implements Comparator<PluginModule> {
+
+        private final Context context;
+
+        private AlphabeticalComparator(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public int compare(PluginModule left, PluginModule right) {
+            String leftName = getName(left);
+            String rightName = getName(right);
+            return leftName.compareTo(rightName);
+        }
+
+        private String getName(PluginModule pluginModule) {
+            int resName = pluginModule.getName();
+            if (resName == R.string.hype_module_name) return pluginModule.getClass().getSimpleName();
+            else return context.getString(resName);
+        }
     }
 }
