@@ -5,6 +5,7 @@ import android.support.annotation.AnyThread;
 import com.willowtreeapps.hyperion.core.PluginSource;
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
@@ -34,7 +35,13 @@ class PluginLoader {
                 Try<Plugins> result;
                 try {
                     final Set<Plugin> plugins = pluginSource.getPlugins();
-                    result = Try.successful(new Plugins(plugins));
+                    Set<Plugin> compatiblePlugins = new HashSet<>();
+                    for (Plugin plugin : plugins) {
+                        if (plugin.deviceMeetsMinimumApiRequirement()) {
+                            compatiblePlugins.add(plugin);
+                        }
+                    }
+                    result = Try.successful(new Plugins(compatiblePlugins));
                 } catch (Throwable t) {
                     result = Try.failure(t);
                 }

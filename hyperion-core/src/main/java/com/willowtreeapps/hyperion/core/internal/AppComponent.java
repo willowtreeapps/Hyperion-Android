@@ -33,7 +33,9 @@ public interface AppComponent {
                                 .appModule(new AppModule(application))
                                 .build();
                         for (Plugin plugin : ServiceLoader.load(Plugin.class)) {
-                            plugin.create(application, INSTANCE.getApplicationExtension());
+                            if (plugin.deviceMeetsMinimumApiRequirement()) {
+                                plugin.create(application, INSTANCE.getApplicationExtension());
+                            }
                         }
                     }
                 }
