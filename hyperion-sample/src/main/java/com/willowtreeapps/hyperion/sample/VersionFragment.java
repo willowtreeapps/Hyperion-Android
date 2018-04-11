@@ -45,6 +45,7 @@ public class VersionFragment extends Fragment {
             list.add(new PluginInfo(R.drawable.attribute_inspector, R.string.attributes_inspector, AttributesInspectorActivity.class));
             list.add(new PluginInfo(R.drawable.screen_recorder, R.string.screen_recorder, ScreenRecorderActivity.class));
             list.add(new PluginInfo(R.drawable.file_explorer, R.string.file_explorer, FileExplorerActivity.class));
+            list.add(new PluginInfo(R.drawable.geiger_counter, R.string.geiger_counter, GeigerCounterActivity.class));
             list.add(new PluginInfo(R.drawable.add, R.string.add_or_remove, null));
         }
 
