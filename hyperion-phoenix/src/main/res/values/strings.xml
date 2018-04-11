@@ -6,4 +6,13 @@
     <string name="hp_clear_data">Clear Data</string>
     <string name="hp_restart_self">Restart Self</string>
     <string name="hp_content_desc_overflow">More</string>
+
+    <string name="hp_pheonix_options_title">Restart Process?</string>
+    <string name="hp_dialog_confirmation">Restart</string>
+
+    <array name="hp_phoenix_options">
+        <item>@string/hp_clear_cache</item>
+        <item>@string/hp_clear_data</item>
+        <item>@string/hp_restart_self</item>
+    </array>
 </resources>
