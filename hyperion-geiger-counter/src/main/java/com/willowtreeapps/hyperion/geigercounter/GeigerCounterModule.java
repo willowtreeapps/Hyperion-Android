@@ -67,8 +67,7 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
             switch (audioManager.getRingerMode()) {
                 case AudioManager.RINGER_MODE_SILENT:
                 case AudioManager.RINGER_MODE_VIBRATE:
-                    String message = "Please turn up the sound volume.";
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.hgc_volume_warning, Toast.LENGTH_SHORT).show();
                     break;
                 case AudioManager.RINGER_MODE_NORMAL:
                     break;

@@ -1,4 +1,5 @@
 <resources>
     <public name="hgc_geiger_counter" type="string">Hyperion-Geiger-Counter</public>
     <string name="hgc_plugin_name">Geiger Counter</string>
+    <string name="hgc_volume_warning">Please turn up the sound volume.</string>
 </resources>
