@@ -18,9 +18,9 @@
     <string name="cd_plugin_image">Plugin Image</string>
     <string name="cd_chevron">Chevron</string>
     <string name="cd_back_arrow">Back Arrow</string>
-    <string name="measurement_tool_desc">Measure the distance between any view on the screen.</string>
-    <string name="attributes_inspector_desc">Tap and hold to inspect elements embedded inside of a group.</string>
-    <string name="file_explorer_desc">Read, write, delete, or share the contents of your app\'s file system for debugging file IO functionality.</string>
-    <string name="screen_recorder_desc">Record, save, and share interactions from within the app.</string>
+    <string name="measurement_tool_desc">Measure the distance between any two views on the screen.</string>
+    <string name="attributes_inspector_desc">Tap to inspect views and adjust their attributes.</string>
+    <string name="file_explorer_desc">Read, write, delete, or share the contents of your app\'s file system.</string>
+    <string name="screen_recorder_desc">Record, save, and share a video of the app.</string>
     <string name="geiger_counter_desc">Check your animation performance by listening for dropped frames.</string>
 </resources>
