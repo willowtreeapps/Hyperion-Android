@@ -1,11 +1,14 @@
 package com.willowtreeapps.hyperion.geigercounter;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
@@ -56,7 +59,23 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        detector.setEnabled(!detector.isEnabled());
+        boolean isEnabled = detector.isEnabled();
+
+        // When enabling while the speaker is muted, remind the user to unmute.
+        if (!isEnabled) {
+            AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+            switch (audioManager.getRingerMode()) {
+                case AudioManager.RINGER_MODE_SILENT:
+                case AudioManager.RINGER_MODE_VIBRATE:
+                    String message = "Please turn up the sound volume.";
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    break;
+                case AudioManager.RINGER_MODE_NORMAL:
+                    break;
+            }
+        }
+
+        detector.setEnabled(!isEnabled);
     }
 
     // DroppedFrameDetectorObserver
