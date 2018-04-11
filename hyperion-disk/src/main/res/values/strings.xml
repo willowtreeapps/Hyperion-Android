@@ -1,6 +1,7 @@
 <resources>
     <public name="hd_disk" type="string">Hyperion-Disk</public>
     <string name="hd_plugin_name">File Explorer</string>
+    <string name="hd_plugin_subtitle">Browse, delete, or share your app\'s files.</string>
     <string name="hd_up">..</string>
     <string name="hd_share">Share</string>
     <string name="hd_delete">Delete</string>

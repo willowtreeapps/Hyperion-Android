@@ -4,5 +4,6 @@
     <string name="hr_record">Record</string>
     <string name="hr_recording">Recording</string>
     <string name="hr_plugin_name">Recorder</string>
+    <string name="hr_plugin_subtitle">Record, save, and share a video of your app.</string>
     <string name="hr_recordings">Recordings</string>
 </resources>

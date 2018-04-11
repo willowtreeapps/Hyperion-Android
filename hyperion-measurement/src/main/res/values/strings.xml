@@ -1,4 +1,5 @@
 <resources>
     <public name="hm_measurements" type="string">Hyperion-Measurements</public>
     <string name="hm_plugin_name">Measurement Inspector</string>
+    <string name="hm_plugin_subtitle">Tap views to measure the distances between them.</string>
 </resources>

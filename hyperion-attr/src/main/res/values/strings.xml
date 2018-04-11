@@ -1,6 +1,7 @@
 <resources>
     <public name="ha_attributes" type="string">Hyperion-Attributes</public>
     <string name="ha_plugin_name">Attributes Inspector</string>
+    <string name="ha_plugin_subtitle">Tap to inspect views and adjust their attributes.</string>
     <string name="ha_cd_visual">Visual Value</string>
     <string name="ha_enter_value">Enter value</string>
     <string name="ha_mutate">Mutate</string>
