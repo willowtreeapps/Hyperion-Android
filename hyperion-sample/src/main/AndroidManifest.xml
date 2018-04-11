@@ -24,6 +24,7 @@
         <activity android:name=".AttributesInspectorActivity" />
         <activity android:name=".ScreenRecorderActivity" />
         <activity android:name=".FileExplorerActivity" />
+        <activity android:name=".GeigerCounterActivity" />
 
     </application>
 

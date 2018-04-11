@@ -13,12 +13,14 @@
     <string name="attributes_inspector">Attributes Inspector</string>
     <string name="screen_recorder">Screen Recorder</string>
     <string name="file_explorer">File Explorer</string>
+    <string name="geiger_counter">Geiger Counter</string>
     <string name="add_or_remove">Add or remove plugins based on your workflow</string>
     <string name="cd_plugin_image">Plugin Image</string>
     <string name="cd_chevron">Chevron</string>
     <string name="cd_back_arrow">Back Arrow</string>
-    <string name="measurement_tool_desc">Measure the distance between any view on the screen.</string>
-    <string name="attributes_inspector_desc">Tap and hold to inspect elements embedded inside of a group.</string>
-    <string name="file_explorer_desc">Read, write, delete, or share the contents of your app\'s file system for debugging file IO functionality.</string>
-    <string name="screen_recorder_desc">Record, save, and share interactions from within the app.</string>
+    <string name="measurement_tool_desc">Tap views to measure the distances between them.</string>
+    <string name="attributes_inspector_desc">Tap to inspect views and adjust their attributes.</string>
+    <string name="file_explorer_desc">Browse, delete, or share your app\'s files.</string>
+    <string name="screen_recorder_desc">Record, save, and share a video of your app.</string>
+    <string name="geiger_counter_desc">Check animation performance by listening for dropped frames.</string>
 </resources>

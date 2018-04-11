@@ -32,7 +32,7 @@
         android:textSize="30sp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
-        android:lineSpacingExtra="24sp"
+        android:lineSpacingExtra="8sp"
         android:gravity="center_horizontal"/>
 
     <TextView
