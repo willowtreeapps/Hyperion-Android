@@ -7,11 +7,14 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import timber.log.Timber;
+
 public class SampleApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
+        if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
 
         // Initialize some sample preferences
         Set<String> stringSet = new LinkedHashSet<>(Arrays.asList("Hello", "Hyperion!"));

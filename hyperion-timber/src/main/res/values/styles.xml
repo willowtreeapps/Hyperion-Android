@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="tmb_TimberActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/hype_white</item>
+        <item name="colorPrimary">@color/tmb_primary</item>
+        <item name="colorPrimaryDark">@color/tmb_primary_dark</item>
+        <item name="colorAccent">@color/tmb_accent</item>
+    </style>
+
+    <style name="tmb_ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="tmb_ListItemContainer">
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+    </style>
+
+</resources>

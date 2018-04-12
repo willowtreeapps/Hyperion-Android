@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.willowtreeapps.hyperion.timber">
+
+    <application>
+        <activity
+            android:name=".list.TimberLogListActivity"
+            android:theme="@style/tmb_TimberActivityTheme"
+            android:windowSoftInputMode="stateHidden" />
+    </application>
+
+</manifest>

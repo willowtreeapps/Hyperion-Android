@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tmb_relativelayout"
+    style="@style/tmb_ListItemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/tmb_log_level"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tmb_log_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/tmb_log_level"
+        app:layout_constraintStart_toEndOf="@+id/tmb_log_level"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tmb_log_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintLeft_toRightOf="@+id/tmb_log_level"
+        app:layout_constraintStart_toEndOf="@+id/tmb_log_level"
+        app:layout_constraintTop_toBottomOf="@+id/tmb_log_date"/>
+
+</android.support.constraint.ConstraintLayout>

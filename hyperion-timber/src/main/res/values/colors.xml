@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tmb_primary">#2196F3</color>
+    <color name="tmb_primary_dark">#1976D2</color>
+    <color name="tmb_accent">#FF9800</color>
+
+    <color name="tmb_log_level_assert">#9876AA</color>
+    <color name="tmb_log_level_debug">#6897BB</color>
+    <color name="tmb_log_level_error">#FF6B68</color>
+    <color name="tmb_log_level_info">#6A8759</color>
+    <color name="tmb_log_level_verbose">#000000</color>
+    <color name="tmb_log_level_warn">#BBB529</color>
+</resources>

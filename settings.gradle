@@ -15,4 +15,5 @@ include ':hyperion-sample',
         ':hyperion-phoenix',
         ':hyperion-crash',
         ':hyperion-shared-preferences',
-        ':hyperion-geiger-counter'
+        ':hyperion-geiger-counter',
+        ':hyperion-timber'

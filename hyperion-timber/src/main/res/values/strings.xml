@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public name="tmb_timber" type="string">Hyperion-Timber</public>
+    <string name="tmb_plugin_name">Timber</string>
+    <string name="tmb_plugin_subtitle">View Timber recorded log messages</string>
+</resources>
