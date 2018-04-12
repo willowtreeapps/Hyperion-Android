@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static android.content.Context.WINDOW_SERVICE;
-import static android.media.AudioManager.STREAM_SYSTEM;
+import static android.media.AudioManager.STREAM_MUSIC;
 import static android.view.HapticFeedbackConstants.CONTEXT_CLICK;
 import static android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING;
 import static com.willowtreeapps.hyperion.geigercounter.GeigerCounterPlugin.LOG_TAG;
@@ -54,7 +54,7 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
 
         observers = new HashSet<>();
 
-        soundPool = new SoundPool(1, STREAM_SYSTEM, 0);
+        soundPool = new SoundPool(1, STREAM_MUSIC, 0);
         int tickSoundID;
         try {
             AssetFileDescriptor tickSoundFileDescriptor = context.getAssets().openFd("sounds/GeigerCounterTick.wav");
