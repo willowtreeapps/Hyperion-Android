@@ -48,21 +48,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/button_more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:background="?attr/selectableItemBackgroundBorderless">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/hp_ic_overflow"
-            android:tint="@color/hype_plugin_text"
-            android:contentDescription="@string/hp_content_desc_overflow"/>
-
-    </FrameLayout>
-
 </FrameLayout>
