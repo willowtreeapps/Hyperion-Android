@@ -31,7 +31,7 @@ class PhoenixModule extends PluginModule {
         new AlertDialog.Builder(activity)
                 .setTitle(R.string.hp_pheonix_options_title)
                 .setMultiChoiceItems(R.array.hp_phoenix_options,
-                        loadPhoenixOptions(activity.getResources()),
+                        loadPhoenixOptions(),
                         new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -49,25 +49,11 @@ class PhoenixModule extends PluginModule {
                 .show();
     }
 
-    private boolean[] loadPhoenixOptions(@NonNull Resources resources) {
-        final String[] selection
-                = resources.getStringArray(R.array.hp_phoenix_options);
-        final boolean[] options = new boolean[selection.length];
-
-        for (int i = 0; i < selection.length; i++) {
-            switch (i) {
-                case 0:
-                    options[i] = ProcessPhoenix.getOptions().shouldClearCache();
-                    break;
-                case 1:
-                    options[i] = ProcessPhoenix.getOptions().shouldClearData();
-                    break;
-                case 2:
-                    options[i] = ProcessPhoenix.getOptions().shouldRestartSelf();
-                    break;
-            }
-        }
-        return options;
+    private boolean[] loadPhoenixOptions() {
+        final RebirthOptions options = ProcessPhoenix.getOptions();
+        return new boolean[]{options.shouldClearCache(),
+                options.shouldClearData(),
+                options.shouldRestartSelf()};
     }
 
     private void setOptionSelection(int selectionIndex, boolean selected) {
