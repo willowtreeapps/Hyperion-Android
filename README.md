@@ -69,6 +69,7 @@ debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.22'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.22'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.22'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.22'
 ```
 
 ## Adding Plugins
