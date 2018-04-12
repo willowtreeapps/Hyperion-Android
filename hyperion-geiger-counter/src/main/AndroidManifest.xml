@@ -1,1 +1,6 @@
-<manifest package="com.willowtreeapps.hyperion.geigercounter"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.willowtreeapps.hyperion.geigercounter">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+</manifest>

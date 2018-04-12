@@ -69,6 +69,18 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
         popupMenu.show();
     }
 
+    private void warnIfNeedToRaiseVolume() {
+        // Remind the user to raise the media volume if no sound or haptics will be played.
+        AudioManager audioManager = (AudioManager) getContext().getSystemService(AUDIO_SERVICE);
+        if (detector.isEnabled() // Detector is on
+                && !detector.areHapticsEnabled() // User won't hear haptics
+                && audioManager != null
+                && audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) <= 0) // Media volume is muted
+        {
+            Toast.makeText(getContext(), R.string.hgc_volume_warning, LENGTH_SHORT).show();
+        }
+    }
+
     // PluginModule
 
     @Override
@@ -114,22 +126,9 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        boolean isEnabled = detector.isEnabled();
+        detector.setEnabled(!detector.isEnabled());
 
-        // When enabling while the speaker is muted and haptics are off, remind the user to unmute.
-        if (!isEnabled && !detector.areHapticsEnabled()) {
-            AudioManager audioManager = (AudioManager) getContext().getSystemService(AUDIO_SERVICE);
-            switch (audioManager.getRingerMode()) {
-                case AudioManager.RINGER_MODE_SILENT:
-                case AudioManager.RINGER_MODE_VIBRATE:
-                    Toast.makeText(getContext(), R.string.hgc_volume_warning, LENGTH_SHORT).show();
-                    break;
-                case AudioManager.RINGER_MODE_NORMAL:
-                    break;
-            }
-        }
-
-        detector.setEnabled(!isEnabled);
+        warnIfNeedToRaiseVolume();
     }
 
     // OnMenuStateChangedListener

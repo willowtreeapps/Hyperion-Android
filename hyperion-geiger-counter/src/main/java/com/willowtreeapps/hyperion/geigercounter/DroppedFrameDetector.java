@@ -3,6 +3,9 @@ package com.willowtreeapps.hyperion.geigercounter;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.SoundPool;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.Choreographer;
@@ -14,13 +17,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static android.content.Context.WINDOW_SERVICE;
-import static android.media.AudioManager.STREAM_SYSTEM;
+import static android.media.AudioManager.STREAM_MUSIC;
 import static android.view.HapticFeedbackConstants.CONTEXT_CLICK;
 import static android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING;
 import static com.willowtreeapps.hyperion.geigercounter.GeigerCounterPlugin.LOG_TAG;
 
 @RequiresApi(GeigerCounterPlugin.API_VERSION)
 class DroppedFrameDetector implements Choreographer.FrameCallback {
+
+    private final Context context;
 
     private final Set<DroppedFrameDetectorObserver> observers;
 
@@ -45,9 +50,11 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
     private static final long NEVER = -1;
 
     DroppedFrameDetector(Context context) {
+        this.context = context;
+
         observers = new HashSet<>();
 
-        soundPool = new SoundPool(1, STREAM_SYSTEM, 0);
+        soundPool = new SoundPool(1, STREAM_MUSIC, 0);
         int tickSoundID;
         try {
             AssetFileDescriptor tickSoundFileDescriptor = context.getAssets().openFd("sounds/GeigerCounterTick.wav");
@@ -110,6 +117,31 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
         }
     }
 
+    private void playTickHaptics() {
+        if (canUseVibrationEffect()) {
+            playVibrationEffect();
+        } else {
+            playHapticFeedback();
+        }
+    }
+
+    private boolean canUseVibrationEffect() {
+        return Build.VERSION_CODES.O <= Build.VERSION.SDK_INT;
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private void playVibrationEffect() {
+        VibrationEffect effect = VibrationEffect.createOneShot(4, 255);
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator == null) {
+            // Fall back to standard haptic feedback
+            playHapticFeedback();
+            return;
+        }
+
+        vibrator.vibrate(effect);
+    }
+
     private void playHapticFeedback() {
         // Use any observer's view to play haptic feedback.
         for (DroppedFrameDetectorObserver observer : observers) {
@@ -141,7 +173,7 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
                 playTickSound();
 
                 if (areHapticsEnabled) {
-                    playHapticFeedback();
+                    playTickHaptics();
                 }
             }
         }
