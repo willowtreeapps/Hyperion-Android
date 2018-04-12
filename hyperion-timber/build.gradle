@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    testCompile "junit:junit:4.12"
+    testImplementation "junit:junit:4.12"
     api project(':hyperion-plugin')
     implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"

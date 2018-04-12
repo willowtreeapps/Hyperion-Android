@@ -41,17 +41,17 @@ Download via Maven:
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
   <artifactId>hyperion-core</artifactId>
-  <version>0.9.21</version>
+  <version>0.9.22</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.21'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.22'
 ```
 
 If you reference Hyperion from your code, you should also compile the no-op artifact for release variants. For most users, this will not be necessary:
 ```groovy
-releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.21'
+releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.22'
 ```
 
 Usage
@@ -60,15 +60,15 @@ Usage
 Include the core library along with any number of plugins.
 
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.21'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.21'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.22'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.22'
 ```
 
 ## Adding Plugins
@@ -83,8 +83,8 @@ Hyperion has adopted a [code of conduct](CODE_OF_CONDUCT.md) defined by the [Con
 ## Third Party Plugins
 The following are a list of third party plugins that integrate with Hyperion. Please make a pull request if you would like to see your plugin here:
 - [Hyperion-Chuck](https://github.com/Commit451/Hyperion-Chuck) - Plugin which adds a button to inspect OkHttp traffic using [Chuck](https://github.com/jgilfelt/chuck)
-- [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which show screen of details about an application
-- [Hyperion-Simple-Item](https://github.com/takahirom/Hyperion-Simple-Item) - Plugin which add simple menus
+- [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which shows screen of details about an application
+- [Hyperion-Simple-Item](https://github.com/takahirom/Hyperion-Simple-Item) - Plugin which adds simple menus
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
