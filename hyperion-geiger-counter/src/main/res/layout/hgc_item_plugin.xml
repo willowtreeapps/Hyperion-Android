@@ -1,45 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="131dp"
-    android:padding="@dimen/hype_plugin_padding"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:background="?attr/selectableItemBackground">
-
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="@dimen/hype_plugin_icon_size"
-        android:layout_height="@dimen/hype_plugin_icon_size"
-        android:layout_marginRight="28dp"
-        android:layout_marginEnd="28dp"
-        android:src="@drawable/hgc_icon"
-        app:tint="@color/hype_plugin_color_selector"
-        android:duplicateParentState="true"/>
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:minHeight="131dp"
+        android:padding="@dimen/hype_plugin_padding"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:duplicateParentState="true"
-            android:text="@string/hgc_plugin_name"
-            android:textColor="@color/hype_plugin_color_selector"
-            android:textSize="16sp" />
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/hype_plugin_icon_size"
+            android:layout_height="@dimen/hype_plugin_icon_size"
+            android:layout_marginRight="28dp"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/hgc_icon"
+            app:tint="@color/hype_plugin_color_selector"
+            android:duplicateParentState="true"/>
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:duplicateParentState="true"
-            android:text="@string/hgc_plugin_subtitle"
-            android:textColor="@color/hype_plugin_color_selector" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:duplicateParentState="true"
+                android:text="@string/hgc_plugin_name"
+                android:textColor="@color/hype_plugin_color_selector"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:duplicateParentState="true"
+                android:text="@string/hgc_plugin_subtitle"
+                android:textColor="@color/hype_plugin_color_selector" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/button_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/hype_plugin_padding">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/hgc_content_desc_overflow"
+            android:src="@drawable/hgc_ic_overflow"
+            android:tint="@color/hype_plugin_text" />
+
+    </FrameLayout>
+
+</FrameLayout>

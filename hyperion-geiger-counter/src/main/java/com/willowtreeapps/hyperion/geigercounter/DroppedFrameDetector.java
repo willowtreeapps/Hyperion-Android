@@ -1,23 +1,28 @@
 package com.willowtreeapps.hyperion.geigercounter;
 
+import android.content.Context;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.media.SoundPool;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static android.content.Context.WINDOW_SERVICE;
 import static android.media.AudioManager.STREAM_SYSTEM;
+import static android.view.HapticFeedbackConstants.CONTEXT_CLICK;
+import static android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING;
 import static com.willowtreeapps.hyperion.geigercounter.GeigerCounterPlugin.LOG_TAG;
 
 @RequiresApi(GeigerCounterPlugin.API_VERSION)
 class DroppedFrameDetector implements Choreographer.FrameCallback {
 
-    private Set<DroppedFrameDetectorObserver> observers;
+    private final Set<DroppedFrameDetectorObserver> observers;
 
     // Player for the Geiger counter tick sound
     private final SoundPool soundPool;
@@ -28,6 +33,9 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
     // Whether we are watching for dropped frames
     private boolean isEnabled;
 
+    // Whether dropped frames play haptic effects in addition to sound
+    private boolean areHapticsEnabled;
+
     // e.g. 0.01666 for a 60 Hz screen
     private final double hardwareFrameIntervalSeconds;
 
@@ -36,13 +44,13 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
     // Sentinel value indicating we have not yet received a frame callback since the observer was enabled
     private static final long NEVER = -1;
 
-    DroppedFrameDetector(AssetManager assetManager, Display display) {
+    DroppedFrameDetector(Context context) {
         observers = new HashSet<>();
 
         soundPool = new SoundPool(1, STREAM_SYSTEM, 0);
         int tickSoundID;
         try {
-            AssetFileDescriptor tickSoundFileDescriptor = assetManager.openFd("sounds/GeigerCounterTick.wav");
+            AssetFileDescriptor tickSoundFileDescriptor = context.getAssets().openFd("sounds/GeigerCounterTick.wav");
             tickSoundID = soundPool.load(tickSoundFileDescriptor, 1);
         } catch (Exception exception) {
             Log.e(LOG_TAG, exception.toString());
@@ -50,6 +58,8 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
         }
         this.tickSoundID = tickSoundID;
 
+        WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
         double hardwareFramesPerSecond = display.getRefreshRate();
         hardwareFrameIntervalSeconds = 1.0 / hardwareFramesPerSecond;
     }
@@ -76,6 +86,14 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
         }
     }
 
+    public boolean areHapticsEnabled() {
+        return areHapticsEnabled;
+    }
+
+    public void setHapticsEnabled(boolean areHapticsEnabled) {
+        this.areHapticsEnabled = areHapticsEnabled;
+    }
+
     public void addObserver(DroppedFrameDetectorObserver observer) {
         observers.add(observer);
     }
@@ -89,6 +107,17 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
     private void playTickSound() {
         if (tickSoundID != NOT_LOADED) {
             soundPool.play(tickSoundID, 1, 1, 1, 0, 1);
+        }
+    }
+
+    private void playHapticFeedback() {
+        // Use any observer's view to play haptic feedback.
+        for (DroppedFrameDetectorObserver observer : observers) {
+            View view = observer.getHostViewForDroppedFrameHapticFeedback();
+            if (view != null) {
+                view.performHapticFeedback(CONTEXT_CLICK, FLAG_IGNORE_GLOBAL_SETTING);
+                break;
+            }
         }
     }
 
@@ -110,6 +139,10 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
 
             if (droppedFrameIntervalSeconds < frameIntervalSeconds) {
                 playTickSound();
+
+                if (areHapticsEnabled) {
+                    playHapticFeedback();
+                }
             }
         }
 
