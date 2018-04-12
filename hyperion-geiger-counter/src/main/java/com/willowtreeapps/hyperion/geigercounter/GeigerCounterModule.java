@@ -13,17 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
+import com.willowtreeapps.hyperion.plugin.v1.MenuState;
+import com.willowtreeapps.hyperion.plugin.v1.OnMenuStateChangedListener;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import static android.content.Context.AUDIO_SERVICE;
 import static android.widget.Toast.LENGTH_SHORT;
 
 @RequiresApi(GeigerCounterPlugin.API_VERSION)
-class GeigerCounterModule extends PluginModule implements View.OnClickListener, DroppedFrameDetectorObserver {
+class GeigerCounterModule extends PluginModule implements View.OnClickListener, OnMenuStateChangedListener, DroppedFrameDetectorObserver {
+
+    private final DroppedFrameDetector detector;
 
     private View view;
-    private DroppedFrameDetector detector;
-
+    private HyperionMenu hyperionMenu;
     private PopupMenu popupMenu;
 
     GeigerCounterModule(DroppedFrameDetector detector) {
@@ -71,6 +75,11 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
     protected void onCreate() {
         super.onCreate();
 
+        hyperionMenu = getExtension().getHyperionMenu();
+        if (hyperionMenu != null) {
+            hyperionMenu.addOnMenuStateChangedListener(this);
+        }
+
         detector.addObserver(this);
     }
 
@@ -97,6 +106,7 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
     protected void onDestroy() {
         super.onDestroy();
 
+        hyperionMenu.removeOnMenuStateChangedListener(this);
         detector.removeObserver(this);
     }
 
@@ -120,6 +130,15 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
         }
 
         detector.setEnabled(!isEnabled);
+    }
+
+    // OnMenuStateChangedListener
+
+    @Override
+    public void onMenuStateChanged(@NonNull MenuState menuState) {
+        if (menuState == MenuState.CLOSING && popupMenu != null) {
+            popupMenu.dismiss();
+        }
     }
 
     // DroppedFrameDetectorObserver

@@ -3,9 +3,6 @@ package com.willowtreeapps.hyperion.geigercounter;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.SoundPool;
-import android.os.Build;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.Choreographer;
@@ -24,8 +21,6 @@ import static com.willowtreeapps.hyperion.geigercounter.GeigerCounterPlugin.LOG_
 
 @RequiresApi(GeigerCounterPlugin.API_VERSION)
 class DroppedFrameDetector implements Choreographer.FrameCallback {
-
-    private final Context context;
 
     private final Set<DroppedFrameDetectorObserver> observers;
 
@@ -50,8 +45,6 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
     private static final long NEVER = -1;
 
     DroppedFrameDetector(Context context) {
-        this.context = context;
-
         observers = new HashSet<>();
 
         soundPool = new SoundPool(1, STREAM_SYSTEM, 0);
