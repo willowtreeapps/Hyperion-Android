@@ -1,10 +1,7 @@
 package com.willowtreeapps.hyperion.geigercounter;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.support.annotation.NonNull;
-import android.view.Display;
-import android.view.WindowManager;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;
@@ -31,12 +28,7 @@ public class GeigerCounterPlugin extends Plugin {
     protected void onApplicationCreated(@NonNull Context context) {
         super.onApplicationCreated(context);
 
-        AssetManager assetManager = context.getAssets();
-
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = windowManager.getDefaultDisplay();
-
-        detector = new DroppedFrameDetector(assetManager, display);
+        detector = new DroppedFrameDetector(context);
     }
 
     @Override
