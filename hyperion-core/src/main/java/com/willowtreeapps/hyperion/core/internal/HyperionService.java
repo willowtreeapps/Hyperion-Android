@@ -58,7 +58,7 @@ public class HyperionService extends Service {
                 .setContentIntent(createContentPendingIntent())
                 .setSubText(getString(R.string.hype_notification_subtext))
                 .setTicker("")
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(R.drawable.hype_logo)
                 .setOngoing(true)
                 .setVibrate(new long[] { 0 })
                 .build();
