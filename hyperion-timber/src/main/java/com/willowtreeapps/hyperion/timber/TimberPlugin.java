@@ -16,12 +16,18 @@ import timber.log.Timber;
 @AutoService(Plugin.class)
 public class TimberPlugin extends Plugin {
 
+    /**
+     * Item buffer for injecting custom logging for projects not using Timber or for non log
+     * records.
+     */
+    public static CircularBuffer<LogItem> logItemBuffer;
+
     @Override
     protected void onApplicationCreated(@NonNull Context context) {
         super.onApplicationCreated(context);
         int count = context.getResources().getInteger(R.integer.tmb_log_buffer);
-        CircularBuffer<LogItem> circularBuffer = new CircularBuffer<>(count);
-        Timber.plant(new TimberLogTree(circularBuffer));
+        logItemBuffer = new CircularBuffer<>(count);
+        Timber.plant(new TimberLogTree(logItemBuffer));
         Timber.i("TimberLogTree planted.");
     }
 
