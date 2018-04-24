@@ -9,14 +9,15 @@ import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.sqlite.R;
 
+import java.util.Collections;
 import java.util.List;
 
 class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableViewHolder> {
 
-    private final List<TableItem> tables;
+    private List<TableItem> tables;
 
-    TablesListAdapter(List<TableItem> tables) {
-        this.tables = tables;
+    TablesListAdapter() {
+        this.tables = Collections.emptyList();
     }
 
     @NonNull
@@ -30,6 +31,11 @@ class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableView
     @Override
     public void onBindViewHolder(@NonNull TableViewHolder holder, int position) {
         holder.bind(tables.get(position));
+    }
+
+    public void setData(List<TableItem> items) {
+        this.tables = items;
+        notifyDataSetChanged();
     }
 
     @Override

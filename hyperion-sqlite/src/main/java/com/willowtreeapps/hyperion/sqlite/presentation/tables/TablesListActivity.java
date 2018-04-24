@@ -1,8 +1,8 @@
 package com.willowtreeapps.hyperion.sqlite.presentation.tables;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,8 +14,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.willowtreeapps.hyperion.sqlite.R;
 
-import java.util.Arrays;
+import java.io.File;
 import java.util.List;
+
+import io.reactivex.functions.Consumer;
 
 public class TablesListActivity extends AppCompatActivity {
 
@@ -27,6 +29,9 @@ public class TablesListActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
+    private TableViewModel viewModel;
+    private TablesListAdapter adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +40,28 @@ public class TablesListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(R.string.hsql_tables_list_heading);
         }
-
+        initViewModels(getIntent().getStringExtra(ARGS_DB_NAME));
         final RecyclerView list = findViewById(R.id.hsql_list);
         list.setLayoutManager(new LinearLayoutManager(this));
-
-        final List<TableItem> databaseList = fetchTables();
-        list.setAdapter(new TablesListAdapter(databaseList));
+        this.adapter = new TablesListAdapter();
+        list.setAdapter(adapter);
+        loadTables(list);
     }
 
-    private List<TableItem> fetchTables() {
-        //TODO fetch using SQLiteDatabase.opendatabase()??
-        return Arrays.asList(new TableItem("Table 1"), new TableItem("Table 2"));
+    private void loadTables(RecyclerView list) {
+        viewModel.loadTables(new Consumer<List<TableItem>>() {
+            @Override
+            public void accept(List<TableItem> tableItems) throws Exception {
+                adapter.setData(tableItems);
+            }
+        });
+    }
+
+    private void initViewModels(String databaseName) {
+        final File dbFile = getDatabasePath(databaseName);
+        viewModel = ViewModelProviders.of(this).get(TableViewModel.class);
+        viewModel.initDatabase(dbFile);
     }
 }
