@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
-import com.willowtreeapps.hyperion.sqlite.presentation.DatabaseListActivity;
+import com.willowtreeapps.hyperion.sqlite.presentation.database.DatabaseListActivity;
 
 class SqlPluginModule extends PluginModule implements View.OnClickListener {
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="hsql_plugin_name">SQLite DB Browser</string>
     <string name="hsql_tables_list_heading">Tables</string>
+    <string name="hsql_database_list_heading">Databases</string>
 </resources>

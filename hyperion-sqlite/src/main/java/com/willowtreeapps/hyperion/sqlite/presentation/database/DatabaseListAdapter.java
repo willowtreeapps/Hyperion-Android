@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.sqlite.presentation;
+package com.willowtreeapps.hyperion.sqlite.presentation.database;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

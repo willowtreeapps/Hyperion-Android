@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.sqlite.presentation;
+package com.willowtreeapps.hyperion.sqlite.presentation.database;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +10,11 @@ import android.support.v7.widget.Toolbar;
 
 import com.willowtreeapps.hyperion.sqlite.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DatabaseListActivity extends AppCompatActivity {
 
@@ -23,6 +26,7 @@ public class DatabaseListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(R.string.hsql_database_list_heading);
         }
 
         final RecyclerView list = findViewById(R.id.hsql_list);
@@ -39,6 +43,13 @@ public class DatabaseListActivity extends AppCompatActivity {
     }
 
     private List<String> fetchDatabaseList() {
-        return Arrays.asList(databaseList());
+
+        Set<String> dbNames = new HashSet<>();
+        for(String db: databaseList()) {
+            if(!db.endsWith("-journal")) {
+                dbNames.add(db);
+            }
+        }
+        return new ArrayList<>(dbNames);
     }
 }
