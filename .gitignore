@@ -11,3 +11,5 @@
 *.project
 *.classpath
 *.prefs
+*.jks
+/*/build
