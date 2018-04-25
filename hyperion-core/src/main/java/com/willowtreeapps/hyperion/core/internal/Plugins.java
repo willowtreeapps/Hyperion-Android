@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,10 @@ class Plugins {
 
     Plugins(@NonNull Set<Plugin> plugins) {
         this.plugins = plugins;
+    }
+
+    Set<Plugin> get() {
+        return Collections.unmodifiableSet(plugins);
     }
 
     @NonNull
@@ -27,5 +32,4 @@ class Plugins {
         }
         return modules;
     }
-
 }
