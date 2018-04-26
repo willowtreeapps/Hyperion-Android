@@ -86,6 +86,7 @@ The following are a list of third party plugins that integrate with Hyperion. Pl
 - [Hyperion-Chuck](https://github.com/Commit451/Hyperion-Chuck) - Plugin which adds a button to inspect OkHttp traffic using [Chuck](https://github.com/jgilfelt/chuck)
 - [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which shows screen of details about an application
 - [Hyperion-Simple-Item](https://github.com/takahirom/Hyperion-Simple-Item) - Plugin which adds simple menus
+- [Hyperion-DBFlow-Manager](https://github.com/wajahatkarim3/DBFlowManager-Hyperion-Plugin) - Plugin which adds a button in inspect [DBFlow](https://github.com/Raizlabs/DBFlow) databases and apply queries on it locally.
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
