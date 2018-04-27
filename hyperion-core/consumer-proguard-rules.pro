@@ -1,1 +1,4 @@
--keep class * implements com.willowtreeapps.hyperion.plugin.v1.Plugin
+-keep class * implements com.willowtreeapps.hyperion.plugin.v1.Plugin { *; }
+-keep class com.willowtreeapps.hyperion.plugin.v1.Plugin { *; }
+-keep class * implements com.willowtreeapps.hyperion.plugin.v1.PluginModule { *; }
+-keep class com.willowtreeapps.hyperion.plugin.v1.PluginModule { *; }
