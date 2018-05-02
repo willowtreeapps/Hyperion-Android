@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,8 @@ public class CrashActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        stacktraceText.setHorizontallyScrolling(true);
+        stacktraceText.setMovementMethod(new ScrollingMovementMethod());
         headerText.setText(report.header);
         stacktraceText.setText(report.trace);
         container.setOnClickListener(this);

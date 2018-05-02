@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -12,7 +12,7 @@
         android:layout_gravity="bottom|end"
         android:src="@drawable/hc_ic_share"/>
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -21,7 +21,6 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
@@ -29,18 +28,22 @@
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:textSize="20sp"/>
+                android:layout_margin="24dp"
+                android:textSize="20sp"
+                tools:text="Version: 6.0\nBrand: Samsung"/>
 
             <TextView
                 android:id="@+id/stacktrace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:textColor="@color/hc_stacktrace"
-                android:textSize="16sp"/>
+                android:textSize="12sp"
+                android:scrollbars="vertical"
+                tools:text="Crash"/>
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
