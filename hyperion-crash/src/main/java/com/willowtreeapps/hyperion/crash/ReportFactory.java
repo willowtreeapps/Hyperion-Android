@@ -5,6 +5,8 @@ import android.os.Build;
 
 class ReportFactory {
 
+    private static final int MAX_STACK_HEIGHT = 80;
+
     private final Context context;
 
     ReportFactory(Context context) {
@@ -36,11 +38,30 @@ class ReportFactory {
 
     private String createStackTraceString(Throwable error) {
         final StringBuilder sb = new StringBuilder();
+        sb.append(error.getClass().getCanonicalName());
+        sb.append(": ");
         sb.append(error.getMessage());
         sb.append("\n");
-        for (StackTraceElement e : error.getStackTrace()) {
+
+        int stackCount = 0;
+        final StackTraceElement[] stackTrace = error.getStackTrace();
+        for (StackTraceElement e : stackTrace) {
+            sb.append("   ");
             sb.append(e.toString());
             sb.append("\n");
+            if (stackCount >= MAX_STACK_HEIGHT) {
+                sb.append("... ");
+                sb.append(stackTrace.length - stackCount);
+                sb.append(" more");
+                break;
+            }
+            stackCount += 1;
+        }
+        final Throwable cause = error.getCause();
+        if (cause != null && error != cause && stackCount < MAX_STACK_HEIGHT) {
+            sb.append("Caused by:");
+            sb.append("\n");
+            sb.append(createStackTraceString(cause));
         }
         return sb.toString();
     }
