@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.sqlite.R;
+import com.willowtreeapps.hyperion.sqlite.presentation.records.DbRecordViewerActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.List;
 class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableViewHolder> {
 
     private List<TableItem> tables;
+    private final String dbName;
 
-    TablesListAdapter() {
+    TablesListAdapter(String dbName) {
         this.tables = Collections.emptyList();
+        this.dbName = dbName;
     }
 
     @NonNull
@@ -30,7 +33,7 @@ class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableView
 
     @Override
     public void onBindViewHolder(@NonNull TableViewHolder holder, int position) {
-        holder.bind(tables.get(position));
+        holder.bind(dbName, tables.get(position));
     }
 
     public void setData(List<TableItem> items) {
@@ -43,17 +46,27 @@ class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableView
         return tables.size();
     }
 
-    static class TableViewHolder extends RecyclerView.ViewHolder {
+    static class TableViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView tableName;
+        private String databaseName;
 
         TableViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             tableName = itemView.findViewById(R.id.hsql_table_name);
         }
 
-        void bind(TableItem table) {
+        void bind(String databaseName,
+                  TableItem table) {
             tableName.setText(table.tableName);
+            this.databaseName = databaseName;
+        }
+
+        @Override
+        public void onClick(View v) {
+            DbRecordViewerActivity.startActivity(v.getContext(), databaseName,
+                    tableName.getText().toString());
         }
     }
 }

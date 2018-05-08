@@ -7,7 +7,10 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-@Database(entities = {UsersEntity.class}, version = 1, exportSchema = false)
+import java.util.ArrayList;
+import java.util.List;
+
+@Database(entities = {UsersEntity.class}, version = 2, exportSchema = false)
 public abstract class SampleDatabase extends RoomDatabase {
     public static final String NAME = "sample_db";
 
@@ -33,13 +36,31 @@ public abstract class SampleDatabase extends RoomDatabase {
                             @Override
                             public void run() {
                                 getInstance(context).getUserDao()
-                                        .insert(new UsersEntity("User1"),
-                                        new UsersEntity("User2"));
+                                        .insert(createSampleRecords());
                             }
                         }) .start();
                     }
                 })
                 .build();
+    }
+
+    private static UsersEntity[] createSampleRecords() {
+
+        int limit = 100;
+        UsersEntity[] entities = new UsersEntity[limit];
+
+        UsersEntity.Builder builder = UsersEntity.newBuilder();
+
+        for (int i = 0; i < limit; i++) {
+            entities[i] = builder.withUserName("User "  + i)
+                    .withFirstName("User")
+                    .withLastName(String.valueOf(i))
+                    .withJoinTimestamp(System.currentTimeMillis())
+                    .withProfileImage("https://www.profileimage.com/" + System.currentTimeMillis())
+            .build();
+        }
+
+        return entities;
     }
 
     public abstract UsersEntity.UserDao getUserDao();

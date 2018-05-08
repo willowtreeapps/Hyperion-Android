@@ -5,5 +5,7 @@
             />
         <activity android:name=".presentation.tables.TablesListActivity"
             />
+        <activity android:name=".presentation.records.DbRecordViewerActivity"
+            />
     </application>
 </manifest>

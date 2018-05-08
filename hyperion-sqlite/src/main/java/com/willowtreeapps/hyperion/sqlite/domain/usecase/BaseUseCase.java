@@ -7,7 +7,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
-public class BaseUseCase {
+public class BaseUseCase implements UseCase {
 
     private final SQLiteDatabase db;
 
@@ -27,5 +27,10 @@ public class BaseUseCase {
                         return db.rawQuery(query, selectionArgs);
                     }
                 });
+    }
+
+    @Override
+    public void closeDatabase() {
+        db.close();
     }
 }

@@ -42,15 +42,16 @@ public class TablesListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.hsql_tables_list_heading);
         }
-        initViewModels(getIntent().getStringExtra(ARGS_DB_NAME));
+        String dbName = getIntent().getStringExtra(ARGS_DB_NAME);
+        initViewModels(dbName);
         final RecyclerView list = findViewById(R.id.hsql_list);
         list.setLayoutManager(new LinearLayoutManager(this));
-        this.adapter = new TablesListAdapter();
+        this.adapter = new TablesListAdapter(dbName);
         list.setAdapter(adapter);
-        loadTables(list);
+        loadTables();
     }
 
-    private void loadTables(RecyclerView list) {
+    private void loadTables() {
         viewModel.loadTables(new Consumer<List<TableItem>>() {
             @Override
             public void accept(List<TableItem> tableItems) throws Exception {
