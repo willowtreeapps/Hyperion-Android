@@ -36,7 +36,6 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
     implementation "com.jakewharton.timber:timber:4.7.0"
     implementation "android.arch.persistence.room:runtime:1.1.0"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.0"
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')

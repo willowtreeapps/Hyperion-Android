@@ -36,7 +36,9 @@ public abstract class DatabaseViewModel<T extends UseCase> extends ViewModel {
     @Override
     protected void onCleared() {
         subscriptions.clear();
-        useCase.get().closeDatabase();
+        if (useCase.get() != null) {
+            useCase.get().closeDatabase();
+        }
         super.onCleared();
     }
 }
