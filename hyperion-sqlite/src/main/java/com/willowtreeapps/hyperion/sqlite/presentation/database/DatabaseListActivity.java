@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 import com.willowtreeapps.hyperion.sqlite.R;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@HyperionIgnore
 public class DatabaseListActivity extends AppCompatActivity {
 
     @Override

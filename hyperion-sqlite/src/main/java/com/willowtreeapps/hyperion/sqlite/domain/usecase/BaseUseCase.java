@@ -19,7 +19,7 @@ public class BaseUseCase implements UseCase {
         return this.db;
     }
 
-    protected Single<Cursor> executeRawQuery(final String query, final String[] selectionArgs) {
+    protected final Single<Cursor> executeRawQuery(final String query, final String[] selectionArgs) {
         return Single.just(db)
                 .map(new Function<SQLiteDatabase, Cursor>() {
                     @Override

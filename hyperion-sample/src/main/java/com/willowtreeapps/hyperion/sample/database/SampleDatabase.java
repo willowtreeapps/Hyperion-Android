@@ -17,7 +17,7 @@ public abstract class SampleDatabase extends RoomDatabase {
     private static SampleDatabase INSTANCE;
 
     public synchronized static SampleDatabase getInstance(@NonNull final Context context) {
-        if(INSTANCE == null) {
+        if (INSTANCE == null) {
             INSTANCE = buildDb(context.getApplicationContext());
         }
         return INSTANCE;

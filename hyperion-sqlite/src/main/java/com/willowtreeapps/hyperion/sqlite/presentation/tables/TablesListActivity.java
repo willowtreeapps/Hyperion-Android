@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 import com.willowtreeapps.hyperion.sqlite.R;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import io.reactivex.functions.Consumer;
 
+@HyperionIgnore
 public class TablesListActivity extends AppCompatActivity {
 
     private static final String ARGS_DB_NAME = "args_db_name";

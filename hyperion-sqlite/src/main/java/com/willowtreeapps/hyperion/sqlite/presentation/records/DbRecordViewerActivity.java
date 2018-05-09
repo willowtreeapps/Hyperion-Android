@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 import com.willowtreeapps.hyperion.sqlite.R;
 
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import io.reactivex.functions.Consumer;
 
+@HyperionIgnore
 public class DbRecordViewerActivity extends AppCompatActivity {
 
     public static void startActivity(Context context, String dbName, String tableName) {
