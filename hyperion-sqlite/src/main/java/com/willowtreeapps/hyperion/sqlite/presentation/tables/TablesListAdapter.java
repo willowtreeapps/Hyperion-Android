@@ -18,6 +18,8 @@ class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableView
     private List<TableItem> tables;
     private final String dbName;
 
+    private OnTableSelectedListener clickListener;
+
     TablesListAdapter(String dbName) {
         this.tables = Collections.emptyList();
         this.dbName = dbName;
@@ -28,7 +30,7 @@ class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableView
     public TableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.hsql_db_table_viewholder, parent, false);
-        return new TableViewHolder(itemView);
+        return new TableViewHolder(itemView, clickListener);
     }
 
     @Override
@@ -46,15 +48,22 @@ class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableView
         return tables.size();
     }
 
+    public void setClickListener(OnTableSelectedListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     static class TableViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView tableName;
         private String databaseName;
 
-        TableViewHolder(View itemView) {
+        private final OnTableSelectedListener l;
+
+        TableViewHolder(View itemView, OnTableSelectedListener listener) {
             super(itemView);
             itemView.setOnClickListener(this);
             tableName = itemView.findViewById(R.id.hsql_table_name);
+            this.l = listener;
         }
 
         void bind(String databaseName,
@@ -65,8 +74,13 @@ class TablesListAdapter extends RecyclerView.Adapter<TablesListAdapter.TableView
 
         @Override
         public void onClick(View v) {
-            DbRecordViewerActivity.startActivity(v.getContext(), databaseName,
-                    tableName.getText().toString());
+            if (l != null) {
+                l.onClick(databaseName, tableName.getText().toString());
+            }
         }
+    }
+
+    public interface OnTableSelectedListener {
+        void onClick(String databaseName, String tableName);
     }
 }

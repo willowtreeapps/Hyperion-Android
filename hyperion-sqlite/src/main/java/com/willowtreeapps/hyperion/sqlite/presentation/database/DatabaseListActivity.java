@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 import com.willowtreeapps.hyperion.sqlite.R;
+import com.willowtreeapps.hyperion.sqlite.presentation.tables.TablesListActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @HyperionIgnore
-public class DatabaseListActivity extends AppCompatActivity {
+public class DatabaseListActivity extends AppCompatActivity implements DatabaseListAdapter.OnDatabaseSelectedListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +36,9 @@ public class DatabaseListActivity extends AppCompatActivity {
         list.setLayoutManager(new LinearLayoutManager(this));
 
         final List<String> databaseList = fetchDatabaseList();
-        list.setAdapter(new DatabaseListAdapter(databaseList));
+        DatabaseListAdapter adapter = new DatabaseListAdapter(databaseList);
+        adapter.setListener(this);
+        list.setAdapter(adapter);
     }
 
     @Override
@@ -47,11 +50,16 @@ public class DatabaseListActivity extends AppCompatActivity {
     private List<String> fetchDatabaseList() {
 
         Set<String> dbNames = new HashSet<>();
-        for(String db: databaseList()) {
-            if(!db.endsWith("-journal")) {
+        for (String db : databaseList()) {
+            if (!db.endsWith("-journal") && !db.endsWith("-wal") && !db.endsWith("-shm")) {
                 dbNames.add(db);
             }
         }
         return new ArrayList<>(dbNames);
+    }
+
+    @Override
+    public void onClick(String databaseName) {
+        TablesListActivity.startActivity(this, databaseName);
     }
 }

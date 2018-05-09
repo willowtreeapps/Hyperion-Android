@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 import com.willowtreeapps.hyperion.sqlite.R;
+import com.willowtreeapps.hyperion.sqlite.presentation.records.DbRecordViewerActivity;
 
 import java.io.File;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 import io.reactivex.functions.Consumer;
 
 @HyperionIgnore
-public class TablesListActivity extends AppCompatActivity {
+public class TablesListActivity extends AppCompatActivity implements TablesListAdapter.OnTableSelectedListener {
 
     private static final String ARGS_DB_NAME = "args_db_name";
 
@@ -49,6 +50,7 @@ public class TablesListActivity extends AppCompatActivity {
         final RecyclerView list = findViewById(R.id.hsql_list);
         list.setLayoutManager(new LinearLayoutManager(this));
         this.adapter = new TablesListAdapter(dbName);
+        this.adapter.setClickListener(this);
         list.setAdapter(adapter);
         loadTables();
     }
@@ -66,5 +68,10 @@ public class TablesListActivity extends AppCompatActivity {
         final File dbFile = getDatabasePath(databaseName);
         viewModel = ViewModelProviders.of(this).get(TableViewModel.class);
         viewModel.initDatabase(dbFile);
+    }
+
+    @Override
+    public void onClick(String databaseName, String tableName) {
+        DbRecordViewerActivity.startActivity(this, databaseName, tableName);
     }
 }
