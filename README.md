@@ -87,6 +87,7 @@ The following are a list of third party plugins that integrate with Hyperion. Pl
 - [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which shows screen of details about an application
 - [Hyperion-Simple-Item](https://github.com/takahirom/Hyperion-Simple-Item) - Plugin which adds simple menus
 - [Hyperion-DBFlow-Manager](https://github.com/wajahatkarim3/DBFlowManager-Hyperion-Plugin) - Plugin which adds a button in inspect [DBFlow](https://github.com/Raizlabs/DBFlow) databases and apply queries on it locally.
+- [Hyperion-kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine-hyperion) - Plugin for checking the state of registered [kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine) instances.
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
