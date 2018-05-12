@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="hsql_table_row_colour_standard">#fefefe</color>
+    <color name="hsql_table_row_colour_alt">#e8e8e8</color>
+</resources>

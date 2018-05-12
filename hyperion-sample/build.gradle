@@ -35,6 +35,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
     implementation "com.jakewharton.timber:timber:4.7.0"
+    implementation "android.arch.persistence.room:runtime:1.1.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.0"
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')
     debugImplementation project(':hyperion-attr')
@@ -50,4 +52,5 @@ dependencies {
     debugImplementation project(':hyperion-shared-preferences')
     debugImplementation project(':hyperion-geiger-counter')
     debugImplementation project(':hyperion-timber')
+    debugImplementation project(':hyperion-sqlite')
 }

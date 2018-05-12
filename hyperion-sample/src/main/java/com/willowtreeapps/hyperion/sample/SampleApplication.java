@@ -3,6 +3,8 @@ package com.willowtreeapps.hyperion.sample;
 import android.app.Application;
 import android.preference.PreferenceManager;
 
+import com.willowtreeapps.hyperion.sample.database.SampleDatabase;
+
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -32,5 +34,14 @@ public class SampleApplication extends Application {
                 .edit()
                 .putBoolean("KEY_BOOLEAN", true)
                 .apply();
+
+        initDb();
+    }
+
+    private void initDb() {
+        final SampleDatabase db
+                = SampleDatabase.getInstance(this);
+        //Needed to kick off the pre-population of data
+        db.getOpenHelper().getReadableDatabase();
     }
 }

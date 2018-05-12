@@ -6,7 +6,7 @@ project.ext.set("targetSdkVersion", 27)
 project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
 project.ext.set("libraryVersion", '0.9.23')
 
-project.ext.set("versionSupportLibrary", "27.1.0")
+project.ext.set("versionSupportLibrary", "27.1.1")
 project.ext.set("versionAutoService", "1.0-rc4")
 project.ext.set("versionDagger", "2.15")
 
