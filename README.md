@@ -81,13 +81,19 @@ Contributions are welcome. Please see the [Contributing guidelines](CONTRIBUTING
 
 Hyperion has adopted a [code of conduct](CODE_OF_CONDUCT.md) defined by the [Contributor Covenant](http://contributor-covenant.org), the same used by the [Swift language](https://swift.org) and countless other open source software teams.
 
-## Third Party Plugins
-The following are a list of third party plugins that integrate with Hyperion. Please make a pull request if you would like to see your plugin here:
+## Plugin Descriptions
+The following is a list of all plugins that integrate with Hyperion. Please make a pull request if you would like to see your plugin here:
+### Third Party Plugins
 - [Hyperion-Chuck](https://github.com/Commit451/Hyperion-Chuck) - Plugin which adds a button to inspect OkHttp traffic using [Chuck](https://github.com/jgilfelt/chuck)
 - [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which shows screen of details about an application
 - [Hyperion-Simple-Item](https://github.com/takahirom/Hyperion-Simple-Item) - Plugin which adds simple menus
 - [Hyperion-DBFlow-Manager](https://github.com/wajahatkarim3/DBFlowManager-Hyperion-Plugin) - Plugin which adds a button in inspect [DBFlow](https://github.com/Raizlabs/DBFlow) databases and apply queries on it locally.
 - [Hyperion-kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine-hyperion) - Plugin for checking the state of registered [kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine) instances.
+
+### Core Plugins
+- [Hyperion-Geiger-Counter](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-geiger-counter) - Check animation performance by listening for dropped frames. Please turn up the media volume. Haptic feedback is also supported. Inspired by [KMCGeigerCounter](https://github.com/kconner/KMCGeigerCounter).
+- [Hyperion-Timber](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-timber) - View Timber recorded log messages.
+- [Hyperion-Shared-Preferences](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-shared-preferences) - View and edit your app\'s key-value storage.
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
