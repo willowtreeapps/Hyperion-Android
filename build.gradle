@@ -32,8 +32,8 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 }
 
@@ -49,6 +49,6 @@ def Integer buildVersionCode() {
     if (project.hasProperty('versionCode')) {
         return project.properties.versionCode.toInteger()
     } else {
-        return 9999;
+        return 9999
     }
 }
