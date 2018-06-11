@@ -1,6 +1,8 @@
 <resources>
     <public name="hype_core" type="string">Hyperion Core</public>
     <string name="hype_plugin_load_failure">Failed to load plugins.\\n%s</string>
+    <string name="hype_notification_content_title">Hyperion</string>
+    <string name="hype_notification_content_text"></string>
     <string name="hype_notification_subtext">Tap to open the menu.</string>
     <string name="hype_notification_action_open_drawer">Open Menu</string>
     <string name="hype_notification_channel_name">Hyperion Foreground Notification</string>

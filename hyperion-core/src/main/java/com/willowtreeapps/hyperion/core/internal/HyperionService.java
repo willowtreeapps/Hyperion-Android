@@ -54,14 +54,31 @@ public class HyperionService extends Service {
     }
 
     private Notification createNotification(Activity activity) {
-        return new NotificationCompat.Builder(this, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentIntent(createContentPendingIntent())
-                .setSubText(getString(R.string.hype_notification_subtext))
                 .setTicker("")
                 .setSmallIcon(R.drawable.hype_logo)
                 .setOngoing(true)
-                .setVibrate(new long[] { 0 })
-                .build();
+                .setVibrate(new long[]{0});
+
+        String contentTitle = getString(R.string.hype_notification_content_title);
+        String contentText = getString(R.string.hype_notification_content_text);
+        String subText = getString(R.string.hype_notification_subtext);
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+            builder.setContentTitle(contentTitle);
+            builder.setContentText(contentText.isEmpty() ? subText : contentText);
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            builder.setContentTitle(contentTitle);
+            builder.setContentText(contentText);
+            builder.setSubText(subText);
+        } else {
+            builder.setContentTitle(contentTitle.isEmpty() ? null : contentTitle);
+            builder.setContentText(contentText.isEmpty() ? null : contentText);
+            builder.setSubText(subText);
+        }
+
+        return builder.build();
     }
 
     private PendingIntent createContentPendingIntent() {
