@@ -21,6 +21,8 @@ import java.util.List;
 @HyperionIgnore
 public class BuildConfigListActivity extends AppCompatActivity {
 
+    private static final String TAG = "BuildConfig";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +48,10 @@ public class BuildConfigListActivity extends AppCompatActivity {
         List<BuildConfigValue> buildConfigValues = new LinkedList<>();
         try {
             Class<?> buildConfigClass = Class.forName(getPackageName() + ".BuildConfig");
-            Log.d("BuildConfig", "Checking BuildConfig " + buildConfigClass.getName());
+            Log.d(TAG, "Checking BuildConfig " + buildConfigClass.getName());
             Field[] declaredFields = buildConfigClass.getDeclaredFields();
             for (Field declaredField : declaredFields) {
-                Log.d("BuildConfig", "Inspecting " + declaredField.toString());
+                Log.d(TAG, "Inspecting " + declaredField.toString());
                 if (Modifier.isStatic(declaredField.getModifiers())) {
                     Class<?> fieldType = declaredField.getType();
                     String name = declaredField.getName() + " (" + fieldType.getSimpleName() + ")";
@@ -58,8 +60,7 @@ public class BuildConfigListActivity extends AppCompatActivity {
                 }
             }
         } catch (Exception e) {
-            Log.e("BuildConfig", "Failed to read BuildConfig");
-            e.printStackTrace();
+            Log.e(TAG, "Failed to read BuildConfig", e);
         }
 
         return buildConfigValues;
