@@ -53,4 +53,5 @@ dependencies {
     debugImplementation project(':hyperion-geiger-counter')
     debugImplementation project(':hyperion-timber')
     debugImplementation project(':hyperion-sqlite')
+    debugImplementation project(':hyperion-build-config')
 }

@@ -17,4 +17,5 @@ include ':hyperion-sample',
         ':hyperion-shared-preferences',
         ':hyperion-geiger-counter',
         ':hyperion-timber',
-        ':hyperion-sqlite'
+        ':hyperion-sqlite',
+        ':hyperion-build-config'
