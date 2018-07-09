@@ -70,6 +70,7 @@ debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.23'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.23'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.23'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.23'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.23'
 ```
 
 ## Adding Plugins
@@ -94,6 +95,7 @@ The following is a list of all plugins that integrate with Hyperion. Please make
 - [Hyperion-Geiger-Counter](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-geiger-counter) - Check animation performance by listening for dropped frames. Please turn up the media volume. Haptic feedback is also supported. Inspired by [KMCGeigerCounter](https://github.com/kconner/KMCGeigerCounter).
 - [Hyperion-Timber](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-timber) - View Timber recorded log messages.
 - [Hyperion-Shared-Preferences](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-shared-preferences) - View and edit your app\'s key-value storage.
+- [Hyperion-Build-Config](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-build-config) - View application BuildConfig values.
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
