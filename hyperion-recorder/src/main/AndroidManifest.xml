@@ -2,7 +2,8 @@
     package="com.willowtreeapps.hyperion.recorder">
 
     <application>
-        <activity android:name=".RecordingsActivity"/>
+        <activity android:name=".RecordingsActivity"
+            android:theme="@style/Theme.AppCompat.Light"/>
         <provider
             android:name=".RecorderFileProvider"
             android:authorities="${applicationId}.RecorderFileProvider"
