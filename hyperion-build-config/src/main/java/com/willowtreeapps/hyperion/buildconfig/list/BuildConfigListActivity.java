@@ -44,10 +44,19 @@ public class BuildConfigListActivity extends AppCompatActivity {
         return true;
     }
 
+    private String buildConfigName() {
+        String resString = getString(R.string.hbc_target_build_config_name);
+        if (resString.isEmpty()) {
+            return getPackageName() + ".BuildConfig";
+        } else {
+            return resString;
+        }
+    }
+
     private List<BuildConfigValue> getBuildConfigValues() {
         List<BuildConfigValue> buildConfigValues = new LinkedList<>();
         try {
-            Class<?> buildConfigClass = Class.forName(getPackageName() + ".BuildConfig");
+            Class<?> buildConfigClass = Class.forName(buildConfigName());
             Log.d(TAG, "Checking BuildConfig " + buildConfigClass.getName());
             Field[] declaredFields = buildConfigClass.getDeclaredFields();
             for (Field declaredField : declaredFields) {

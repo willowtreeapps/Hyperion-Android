@@ -3,4 +3,5 @@
     <public name="hbc_build_config" type="string">Hyperion-BuildConfig</public>
     <string name="hbc_plugin_name">BuildConfig</string>
     <string name="hbc_plugin_subtitle">View the application BuildConfig values.</string>
+    <string name="hbc_target_build_config_name" />
 </resources>
