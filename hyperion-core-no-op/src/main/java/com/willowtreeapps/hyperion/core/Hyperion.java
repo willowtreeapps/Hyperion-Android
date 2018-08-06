@@ -3,6 +3,7 @@ package com.willowtreeapps.hyperion.core;
 import android.app.Activity;
 import android.view.View;
 
+@SuppressWarnings("unused")
 public final class Hyperion {
 
     public static View createPluginView(Activity activity) {
