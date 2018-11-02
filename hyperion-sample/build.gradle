@@ -34,9 +34,9 @@ android {
 dependencies {
     implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
-    implementation "com.jakewharton.timber:timber:4.7.0"
-    implementation "android.arch.persistence.room:runtime:1.1.0"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.0"
+    implementation "com.jakewharton.timber:timber:${project.versionTimber}"
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')
     debugImplementation project(':hyperion-attr')

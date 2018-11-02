@@ -31,6 +31,6 @@ dependencies {
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
     implementation "com.android.support:design:${project.versionSupportLibrary}"
-    implementation "com.jakewharton.timber:timber:4.7.0"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.jakewharton.timber:timber:${project.versionTimber}"
+    implementation "com.android.support.constraint:constraint-layout:${project.versionConstraintLayout}"
 }
