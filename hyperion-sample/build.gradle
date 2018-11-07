@@ -21,7 +21,7 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
             useProguard false
         }
         release {
@@ -38,6 +38,10 @@ dependencies {
     implementation "com.jakewharton.timber:timber:${project.versionTimber}"
     implementation "android.arch.persistence.room:runtime:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')
     debugImplementation project(':hyperion-attr')
