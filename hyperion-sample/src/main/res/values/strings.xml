@@ -23,4 +23,5 @@
     <string name="file_explorer_desc">Browse, delete, or share your app\'s files.</string>
     <string name="screen_recorder_desc">Record, save, and share a video of your app.</string>
     <string name="geiger_counter_desc">Check animation performance by listening for dropped frames.</string>
+    <string name="chuck_desc">An in-app HTTP inspector for Android OkHttp clients</string>
 </resources>

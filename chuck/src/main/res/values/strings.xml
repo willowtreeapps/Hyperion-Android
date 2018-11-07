@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Hyperion-Chuck</string>
+    <string name="hchuck_plugin_name">Chuck HTTP</string>
+</resources>

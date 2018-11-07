@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
+    implementation "com.android.support:design:${project.versionSupportLibrary}"
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
     implementation "com.jakewharton.timber:timber:${project.versionTimber}"
     implementation "android.arch.persistence.room:runtime:1.1.1"
@@ -54,4 +55,5 @@ dependencies {
     debugImplementation project(':hyperion-timber')
     debugImplementation project(':hyperion-sqlite')
     debugImplementation project(':hyperion-build-config')
+    debugImplementation project(':chuck')
 }

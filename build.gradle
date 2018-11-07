@@ -14,7 +14,6 @@ project.ext.set("versionTimber", "4.7.1")
 
 
 buildscript {
-
     repositories {
         jcenter()
         maven {

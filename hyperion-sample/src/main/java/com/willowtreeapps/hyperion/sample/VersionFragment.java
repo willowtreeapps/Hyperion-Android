@@ -40,12 +40,13 @@ public class VersionFragment extends Fragment {
         private static final List<PluginInfo> list;
 
         static {
-            list = new ArrayList<>(5);
+            list = new ArrayList<>();
             list.add(new PluginInfo(R.drawable.attribute_inspector, R.string.attributes_inspector, AttributesInspectorActivity.class));
             list.add(new PluginInfo(R.drawable.file_explorer, R.string.file_explorer, FileExplorerActivity.class));
             list.add(new PluginInfo(R.drawable.geiger_counter, R.string.geiger_counter, GeigerCounterActivity.class));
             list.add(new PluginInfo(R.drawable.measurement_tool, R.string.measurement_tool, MeasurementToolActivity.class));
             list.add(new PluginInfo(R.drawable.screen_recorder, R.string.screen_recorder, ScreenRecorderActivity.class));
+            list.add(new PluginInfo(R.drawable.hchuck_icon, R.string.hchuck_plugin_name, ChuckActivity.class));
             list.add(new PluginInfo(R.drawable.add, R.string.add_or_remove, null));
         }
 
@@ -99,8 +100,10 @@ public class VersionFragment extends Fragment {
 
     private static final class PluginInfo {
 
-        private final @DrawableRes int image;
-        private final @StringRes int title;
+        private final @DrawableRes
+        int image;
+        private final @StringRes
+        int title;
         private final Class<? extends Activity> activity;
 
         public PluginInfo(int image, int title, Class<? extends Activity> activity) {

@@ -1,0 +1,37 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':hyperion-plugin')
+    api "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
+    api "com.android.support:design:${project.versionSupportLibrary}"
+    annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
+    api 'com.readystatesoftware.chuck:library:1.1.0'
+}
+repositories {
+    mavenCentral()
+}
