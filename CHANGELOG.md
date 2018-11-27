@@ -1,6 +1,2 @@
-# Change Log
-All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
-
-## [1.0.0] - DATE TBD
-### Added
-- Initial release of Hyperion
+## November 26, 2018 - v0.9.25
+- Fixes foreground permission issue on Android P.
