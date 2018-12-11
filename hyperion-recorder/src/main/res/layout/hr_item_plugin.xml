@@ -41,13 +41,14 @@
             android:text="@string/hr_plugin_subtitle"
             android:textColor="@color/hype_plugin_color_selector" />
 
-    </LinearLayout>
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/recordings_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hr_recordings"/>
 
-    <Button
-        android:id="@+id/recordings_button"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hr_recordings" />
+    </LinearLayout>
 
 </LinearLayout>
