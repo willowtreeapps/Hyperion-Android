@@ -21,6 +21,8 @@ android {
 
     buildTypes {
         debug {
+            // Force a private static variable to be added to the BuildConfig
+            testCoverageEnabled true
             minifyEnabled true
             useProguard false
         }

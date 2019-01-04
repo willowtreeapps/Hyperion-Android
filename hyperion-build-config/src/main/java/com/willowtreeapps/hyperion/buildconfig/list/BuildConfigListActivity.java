@@ -15,8 +15,10 @@ import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @HyperionIgnore
 public class BuildConfigListActivity extends AppCompatActivity {
@@ -62,10 +64,15 @@ public class BuildConfigListActivity extends AppCompatActivity {
             for (Field declaredField : declaredFields) {
                 Log.d(TAG, "Inspecting " + declaredField.toString());
                 if (Modifier.isStatic(declaredField.getModifiers())) {
-                    Class<?> fieldType = declaredField.getType();
-                    String name = declaredField.getName() + " (" + fieldType.getSimpleName() + ")";
-                    String value = declaredField.get(null).toString();
-                    buildConfigValues.add(new BuildConfigValue(name, value));
+                    try {
+                        if (!declaredField.isAccessible()) declaredField.setAccessible(true);
+                        Class<?> fieldType = declaredField.getType();
+                        String name = declaredField.getName() + " (" + fieldType.getSimpleName() + ")";
+                        String value = objectToString(declaredField.get(null));
+                        buildConfigValues.add(new BuildConfigValue(name, value));
+                    } catch (Exception e) {
+                        Log.e(TAG, "Failed to process field from config.", e);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -73,6 +80,20 @@ public class BuildConfigListActivity extends AppCompatActivity {
         }
 
         return buildConfigValues;
+    }
+
+    private String objectToString(Object obj) {
+        if (obj.getClass().isArray()) {
+            if (obj instanceof boolean[]) return Arrays.toString((boolean[]) obj);
+            if (obj instanceof byte[]) return Arrays.toString((byte[]) obj);
+            if (obj instanceof int[]) return Arrays.toString((int[]) obj);
+            if (obj instanceof short[]) return Arrays.toString((short[]) obj);
+            if (obj instanceof long[]) return Arrays.toString((long[]) obj);
+            if (obj instanceof float[]) return Arrays.toString((float[]) obj);
+            if (obj instanceof double[]) return Arrays.toString((double[]) obj);
+            if (obj instanceof char[]) return Arrays.toString((char[]) obj);
+            return Arrays.toString((Object[]) obj);
+        } else return obj.toString();
     }
 
 }
