@@ -12,7 +12,8 @@ class ServiceLoaderPluginSource implements PluginSource {
     @Override
     public Set<Plugin> getPlugins() {
         Set<Plugin> plugins = new HashSet<>();
-        ServiceLoader<Plugin> loader = ServiceLoader.load(Plugin.class);
+        ServiceLoader<Plugin> loader = ServiceLoader.load(
+                Plugin.class, getClass().getClassLoader());
         for (Plugin plugin : loader) {
             plugins.add(plugin);
         }
