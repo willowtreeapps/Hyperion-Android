@@ -6,6 +6,7 @@ import android.support.annotation.Px;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
 
@@ -15,12 +16,15 @@ class MeasurementHelperImpl implements MeasurementHelper {
 
     private static final int[] OUT_LOCATION = new int[2];
     private final DisplayMetrics displayMetrics;
+    private ViewGroup container;
 
     @Inject
-    MeasurementHelperImpl(DisplayMetrics displayMetrics) {
+    MeasurementHelperImpl(DisplayMetrics displayMetrics, ViewGroup container) {
         this.displayMetrics = displayMetrics;
+        this.container = container;
     }
 
+    @Override
     public void getParentRelativeRect(@NonNull View view, @NonNull Rect rect) {
         rect.left = getRelativeLeft(view);
         rect.top = getRelativeTop(view);
@@ -28,6 +32,7 @@ class MeasurementHelperImpl implements MeasurementHelper {
         rect.bottom = getRelativeBottom(view);
     }
 
+    @Override
     public int getRelativeLeft(@NonNull View view) {
         if (view.getParent() == view.getRootView()) {
             return view.getLeft();
@@ -36,6 +41,7 @@ class MeasurementHelperImpl implements MeasurementHelper {
         }
     }
 
+    @Override
     public int getRelativeTop(@NonNull View view) {
         if (view.getParent() == view.getRootView()) {
             return view.getTop();
@@ -44,6 +50,7 @@ class MeasurementHelperImpl implements MeasurementHelper {
         }
     }
 
+    @Override
     public int getRelativeRight(@NonNull View view) {
         if (view.getParent() == view.getRootView()) {
             return view.getRight();
@@ -52,6 +59,7 @@ class MeasurementHelperImpl implements MeasurementHelper {
         }
     }
 
+    @Override
     public int getRelativeBottom(@NonNull View view) {
         if (view.getParent() == view.getRootView()) {
             return view.getBottom();
@@ -60,6 +68,7 @@ class MeasurementHelperImpl implements MeasurementHelper {
         }
     }
 
+    @Override
     public void getScreenLocation(@NonNull View view, Rect rect) {
         view.getLocationOnScreen(OUT_LOCATION);
 
@@ -69,15 +78,24 @@ class MeasurementHelperImpl implements MeasurementHelper {
         rect.bottom = rect.top + view.getMeasuredHeight();
     }
 
+    @Override
+    public void getContentRootLocation(@NonNull View view, Rect rect) {
+        view.getDrawingRect(rect);
+        container.offsetDescendantRectToMyCoords(view, rect);
+    }
+
     @Px
+    @Override
     public int toPx(int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
     }
 
+    @Override
     public int toDp(@Px int px) {
         return (int) (px / ((float) displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
+    @Override
     public int toSp(float px) {
         float scaledDensity = displayMetrics.scaledDensity;
         return (int) (px / scaledDensity);

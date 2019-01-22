@@ -21,18 +21,28 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
     @Override
     public void onActivityResumed(Activity activity) {
         foregroundActivity = activity;
-        final ServiceConnection connection = container.getComponent(activity).getServiceConnection();
+        CoreComponent component = container.getComponent(activity);
+        if (component == null) {
+            return;
+        }
+        final ServiceConnection connection = component.getServiceConnection();
         foregroundActivity.bindService(
                 new Intent(activity, HyperionService.class),
                 connection,
                 Context.BIND_AUTO_CREATE);
+        component.getMenuController().onResume();
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
         if (foregroundActivity == activity) {
-            final ServiceConnection connection = container.getComponent(activity).getServiceConnection();
+            CoreComponent component = container.getComponent(activity);
+            if (component == null) {
+                return;
+            }
+            final ServiceConnection connection = component.getServiceConnection();
             foregroundActivity.unbindService(connection);
+            component.getMenuController().onPause();
             foregroundActivity = null;
         }
     }

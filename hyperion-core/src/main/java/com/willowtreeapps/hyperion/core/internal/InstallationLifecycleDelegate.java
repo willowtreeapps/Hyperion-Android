@@ -3,9 +3,11 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 
 import javax.inject.Inject;
@@ -29,22 +31,11 @@ class InstallationLifecycleDelegate extends LifecycleDelegate {
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         applicationInstaller.installIfNeeded();
 
-        // reorganize the layout
-        final ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-        final View contentView = decorView.getChildAt(0);
-        if (decorView.getChildCount() < 1) {
-            // no content, abort install
-            return;
-        }
-        decorView.removeView(contentView);
+        final ViewGroup windowContentView = activity.getWindow().findViewById(android.R.id.content);
+        final HyperionMenuController controller = new HyperionMenuController(windowContentView);
 
-        // embed content view within overlay
-        final HyperionOverlayLayout overlayLayout = new HyperionOverlayLayout(activity);
-        overlayLayout.addView(contentView);
-
-        // embed overlay + content within menu
-        final HyperionMenuLayout menuLayout = new HyperionMenuLayout(activity);
-        decorView.addView(menuLayout);
+        final View background = new View(activity);
+        background.setBackgroundColor(ContextCompat.getColor(activity, R.color.hype_menu_background));
 
         FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
 
@@ -60,18 +51,17 @@ class InstallationLifecycleDelegate extends LifecycleDelegate {
                 .appComponent(AppComponent.Holder.getInstance(activity))
                 .activity(activity)
                 .pluginSource(container.getPluginSource())
-                .overlayContainer(overlayLayout)
+                .menuController(controller)
+                .container(windowContentView)
+                .background(background)
                 .activityResults(activityResults)
                 .build();
 
         container.putComponent(activity, component);
 
         // embed plugins list into menu
-        final Context coreContext = new ComponentContextThemeWrapper(activity, component);
-        final HyperionPluginView pluginView = new HyperionPluginView(coreContext);
-        pluginView.setAlpha(0.0f);
-        menuLayout.addView(pluginView);
-        menuLayout.addView(overlayLayout);
+        HyperionPluginView pluginView = new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));
+        controller.setPluginView(pluginView);
     }
 
     @Override

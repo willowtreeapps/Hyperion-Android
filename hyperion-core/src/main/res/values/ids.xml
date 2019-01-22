@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="hyperion_menu" type="id"/>
-    <item name="hyperion_plugins" type="id"/>
-    <item name="hyperion_overlay" type="id"/>
+    <item name="hyperion_menu" type="id" />
+    <item name="hyperion_plugins" type="id" />
+    <item name="hyperion_overlay" type="id" />
+    <item name="hyperion_background" type="id" />
 </resources>

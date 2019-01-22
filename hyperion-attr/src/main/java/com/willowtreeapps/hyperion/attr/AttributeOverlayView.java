@@ -2,6 +2,7 @@ package com.willowtreeapps.hyperion.attr;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -89,7 +90,7 @@ class AttributeOverlayView extends FrameLayout {
             int count = parent.getChildCount();
             for (int i = 0; i < count; i++) {
                 View child = parent.getChildAt(i);
-                measurementHelper.getScreenLocation(child, outRect);
+                measurementHelper.getContentRootLocation(child, outRect);
                 if (child.getVisibility() != VISIBLE) {
                     continue;
                 }
@@ -106,7 +107,7 @@ class AttributeOverlayView extends FrameLayout {
 
     private void setTarget(View view) {
         currentView = view;
-        measurementHelper.getScreenLocation(view, outRect);
+        measurementHelper.getContentRootLocation(view, outRect);
 
         dismissPopupIfNeeded();
 

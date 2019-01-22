@@ -9,7 +9,7 @@ public interface OverlayContainer {
 
     void setOverlayView(@NonNull View view);
 
-    void setOverlayView(@LayoutRes int view);
+    void setOverlayView(@LayoutRes int layout);
 
     @Nullable
     View getOverlayView();

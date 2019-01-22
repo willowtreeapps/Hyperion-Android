@@ -14,9 +14,13 @@ import dagger.Component;
 public interface AppComponent {
 
     Application getApplication();
+
     ApplicationExtension getApplicationExtension();
+
     Application.ActivityLifecycleCallbacks getActivityLifecycleCallbacks();
+
     PublicControl getPublicControl();
+
     PluginRepository getPluginRepository();
 
     @Component.Builder

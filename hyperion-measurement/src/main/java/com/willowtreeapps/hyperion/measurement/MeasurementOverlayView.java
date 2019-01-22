@@ -302,7 +302,7 @@ class MeasurementOverlayView extends FrameLayout {
             int count = parent.getChildCount();
             for (int i = 0; i < count; i++) {
                 View child = parent.getChildAt(i);
-                measurementHelper.getScreenLocation(child, outRect);
+                measurementHelper.getContentRootLocation(child, outRect);
                 if (child.getVisibility() != VISIBLE) {
                     continue;
                 }
@@ -320,7 +320,7 @@ class MeasurementOverlayView extends FrameLayout {
     private void setPrimaryTarget(View view) {
         currentView = view;
         rectPrimary = new Rect();
-        measurementHelper.getScreenLocation(view, rectPrimary);
+        measurementHelper.getContentRootLocation(view, rectPrimary);
 
         setWidthMeasurementText(rectPrimary.width());
         setHeightMeasurementText(rectPrimary.height());
@@ -328,7 +328,7 @@ class MeasurementOverlayView extends FrameLayout {
 
     private void setSecondaryTarget(View view) {
         rectSecondary = new Rect();
-        measurementHelper.getScreenLocation(view, rectSecondary);
+        measurementHelper.getContentRootLocation(view, rectSecondary);
 
         if (rectPrimary.bottom < rectSecondary.top) {
             setHeightMeasurementText(rectSecondary.top - rectPrimary.bottom);

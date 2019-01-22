@@ -1,7 +1,11 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
+import android.support.v4.view.ViewCompat;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.willowtreeapps.hyperion.core.PluginSource;
 import com.willowtreeapps.hyperion.core.PublicControl;
@@ -32,8 +36,10 @@ class PublicControlImpl implements PublicControl {
     public void setShakeGestureSensitivity(float sensitivity) {
         this.sensitivity = sensitivity;
         for (Activity activity : container.getActivities()) {
-            final HyperionMenuLayout menu = activity.findViewById(R.id.hyperion_menu);
-            menu.setShakeGestureSensitivity(sensitivity);
+            CoreComponent component = container.getComponent(activity);
+            if (component != null) {
+                component.getMenuController().setShakeGestureSensitivity(sensitivity);
+            }
         }
     }
 
@@ -47,12 +53,11 @@ class PublicControlImpl implements PublicControl {
 
     @Override
     public void open(Activity activity) {
-        final HyperionMenuLayout menu = activity.findViewById(R.id.hyperion_menu);
-        if (menu == null) {
-            Log.d("Hyperion", "Could not find Hyperion menu in this activity.");
+        CoreComponent component = container.getComponent(activity);
+        if (component == null) {
             return;
         }
-        menu.expand();
+        component.getMenuController().expand();
     }
 
     @Override
