@@ -162,10 +162,22 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
         Activity activity = ActivityUtil.findActivity(container);
         if (activity != null) {
             Window window = activity.getWindow();
-            View decor = window.getDecorView();
+            Drawable decorBackground = cloneDrawable(window.getDecorView().getBackground());
             background = contentView.getBackground();
-            ViewCompat.setBackground(contentView, decor.getBackground());
+            if (decorBackground != null) {
+                ViewCompat.setBackground(contentView, decorBackground);
+            }
         }
+    }
+
+    @Nullable
+    private static Drawable cloneDrawable(@Nullable Drawable drawable) {
+        // Safely clone the drawable so the original one doesn't get messed up.
+        if (drawable == null) {
+            return null;
+        }
+        Drawable.ConstantState constantState = drawable.getConstantState();
+        return constantState != null ? constantState.newDrawable() : drawable.mutate();
     }
 
     public void collapse() {
