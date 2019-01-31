@@ -2,14 +2,12 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.ServiceConnection;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.core.PluginSource;
 import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
-import com.willowtreeapps.hyperion.plugin.v1.OverlayContainer;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import java.util.Set;
@@ -40,10 +38,6 @@ interface CoreComponent {
 
     HyperionMenuController getMenuController();
 
-    ViewGroup getContainer();
-
-    View getBackground();
-
     Set<PluginModule> getPluginModules();
 
     @Component.Builder
@@ -65,9 +59,6 @@ interface CoreComponent {
 
         @BindsInstance
         Builder container(ViewGroup container);
-
-        @BindsInstance
-        Builder background(View background);
 
         CoreComponent build();
     }

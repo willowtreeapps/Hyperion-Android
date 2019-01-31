@@ -34,9 +34,6 @@ class InstallationLifecycleDelegate extends LifecycleDelegate {
         final ViewGroup windowContentView = activity.getWindow().findViewById(android.R.id.content);
         final HyperionMenuController controller = new HyperionMenuController(windowContentView);
 
-        final View background = new View(activity);
-        background.setBackgroundColor(ContextCompat.getColor(activity, R.color.hype_menu_background));
-
         FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
 
         ActivityResults activityResults = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
@@ -53,7 +50,6 @@ class InstallationLifecycleDelegate extends LifecycleDelegate {
                 .pluginSource(container.getPluginSource())
                 .menuController(controller)
                 .container(windowContentView)
-                .background(background)
                 .activityResults(activityResults)
                 .build();
 
