@@ -118,8 +118,7 @@ public class ProcessPhoenix extends Activity {
             File[] files = getCacheDir().listFiles();
 
             for (File file : files) {
-                //noinspection ResultOfMethodCallIgnored
-                file.delete();
+                delete(file);
             }
         } catch (Exception e) {
             // this is fine.
