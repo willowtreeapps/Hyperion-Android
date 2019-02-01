@@ -2,12 +2,15 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.ServiceConnection;
+import android.view.ViewGroup;
 
 import com.willowtreeapps.hyperion.core.PluginSource;
 import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;
-import com.willowtreeapps.hyperion.plugin.v1.OverlayContainer;
+import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
+
+import java.util.Set;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -29,11 +32,13 @@ interface CoreComponent {
 
     Activity getActivity();
 
-    OverlayContainer getOverlayContainer();
-
     ActivityResults getActivityResults();
 
     ServiceConnection getServiceConnection();
+
+    HyperionMenuController getMenuController();
+
+    Set<PluginModule> getPluginModules();
 
     @Component.Builder
     interface Builder {
@@ -47,10 +52,13 @@ interface CoreComponent {
         Builder pluginSource(PluginSource pluginSource);
 
         @BindsInstance
-        Builder overlayContainer(OverlayContainer overlayContainer);
+        Builder activityResults(ActivityResults activityResults);
 
         @BindsInstance
-        Builder activityResults(ActivityResults activityResults);
+        Builder menuController(HyperionMenuController menuController);
+
+        @BindsInstance
+        Builder container(ViewGroup container);
 
         CoreComponent build();
     }

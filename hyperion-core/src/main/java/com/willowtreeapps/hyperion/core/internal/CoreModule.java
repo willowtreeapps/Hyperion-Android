@@ -23,4 +23,5 @@ abstract class CoreModule {
     @ActivityScope
     abstract AttributeTranslator bindAttributeTranslator(AttributeTranslatorImpl attributeTranslator);
 
+
 }

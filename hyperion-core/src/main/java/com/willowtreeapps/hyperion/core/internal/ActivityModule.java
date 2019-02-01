@@ -2,8 +2,15 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.support.v4.util.ArrayMap;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+
+import com.willowtreeapps.hyperion.plugin.v1.PluginExtension;
+import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
+
+import java.util.Collections;
+import java.util.Set;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,4 +33,9 @@ abstract class ActivityModule {
         return resources.getDisplayMetrics();
     }
 
+    @Provides
+    @ActivityScope
+    static Set<PluginModule> modules(PluginRepository pluginRepository) {
+        return pluginRepository.getPlugins().createModules();
+    }
 }

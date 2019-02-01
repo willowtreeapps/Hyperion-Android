@@ -8,7 +8,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.WindowInsetsCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,8 +15,6 @@ import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.core.BuildConfig;
 import com.willowtreeapps.hyperion.core.R;
-import com.willowtreeapps.hyperion.plugin.v1.HyperionMenu;
-import com.willowtreeapps.hyperion.plugin.v1.MenuState;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import java.util.Comparator;
@@ -28,14 +25,8 @@ import javax.inject.Inject;
 
 public class HyperionPluginView extends FrameLayout {
 
-    private final LinearLayout pluginListContainer;
-    private final PluginExtensionImpl pluginExtension;
-
     @Inject
-    PluginRepository pluginRepository;
-
-    private Set<PluginModule> modules;
-    private MenuState menuState = MenuState.CLOSE;
+    Set<PluginModule> modules;
 
     public HyperionPluginView(@NonNull Context context) {
         this(context, null);
@@ -54,12 +45,10 @@ public class HyperionPluginView extends FrameLayout {
         final TextView versionText = findViewById(R.id.version_text);
         versionText.setText(context.getString(R.string.hype_version_text, BuildConfig.VERSION_NAME));
 
-        pluginListContainer = findViewById(R.id.plugin_list_container);
-        pluginExtension = new PluginExtensionImpl(component);
+        LinearLayout pluginListContainer = findViewById(R.id.plugin_list_container);
+        PluginExtensionImpl pluginExtension = new PluginExtensionImpl(component);
         setFitsSystemWindows(true);
         setId(R.id.hyperion_plugins);
-        ViewCompat.setImportantForAccessibility(
-                this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
         ViewCompat.setOnApplyWindowInsetsListener(this, new android.support.v4.view.OnApplyWindowInsetsListener() {
             @Override
             public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
@@ -71,50 +60,17 @@ public class HyperionPluginView extends FrameLayout {
                 return insets;
             }
         });
-    }
 
-    void setMenuState(MenuState menuState) {
-        this.menuState = menuState;
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        // block touches while the menu is closed.
-        return menuState == MenuState.CLOSE || super.onInterceptTouchEvent(ev);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        pluginExtension.setHyperionMenu((HyperionMenu) getParent());
-        populatePluginList(pluginRepository.getPlugins());
-    }
-
-    private void populatePluginList(Plugins plugins) {
         final Comparator<PluginModule> comparator = new AlphabeticalComparator(getContext());
         final Set<PluginModule> sortedModules = new TreeSet<>(comparator);
-        sortedModules.addAll(plugins.createModules());
-        this.modules = sortedModules;
+        sortedModules.addAll(modules);
 
-        final Context context = new PluginExtensionContextWrapper(
-                getContext(), pluginExtension);
-        final LayoutInflater inflater = LayoutInflater.from(context);
-        for (PluginModule module : modules) {
-            module.create(pluginExtension, context);
+        final Context inflaterContext = new PluginExtensionContextWrapper(getContext(), pluginExtension);
+        final LayoutInflater inflater = LayoutInflater.from(inflaterContext);
+        for (PluginModule module : sortedModules) {
             View view = module.createPluginView(inflater, pluginListContainer);
             pluginListContainer.addView(view);
         }
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (modules != null) {
-            for (PluginModule module : modules) {
-                module.destroy();
-            }
-        }
-        pluginExtension.setHyperionMenu(null);
     }
 
     private static final class AlphabeticalComparator implements Comparator<PluginModule> {

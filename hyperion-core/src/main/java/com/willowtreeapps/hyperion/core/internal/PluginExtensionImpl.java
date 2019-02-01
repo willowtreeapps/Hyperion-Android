@@ -16,7 +16,6 @@ import com.willowtreeapps.hyperion.plugin.v1.PluginExtension;
 class PluginExtensionImpl implements PluginExtension {
 
     private final CoreComponent component;
-    private HyperionMenu menu;
 
     PluginExtensionImpl(CoreComponent component) {
         this.component = component;
@@ -31,14 +30,13 @@ class PluginExtensionImpl implements PluginExtension {
     @NonNull
     @Override
     public ViewGroup getContentRoot() {
-        final HyperionOverlayLayout overlayLayout = getActivity().findViewById(R.id.hyperion_overlay);
-        return (ViewGroup) overlayLayout.getChildAt(0);
+        return (ViewGroup) component.getMenuController().getContentView();
     }
 
     @NonNull
     @Override
     public OverlayContainer getOverlayContainer() {
-        return component.getOverlayContainer();
+        return component.getMenuController();
     }
 
     @NonNull
@@ -62,10 +60,6 @@ class PluginExtensionImpl implements PluginExtension {
     @Nullable
     @Override
     public HyperionMenu getHyperionMenu() {
-        return menu;
-    }
-
-    void setHyperionMenu(@Nullable HyperionMenu menu) {
-        this.menu = menu;
+        return component.getMenuController();
     }
 }
