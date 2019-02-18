@@ -69,3 +69,9 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
               ./gradlew publish -Psonatype.username=$SONATYPE_USERNAME -Psonatype.password=$SONATYPE_PASSWORD -Porg.gradle.parallel=false
             fi
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: opensource-maven
