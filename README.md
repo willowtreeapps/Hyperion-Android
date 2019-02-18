@@ -54,6 +54,17 @@ If you reference Hyperion from your code, you should also compile the no-op arti
 releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.27'
 ```
 
+If you want to be on the bleeding-edge, you can try out the SNAPSHOT version.
+
+```groovy
+repositories {
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+dependencies {
+  debugImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.28-SNAPSHOT'
+}
+```
+
 Usage
 -----
 
