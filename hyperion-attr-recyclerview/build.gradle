@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply from: '../publish.gradle'
 
 group = project.libraryGroup
 version = project.libraryVersion
@@ -30,3 +29,5 @@ dependencies {
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
     implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
 }
+
+apply from: '../publish.gradle'

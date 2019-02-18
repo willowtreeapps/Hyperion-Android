@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply from: '../publish.gradle'
 
 group = project.libraryGroup
 version = project.libraryVersion
@@ -34,3 +33,5 @@ dependencies {
     implementation "com.google.dagger:dagger:${project.versionDagger}"
     annotationProcessor "com.google.dagger:dagger-compiler:${project.versionDagger}"
 }
+
+apply from: '../publish.gradle'
