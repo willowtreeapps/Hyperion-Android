@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply from: '../publish.gradle'
 
 group = project.libraryGroup
 version = project.libraryVersion
@@ -33,3 +32,5 @@ dependencies {
     implementation "com.google.dagger:dagger:${project.versionDagger}"
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
 }
+
+apply from: '../publish.gradle'

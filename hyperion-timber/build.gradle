@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply from: '../publish.gradle'
 
 group = project.libraryGroup
 version = project.libraryVersion
@@ -34,3 +33,5 @@ dependencies {
     implementation "com.jakewharton.timber:timber:4.7.0"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
+
+apply from: '../publish.gradle'

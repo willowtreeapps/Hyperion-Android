@@ -64,3 +64,8 @@ jobs:
           destination: recorder
 #      - store_test_results:
 #          path: app/build/test-results
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              ./gradlew publish -Psonatype.username=$SONATYPE_USERNAME -Psonatype.password=$SONATYPE_PASSWORD -Porg.gradle.parallel=false
+            fi

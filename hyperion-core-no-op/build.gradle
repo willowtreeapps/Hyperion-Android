@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply from: '../publish.gradle'
 
 group = project.libraryGroup
 version = project.libraryVersion
@@ -25,3 +24,5 @@ android {
 dependencies {
 
 }
+
+apply from: '../publish.gradle'
