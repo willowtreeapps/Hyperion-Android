@@ -107,6 +107,8 @@ The following is a list of all plugins that integrate with Hyperion. Please make
 - [Hyperion-Timber](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-timber) - View Timber recorded log messages.
 - [Hyperion-Shared-Preferences](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-shared-preferences) - View and edit your app\'s key-value storage.
 - [Hyperion-Build-Config](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-build-config) - View application BuildConfig values.
+- [Hyperion-Device-Info](https://github.com/DroidsOnRoids/FoQA#device-info-plugin) - View device market name and Android version.
+- [Hyperion-Font-Scale](https://github.com/DroidsOnRoids/FoQA#font-scale-plugin) - Change system font scale.
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
