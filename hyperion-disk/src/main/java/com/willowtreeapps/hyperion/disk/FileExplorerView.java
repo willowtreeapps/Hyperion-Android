@@ -6,9 +6,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.media.ThumbnailUtils;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.AttrRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -190,19 +193,33 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
             if (item.isVideo()) {
                 Bitmap thumbnail = ThumbnailUtils.createVideoThumbnail(
                         item.path, MediaStore.Video.Thumbnails.MINI_KIND);
-                image.setImageBitmap(thumbnail);
+                setImageBitmap(thumbnail);
             } else if (item.isImage()) {
                 BitmapFactory.Options bmOptions = new BitmapFactory.Options();
                 Bitmap bitmap = BitmapFactory.decodeFile(item.path, bmOptions);
                 bitmap = Bitmap.createScaledBitmap(bitmap, imageSize, imageSize, true);
-                image.setImageBitmap(bitmap);
+                setImageBitmap(bitmap);
             } else if (item.isDirectory) {
-                image.setImageResource(R.drawable.hd_ic_folder);
+                setImageResource(R.drawable.hd_ic_folder);
             } else {
-                image.setImageResource(R.drawable.hd_ic_file);
+                setImageResource(R.drawable.hd_ic_file);
             }
             text.setText(item.name);
             date.setText(item.lastModified);
+        }
+
+        private void setImageResource(@DrawableRes int resId) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                image.setImageTintMode(PorterDuff.Mode.SRC_IN);
+            }
+            image.setImageResource(resId);
+        }
+
+        private void setImageBitmap(Bitmap bitmap) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                image.setImageTintMode(PorterDuff.Mode.DST_IN);
+            }
+            image.setImageBitmap(bitmap);
         }
 
         @Override
