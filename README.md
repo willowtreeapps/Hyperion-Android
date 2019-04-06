@@ -1,7 +1,8 @@
 # Hyperion
 
 [![CircleCI](https://circleci.com/gh/willowtreeapps/Hyperion-Android.svg?style=svg&circle-token=3d0158d85c451692a4ce0ee18eb12617f67206eb)](https://circleci.com/gh/willowtreeapps/Hyperion-Android)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.willowtreeapps.hyperion/hyperion-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.willowtreeapps.hyperion/hyperion-core)
+[![Maven Central](https://img.shields.io/maven-central/v/com.willowtreeapps.hyperion/hyperion-core.svg)](https://search.maven.org/search?q=g:com.willowtreeapps.hyperion)
+[![Sonatype Snapshot](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.willowtreeapps.hyperion/hyperion-core.svg)](https://oss.sonatype.org/content/repositories/snapshots/com/willowtreeapps/hyperion)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)]()
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 
