@@ -1,30 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="131dp"
-    android:padding="@dimen/hype_plugin_padding"
-    android:orientation="horizontal"
+    android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:background="?attr/selectableItemBackground">
+    android:minHeight="131dp"
+    android:orientation="horizontal"
+    android:padding="@dimen/hype_plugin_padding">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="@dimen/hype_plugin_icon_size"
-        android:layout_height="@dimen/hype_plugin_icon_size"
-        android:layout_marginRight="28dp"
-        android:layout_marginEnd="28dp"
-        android:src="@drawable/hsql_icon_24dp"
-        app:tint="@color/hype_plugin_color_selector"
-        android:duplicateParentState="true"/>
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/hype_plugin_color_selector"
-        android:text="@string/hsql_plugin_name"
-        android:duplicateParentState="true"/>
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
 
-</LinearLayout>
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/hype_plugin_icon_size"
+            android:layout_height="@dimen/hype_plugin_icon_size"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:duplicateParentState="true"
+            android:src="@drawable/hsql_icon_24dp"
+            app:tint="@color/hype_plugin_color_selector" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:duplicateParentState="true"
+                android:text="@string/hsql_plugin_name"
+                android:textColor="@color/hype_plugin_color_selector"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/hsql_plugin_subtitle"
+                android:textColor="@color/hype_plugin_color_selector" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
