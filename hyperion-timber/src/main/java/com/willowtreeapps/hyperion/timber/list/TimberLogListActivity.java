@@ -37,6 +37,14 @@ public class TimberLogListActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tmb_activity_timber_list);
         mToolbar = findViewById(R.id.tmb_toolbar);
+        mToolbar.setNavigationIcon(R.drawable.tmb_ic_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         mToolbar.inflateMenu(R.menu.tmb_filter);
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -84,12 +92,6 @@ public class TimberLogListActivity extends AppCompatActivity implements View.OnC
         RecyclerView recyclerView = findViewById(R.id.tmb_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     private CircularBuffer<LogItem> getLogItemQueue() {

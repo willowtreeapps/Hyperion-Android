@@ -29,7 +29,7 @@ class TimberLogViewHolder extends RecyclerView.ViewHolder {
         logLevelView = itemView.findViewById(R.id.tmb_log_level);
         logDateTextView = itemView.findViewById(R.id.tmb_log_date);
         logMsgTextView = itemView.findViewById(R.id.tmb_log_msg);
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.US);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.ENGLISH);
     }
 
     void bind(LogItem logItem) {
