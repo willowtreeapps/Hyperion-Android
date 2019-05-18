@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Timber.i("Hello Timber Info!");
         Timber.v("Hello Timber Verbose!");
         Timber.w("Hello Timber Warn!");
+        Timber.d("https://google.com");
 
         CustomLog.debug("I'm a custom message!");
 

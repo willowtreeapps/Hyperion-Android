@@ -82,7 +82,7 @@ public class TimberLogListActivity extends AppCompatActivity implements View.OnC
         mShareButton.setOnClickListener(this);
 
         RecyclerView recyclerView = findViewById(R.id.tmb_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         recyclerView.setAdapter(adapter);
     }
 
