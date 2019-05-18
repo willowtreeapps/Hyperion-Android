@@ -26,11 +26,10 @@ import java.util.List;
 import timber.log.Timber;
 
 @HyperionIgnore
-public class TimberLogListActivity extends AppCompatActivity implements View.OnClickListener {
+public class TimberLogListActivity extends AppCompatActivity {
     Toolbar mToolbar;
     Toolbar mFilterToolbar;
     EditText mFilterEditText;
-    Button mShareButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +50,10 @@ public class TimberLogListActivity extends AppCompatActivity implements View.OnC
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.menu_item_filter) {
                     fadeIn(mFilterToolbar);
+                    return true;
+                }
+                if (item.getItemId() == R.id.menu_item_share) {
+                    collectLogs();
                     return true;
                 }
                 return false;
@@ -86,9 +89,6 @@ public class TimberLogListActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-        mShareButton = findViewById(R.id.button_share);
-        mShareButton.setOnClickListener(this);
-
         RecyclerView recyclerView = findViewById(R.id.tmb_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         recyclerView.setAdapter(adapter);
@@ -103,14 +103,6 @@ public class TimberLogListActivity extends AppCompatActivity implements View.OnC
         }
 
         throw new RuntimeException("TimberLogTree not planted in forest.");
-    }
-
-    @Override
-    public void onClick(View view) {
-        int viewId = view.getId();
-        if (viewId == R.id.button_share) {
-            collectLogs();
-        }
     }
 
     private void collectLogs() {

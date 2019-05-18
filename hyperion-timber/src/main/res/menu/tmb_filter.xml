@@ -5,4 +5,8 @@
         android:id="@+id/menu_item_filter"
         android:title="@string/tmb_filter" />
 
+    <item
+        android:id="@+id/menu_item_share"
+        android:title="@string/tmb_share" />
+
 </menu>

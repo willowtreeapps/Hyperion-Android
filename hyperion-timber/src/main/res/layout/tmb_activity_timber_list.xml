@@ -57,11 +57,4 @@
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <Button
-        android:id="@+id/button_share"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="Share" />
-
 </android.support.design.widget.CoordinatorLayout>

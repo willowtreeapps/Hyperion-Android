@@ -4,4 +4,5 @@
     <string name="tmb_plugin_name">Timber</string>
     <string name="tmb_plugin_subtitle">View Timber recorded log messages</string>
     <string name="tmb_filter">Filter</string>
+    <string name="tmb_share">Share</string>
 </resources>
