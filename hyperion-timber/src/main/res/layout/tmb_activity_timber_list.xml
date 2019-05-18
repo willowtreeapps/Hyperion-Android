@@ -12,13 +12,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tmb_toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/tmb_ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@string/tmb_plugin_name" />
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tmb_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/tmb_ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/tmb_plugin_name" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tmb_filter_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/tmb_ActionBarFilter"
+                android:visibility="gone"
+                android:background="@color/hype_white"
+                app:title="@string/tmb_plugin_name">
+
+                <EditText
+                    android:id="@+id/tmb_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/tmb_filter"
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    tools:targetApi="o" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -26,14 +54,14 @@
         android:id="@+id/tmb_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <Button
-        android:text="Share"
         android:id="@+id/button_share"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_height="wrap_content" />
+        android:text="Share" />
 
 </android.support.design.widget.CoordinatorLayout>

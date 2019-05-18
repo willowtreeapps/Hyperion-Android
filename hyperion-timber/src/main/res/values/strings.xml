@@ -3,4 +3,5 @@
     <public name="tmb_timber" type="string">Hyperion-Timber</public>
     <string name="tmb_plugin_name">Timber</string>
     <string name="tmb_plugin_subtitle">View Timber recorded log messages</string>
+    <string name="tmb_filter">Filter</string>
 </resources>
