@@ -141,6 +141,7 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
         private final TextView text;
         private final TextView date;
         private final View options;
+        private final int imageSize;
         private FileItem item;
 
         private FileViewHolder(Files files, final View itemView) {
@@ -181,6 +182,7 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
                     menu.show();
                 }
             });
+            imageSize = (int) itemView.getContext().getResources().getDimension(R.dimen.hd_file_image_size);
         }
 
         private void bind(FileItem item) {
@@ -192,7 +194,7 @@ public class FileExplorerView extends FrameLayout implements Files.Listener {
             } else if (item.isImage()) {
                 BitmapFactory.Options bmOptions = new BitmapFactory.Options();
                 Bitmap bitmap = BitmapFactory.decodeFile(item.path, bmOptions);
-                bitmap = Bitmap.createScaledBitmap(bitmap, itemView.getWidth(), itemView.getHeight(), true);
+                bitmap = Bitmap.createScaledBitmap(bitmap, imageSize, imageSize, true);
                 image.setImageBitmap(bitmap);
             } else if (item.isDirectory) {
                 image.setImageResource(R.drawable.hd_ic_folder);
