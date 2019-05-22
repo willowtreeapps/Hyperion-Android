@@ -74,15 +74,15 @@ Include the core library along with any number of plugins.
 ```groovy
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.27'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.27'
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.27'
 ```
 
 ## Adding Plugins
@@ -96,18 +96,26 @@ Hyperion has adopted a [code of conduct](CODE_OF_CONDUCT.md) defined by the [Con
 
 ## Plugin Descriptions
 The following is a list of all plugins that integrate with Hyperion. Please make a pull request if you would like to see your plugin here:
+
+### Core Plugins
+- [Hyperion-Attr](/hyperion-attr) - Inspect views and adjust their attributes.
+- [Hyperion-Build-Config](/hyperion-build-config) - View application BuildConfig values.
+- [Hyperion-Crash](/hyperion-crash) - Show alternative activity when app crashes with the crash details. No UI for this module within drawer.
+- [Hyperion-Disk](/hyperion-disk) - Browse, delete, or share your app\'s files.
+- [Hyperion-Geiger-Counter](/hyperion-geiger-counter) - Check animation performance by listening for dropped frames. Please turn up the media volume. Haptic feedback is also supported. Inspired by [KMCGeigerCounter](https://github.com/kconner/KMCGeigerCounter).
+- [Hyperion-Measurement](/hyperion-measurement) - Tap views to measure the distances between them.
+- [Hyperion-Phoenix](/hyperion-phoenix) - Clear local storage and relaunch the app.
+- [Hyperion-Recorder](/hyperion-recorder) - Record, save, and share a video of your app.
+- [Hyperion-Shared-Preferences](/hyperion-shared-preferences) - View and edit your app\'s key-value storage.
+- [Hyperion-SQLite](/hyperion-sqlite) - Browse SQLite databases within your app.
+- [Hyperion-Timber](/hyperion-timber) - View Timber recorded log messages.
+
 ### Third Party Plugins
 - [Hyperion-Chuck](https://github.com/Commit451/Hyperion-Chuck) - Plugin which adds a button to inspect OkHttp traffic using [Chuck](https://github.com/jgilfelt/chuck)
 - [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which shows screen of details about an application
 - [Hyperion-Simple-Item](https://github.com/takahirom/Hyperion-Simple-Item) - Plugin which adds simple menus
 - [Hyperion-DBFlow-Manager](https://github.com/wajahatkarim3/DBFlowManager-Hyperion-Plugin) - Plugin which adds a button in inspect [DBFlow](https://github.com/Raizlabs/DBFlow) databases and apply queries on it locally.
 - [Hyperion-kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine-hyperion) - Plugin for checking the state of registered [kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine) instances.
-
-### Core Plugins
-- [Hyperion-Geiger-Counter](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-geiger-counter) - Check animation performance by listening for dropped frames. Please turn up the media volume. Haptic feedback is also supported. Inspired by [KMCGeigerCounter](https://github.com/kconner/KMCGeigerCounter).
-- [Hyperion-Timber](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-timber) - View Timber recorded log messages.
-- [Hyperion-Shared-Preferences](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-shared-preferences) - View and edit your app\'s key-value storage.
-- [Hyperion-Build-Config](https://github.com/willowtreeapps/Hyperion-Android/tree/develop/hyperion-build-config) - View application BuildConfig values.
 - [Hyperion-Device-Info](https://github.com/DroidsOnRoids/FoQA#device-info-plugin) - View device market name and Android version.
 - [Hyperion-Font-Scale](https://github.com/DroidsOnRoids/FoQA#font-scale-plugin) - Change system font scale.
 

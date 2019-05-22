@@ -3,4 +3,5 @@
     <string name="hsql_tables_list_heading">Tables</string>
     <string name="hsql_database_list_heading">Databases</string>
     <string name="hsql_data_type_blob">Blob Data</string>
+    <string name="hsql_plugin_subtitle">Browse SQLite databases within your app.</string>
 </resources>
