@@ -3,6 +3,8 @@ package com.willowtreeapps.hyperion.timber.list;
 import android.content.res.Resources;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,7 +29,7 @@ class TimberLogViewHolder extends RecyclerView.ViewHolder {
         logLevelView = itemView.findViewById(R.id.tmb_log_level);
         logDateTextView = itemView.findViewById(R.id.tmb_log_date);
         logMsgTextView = itemView.findViewById(R.id.tmb_log_msg);
-        dateFormat = new SimpleDateFormat("mm:ss:SSS", Locale.ENGLISH);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.ENGLISH);
     }
 
     void bind(LogItem logItem) {
@@ -35,6 +37,7 @@ class TimberLogViewHolder extends RecyclerView.ViewHolder {
         logLevelView.setBackgroundColor(logLevelColor);
         logDateTextView.setText(dateFormat.format(logItem.date));
         logMsgTextView.setText(logItem.message);
+        Linkify.addLinks(logMsgTextView, Linkify.ALL);
     }
 
 }
