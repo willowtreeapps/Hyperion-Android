@@ -13,7 +13,7 @@ android {
         versionCode buildVersionCode()
         versionName version
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
@@ -26,11 +26,11 @@ android {
 dependencies {
     testImplementation "junit:junit:4.12"
     api project(':hyperion-plugin')
-    implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
+    implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
-    implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
-    implementation "com.android.support:design:${project.versionSupportLibrary}"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerview}"
+    implementation "com.google.android.material:material:${project.versionMaterial}"
+    implementation "androidx.constraintlayout:constraintlayout:${project.versionConstraintLayout}"
 }
 
 apply from: '../publish.gradle'

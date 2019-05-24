@@ -6,9 +6,12 @@ project.ext.set("targetSdkVersion", 28)
 project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
 project.ext.set("libraryVersion", '0.9.28-SNAPSHOT')
 
-project.ext.set("versionSupportLibrary", "28.0.0")
 project.ext.set("versionAutoService", "1.0-rc4")
 project.ext.set("versionDagger", "2.15")
+project.ext.set("versionRecyclerview", "1.0.0")
+project.ext.set("versionAppCompat", "1.0.2")
+project.ext.set("versionConstraintLayout", "1.1.3")
+project.ext.set("versionMaterial", "1.0.0")
 
 buildscript {
 
@@ -25,7 +28,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "me.tatarka.gradle:pom:1.0"
     }
 }

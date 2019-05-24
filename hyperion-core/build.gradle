@@ -14,7 +14,7 @@ android {
         versionName version
         consumerProguardFiles 'consumer-proguard-rules.pro'
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
@@ -28,8 +28,8 @@ dependencies {
     implementation(project(':hyperion-plugin')) {
         transitive = true
     }
-    implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
-    implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
+    implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerview}"
     implementation "com.google.dagger:dagger:${project.versionDagger}"
     annotationProcessor "com.google.dagger:dagger-compiler:${project.versionDagger}"
 }
