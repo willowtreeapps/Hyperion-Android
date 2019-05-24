@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 import com.willowtreeapps.hyperion.attr.AttributeValue;
 

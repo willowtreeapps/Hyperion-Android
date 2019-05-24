@@ -1,9 +1,9 @@
 package com.willowtreeapps.hyperion.plugin.v1;
 
 import android.graphics.Rect;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Px;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Px;
 import android.view.View;
 
 @MainThread

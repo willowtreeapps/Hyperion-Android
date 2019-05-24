@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
-import android.support.annotation.NonNull;
-import android.support.v4.widget.CompoundButtonCompat;
+import androidx.annotation.NonNull;
+import androidx.core.widget.CompoundButtonCompat;
 import android.widget.CompoundButton;
 
 import com.google.auto.service.AutoService;

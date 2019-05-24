@@ -27,7 +27,7 @@ dependencies {
     compileOnly project(':hyperion-plugin')
     compileOnly project(':hyperion-attr')
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
-    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerview}"
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerView}"
 }
 
 apply from: '../publish.gradle'

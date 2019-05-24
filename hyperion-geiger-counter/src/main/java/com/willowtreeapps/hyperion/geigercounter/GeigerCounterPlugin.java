@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.geigercounter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;

@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 final class Preconditions {
 

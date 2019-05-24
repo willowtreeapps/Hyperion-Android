@@ -29,7 +29,7 @@ dependencies {
         transitive = true
     }
     implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
-    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerview}"
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerView}"
     implementation "com.google.dagger:dagger:${project.versionDagger}"
     annotationProcessor "com.google.dagger:dagger-compiler:${project.versionDagger}"
 }

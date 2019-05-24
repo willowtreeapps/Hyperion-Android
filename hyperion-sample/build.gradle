@@ -35,7 +35,7 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
-    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerview}"
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerView}"
     implementation "com.jakewharton.timber:timber:4.7.0"
     implementation 'androidx.room:room-runtime:2.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'

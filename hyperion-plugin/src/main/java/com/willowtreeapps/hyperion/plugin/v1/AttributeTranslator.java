@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.plugin.v1;
 
-import android.support.annotation.Px;
+import androidx.annotation.Px;
 
 public interface AttributeTranslator {
 

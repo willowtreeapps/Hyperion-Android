@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.plugin.v1;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 public interface OnOverlayViewChangedListener {

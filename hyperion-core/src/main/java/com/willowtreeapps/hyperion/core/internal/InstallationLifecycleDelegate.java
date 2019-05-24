@@ -1,13 +1,10 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
+import androidx.core.content.ContextCompat;
 import android.view.ViewGroup;
 
-import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 
 import javax.inject.Inject;

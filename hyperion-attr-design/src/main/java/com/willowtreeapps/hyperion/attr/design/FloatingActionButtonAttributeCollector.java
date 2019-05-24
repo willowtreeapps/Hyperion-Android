@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.design;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.AttributeValue;

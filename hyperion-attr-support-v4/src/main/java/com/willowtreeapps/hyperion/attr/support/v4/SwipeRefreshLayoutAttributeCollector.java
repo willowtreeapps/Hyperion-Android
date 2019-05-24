@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.support.v4;
 
-import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.NonNull;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;

@@ -1,8 +1,8 @@
 package com.willowtreeapps.hyperion.sqlite.presentation;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.willowtreeapps.hyperion.sqlite.domain.usecase.UseCase;
 

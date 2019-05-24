@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.timber.timber;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.willowtreeapps.hyperion.timber.model.CircularBuffer;
 import com.willowtreeapps.hyperion.timber.model.Level;

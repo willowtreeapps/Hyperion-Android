@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.attr;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 abstract class DataViewHolder<T> extends RecyclerView.ViewHolder {

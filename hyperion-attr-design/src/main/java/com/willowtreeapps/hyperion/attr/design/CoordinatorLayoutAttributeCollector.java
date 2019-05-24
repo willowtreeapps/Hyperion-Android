@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.design;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;

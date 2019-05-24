@@ -1,15 +1,10 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
-import android.support.v4.view.ViewCompat;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
+import androidx.core.view.ViewCompat;
 
 import com.willowtreeapps.hyperion.core.PluginSource;
 import com.willowtreeapps.hyperion.core.PublicControl;
-import com.willowtreeapps.hyperion.core.R;
 import com.willowtreeapps.hyperion.plugin.v1.ForegroundManager;
 
 import javax.inject.Inject;

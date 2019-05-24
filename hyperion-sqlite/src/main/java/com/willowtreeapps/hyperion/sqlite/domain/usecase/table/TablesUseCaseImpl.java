@@ -2,7 +2,7 @@ package com.willowtreeapps.hyperion.sqlite.domain.usecase.table;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.willowtreeapps.hyperion.sqlite.domain.usecase.BaseUseCase;
 import com.willowtreeapps.hyperion.sqlite.model.ColumnInfo;

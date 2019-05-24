@@ -3,7 +3,7 @@ package com.willowtreeapps.hyperion.disk;
 import android.os.FileObserver;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.util.Arrays;

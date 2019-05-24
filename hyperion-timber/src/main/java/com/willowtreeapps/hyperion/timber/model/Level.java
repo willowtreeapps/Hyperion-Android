@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.timber.model;
 
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 import android.util.Log;
 
 import com.willowtreeapps.hyperion.timber.R;

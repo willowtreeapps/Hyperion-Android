@@ -35,7 +35,7 @@ dependencies {
     api project(':hyperion-plugin')
     implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
-    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerview}"
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerView}"
     implementation "com.google.android.material:material:${project.versionMaterial}"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'

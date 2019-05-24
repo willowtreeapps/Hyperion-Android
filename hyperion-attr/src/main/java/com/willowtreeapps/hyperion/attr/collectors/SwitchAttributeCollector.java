@@ -2,7 +2,7 @@ package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.Switch;
 
 import com.google.auto.service.AutoService;

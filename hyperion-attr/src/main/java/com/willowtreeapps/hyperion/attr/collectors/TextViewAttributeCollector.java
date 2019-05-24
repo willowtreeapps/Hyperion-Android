@@ -2,8 +2,8 @@ package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.widget.TextViewCompat;
+import androidx.annotation.NonNull;
+import androidx.core.widget.TextViewCompat;
 import android.widget.TextView;
 
 import com.google.auto.service.AutoService;

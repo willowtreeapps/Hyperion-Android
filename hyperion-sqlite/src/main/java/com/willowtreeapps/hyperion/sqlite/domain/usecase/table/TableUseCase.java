@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.sqlite.domain.usecase.table;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.willowtreeapps.hyperion.sqlite.domain.usecase.UseCase;
 import com.willowtreeapps.hyperion.sqlite.model.ColumnInfo;

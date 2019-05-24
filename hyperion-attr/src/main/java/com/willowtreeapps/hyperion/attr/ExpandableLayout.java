@@ -8,7 +8,7 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Interpolator;

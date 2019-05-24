@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.design;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
+import androidx.annotation.NonNull;
+import com.google.android.material.appbar.AppBarLayout;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;

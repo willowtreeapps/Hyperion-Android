@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
