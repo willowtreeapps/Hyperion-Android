@@ -39,38 +39,44 @@ public final class Hyperion {
 
     /**
      * Manually trigger the Hyperion menu embedded in the current foreground {@link Activity}
+     *
+     * @return true if the menu was opened, otherwise false
      **/
-    public static void open() {
+    public static boolean open() {
         requireApplication();
-        AppComponent.Holder.getInstance(application).getPublicControl().open();
+        return AppComponent.Holder.getInstance(application).getPublicControl().open();
     }
 
     /**
      * Manually trigger the Hyperion menu embedded in the given {@link Activity} to open.
      *
      * @param activity the {@link Activity} containing the menu to open.
+     * @return true if the menu was opened, otherwise false
      */
-    public static void open(Activity activity) {
+    public static boolean open(Activity activity) {
         requireApplication();
-        AppComponent.Holder.getInstance(application).getPublicControl().open(activity);
+        return AppComponent.Holder.getInstance(application).getPublicControl().open(activity);
     }
 
     /**
      * Manually trigger closing the Hyperion menu embedded in the current foreground {@link Activity}
+     *
+     * @return true if the menu was closed, otherwise false
      **/
-    public static void close() {
+    public static boolean close() {
         requireApplication();
-        AppComponent.Holder.getInstance(application).getPublicControl().close();
+        return AppComponent.Holder.getInstance(application).getPublicControl().close();
     }
 
     /**
      * Manually trigger the Hyperion menu embedded in the given {@link Activity} to close.
      *
      * @param activity the {@link Activity} containing the menu to close.
+     * @return true if the menu was opened, otherwise false
      */
-    public static void close(Activity activity) {
+    public static boolean close(Activity activity) {
         requireApplication();
-        AppComponent.Holder.getInstance(application).getPublicControl().close(activity);
+        return AppComponent.Holder.getInstance(application).getPublicControl().close(activity);
     }
 
     /**

@@ -98,9 +98,9 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
         });
     }
 
-    public void expand() {
+    public boolean expand() {
         if (menuState != MenuState.CLOSE) {
-            return;
+            return false;
         }
         setMenuState(MenuState.OPENING);
         View contentView = getContentView();
@@ -168,6 +168,7 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
                 ViewCompat.setBackground(contentView, decorBackground);
             }
         }
+        return true;
     }
 
     @Nullable
@@ -180,9 +181,9 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
         return constantState != null ? constantState.newDrawable() : drawable.mutate();
     }
 
-    public void collapse() {
+    public boolean collapse() {
         if (menuState != MenuState.OPEN) {
-            return;
+            return false;
         }
         setMenuState(MenuState.CLOSING);
         final View contentView = getContentView();
@@ -223,6 +224,7 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
                 .translationX(160.0f)
                 .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
                 .start();
+        return true;
     }
 
     public void onResume() {
