@@ -61,6 +61,23 @@ class PublicControlImpl implements PublicControl {
     }
 
     @Override
+    public void close() {
+        final Activity foregroundActivity = foregroundManager.getForegroundActivity();
+        if (foregroundActivity != null) {
+            close(foregroundActivity);
+        }
+    }
+
+    @Override
+    public void close(Activity activity) {
+        CoreComponent component = container.getComponent(activity);
+        if (component == null) {
+            return;
+        }
+        component.getMenuController().collapse();
+    }
+
+    @Override
     public void setPluginSource(PluginSource pluginSource) {
         container.setPluginSource(pluginSource);
     }

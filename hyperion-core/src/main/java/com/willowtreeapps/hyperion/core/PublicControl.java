@@ -8,6 +8,10 @@ public interface PublicControl {
 
     void open(Activity activity);
 
+    void close();
+
+    void close(Activity activity);
+
     void setShakeGestureSensitivity(float sensitivity);
 
     float getShakeGestureSensitivity();

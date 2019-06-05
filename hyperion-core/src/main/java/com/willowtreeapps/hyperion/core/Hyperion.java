@@ -56,6 +56,24 @@ public final class Hyperion {
     }
 
     /**
+     * Manually trigger closing the Hyperion menu embedded in the current foreground {@link Activity}
+     **/
+    public static void close() {
+        requireApplication();
+        AppComponent.Holder.getInstance(application).getPublicControl().close();
+    }
+
+    /**
+     * Manually trigger the Hyperion menu embedded in the given {@link Activity} to close.
+     *
+     * @param activity the {@link Activity} containing the menu to close.
+     */
+    public static void close(Activity activity) {
+        requireApplication();
+        AppComponent.Holder.getInstance(application).getPublicControl().close(activity);
+    }
+
+    /**
      * Hook to manually register a plugin source.
      * This API does not update the Hyperion menu retroactively,
      * so clients should call this as early as possible.
