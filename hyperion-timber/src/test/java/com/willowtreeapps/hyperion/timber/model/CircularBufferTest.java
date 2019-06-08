@@ -35,4 +35,14 @@ public class CircularBufferTest {
         assertEquals((Integer) 1, queue.getItem(2));
     }
 
+    @Test
+    public void overfill() {
+        int maxSize = 10;
+        CircularBuffer<Integer> queue = new CircularBuffer<>(maxSize);
+        for (int i = 1; i <= maxSize * 4; i++) {
+            queue.enqueue(i);
+        }
+        assertEquals((Integer) (maxSize * 4), queue.getItem(0));
+    }
+
 }

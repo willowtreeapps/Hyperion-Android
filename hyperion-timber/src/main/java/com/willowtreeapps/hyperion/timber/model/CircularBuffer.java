@@ -10,6 +10,7 @@ public class CircularBuffer<T> {
     private final Object[] queue;
     private int head;
     private int size;
+    private int currentSize = 0;
 
     /**
      * Create the queue with a maximum size.
@@ -29,7 +30,11 @@ public class CircularBuffer<T> {
         queue[head] = item;
         head++;
         size++;
+        if (currentSize != queue.length) {
+            currentSize++;
+        }
         if (head == queue.length) head = 0;
+        printQueue();
     }
 
     /**
@@ -38,7 +43,7 @@ public class CircularBuffer<T> {
      * @return number of stored elements
      */
     public int size() {
-        return Math.min(this.size, queue.length);
+        return currentSize;
     }
 
     /**
@@ -54,4 +59,15 @@ public class CircularBuffer<T> {
         return (T) queue[target];
     }
 
+    private void printQueue() {
+        System.out.print("Current queue: ");
+        for (int i = 0; i < this.size(); i++) {
+            try {
+                System.out.print(" " + this.getItem(i) + " ");
+            } catch (Exception e ) {
+                System.out.print(" e ");
+            }
+        }
+        System.out.println();
+    }
 }
