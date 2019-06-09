@@ -5,4 +5,9 @@
     <string name="tmb_plugin_subtitle">View Timber recorded log messages</string>
     <string name="tmb_filter">Filter</string>
     <string name="tmb_share">Share</string>
+    <string name="tmb_last_logs">Last </string>
+    <plurals name="tmb_last_logs">
+        <item quantity="one">Last %d log</item>
+        <item quantity="other">Last %d logs</item>
+    </plurals>
 </resources>
