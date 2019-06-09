@@ -8,9 +8,10 @@ package com.willowtreeapps.hyperion.timber.model;
 public class CircularBuffer<T> {
 
     private final Object[] queue;
-    private int head;
-    private int size;
+    private int head = 0;
+    private int nextHead = 0;
     private int currentSize = 0;
+    private int maxSize;
 
     /**
      * Create the queue with a maximum size.
@@ -19,6 +20,7 @@ public class CircularBuffer<T> {
      */
     public CircularBuffer(int size) {
         queue = new Object[size];
+        maxSize = size;
     }
 
     /**
@@ -27,14 +29,18 @@ public class CircularBuffer<T> {
      * @param item to be added
      */
     public void enqueue(T item) {
+        head = nextHead;
         queue[head] = item;
-        head++;
-        size++;
-        if (currentSize != queue.length) {
+        if (currentSize != maxSize) {
             currentSize++;
         }
-        if (head == queue.length) head = 0;
+        nextHead++;
+        if (nextHead == maxSize) {
+            nextHead = 0;
+        }
+
         printQueue();
+        //printQueueNormal();
     }
 
     /**
@@ -54,19 +60,29 @@ public class CircularBuffer<T> {
      */
     @SuppressWarnings("unchecked")
     public T getItem(int index) {
-        int target = head - 1 - index;
-        if (target < 0) target = size + target - head;
-        return (T) queue[target];
+        int target = index;
+        if (index >= maxSize) {
+            target = maxSize - index;
+        }
+        return (T) queue[head - target];
     }
 
     private void printQueue() {
-        System.out.print("Current queue: ");
+        System.out.print("Curren: ");
         for (int i = 0; i < this.size(); i++) {
             try {
                 System.out.print(" " + this.getItem(i) + " ");
-            } catch (Exception e ) {
+            } catch (Exception e) {
                 System.out.print(" e ");
             }
+        }
+        System.out.println();
+    }
+
+    private void printQueueNormal() {
+        System.out.print("Actual: ");
+        for (int i = 0; i < this.size(); i++) {
+            System.out.print(" " + queue[i] + " ");
         }
         System.out.println();
     }
