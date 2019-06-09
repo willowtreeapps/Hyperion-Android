@@ -38,9 +38,6 @@ public class CircularBuffer<T> {
         if (nextHead == maxSize) {
             nextHead = 0;
         }
-
-        printQueue();
-        //printQueueNormal();
     }
 
     /**
@@ -60,30 +57,8 @@ public class CircularBuffer<T> {
      */
     @SuppressWarnings("unchecked")
     public T getItem(int index) {
-        int target = index;
-        if (index >= maxSize) {
-            target = maxSize - index;
-        }
-        return (T) queue[head - target];
-    }
-
-    private void printQueue() {
-        System.out.print("Curren: ");
-        for (int i = 0; i < this.size(); i++) {
-            try {
-                System.out.print(" " + this.getItem(i) + " ");
-            } catch (Exception e) {
-                System.out.print(" e ");
-            }
-        }
-        System.out.println();
-    }
-
-    private void printQueueNormal() {
-        System.out.print("Actual: ");
-        for (int i = 0; i < this.size(); i++) {
-            System.out.print(" " + queue[i] + " ");
-        }
-        System.out.println();
+        int target = head - index;
+        if (target < 0) target = queue.length + target - head;
+        return (T) queue[target];
     }
 }
