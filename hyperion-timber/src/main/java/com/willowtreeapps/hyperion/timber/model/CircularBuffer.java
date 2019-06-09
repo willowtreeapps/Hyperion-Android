@@ -11,7 +11,6 @@ public class CircularBuffer<T> {
     private int head = 0;
     private int nextHead = 0;
     private int currentSize = 0;
-    private int maxSize;
 
     /**
      * Create the queue with a maximum size.
@@ -20,7 +19,6 @@ public class CircularBuffer<T> {
      */
     public CircularBuffer(int size) {
         queue = new Object[size];
-        maxSize = size;
     }
 
     /**
@@ -31,11 +29,11 @@ public class CircularBuffer<T> {
     public void enqueue(T item) {
         head = nextHead;
         queue[head] = item;
-        if (currentSize != maxSize) {
+        if (currentSize != queue.length) {
             currentSize++;
         }
         nextHead++;
-        if (nextHead == maxSize) {
+        if (nextHead == queue.length) {
             nextHead = 0;
         }
     }
