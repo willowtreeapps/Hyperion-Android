@@ -56,7 +56,7 @@ public class CircularBuffer<T> {
     @SuppressWarnings("unchecked")
     public T getItem(int index) {
         int target = head - index;
-        if (target < 0) target = queue.length + target - head;
+        if (target < 0) target = queue.length + target;
         return (T) queue[target];
     }
 }
