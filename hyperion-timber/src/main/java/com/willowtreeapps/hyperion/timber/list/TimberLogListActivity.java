@@ -64,6 +64,9 @@ public class TimberLogListActivity extends AppCompatActivity {
 
         CircularBuffer<LogItem> logItemQueue = getLogItemQueue();
         final TimberLogListAdapter adapter = new TimberLogListAdapter(logItemQueue);
+
+        int numberOfLogs = logItemQueue.size();
+        mToolbar.setSubtitle(getResources().getQuantityString(R.plurals.tmb_last_logs, numberOfLogs, numberOfLogs));
         mFilterEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
