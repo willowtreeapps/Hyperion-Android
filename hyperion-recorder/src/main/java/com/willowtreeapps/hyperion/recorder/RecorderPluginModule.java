@@ -63,13 +63,13 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
         if (RecordingManager.isRecording()) {
             stopRecording();
         } else {
-            startRecording();
+            startRecording(v.getContext());
         }
     }
 
-    private void startRecording() {
+    private void startRecording(Context context) {
         try {
-            RecordingManager.prepare(getContext());
+            RecordingManager.prepare(context);
             RecordingManager.requestStart(getExtension().getActivityResults(), REQUEST_CODE);
         } catch (RecordingException ex) {
             ex.printStackTrace();
@@ -97,7 +97,7 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
             return;
         }
         if (resultCode != RESULT_OK) {
-            Toast.makeText(getContext(),
+            Toast.makeText(view.getContext(),
                     "Screen Cast Permission Denied", Toast.LENGTH_SHORT).show();
             RecordingManager.reset();
             view.setSelected(false);
