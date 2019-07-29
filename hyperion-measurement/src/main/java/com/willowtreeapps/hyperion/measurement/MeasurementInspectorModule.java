@@ -44,7 +44,7 @@ class MeasurementInspectorModule extends PluginModule
     public void onClick(View v) {
         View currentOverlay = overlay.getOverlayView();
         if (currentOverlay == null || !OVERLAY_TAG.equals(currentOverlay.getTag())) {
-            View newOverlay = new MeasurementOverlayView(getContext());
+            View newOverlay = new MeasurementOverlayView(v.getContext());
             newOverlay.setTag(OVERLAY_TAG);
             overlay.setOverlayView(newOverlay);
         } else {
