@@ -15,4 +15,19 @@ public interface HyperionMenu {
     void addOnMenuStateChangedListener(@NonNull OnMenuStateChangedListener listener);
 
     boolean removeOnMenuStateChangedListener(@NonNull OnMenuStateChangedListener listener);
+
+    /**
+     * Request to open the menu.
+     *
+     * @return true if the menu was opened
+     */
+    boolean expand();
+
+    /**
+     * Request the to close the menu.
+     *
+     * @return true if the menu was closed
+     */
+    boolean collapse();
+
 }
