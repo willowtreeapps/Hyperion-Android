@@ -98,6 +98,7 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
         });
     }
 
+    @Override
     public boolean expand() {
         if (menuState != MenuState.CLOSE) {
             return false;
@@ -181,6 +182,7 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
         return constantState != null ? constantState.newDrawable() : drawable.mutate();
     }
 
+    @Override
     public boolean collapse() {
         if (menuState != MenuState.OPEN) {
             return false;
