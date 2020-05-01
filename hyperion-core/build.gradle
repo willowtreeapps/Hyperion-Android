@@ -15,6 +15,10 @@ android {
         consumerProguardFiles 'consumer-proguard-rules.pro'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // VERSION_NAME no longer available as of 4.1
+        // https://issuetracker.google.com/issues/158695880
+        buildConfigField 'String', 'VERSION_NAME', "\"$version\""
     }
 
     lintOptions {

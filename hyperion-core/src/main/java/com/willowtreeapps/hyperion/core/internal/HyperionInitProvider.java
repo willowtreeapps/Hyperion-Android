@@ -2,8 +2,10 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Application;
 import android.content.Context;
-import androidx.annotation.NonNull;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.willowtreeapps.hyperion.core.Hyperion;
 
@@ -26,6 +28,7 @@ public class HyperionInitProvider extends EmptyContentProvider {
 
     @NonNull
     private Context requireContextInternal() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) return requireContext();
         final Context context = getContext();
         if (context == null) {
             throw new NullPointerException("context == null");

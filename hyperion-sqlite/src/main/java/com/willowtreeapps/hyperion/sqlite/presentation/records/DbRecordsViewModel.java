@@ -7,6 +7,8 @@ import android.graphics.Typeface;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.willowtreeapps.hyperion.sqlite.R;
 import com.willowtreeapps.hyperion.sqlite.domain.usecase.records.RecordsViewerUseCase;
 import com.willowtreeapps.hyperion.sqlite.domain.usecase.records.RecordsViewerUseCaseImpl;
@@ -35,7 +37,7 @@ public class DbRecordsViewModel extends DatabaseViewModel<RecordsViewerUseCase> 
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<Cursor, List<TableRow>>() {
                     @Override
-                    public List<TableRow> apply(Cursor cursor) throws Exception {
+                    public List<TableRow> apply(@NonNull Cursor cursor) throws Exception {
                         return getTableRows(context, cursor);
                     }
                 })
