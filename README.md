@@ -118,6 +118,7 @@ The following is a list of all plugins that integrate with Hyperion. Please make
 - [Hyperion-kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine-hyperion) - Plugin for checking the state of registered [kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine) instances.
 - [Hyperion-Device-Info](https://github.com/DroidsOnRoids/FoQA#device-info-plugin) - View device market name and Android version.
 - [Hyperion-Font-Scale](https://github.com/DroidsOnRoids/FoQA#font-scale-plugin) - Change system font scale.
+- [Hyperion-Host-Interceptor](https://github.com/MiSikora/Hyperion-Host-Interceptor) - Intercept OkHttp client host at runtime.
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.
