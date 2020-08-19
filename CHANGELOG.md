@@ -1,3 +1,7 @@
+### August 18, 2020 - v0.9.29
+- Fixes CI publish script
+- Updates AGP and gradle versions
+
 ### August 18, 2020 - v0.9.28
 - Fixes [#197](https://github.com/willowtreeapps/Hyperion-Android/issues/197)
 - Fixes [#190](https://github.com/willowtreeapps/Hyperion-Android/issues/190)
