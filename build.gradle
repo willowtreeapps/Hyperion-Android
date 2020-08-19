@@ -13,20 +13,13 @@ project.ext.set("versionDagger", "2.15")
 buildscript {
 
     repositories {
-        jcenter()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
         google()
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
-        classpath "me.tatarka.gradle:pom:1.0"
+        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'digital.wup:android-maven-publish:3.6.2'
     }
 }
 
@@ -35,10 +28,6 @@ allprojects {
         google()
         jcenter()
     }
-}
-
-subprojects {
-    task moduleDependencies(type: DependencyReportTask) {}
 }
 
 task clean(type: Delete) {
