@@ -1,156 +1,69 @@
-apply plugin: 'maven-publish'
 apply plugin: 'signing'
-apply plugin: 'me.tatarka.gradle.pom'
+apply plugin: 'digital.wup.android-maven-publish'
 
-def isAndroid = plugins.hasPlugin('com.android.library')
-
-ext {
-    pomFile = file("${project.buildDir}/generated-pom.xml")
-    isReleaseVersion = !(project.version =~ /-SNAPSHOT$/)
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from(android.sourceSets.main.java.srcDirs)
 }
 
-if (isAndroid) {
-    task javadoc(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-    }
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    failOnError = false
 }
 
 task javadocsJar(type: Jar) {
     classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    if (isAndroid) {
-        from android.sourceSets.main.java.srcDirs
-    } else {
-        from sourceSets.main.allSource
-    }
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocsJar
-}
-
-signing {
-    required { signatory != null && project.ext.isReleaseVersion }
-    sign configurations.archives
+    from(androidJavadocs)
 }
 
 def siteUrl = 'https://github.com/willowtreeapps/Hyperion-Android'
 def gitUrl = 'https://github.com/willowtreeapps/Hyperion-Android.git'
 
-pom {
-    name project.name
-    if (isAndroid) {
-        packaging 'aar'
-    }
-    description 'App Debugging & Inspection Tool for Android Edit'
-    url siteUrl
-
-    scm {
-        url siteUrl
-        connection gitUrl
-        developerConnection gitUrl
-    }
-
-    licenses {
-        license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-            distribution 'repo'
-        }
-    }
-
-    developers {
-        developer {
-            id 'kritarie'
-            name 'Sean Amos'
-        }
-    }
-}
-
 publishing {
-    repositories {
-        maven {
-            if (project.ext.isReleaseVersion) {
-                url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            } else {
-                url 'https://oss.sonatype.org/content/repositories/snapshots/'
-            }
-
-            credentials {
-                username = project.findProperty('sonatype.username')
-                password = project.findProperty('sonatype.password')
-            }
-        }
-    }
-
     publications {
         lib(MavenPublication) {
-            // The publication doesn't know about our dependencies, so we have to manually add them to the pom
-            pom.withXml {
-                def dependenciesNode = asNode().appendNode('dependencies')
-
-                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
-                configurations.implementation.allDependencies.each {
-                    def dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', it.group)
-                    dependencyNode.appendNode('artifactId', it.name)
-                    dependencyNode.appendNode('version', it.version)
-                }
-            }
-
-            if (isAndroid) {
-                artifact "$buildDir/outputs/aar/${project.name}-release.aar"
-            } else {
-                from components.java
-            }
-
+            from components.android
             artifact sourcesJar
             artifact javadocsJar
 
-            if (signing.required) {
-                // Sign the artifacts.
-                project.tasks.signArchives.signatureFiles.each {
-                    artifact(it) {
-                        def matcher = it.file =~ /-?(?<classifier>sources|javadoc)?\.(?<extension>jar|aar)\.asc$/
-                        if (matcher.find()) {
-                            classifier = matcher.group('classifier')
-                            extension = matcher.group('extension') + '.asc'
-                        }
+            pom {
+                name = project.name
+                description = 'App Debugging & Inspection Tool for Android'
+                url = siteUrl
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
                     }
                 }
-            }
-        }
-    }
-}
-
-if (signing.required) {
-    project.afterEvaluate {
-        // Sign the pom.xml.
-        publishing.publications.lib(MavenPublication) {
-            pom.withXml {
-                writeTo(project.ext.pomFile)
-                def pomAscFile = signing.sign(project.ext.pomFile).signatureFiles[0]
-                artifact(pomAscFile) {
-                    classifier = null
-                    extension = 'pom.asc'
+                developers {
+                    developer {
+                        id = 'kritarie'
+                        name = 'Sean Amos'
+                    }
                 }
-                project.ext.pomFile.delete()
+                scm {
+                    connection = gitUrl
+                    developerConnection = gitUrl
+                    url = siteUrl
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            def snapshotsRepoUrl = 'https://oss.sonatype.org/content/repositories/snapshots'
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username project.findProperty('sonatype.username')
+                password project.findProperty('sonatype.password')
             }
         }
     }
 }
 
-model {
-    tasks.publishLibPublicationToMavenLocal {
-        dependsOn(project.tasks.signArchives)
-    }
-
-    tasks.publishLibPublicationToMavenRepository {
-        dependsOn(project.tasks.signArchives)
-    }
+signing {
+    sign publishing.publications.lib
 }
