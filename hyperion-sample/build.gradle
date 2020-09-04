@@ -10,6 +10,7 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode buildVersionCode()
         versionName version
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -35,6 +36,7 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
+    implementation "androidx.multidex:multidex:${project.versionMultidex}"
     implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerView}"
     implementation "com.jakewharton.timber:timber:4.7.0"
     implementation 'androidx.room:room-runtime:2.0.0'

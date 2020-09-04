@@ -28,6 +28,8 @@ dependencies {
     compileOnly project(':hyperion-attr')
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
     implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
+    implementation "androidx.slidingpanelayout:slidingpanelayout:${project.versionSlidingPanelLayout}"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:${project.versionSwipeRefreshLayout}"
 }
 
 apply from: '../publish.gradle'
