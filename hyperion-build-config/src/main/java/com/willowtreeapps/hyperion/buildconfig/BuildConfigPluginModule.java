@@ -22,7 +22,7 @@ class BuildConfigPluginModule extends PluginModule implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getContext(), BuildConfigListActivity.class);
-        getContext().startActivity(intent);
+        Intent intent = new Intent(v.getContext(), BuildConfigListActivity.class);
+        v.getContext().startActivity(intent);
     }
 }

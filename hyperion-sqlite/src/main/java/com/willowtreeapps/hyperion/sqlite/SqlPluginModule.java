@@ -22,6 +22,6 @@ class SqlPluginModule extends PluginModule implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        getContext().startActivity(new Intent(getContext(), DatabaseListActivity.class));
+        v.getContext().startActivity(new Intent(v.getContext(), DatabaseListActivity.class));
     }
 }

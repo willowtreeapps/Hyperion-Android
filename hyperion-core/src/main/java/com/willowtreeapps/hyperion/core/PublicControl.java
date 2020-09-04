@@ -4,9 +4,13 @@ import android.app.Activity;
 
 public interface PublicControl {
 
-    void open();
+    boolean open();
 
-    void open(Activity activity);
+    boolean open(Activity activity);
+
+    boolean close();
+
+    boolean close(Activity activity);
 
     void setShakeGestureSensitivity(float sensitivity);
 

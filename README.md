@@ -42,17 +42,17 @@ Download via Maven:
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
   <artifactId>hyperion-core</artifactId>
-  <version>0.9.27</version>
+  <version>0.9.29</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.29'
 ```
 
 If you reference Hyperion from your code, you should also compile the no-op artifact for release variants. For most users, this will not be necessary:
 ```groovy
-releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.27'
+releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.29'
 ```
 
 If you want to be on the bleeding-edge, you can try out the SNAPSHOT version.
@@ -62,7 +62,7 @@ repositories {
   maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 dependencies {
-  debugImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.28-SNAPSHOT'
+  debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.29-SNAPSHOT'
 }
 ```
 
@@ -72,17 +72,17 @@ Usage
 Include the core library along with any number of plugins.
 
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.27'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.27'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.29'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.29'
 ```
 
 ## Adding Plugins
@@ -118,6 +118,7 @@ The following is a list of all plugins that integrate with Hyperion. Please make
 - [Hyperion-kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine-hyperion) - Plugin for checking the state of registered [kfin-state-machine](https://github.com/ToxicBakery/kfin-state-machine) instances.
 - [Hyperion-Device-Info](https://github.com/DroidsOnRoids/FoQA#device-info-plugin) - View device market name and Android version.
 - [Hyperion-Font-Scale](https://github.com/DroidsOnRoids/FoQA#font-scale-plugin) - Change system font scale.
+- [Hyperion-Host-Interceptor](https://github.com/MiSikora/Hyperion-Host-Interceptor) - Intercept OkHttp client host at runtime.
 
 ## License
 Hyperion is available under the MIT license. See the LICENSE file for more info.

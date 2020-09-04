@@ -69,15 +69,15 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
         popupMenu.show();
     }
 
-    private void warnIfNeedToRaiseVolume() {
+    private void warnIfNeedToRaiseVolume(Context context) {
         // Remind the user to raise the media volume if no sound or haptics will be played.
-        AudioManager audioManager = (AudioManager) getContext().getSystemService(AUDIO_SERVICE);
+        AudioManager audioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
         if (detector.isEnabled() // Detector is on
                 && !detector.areHapticsEnabled() // User won't hear haptics
                 && audioManager != null
                 && audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) <= 0) // Media volume is muted
         {
-            Toast.makeText(getContext(), R.string.hgc_volume_warning, LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.hgc_volume_warning, LENGTH_SHORT).show();
         }
     }
 
@@ -128,7 +128,7 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
     public void onClick(View v) {
         detector.setEnabled(!detector.isEnabled());
 
-        warnIfNeedToRaiseVolume();
+        warnIfNeedToRaiseVolume(v.getContext());
     }
 
     // OnMenuStateChangedListener

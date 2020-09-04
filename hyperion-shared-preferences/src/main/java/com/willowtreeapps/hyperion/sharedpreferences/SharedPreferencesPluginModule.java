@@ -22,7 +22,7 @@ class SharedPreferencesPluginModule extends PluginModule implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getContext(), SharedPreferencesListActivity.class);
-        getContext().startActivity(intent);
+        Intent intent = new Intent(v.getContext(), SharedPreferencesListActivity.class);
+        v.getContext().startActivity(intent);
     }
 }

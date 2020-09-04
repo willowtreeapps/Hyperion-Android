@@ -12,7 +12,7 @@ public class HyperionInitProvider extends EmptyContentProvider {
     @Override
     public boolean onCreate() {
         try {
-            final Context context = requireContext();
+            final Context context = requireContextInternal();
             Hyperion.setApplication(context);
             final Application application = (Application) context.getApplicationContext();
             final AppComponent component = AppComponent.Holder.getInstance(context);
@@ -25,7 +25,7 @@ public class HyperionInitProvider extends EmptyContentProvider {
     }
 
     @NonNull
-    private Context requireContext() {
+    private Context requireContextInternal() {
         final Context context = getContext();
         if (context == null) {
             throw new NullPointerException("context == null");

@@ -22,7 +22,7 @@ class TimberPluginModule extends PluginModule implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getContext(), TimberLogListActivity.class);
-        getContext().startActivity(intent);
+        Intent intent = new Intent(v.getContext(), TimberLogListActivity.class);
+        v.getContext().startActivity(intent);
     }
 }

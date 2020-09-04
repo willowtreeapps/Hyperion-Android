@@ -4,7 +4,7 @@ project.ext.set("minSdkVersion", 15)
 project.ext.set("targetSdkVersion", 28)
 
 project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
-project.ext.set("libraryVersion", '0.9.28-SNAPSHOT')
+project.ext.set("libraryVersion", '0.9.29')
 
 project.ext.set("versionAutoService", "1.0-rc4")
 project.ext.set("versionDagger", "2.15")
@@ -16,20 +16,13 @@ project.ext.set("versionMaterial", "1.0.0")
 buildscript {
 
     repositories {
-        jcenter()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
         google()
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
-        classpath "me.tatarka.gradle:pom:1.0"
+        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'digital.wup:android-maven-publish:3.6.2'
     }
 }
 
@@ -38,10 +31,6 @@ allprojects {
         google()
         jcenter()
     }
-}
-
-subprojects {
-    task moduleDependencies(type: DependencyReportTask) {}
 }
 
 task clean(type: Delete) {

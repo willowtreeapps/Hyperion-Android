@@ -53,7 +53,7 @@ class AttributeInspectorModule extends PluginModule
     public void onClick(View v) {
         final View currentOverlay = overlay.getOverlayView();
         if (currentOverlay == null || !OVERLAY_TAG.equals(currentOverlay.getTag())) {
-            View newOverlay = new AttributeOverlayView(getContext());
+            View newOverlay = new AttributeOverlayView(v.getContext());
             newOverlay.setTag(OVERLAY_TAG);
             overlay.setOverlayView(newOverlay);
         } else {
