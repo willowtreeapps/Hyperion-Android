@@ -10,7 +10,8 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode buildVersionCode()
         versionName version
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
@@ -34,11 +35,12 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
-    implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
+    implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
+    implementation "androidx.multidex:multidex:${project.versionMultidex}"
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerView}"
     implementation "com.jakewharton.timber:timber:4.7.0"
-    implementation "android.arch.persistence.room:runtime:1.1.0"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.0"
+    implementation 'androidx.room:room-runtime:2.0.0'
+    annotationProcessor 'androidx.room:room-compiler:2.0.0'
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')
     debugImplementation project(':hyperion-attr')

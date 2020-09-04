@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.attr;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 public abstract class MutableViewAttribute<T> extends ViewAttribute<T> {

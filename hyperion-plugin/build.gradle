@@ -13,7 +13,7 @@ android {
         versionCode buildVersionCode()
         versionName version
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    compileOnly "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
+    compileOnly "androidx.appcompat:appcompat:${project.versionAppCompat}"
 }
 
 apply from: '../publish.gradle'

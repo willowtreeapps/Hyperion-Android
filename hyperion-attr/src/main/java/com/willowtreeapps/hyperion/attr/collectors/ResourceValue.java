@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.content.res.Resources;
-import android.support.annotation.AnyRes;
+import androidx.annotation.AnyRes;
 
 import com.willowtreeapps.hyperion.attr.AttributeValue;
 

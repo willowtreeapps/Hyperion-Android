@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.EditText;
 
 import com.google.auto.service.AutoService;

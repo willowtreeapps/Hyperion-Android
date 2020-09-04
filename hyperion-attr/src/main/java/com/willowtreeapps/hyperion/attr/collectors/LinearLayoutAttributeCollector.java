@@ -1,8 +1,8 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutCompat;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import android.widget.LinearLayout;
 
 import com.google.auto.service.AutoService;

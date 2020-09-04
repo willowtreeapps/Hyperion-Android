@@ -1,6 +1,6 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import android.support.annotation.Px;
+import androidx.annotation.Px;
 
 import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 import com.willowtreeapps.hyperion.plugin.v1.MeasurementHelper;

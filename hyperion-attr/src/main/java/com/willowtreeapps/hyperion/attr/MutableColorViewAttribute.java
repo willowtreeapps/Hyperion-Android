@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr;
 
 import android.graphics.Color;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public abstract class MutableColorViewAttribute extends MutableViewAttribute<Color> {
     MutableColorViewAttribute(String key, @NonNull Color value) {

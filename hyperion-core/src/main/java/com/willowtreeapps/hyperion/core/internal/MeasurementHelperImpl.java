@@ -1,8 +1,8 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.annotation.Px;
+import androidx.annotation.NonNull;
+import androidx.annotation.Px;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;

@@ -2,7 +2,7 @@ package com.willowtreeapps.hyperion.sqlite.domain.database;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.reactivex.Flowable;
 

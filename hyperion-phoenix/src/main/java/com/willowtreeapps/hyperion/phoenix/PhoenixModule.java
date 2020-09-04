@@ -2,9 +2,8 @@ package com.willowtreeapps.hyperion.phoenix;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

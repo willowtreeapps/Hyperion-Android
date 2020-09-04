@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.recycler;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.collectors.TypedAttributeCollector;

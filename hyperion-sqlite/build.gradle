@@ -12,7 +12,7 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode buildVersionCode()
         versionName version
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
@@ -33,15 +33,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api project(':hyperion-plugin')
-    implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
+    implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
-    implementation "com.android.support:recyclerview-v7:${project.versionSupportLibrary}"
-    implementation "com.android.support:design:${project.versionSupportLibrary}"
-    implementation "android.arch.lifecycle:extensions:1.1.0"
-    implementation "android.arch.lifecycle:viewmodel:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:${project.versionRecyclerView}"
+    implementation "com.google.android.material:material:${project.versionMaterial}"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }

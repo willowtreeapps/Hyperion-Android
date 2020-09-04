@@ -1,8 +1,10 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 @SuppressLint("CommitTransaction")
 abstract class FragmentCompatTransaction {
@@ -19,7 +21,7 @@ abstract class FragmentCompatTransaction {
         return new Android(transaction);
     }
 
-    static FragmentCompatTransaction beginTransaction(android.support.v4.app.FragmentTransaction transaction) {
+    static FragmentCompatTransaction beginTransaction(FragmentTransaction transaction) {
         return new Support(transaction);
     }
 
@@ -57,27 +59,27 @@ abstract class FragmentCompatTransaction {
 
     private static class Support extends FragmentCompatTransaction {
 
-        private final android.support.v4.app.FragmentTransaction transaction;
+        private final FragmentTransaction transaction;
 
-        private Support(android.support.v4.app.FragmentTransaction transaction) {
+        private Support(FragmentTransaction transaction) {
             this.transaction = transaction;
         }
 
         @Override
         FragmentCompatTransaction add(Object fragment, @Nullable String tag) {
-            transaction.add((android.support.v4.app.Fragment) fragment, tag);
+            transaction.add((Fragment) fragment, tag);
             return this;
         }
 
         @Override
         FragmentCompatTransaction add(int containerViewId, Object fragment, @Nullable String tag) {
-            transaction.add(containerViewId, (android.support.v4.app.Fragment) fragment, tag);
+            transaction.add(containerViewId, (Fragment) fragment, tag);
             return this;
         }
 
         @Override
         FragmentCompatTransaction remove(Object fragment) {
-            transaction.remove((android.support.v4.app.Fragment) fragment);
+            transaction.remove((Fragment) fragment);
             return this;
         }
 

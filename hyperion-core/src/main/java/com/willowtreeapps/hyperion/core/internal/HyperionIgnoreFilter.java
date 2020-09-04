@@ -3,7 +3,7 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.support.v4.util.SimpleArrayMap;
+import androidx.collection.SimpleArrayMap;
 
 import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 

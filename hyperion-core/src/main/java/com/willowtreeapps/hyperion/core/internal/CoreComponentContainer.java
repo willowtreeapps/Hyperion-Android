@@ -2,11 +2,10 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
+import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
 
 import com.willowtreeapps.hyperion.core.PluginSource;
-import com.willowtreeapps.hyperion.plugin.v1.Plugin;
 import com.willowtreeapps.hyperion.plugin.v1.PluginExtension;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 

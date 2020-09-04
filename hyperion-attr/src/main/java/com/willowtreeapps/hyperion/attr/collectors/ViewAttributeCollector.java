@@ -2,9 +2,9 @@ package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.view.ViewCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.view.ViewCompat;
 import android.view.View;
 
 import com.google.auto.service.AutoService;

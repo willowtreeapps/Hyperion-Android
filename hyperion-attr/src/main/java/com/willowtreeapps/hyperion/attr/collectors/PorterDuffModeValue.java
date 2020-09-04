@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.graphics.PorterDuff;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.willowtreeapps.hyperion.attr.AttributeValue;
 

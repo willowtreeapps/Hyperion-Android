@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.attr.support.v7;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.ViewAttribute;

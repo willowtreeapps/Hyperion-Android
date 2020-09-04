@@ -13,7 +13,7 @@ android {
         versionCode buildVersionCode()
         versionName version
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
@@ -25,8 +25,8 @@ android {
 
 dependencies {
     api project(':hyperion-plugin')
-    implementation "com.android.support:appcompat-v7:${project.versionSupportLibrary}"
-    implementation "com.android.support:design:${project.versionSupportLibrary}"
+    implementation "androidx.appcompat:appcompat:${project.versionAppCompat}"
+    implementation "com.google.android.material:material:${project.versionMaterial}"
     annotationProcessor "com.google.auto.service:auto-service:${project.versionAutoService}"
 }
 

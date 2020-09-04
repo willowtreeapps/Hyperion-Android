@@ -1,7 +1,7 @@
 package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Application;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 import com.willowtreeapps.hyperion.plugin.v1.ApplicationExtension;
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;
