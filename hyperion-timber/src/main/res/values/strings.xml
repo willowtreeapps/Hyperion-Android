@@ -10,4 +10,5 @@
         <item quantity="one">Last %d log</item>
         <item quantity="other">Last %d logs</item>
     </plurals>
+    <string name="tmb_message_with_tag_format">%1$s: %2$s</string>
 </resources>

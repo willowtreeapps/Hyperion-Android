@@ -113,11 +113,16 @@ public class TimberLogListActivity extends AppCompatActivity {
         StringBuilder logs = new StringBuilder();
         for (int i = 0; i < size; i++) {
             LogItem logItem = logItemQueue.getItem(i);
+            String messageWithTag = logItem.tag != null
+                    ? getString(R.string.tmb_message_with_tag_format, logItem.tag, logItem.message)
+                    : logItem.message;
+
             logs.append(logItem.level)
                     .append(" : [")
                     .append(logItem.date)
                     .append("] --> ")
-                    .append(logItem.message).append("\n");
+                    .append(messageWithTag)
+                    .append("\n");
         }
         ShareCompat.IntentBuilder
                 .from(this)

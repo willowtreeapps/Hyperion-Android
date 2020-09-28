@@ -35,7 +35,10 @@ class TimberLogViewHolder extends RecyclerView.ViewHolder {
         int logLevelColor = ResourcesCompat.getColor(resources, logItem.level.colorRes, null);
         logLevelView.setBackgroundColor(logLevelColor);
         logDateTextView.setText(dateFormat.format(logItem.date));
-        logMsgTextView.setText(logItem.message);
+        String messageWithTag = logItem.tag != null
+                ? resources.getString(R.string.tmb_message_with_tag_format, logItem.tag, logItem.message)
+                : logItem.message;
+        logMsgTextView.setText(messageWithTag);
         Linkify.addLinks(logMsgTextView, Linkify.ALL);
     }
 

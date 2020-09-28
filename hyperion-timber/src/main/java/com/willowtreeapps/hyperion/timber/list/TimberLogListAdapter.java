@@ -50,7 +50,7 @@ class TimberLogListAdapter extends RecyclerView.Adapter<TimberLogViewHolder> {
         if (filter != null) {
             for (int i = 0; i < logItems.size(); i++) {
                 LogItem item = logItems.getItem(i);
-                if (containsIgnoreCase(item.message, filter)) {
+                if (containsIgnoreCase(item.tag, filter) || containsIgnoreCase(item.message, filter)) {
                     filteredLogItems.add(item);
                 }
             }
