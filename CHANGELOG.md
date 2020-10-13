@@ -1,5 +1,5 @@
 ### October 13, 2020 - v0.9.30
-- Update Core plugins to androidx / jetpack
+- Update Core plugins to Androidx / Jetpack
 
 ### August 18, 2020 - v0.9.29
 - Fixes CI publish script
