@@ -1,3 +1,6 @@
+### October 13, 2020 - v0.9.30
+- Update Core plugins to androidx / jetpack
+
 ### August 18, 2020 - v0.9.29
 - Fixes CI publish script
 - Updates AGP and gradle versions
