@@ -30,7 +30,7 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
                 new Intent(activity, HyperionService.class),
                 connection,
                 Context.BIND_AUTO_CREATE);
-        component.getMenuController().onResume();
+        component.getMenuController().onStart();
     }
 
     @Override
@@ -42,7 +42,7 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
             }
             final ServiceConnection connection = component.getServiceConnection();
             foregroundActivity.unbindService(connection);
-            component.getMenuController().onPause();
+            component.getMenuController().onStop();
             foregroundActivity = null;
         }
     }

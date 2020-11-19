@@ -229,11 +229,11 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
         return true;
     }
 
-    public void onResume() {
+    public void onStart() {
         sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
-    public void onPause() {
+    public void onStop() {
         sensorManager.unregisterListener(shakeDetector);
     }
 
