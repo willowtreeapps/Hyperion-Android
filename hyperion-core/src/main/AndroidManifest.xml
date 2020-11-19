@@ -6,12 +6,13 @@
 
     <application>
         <provider
-            android:authorities="${applicationId}.HyperionInitProvider"
             android:name=".internal.HyperionInitProvider"
+            android:authorities="${applicationId}.HyperionInitProvider"
             android:exported="false" />
         <service
             android:name=".internal.HyperionService"
-            android:exported="false"/>
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
     </application>
 
 </manifest>

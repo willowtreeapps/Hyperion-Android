@@ -19,7 +19,7 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
     }
 
     @Override
-    public void onActivityResumed(Activity activity) {
+    public void onActivityStarted(Activity activity) {
         foregroundActivity = activity;
         CoreComponent component = container.getComponent(activity);
         if (component == null) {
@@ -34,7 +34,7 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
     }
 
     @Override
-    public void onActivityPaused(Activity activity) {
+    public void onActivityStopped(Activity activity) {
         if (foregroundActivity == activity) {
             CoreComponent component = container.getComponent(activity);
             if (component == null) {
