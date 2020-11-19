@@ -19,7 +19,7 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
     }
 
     @Override
-    public void onActivityResumed(Activity activity) {
+    public void onActivityStarted(Activity activity) {
         foregroundActivity = activity;
         CoreComponent component = container.getComponent(activity);
         if (component == null) {
@@ -30,11 +30,11 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
                 new Intent(activity, HyperionService.class),
                 connection,
                 Context.BIND_AUTO_CREATE);
-        component.getMenuController().onResume();
+        component.getMenuController().onStart();
     }
 
     @Override
-    public void onActivityPaused(Activity activity) {
+    public void onActivityStopped(Activity activity) {
         if (foregroundActivity == activity) {
             CoreComponent component = container.getComponent(activity);
             if (component == null) {
@@ -42,7 +42,7 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
             }
             final ServiceConnection connection = component.getServiceConnection();
             foregroundActivity.unbindService(connection);
-            component.getMenuController().onPause();
+            component.getMenuController().onStop();
             foregroundActivity = null;
         }
     }
