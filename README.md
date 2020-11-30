@@ -62,7 +62,7 @@ repositories {
   maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 dependencies {
-  debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.30-SNAPSHOT'
+  debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.31-SNAPSHOT'
 }
 ```
 
