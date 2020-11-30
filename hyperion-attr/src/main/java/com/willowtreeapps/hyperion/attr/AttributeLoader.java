@@ -19,7 +19,7 @@ class AttributeLoader {
     @Inject
     AttributeLoader(AttributeTranslator attributeTranslator) {
         this.attributeTranslator = attributeTranslator;
-        this.typedCollectors = AttributeCollectors.get();
+        this.typedCollectors = AttributeCollectors.getInstance().getCollectors();
     }
 
     @SuppressWarnings("unchecked")
