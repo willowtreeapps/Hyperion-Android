@@ -71,7 +71,7 @@ public class HyperionMenuController implements HyperionMenu, OverlayContainer {
         shakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake() {
-                collapse();
+                expand();
             }
         });
     }
