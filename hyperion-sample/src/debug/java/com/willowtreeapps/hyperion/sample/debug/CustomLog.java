@@ -11,9 +11,9 @@ public class CustomLog {
     private CustomLog() {
     }
 
-    public static void debug(String message) {
+    public static void debug(String tag, String message) {
         TimberPlugin.logItemBuffer
-                .enqueue(new LogItem(Level.DEBUG, new Date(), message));
+                .enqueue(new LogItem(Level.DEBUG, new Date(), tag, message));
     }
 
 }

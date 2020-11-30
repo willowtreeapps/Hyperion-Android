@@ -10,7 +10,7 @@ import java.util.Date;
 
 import timber.log.Timber;
 
-public class TimberLogTree extends Timber.Tree {
+public class TimberLogTree extends Timber.DebugTree {
 
     private final CircularBuffer<LogItem> circularBuffer;
 
@@ -27,6 +27,7 @@ public class TimberLogTree extends Timber.Tree {
         LogItem logItem = new LogItem(
                 Level.forLogLevel(priority),
                 new Date(),
+                tag,
                 message);
 
         circularBuffer.enqueue(logItem);
