@@ -6,7 +6,7 @@ public class CustomLog {
     private CustomLog() {
     }
 
-    public static void debug(String message) {
+    public static void debug(String tag, String message) {
     }
 
 }
