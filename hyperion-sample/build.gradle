@@ -25,11 +25,9 @@ android {
             // Force a private static variable to be added to the BuildConfig
             testCoverageEnabled true
             minifyEnabled false
-            useProguard false
         }
         release {
             minifyEnabled true
-            useProguard true
         }
     }
 }

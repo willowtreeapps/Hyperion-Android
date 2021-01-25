@@ -6,12 +6,14 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import androidx.annotation.RequiresApi;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +36,9 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
     private final int tickSoundID;
     // Sentinel value indicating we failed to load the tick sound
     private static final int NOT_LOADED = -1;
+
+    // Devices lacking displays may now enable the frame detector
+    private static final int HARDWARE_DISABLED = -1;
 
     // Whether we are watching for dropped frames
     private boolean isEnabled;
@@ -65,10 +70,13 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
         }
         this.tickSoundID = tickSoundID;
 
-        WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
-        Display display = windowManager.getDefaultDisplay();
-        double hardwareFramesPerSecond = display.getRefreshRate();
-        hardwareFrameIntervalSeconds = 1.0 / hardwareFramesPerSecond;
+        Display display = getDisplay(context);
+        if (display != null) {
+            double hardwareFramesPerSecond = display.getRefreshRate();
+            hardwareFrameIntervalSeconds = 1.0 / hardwareFramesPerSecond;
+        } else {
+            hardwareFrameIntervalSeconds = HARDWARE_DISABLED;
+        }
     }
 
     public boolean isEnabled() {
@@ -76,6 +84,7 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
     }
 
     public void setEnabled(boolean isEnabled) {
+        if (hardwareFrameIntervalSeconds == HARDWARE_DISABLED) return;
         this.isEnabled = isEnabled;
 
         Choreographer choreographer = Choreographer.getInstance();
@@ -107,6 +116,13 @@ class DroppedFrameDetector implements Choreographer.FrameCallback {
 
     public void removeObserver(DroppedFrameDetectorObserver observer) {
         observers.remove(observer);
+    }
+
+    @Nullable
+    private Display getDisplay(Context context) {
+            WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
+            if (windowManager == null) return null;
+            else return windowManager.getDefaultDisplay();
     }
 
     // Helpers
