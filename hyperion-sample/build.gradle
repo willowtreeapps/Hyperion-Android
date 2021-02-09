@@ -39,6 +39,7 @@ dependencies {
     implementation "com.jakewharton.timber:timber:4.7.0"
     implementation 'androidx.room:room-runtime:2.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
     debugImplementation project(':hyperion-core')
     releaseImplementation project(':hyperion-core-no-op')
     debugImplementation project(':hyperion-attr')
