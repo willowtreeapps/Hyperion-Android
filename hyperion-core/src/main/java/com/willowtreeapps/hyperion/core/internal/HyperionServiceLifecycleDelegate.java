@@ -42,6 +42,9 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
             }
             final ServiceConnection connection = component.getServiceConnection();
             foregroundActivity.unbindService(connection);
+            if (connection instanceof HyperionService.Connection){
+                ((HyperionService.Connection) connection).forceDisconnect();
+            }
             component.getMenuController().onStop();
             foregroundActivity = null;
         }
