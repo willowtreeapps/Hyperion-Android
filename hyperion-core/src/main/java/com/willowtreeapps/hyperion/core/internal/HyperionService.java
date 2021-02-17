@@ -40,7 +40,7 @@ public class HyperionService extends Service {
     void attach(Activity activity) {
         this.activity = new WeakReference<>(activity);
         initChannels();
-        startForeground(NOTIFICATION_ID, createNotification(activity));
+        startForeground(NOTIFICATION_ID, createNotification());
     }
 
     void detach(Activity activity) {
@@ -53,7 +53,7 @@ public class HyperionService extends Service {
         }
     }
 
-    private Notification createNotification(Activity activity) {
+    private Notification createNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentIntent(createContentPendingIntent())
                 .setTicker("")
