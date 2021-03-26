@@ -32,15 +32,15 @@ public class HyperionService extends Service {
     private static final int ACTION_REQUEST_CODE_OPEN_MENU = 0x100;
     private static final String ACTION_OPEN_MENU = "open-menu";
 
-    private final IBinder binder = new Binder();
-    private final BroadcastReceiver actionOpenMenuReceiver = new OpenMenuReceiver();
+    private BroadcastReceiver actionOpenMenuReceiver = new OpenMenuReceiver();
+    private IBinder binder = new Binder();
     private NotificationManager notificationManager;
     private WeakReference<Activity> activity;
 
     void attach(Activity activity) {
         this.activity = new WeakReference<>(activity);
         initChannels();
-        startForeground(NOTIFICATION_ID, createNotification(activity));
+        startForeground(NOTIFICATION_ID, createNotification());
     }
 
     void detach(Activity activity) {
@@ -53,7 +53,7 @@ public class HyperionService extends Service {
         }
     }
 
-    private Notification createNotification(Activity activity) {
+    private Notification createNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentIntent(createContentPendingIntent())
                 .setTicker("")
@@ -110,7 +110,9 @@ public class HyperionService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        binder = null;
         unregisterReceiver(actionOpenMenuReceiver);
+        actionOpenMenuReceiver = null;
     }
 
     @Nullable
@@ -131,7 +133,7 @@ public class HyperionService extends Service {
         }
     }
 
-    final class Binder extends android.os.Binder {
+    final private class Binder extends android.os.Binder {
         HyperionService getService() {
             return HyperionService.this;
         }
@@ -156,6 +158,12 @@ public class HyperionService extends Service {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            this.service.detach(activity);
+            service = null;
+        }
+
+        void forceDisconnect(){
+            // `onServiceDisconnected` doesn't seem to be called as expected, so this method guarantees unbinding.
             this.service.detach(activity);
             service = null;
         }

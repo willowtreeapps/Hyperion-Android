@@ -76,6 +76,9 @@ class HyperionIgnoreFilter implements Application.ActivityLifecycleCallbacks {
         } else {
             HyperionIgnore ignore = activity.getClass().getAnnotation(HyperionIgnore.class);
             boolean shouldIgnore = ignore != null;
+            if (activity.getClass().getName().equals("leakcanary.internal.activity.LeakActivity")){
+                shouldIgnore = true;
+            }
             cache.put(clz, shouldIgnore);
             return shouldIgnore;
         }
