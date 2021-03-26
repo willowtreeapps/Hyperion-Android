@@ -42,17 +42,17 @@ Download via Maven:
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
   <artifactId>hyperion-core</artifactId>
-  <version>0.9.30</version>
+  <version>0.9.31</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.30'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.31'
 ```
 
 If you reference Hyperion from your code, you should also compile the no-op artifact for release variants. For most users, this will not be necessary:
 ```groovy
-releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.30'
+releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.31'
 ```
 
 If you want to be on the bleeding-edge, you can try out the SNAPSHOT version.
@@ -72,17 +72,17 @@ Usage
 Include the core library along with any number of plugins.
 
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.30'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.30'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.31'
 ```
 
 ## Adding Plugins
