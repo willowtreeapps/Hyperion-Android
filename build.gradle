@@ -4,7 +4,7 @@ project.ext.set("minSdkVersion", 15)
 project.ext.set("targetSdkVersion", 30)
 
 project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
-project.ext.set("libraryVersion", '0.9.31')
+project.ext.set("libraryVersion", '0.9.32')
 
 project.ext.set("versionAutoService", "1.0-rc4")
 project.ext.set("versionDagger", "2.24")
@@ -24,7 +24,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.1.3'
         classpath 'digital.wup:android-maven-publish:3.6.2'
     }
 }

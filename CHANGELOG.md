@@ -1,4 +1,8 @@
-### January 25, 2020 - v0.9.31
+### March 26, 2021 - v0.9.32
+
+- Fixes memory leak caused by dangling hyperion service connections (Fixes [#220](https://github.com/willowtreeapps/Hyperion-Android/issues/220))
+
+### January 25, 2021 - v0.9.31
 
 - Increment target SDK version to 30 (Fixes [#191](https://github.com/willowtreeapps/Hyperion-Android/issues/191))
 
