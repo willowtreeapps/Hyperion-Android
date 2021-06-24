@@ -1,3 +1,7 @@
+### June 24, 2021 - v0.9.33
+
+- Fixes NPE caused by hyperion service disconnect (Fixes [#225](https://github.com/willowtreeapps/Hyperion-Android/issues/225))
+
 ### March 26, 2021 - v0.9.32
 
 - Fixes memory leak caused by dangling hyperion service connections (Fixes [#220](https://github.com/willowtreeapps/Hyperion-Android/issues/220))

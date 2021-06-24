@@ -14,7 +14,7 @@
 
 Hyperion is a hidden plugin drawer that can easily be integrated into any app. The drawer sits discreetly 🙊 under the app so that it is there when you need it and out of the way when you don't. Hyperion plugins are designed to make inspection of your app quick and simple.
 
-Please see our annoucement [blog post](https://willowtreeapps.com/ideas/introducing-hyperion-for-android) for a feature showcase.
+Please see our announcement [blog post](https://willowtreeapps.com/ideas/introducing-hyperion-for-android) for a feature showcase.
 
 ![Demo Attribute inspector](https://images.ctfassets.net/3cttzl4i3k1h/1KhiROG0wcSi8QYa6iYGI0/0cd93ebf5a67012c09e16964032ea7e6/image2new.gif)
 
@@ -42,17 +42,17 @@ Download via Maven:
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
   <artifactId>hyperion-core</artifactId>
-  <version>0.9.31</version>
+  <version>0.9.33</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.33'
 ```
 
 If you reference Hyperion from your code, you should also compile the no-op artifact for release variants. For most users, this will not be necessary:
 ```groovy
-releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.31'
+releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.33'
 ```
 
 If you want to be on the bleeding-edge, you can try out the SNAPSHOT version.
@@ -62,7 +62,7 @@ repositories {
   maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 dependencies {
-  debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.31-SNAPSHOT'
+  debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.33-SNAPSHOT'
 }
 ```
 
@@ -72,17 +72,17 @@ Usage
 Include the core library along with any number of plugins.
 
 ```groovy
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.31'
-debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.31'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.33'
+debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.33'
 ```
 
 ## Adding Plugins
