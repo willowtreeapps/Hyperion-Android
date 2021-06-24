@@ -15,6 +15,7 @@ import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
@@ -162,9 +163,11 @@ public class HyperionService extends Service {
             service = null;
         }
 
-        void forceDisconnect(){
+        void forceDisconnect() {
             // `onServiceDisconnected` doesn't seem to be called as expected, so this method guarantees unbinding.
-            this.service.detach(activity);
+            if (this.service != null) {
+                this.service.detach(activity);
+            }
             service = null;
         }
     }
