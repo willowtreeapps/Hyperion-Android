@@ -83,8 +83,14 @@ public class HyperionService extends Service {
     }
 
     private PendingIntent createContentPendingIntent() {
+        final int pendingIntentFlags;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            pendingIntentFlags = PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE;
+        } else {
+            pendingIntentFlags = PendingIntent.FLAG_CANCEL_CURRENT;
+        }
         return PendingIntent.getBroadcast(this, ACTION_REQUEST_CODE_OPEN_MENU,
-                new Intent(ACTION_OPEN_MENU), PendingIntent.FLAG_CANCEL_CURRENT);
+                new Intent(ACTION_OPEN_MENU), pendingIntentFlags);
     }
 
     private void initChannels() {
