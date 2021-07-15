@@ -2,9 +2,10 @@ package com.willowtreeapps.hyperion.attr.collectors;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.core.widget.TextViewCompat;
-import android.widget.TextView;
 
 import com.google.auto.service.AutoService;
 import com.willowtreeapps.hyperion.attr.AttributeValue;
@@ -15,7 +16,14 @@ import com.willowtreeapps.hyperion.plugin.v1.AttributeTranslator;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.view.inputmethod.EditorInfo.*;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_GO;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_NEXT;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_NONE;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_PREVIOUS;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEND;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_UNSPECIFIED;
 
 @AutoService(TypedAttributeCollector.class)
 public class TextViewAttributeCollector extends TypedAttributeCollector<TextView> {
@@ -29,6 +37,8 @@ public class TextViewAttributeCollector extends TypedAttributeCollector<TextView
     public List<ViewAttribute> collect(final TextView view, AttributeTranslator attributeTranslator) {
         List<ViewAttribute> attributes = new ArrayList<>();
 
+        attributes.add(new ViewAttribute<>("StringId",
+                view.getResources().getResourceEntryName(view.getId())));
         attributes.add(new MutableStringViewAttribute("Text", view.getText().toString()) {
             @Override
             protected void mutate(CharSequence value) {
