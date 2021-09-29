@@ -1,3 +1,7 @@
+### September 29, 2021 - v0.9.34
+
+- Fixes PendingIntent flag crash when targeting API 31+ (Fixes [#228](https://github.com/willowtreeapps/Hyperion-Android/issues/228))
+
 ### June 24, 2021 - v0.9.33
 
 - Fixes NPE caused by hyperion service disconnect (Fixes [#225](https://github.com/willowtreeapps/Hyperion-Android/issues/225))
