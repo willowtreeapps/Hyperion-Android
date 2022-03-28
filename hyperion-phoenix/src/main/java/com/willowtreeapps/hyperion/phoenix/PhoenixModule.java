@@ -27,7 +27,7 @@ class PhoenixModule extends PluginModule {
 
 
     private void confirmRebirth(final Activity activity) {
-        new AlertDialog.Builder(activity)
+        new AlertDialog.Builder(activity, R.style.Theme_AppCompat_Light_Dialog_Alert)
                 .setTitle(R.string.hp_pheonix_options_title)
                 .setMultiChoiceItems(R.array.hp_phoenix_options,
                         loadPhoenixOptions(),
