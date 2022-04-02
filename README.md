@@ -25,6 +25,25 @@ To create your own plugin, implement the Plugin interface and expose the impleme
 ## How To Show Hyperion Plugin List
 Once Hyperion is integrated into your app, simply shake your phone to activate. If you are running your app on an emulator, you can manually open the menu by calling `Hyperion.open(Activity activity)`. You can also open the menu by selecting the foreground notification that appears while the client app is in the foreground.
 
+### Conditional Startup
+Hyperion enables itself automatically for all Activities in your application. To disable for specific Activities, annotate them with `@HyperionIgnore`. To disable for all Activities, set a `meta-data` field in your `AndroidManifest.xml`:
+
+```
+    <meta-data
+        android:name="com.willowtreeapps.hyperion.core.enableOnStart"
+        android:value="false"/>
+```
+
+`Hyperion#open(Activity)` will have no affect if Hyperion has not been enabled. You can reenable for future Activities with `Hyperion.enable()`.
+
+To embed the Hyperion Plugin Menu into your own Activity, acquire a `PluginViewFactory` from `Hyperion#getPluginViewFactory` and call `create(Activity)`:
+
+```
+View pluginView = Hyperion.getPluginViewFactory().create(activity);
+```
+
+See [FactoryActivity](hyperion-sample/src/main/java/com/willowtreeapps/hyperion/sample/FactoryActivity.java) for more details.
+
 ## Sample App
 Want to learn how to use Hyperion? The sample app will teach you!
 

@@ -1,7 +1,8 @@
 package com.willowtreeapps.hyperion.core.internal;
 
-import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 
@@ -16,15 +17,28 @@ public class HyperionInitProvider extends EmptyContentProvider {
         try {
             final Context context = requireContextInternal();
             Hyperion.setApplication(context);
-            final Application application = (Application) context.getApplicationContext();
-            final AppComponent component = AppComponent.Holder.getInstance(context);
-            application.registerActivityLifecycleCallbacks(component.getActivityLifecycleCallbacks());
+
+            if(readEnableOnStartMetadata(context)) {
+                Hyperion.enable();
+            }
+
             return true;
         } catch (Exception e) {
             Log.e("Hyperion", "Init failed.", e);
             return false;
         }
     }
+
+    private boolean readEnableOnStartMetadata(Context context) {
+        try {
+            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            return appInfo.metaData.getBoolean(Hyperion.ENABLE_ON_START_METADATA_KEY, true);
+        } catch (PackageManager.NameNotFoundException exception) {
+            Log.e("Hyperion", "Init failed.", exception);
+            return true;
+        }
+    }
+
 
     @NonNull
     private Context requireContextInternal() {

@@ -26,6 +26,8 @@ public interface AppComponent {
 
     PluginViewFactory getPluginViewFactory();
 
+    ApplicationInstaller getApplicationInstaller();
+
     @Component.Builder
     interface Builder {
 

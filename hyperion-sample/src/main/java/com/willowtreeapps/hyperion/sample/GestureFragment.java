@@ -28,7 +28,6 @@ public class GestureFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Hyperion.open(getActivity());
-                startActivity(new Intent(v.getContext(), FactoryActivity.class));
             }
         });
 

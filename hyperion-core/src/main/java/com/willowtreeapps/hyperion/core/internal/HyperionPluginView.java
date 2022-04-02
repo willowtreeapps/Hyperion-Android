@@ -80,20 +80,15 @@ public class HyperionPluginView extends FrameLayout {
 
     @AppScope
     static final class Factory implements PluginViewFactory {
-
-        private ApplicationInstaller applicationInstaller;
         private CoreComponentContainer container;
         private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
 
         @Inject
-        Factory (ApplicationInstaller applicationInstaller, CoreComponentContainer container) {
-            this.applicationInstaller = applicationInstaller;
+        Factory (CoreComponentContainer container) {
             this.container = container;
         }
 
         private CoreComponent getCoreComponent(Activity activity) {
-            applicationInstaller.installIfNeeded();
-
             final ViewGroup windowContentView = activity.getWindow().findViewById(android.R.id.content);
             final HyperionMenuController controller = new HyperionMenuController(windowContentView);
 

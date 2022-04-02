@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.willowtreeapps.hyperion.core.Hyperion;
 import com.willowtreeapps.hyperion.core.PluginViewFactory;
+import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 
+@HyperionIgnore
 public class FactoryActivity extends AppCompatActivity {
     private final PluginViewFactory factory = Hyperion.getPluginViewFactory();
 
