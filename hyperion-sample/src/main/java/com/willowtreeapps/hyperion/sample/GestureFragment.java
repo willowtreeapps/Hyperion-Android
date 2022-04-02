@@ -1,5 +1,6 @@
 package com.willowtreeapps.hyperion.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,15 @@ public class GestureFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Hyperion.open(getActivity());
+                startActivity(new Intent(v.getContext(), FactoryActivity.class));
+            }
+        });
+
+        final Button openCustomMenuButton = view.findViewById(R.id.open_custom_button);
+        openCustomMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), FactoryActivity.class));
             }
         });
     }

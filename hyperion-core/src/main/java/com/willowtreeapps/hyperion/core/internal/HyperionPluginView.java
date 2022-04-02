@@ -1,20 +1,25 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.core.BuildConfig;
+import com.willowtreeapps.hyperion.core.PluginViewFactory;
 import com.willowtreeapps.hyperion.core.R;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import java.util.Comparator;
@@ -70,6 +75,62 @@ public class HyperionPluginView extends FrameLayout {
         for (PluginModule module : sortedModules) {
             View view = module.createPluginView(inflater, pluginListContainer);
             pluginListContainer.addView(view);
+        }
+    }
+
+    @AppScope
+    static final class Factory implements PluginViewFactory {
+
+        private ApplicationInstaller applicationInstaller;
+        private CoreComponentContainer container;
+        private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
+
+        @Inject
+        Factory (ApplicationInstaller applicationInstaller, CoreComponentContainer container) {
+            this.applicationInstaller = applicationInstaller;
+            this.container = container;
+        }
+
+        private CoreComponent getCoreComponent(Activity activity) {
+            applicationInstaller.installIfNeeded();
+
+            final ViewGroup windowContentView = activity.getWindow().findViewById(android.R.id.content);
+            final HyperionMenuController controller = new HyperionMenuController(windowContentView);
+
+            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
+
+            ActivityResults activityResults = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+            if (activityResults == null) {
+                activityResults = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
+                fragmentManager.beginTransaction()
+                        .add(activityResults, ACTIVITY_RESULT_TAG)
+                        .commit();
+            }
+
+            CoreComponent component = DaggerCoreComponent.builder()
+                    .appComponent(AppComponent.Holder.getInstance(activity))
+                    .activity(activity)
+                    .pluginSource(container.getPluginSource())
+                    .menuController(controller)
+                    .container(windowContentView)
+                    .activityResults(activityResults)
+                    .build();
+
+            container.putComponent(activity, component);
+            return component;
+        }
+
+        @Override
+        public View create(Activity activity) {
+            CoreComponent component = getCoreComponent(activity);
+            HyperionPluginView pluginView = new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));
+            component.getMenuController().setPluginView(pluginView);
+            return pluginView;
+        }
+
+        @Override
+        public void destroy(Activity activity) {
+            container.removeComponent(activity);
         }
     }
 

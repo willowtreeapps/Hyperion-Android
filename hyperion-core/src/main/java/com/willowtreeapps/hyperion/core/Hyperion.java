@@ -102,6 +102,11 @@ public final class Hyperion {
         return AppComponent.Holder.getInstance(application).getPublicControl().getPluginSource();
     }
 
+    public static PluginViewFactory getPluginViewFactory() {
+        requireApplication();
+        return AppComponent.Holder.getInstance(application).getPluginViewFactory();
+    }
+
     private static void requireApplication() {
         if (application == null) {
             throw new IllegalStateException("Application has not been set.");

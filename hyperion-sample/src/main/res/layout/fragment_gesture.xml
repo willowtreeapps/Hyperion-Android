@@ -68,4 +68,47 @@
         android:backgroundTint="@color/dark_blue"
         android:text="@string/open"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp"
+            android:background="@color/text_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/or"
+            android:textAllCaps="true" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp"
+            android:background="@color/text_gray" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="14sp"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/custom_open"/>
+
+    <Button
+        android:id="@+id/open_custom_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:backgroundTint="@color/dark_blue"
+        android:text="@string/open"/>
+
 </LinearLayout>
