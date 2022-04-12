@@ -18,7 +18,7 @@ class InstallationLifecycleDelegate extends LifecycleDelegate {
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        factory.createInternal(activity);
+        factory.createInternal(activity, true);
     }
 
     @Override
