@@ -9,16 +9,16 @@ import javax.inject.Inject;
 
 @AppScope
 class InstallationLifecycleDelegate extends LifecycleDelegate {
-    private final PluginViewFactory factory;
+    private final HyperionPluginView.Factory factory;
 
     @Inject
-    InstallationLifecycleDelegate(PluginViewFactory factory) {
+    InstallationLifecycleDelegate(HyperionPluginView.Factory factory) {
         this.factory = factory;
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        factory.create(activity);
+        factory.createInternal(activity);
     }
 
     @Override

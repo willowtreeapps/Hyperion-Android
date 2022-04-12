@@ -32,7 +32,7 @@ public class FactoryActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         factory.destroy(this);
+        super.onDestroy();
     }
 }

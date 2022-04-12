@@ -119,6 +119,12 @@ public class HyperionPluginView extends FrameLayout {
         public View create(Activity activity) {
             CoreComponent component = getCoreComponent(activity);
             HyperionPluginView pluginView = new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));
+            return pluginView;
+        }
+
+        View createInternal(Activity activity) {
+            CoreComponent component = getCoreComponent(activity);
+            HyperionPluginView pluginView = new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));
             component.getMenuController().setPluginView(pluginView);
             return pluginView;
         }

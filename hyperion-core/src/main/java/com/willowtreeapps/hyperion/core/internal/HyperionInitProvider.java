@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import com.willowtreeapps.hyperion.core.Hyperion;
 
 public class HyperionInitProvider extends EmptyContentProvider {
+    private static final Boolean DEFAULT_INIT = true;
 
     @Override
     public boolean onCreate() {
@@ -32,7 +34,13 @@ public class HyperionInitProvider extends EmptyContentProvider {
     private boolean readEnableOnStartMetadata(Context context) {
         try {
             ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            return appInfo.metaData.getBoolean(Hyperion.ENABLE_ON_START_METADATA_KEY, true);
+            Bundle metaData = appInfo.metaData;
+
+            if(metaData != null) {
+                return metaData.getBoolean(Hyperion.ENABLE_ON_START_METADATA_KEY, DEFAULT_INIT);
+            } else {
+                return DEFAULT_INIT;
+            }
         } catch (PackageManager.NameNotFoundException exception) {
             Log.e("Hyperion", "Init failed.", exception);
             return true;
