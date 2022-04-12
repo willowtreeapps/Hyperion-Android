@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="64dp">
+        android:padding="48dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="110dp"
+            android:layout_marginBottom="80dp"
             android:lineSpacingExtra="10sp"
             android:text="@string/gestures_title"
             android:textSize="30sp" />
