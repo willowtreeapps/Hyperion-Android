@@ -48,6 +48,10 @@ public abstract class PluginModule {
 
     }
 
+    public boolean isStandalone() {
+        return true;
+    }
+
     @NonNull
     public final PluginExtension getExtension() {
         return this.extension;

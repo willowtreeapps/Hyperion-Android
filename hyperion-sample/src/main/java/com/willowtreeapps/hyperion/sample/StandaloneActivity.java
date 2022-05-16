@@ -12,7 +12,7 @@ import com.willowtreeapps.hyperion.core.PluginViewFactory;
 import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 
 @HyperionIgnore
-public class FactoryActivity extends AppCompatActivity {
+public class StandaloneActivity extends AppCompatActivity {
     private final PluginViewFactory factory = Hyperion.getPluginViewFactory();
 
     @Override

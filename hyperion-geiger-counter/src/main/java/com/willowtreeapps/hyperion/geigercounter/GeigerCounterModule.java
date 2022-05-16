@@ -122,6 +122,11 @@ class GeigerCounterModule extends PluginModule implements View.OnClickListener, 
         detector.removeObserver(this);
     }
 
+    @Override
+    public boolean isStandalone() {
+        return false;
+    }
+
     // OnClickListener
 
     @Override

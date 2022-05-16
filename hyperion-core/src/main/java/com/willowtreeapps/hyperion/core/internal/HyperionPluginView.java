@@ -33,6 +33,9 @@ public class HyperionPluginView extends FrameLayout {
     @Inject
     Set<PluginModule> modules;
 
+    @Inject
+    PluginFilter filter;
+
     public HyperionPluginView(@NonNull Context context) {
         this(context, null);
     }
@@ -66,9 +69,11 @@ public class HyperionPluginView extends FrameLayout {
             }
         });
 
+        Set<PluginModule> filteredModules = filter.filter(modules);
+
         final Comparator<PluginModule> comparator = new AlphabeticalComparator(getContext());
         final Set<PluginModule> sortedModules = new TreeSet<>(comparator);
-        sortedModules.addAll(modules);
+        sortedModules.addAll(filteredModules);
 
         final Context inflaterContext = new PluginExtensionContextWrapper(getContext(), pluginExtension);
         final LayoutInflater inflater = LayoutInflater.from(inflaterContext);
@@ -88,7 +93,7 @@ public class HyperionPluginView extends FrameLayout {
             this.container = container;
         }
 
-        private CoreComponent getCoreComponent(Activity activity) {
+        private CoreComponent getCoreComponent(Activity activity, boolean standalone) {
             final ViewGroup windowContentView = activity.getWindow().findViewById(android.R.id.content);
             final HyperionMenuController controller = new HyperionMenuController(windowContentView);
 
@@ -102,13 +107,18 @@ public class HyperionPluginView extends FrameLayout {
                         .commit();
             }
 
+            PluginFilter filter = new IdentityPluginFilter();
+            if(standalone) {
+                filter = new StandalonePluginFilter();
+            }
+
             CoreComponent component = DaggerCoreComponent.builder()
                     .appComponent(AppComponent.Holder.getInstance(activity))
                     .activity(activity)
-                    .pluginSource(container.getPluginSource())
                     .menuController(controller)
                     .container(windowContentView)
                     .activityResults(activityResults)
+                    .pluginFilter(filter)
                     .build();
 
             container.putComponent(activity, component);
@@ -117,11 +127,11 @@ public class HyperionPluginView extends FrameLayout {
 
         @Override
         public View create(Activity activity) {
-            return createInternal(activity, false);
+            return createInternal(activity, false, true);
         }
 
-        HyperionPluginView createInternal(Activity activity, Boolean bindToMenuController) {
-            CoreComponent component = getCoreComponent(activity);
+        HyperionPluginView createInternal(Activity activity, boolean bindToMenuController, boolean standalone) {
+            CoreComponent component = getCoreComponent(activity, standalone);
             HyperionPluginView pluginView = new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));
             if(bindToMenuController) {
                 component.getMenuController().setPluginView(pluginView);
