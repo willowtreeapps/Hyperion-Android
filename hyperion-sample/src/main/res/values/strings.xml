@@ -6,6 +6,7 @@
     <string name="gestures_title">Using Hyperion</string>
     <string name="gestures_shake">Shake phone to expand Hyperion plugins menu</string>
     <string name="manual_open">Press to expand the menu manually</string>
+    <string name="custom_open">Press to expand the menu in a new Activity</string>
     <string name="or">or</string>
     <string name="open">Open</string>
     <string name="this_version">What’s in this version?</string>

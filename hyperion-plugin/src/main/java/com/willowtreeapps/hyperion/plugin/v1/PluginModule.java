@@ -48,6 +48,16 @@ public abstract class PluginModule {
 
     }
 
+    /**
+     * Indicates whether this plugin is stateless or dependent on the foreground Activity's
+     * lifecycle. Plugins that are stateless can be shown when instantiated from {@link com.willowtreeapps.hyperion.core.PluginViewFactory}
+     *
+     * @return true if this plugin is stateless
+     */
+    public boolean isStandalone() {
+        return true;
+    }
+
     @NonNull
     public final PluginExtension getExtension() {
         return this.extension;

@@ -59,6 +59,11 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
     }
 
     @Override
+    public boolean isStandalone() {
+        return false;
+    }
+
+    @Override
     public void onClick(View v) {
         if (RecordingManager.isRecording()) {
             stopRecording();

@@ -12,9 +12,24 @@ public final class Hyperion {
 
     private static Application application;
 
+    public static final String ENABLE_ON_START_METADATA_KEY = "com.willowtreeapps.hyperion.core.enableOnStart";
+
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     public static void setApplication(@NonNull Context context) {
         application = (Application) context.getApplicationContext();
+        AppComponent.Holder.getInstance(application).getApplicationInstaller().installIfNeeded();
+    }
+
+    public static void enable() {
+        requireApplication();
+        AppComponent component = AppComponent.Holder.getInstance(application);
+        application.registerActivityLifecycleCallbacks(component.getActivityLifecycleCallbacks());
+    }
+
+    public static void disable() {
+        requireApplication();
+        AppComponent component = AppComponent.Holder.getInstance(application);
+        application.unregisterActivityLifecycleCallbacks(component.getActivityLifecycleCallbacks());
     }
 
     /**
@@ -100,6 +115,11 @@ public final class Hyperion {
     public static PluginSource getPluginSource() {
         requireApplication();
         return AppComponent.Holder.getInstance(application).getPublicControl().getPluginSource();
+    }
+
+    public static PluginViewFactory getPluginViewFactory() {
+        requireApplication();
+        return AppComponent.Holder.getInstance(application).getPluginViewFactory();
     }
 
     private static void requireApplication() {

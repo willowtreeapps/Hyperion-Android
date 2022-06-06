@@ -1,71 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:padding="64dp"
-    android:gravity="center_horizontal">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="110dp"
-        android:textSize="30sp"
-        android:lineSpacingExtra="10sp"
-        android:text="@string/gestures_title"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="14sp"
-        android:lineSpacingExtra="3sp"
-        android:drawableLeft="@drawable/shake"
-        android:drawableStart="@drawable/shake"
-        android:drawablePadding="8dp"
-        android:text="@string/gestures_shake"/>
+    android:layout_width="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="20dp"
-            android:layout_height="1dp"
-            android:background="@color/text_gray"/>
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="48dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:textAllCaps="true"
-            android:text="@string/or"/>
+            android:layout_marginBottom="80dp"
+            android:lineSpacingExtra="10sp"
+            android:text="@string/gestures_title"
+            android:textSize="30sp" />
 
-        <View
-            android:layout_width="20dp"
-            android:layout_height="1dp"
-            android:background="@color/text_gray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/shake"
+            android:drawableLeft="@drawable/shake"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:lineSpacingExtra="3sp"
+            android:text="@string/gestures_shake"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp"
+                android:background="@color/text_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/or"
+                android:textAllCaps="true" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp"
+                android:background="@color/text_gray" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="3sp"
+            android:text="@string/manual_open"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/open_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/dark_blue"
+            android:text="@string/open" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp"
+                android:background="@color/text_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/or"
+                android:textAllCaps="true" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp"
+                android:background="@color/text_gray" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="3sp"
+            android:text="@string/custom_open"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/open_custom_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/dark_blue"
+            android:text="@string/open" />
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="14sp"
-        android:lineSpacingExtra="3sp"
-        android:text="@string/manual_open"/>
-
-    <Button
-        android:id="@+id/open_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:backgroundTint="@color/dark_blue"
-        android:text="@string/open"/>
-
-</LinearLayout>
+</ScrollView>

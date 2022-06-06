@@ -3,6 +3,7 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Application;
 
 import com.willowtreeapps.hyperion.core.PluginSource;
+import com.willowtreeapps.hyperion.core.PluginViewFactory;
 import com.willowtreeapps.hyperion.core.PublicControl;
 import com.willowtreeapps.hyperion.plugin.v1.ApplicationExtension;
 import com.willowtreeapps.hyperion.plugin.v1.ForegroundManager;
@@ -51,5 +52,9 @@ abstract class AppModule {
     @Binds
     @IntoSet
     abstract LifecycleDelegate bindForegroundDelegate(ForegroundManagerLifecycleDelegate delegate);
+
+    @AppScope
+    @Binds
+    abstract PluginViewFactory bindPluginViewFactory(HyperionPluginView.Factory factory);
 
 }

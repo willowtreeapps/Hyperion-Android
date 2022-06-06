@@ -1,20 +1,25 @@
 package com.willowtreeapps.hyperion.core.internal;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.willowtreeapps.hyperion.core.BuildConfig;
+import com.willowtreeapps.hyperion.core.PluginViewFactory;
 import com.willowtreeapps.hyperion.core.R;
+import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 import com.willowtreeapps.hyperion.plugin.v1.PluginModule;
 
 import java.util.Comparator;
@@ -27,6 +32,9 @@ public class HyperionPluginView extends FrameLayout {
 
     @Inject
     Set<PluginModule> modules;
+
+    @Inject
+    PluginFilter filter;
 
     public HyperionPluginView(@NonNull Context context) {
         this(context, null);
@@ -61,15 +69,79 @@ public class HyperionPluginView extends FrameLayout {
             }
         });
 
+        Set<PluginModule> filteredModules = filter.filter(modules);
+
         final Comparator<PluginModule> comparator = new AlphabeticalComparator(getContext());
         final Set<PluginModule> sortedModules = new TreeSet<>(comparator);
-        sortedModules.addAll(modules);
+        sortedModules.addAll(filteredModules);
 
         final Context inflaterContext = new PluginExtensionContextWrapper(getContext(), pluginExtension);
         final LayoutInflater inflater = LayoutInflater.from(inflaterContext);
         for (PluginModule module : sortedModules) {
             View view = module.createPluginView(inflater, pluginListContainer);
             pluginListContainer.addView(view);
+        }
+    }
+
+    @AppScope
+    static final class Factory implements PluginViewFactory {
+        private CoreComponentContainer container;
+        private static final String ACTIVITY_RESULT_TAG = "hyperion_activity_result";
+
+        @Inject
+        Factory (CoreComponentContainer container) {
+            this.container = container;
+        }
+
+        private CoreComponent getCoreComponent(Activity activity, boolean standalone) {
+            final ViewGroup windowContentView = activity.getWindow().findViewById(android.R.id.content);
+            final HyperionMenuController controller = new HyperionMenuController(windowContentView);
+
+            FragmentManagerCompat fragmentManager = FragmentManagerCompat.create(activity);
+
+            ActivityResults activityResults = fragmentManager.findFragmentByTag(ACTIVITY_RESULT_TAG);
+            if (activityResults == null) {
+                activityResults = fragmentManager.isSupport() ? new ActivityResultsSupportFragment() : new ActivityResultsFragment();
+                fragmentManager.beginTransaction()
+                        .add(activityResults, ACTIVITY_RESULT_TAG)
+                        .commit();
+            }
+
+            PluginFilter filter = new IdentityPluginFilter();
+            if(standalone) {
+                filter = new StandalonePluginFilter();
+            }
+
+            CoreComponent component = DaggerCoreComponent.builder()
+                    .appComponent(AppComponent.Holder.getInstance(activity))
+                    .activity(activity)
+                    .menuController(controller)
+                    .container(windowContentView)
+                    .activityResults(activityResults)
+                    .pluginFilter(filter)
+                    .build();
+
+            container.putComponent(activity, component);
+            return component;
+        }
+
+        @Override
+        public View create(Activity activity) {
+            return createInternal(activity, false, true);
+        }
+
+        HyperionPluginView createInternal(Activity activity, boolean bindToMenuController, boolean standalone) {
+            CoreComponent component = getCoreComponent(activity, standalone);
+            HyperionPluginView pluginView = new HyperionPluginView(new ComponentContextThemeWrapper(activity, component));
+            if(bindToMenuController) {
+                component.getMenuController().setPluginView(pluginView);
+            }
+            return pluginView;
+        }
+
+        @Override
+        public void destroy(Activity activity) {
+            container.removeComponent(activity);
         }
     }
 

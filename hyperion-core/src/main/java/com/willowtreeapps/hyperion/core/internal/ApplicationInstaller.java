@@ -2,13 +2,14 @@ package com.willowtreeapps.hyperion.core.internal;
 
 import android.app.Application;
 import androidx.annotation.MainThread;
+import androidx.annotation.RestrictTo;
 
 import com.willowtreeapps.hyperion.plugin.v1.ApplicationExtension;
 import com.willowtreeapps.hyperion.plugin.v1.Plugin;
 
 import javax.inject.Inject;
 
-class ApplicationInstaller {
+public class ApplicationInstaller {
 
     private final PluginRepository pluginRepository;
     private final Application application;
@@ -25,7 +26,8 @@ class ApplicationInstaller {
     }
 
     @MainThread
-    void installIfNeeded() {
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    public void installIfNeeded() {
         if (!applicationCreated) {
             final Plugins plugins = pluginRepository.getPlugins();
             for (Plugin plugin : plugins.get()) {

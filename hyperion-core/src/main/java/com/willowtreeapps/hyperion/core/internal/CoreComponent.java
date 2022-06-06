@@ -40,6 +40,8 @@ interface CoreComponent {
 
     Set<PluginModule> getPluginModules();
 
+    PluginFilter getPluginFilter();
+
     @Component.Builder
     interface Builder {
 
@@ -49,9 +51,6 @@ interface CoreComponent {
         Builder activity(Activity activity);
 
         @BindsInstance
-        Builder pluginSource(PluginSource pluginSource);
-
-        @BindsInstance
         Builder activityResults(ActivityResults activityResults);
 
         @BindsInstance
@@ -59,6 +58,9 @@ interface CoreComponent {
 
         @BindsInstance
         Builder container(ViewGroup container);
+
+        @BindsInstance
+        Builder pluginFilter(PluginFilter pluginFilter);
 
         CoreComponent build();
     }

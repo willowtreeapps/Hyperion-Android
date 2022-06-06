@@ -50,6 +50,11 @@ class AttributeInspectorModule extends PluginModule
     }
 
     @Override
+    public boolean isStandalone() {
+        return false;
+    }
+
+    @Override
     public void onClick(View v) {
         final View currentOverlay = overlay.getOverlayView();
         if (currentOverlay == null || !OVERLAY_TAG.equals(currentOverlay.getTag())) {

@@ -3,6 +3,7 @@ package com.willowtreeapps.hyperion.core.internal;
 import android.app.Application;
 import android.content.Context;
 
+import com.willowtreeapps.hyperion.core.PluginViewFactory;
 import com.willowtreeapps.hyperion.core.PublicControl;
 import com.willowtreeapps.hyperion.plugin.v1.ApplicationExtension;
 
@@ -22,6 +23,10 @@ public interface AppComponent {
     PublicControl getPublicControl();
 
     PluginRepository getPluginRepository();
+
+    PluginViewFactory getPluginViewFactory();
+
+    ApplicationInstaller getApplicationInstaller();
 
     @Component.Builder
     interface Builder {
