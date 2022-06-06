@@ -1,4 +1,4 @@
-package com.willowtreeapps.hyperion.sample;
+package com.willowtreeapps.hyperion.core;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,8 +7,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.willowtreeapps.hyperion.core.Hyperion;
-import com.willowtreeapps.hyperion.core.PluginViewFactory;
 import com.willowtreeapps.hyperion.plugin.v1.HyperionIgnore;
 
 @HyperionIgnore
@@ -18,7 +16,7 @@ public class StandaloneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_factory);
+        setContentView(R.layout.activity_standalone);
 
         final LinearLayout rootView = findViewById(R.id.rootView);
         rootView.addView(createPluginView());

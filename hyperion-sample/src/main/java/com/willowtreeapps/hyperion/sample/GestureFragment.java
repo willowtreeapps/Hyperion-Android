@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.willowtreeapps.hyperion.core.Hyperion;
+import com.willowtreeapps.hyperion.core.StandaloneActivity;
 
 public class GestureFragment extends Fragment {
 

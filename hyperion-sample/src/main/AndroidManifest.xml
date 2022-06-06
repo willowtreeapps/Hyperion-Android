@@ -25,7 +25,6 @@
         <activity android:name=".ScreenRecorderActivity" />
         <activity android:name=".FileExplorerActivity" />
         <activity android:name=".GeigerCounterActivity" />
-        <activity android:name=".StandaloneActivity" />
 
     </application>
 

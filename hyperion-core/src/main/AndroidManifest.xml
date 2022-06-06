@@ -13,6 +13,9 @@
             android:name=".internal.HyperionService"
             android:exported="false"
             android:foregroundServiceType="mediaProjection" />
+        <activity
+            android:name="com.willowtreeapps.hyperion.core.StandaloneActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
