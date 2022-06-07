@@ -1,6 +1,7 @@
 package com.willowtreeapps.hyperion.core;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 
 @SuppressWarnings("unused")
@@ -28,6 +29,10 @@ public final class Hyperion {
     }
 
     public static void setPluginSource(Object... pluginSource) {
+        // no-op
+    }
+
+    public static void startActivity(Context context) {
         // no-op
     }
 }

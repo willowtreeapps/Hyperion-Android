@@ -2,7 +2,10 @@ package com.willowtreeapps.hyperion.core;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
@@ -120,6 +123,13 @@ public final class Hyperion {
     public static PluginViewFactory getPluginViewFactory() {
         requireApplication();
         return AppComponent.Holder.getInstance(application).getPluginViewFactory();
+    }
+
+    /**
+     * Starts a separate {@link StandaloneActivity} with compatible hyperion plugins.
+     */
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, StandaloneActivity.class));
     }
 
     private static void requireApplication() {
