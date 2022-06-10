@@ -34,7 +34,7 @@ public class HyperionService extends Service {
     private static final String ACTION_OPEN_MENU = "open-menu";
 
     private BroadcastReceiver actionOpenMenuReceiver = new OpenMenuReceiver();
-    private IBinder binder = new Binder();
+    private IBinder binder = new Binder(this);
     private NotificationManager notificationManager;
     private WeakReference<Activity> activity;
 
@@ -140,9 +140,16 @@ public class HyperionService extends Service {
         }
     }
 
-    final private class Binder extends android.os.Binder {
+    private final static class Binder extends android.os.Binder {
+
+        private final WeakReference<HyperionService> serviceRef;
+
+        private Binder(final HyperionService service) {
+            this.serviceRef = new WeakReference<>(service);
+        }
+
         HyperionService getService() {
-            return HyperionService.this;
+            return serviceRef.get();
         }
     }
 
