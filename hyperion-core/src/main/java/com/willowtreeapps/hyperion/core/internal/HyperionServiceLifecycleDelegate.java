@@ -11,7 +11,6 @@ import javax.inject.Inject;
 class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
 
     private final CoreComponentContainer container;
-    private Activity foregroundActivity;
 
     @Inject
     HyperionServiceLifecycleDelegate(CoreComponentContainer container) {
@@ -20,13 +19,12 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
 
     @Override
     public void onActivityStarted(Activity activity) {
-        foregroundActivity = activity;
         CoreComponent component = container.getComponent(activity);
         if (component == null) {
             return;
         }
         final ServiceConnection connection = component.getServiceConnection();
-        foregroundActivity.bindService(
+        activity.bindService(
                 new Intent(activity, HyperionService.class),
                 connection,
                 Context.BIND_AUTO_CREATE);
@@ -35,18 +33,15 @@ class HyperionServiceLifecycleDelegate extends LifecycleDelegate {
 
     @Override
     public void onActivityStopped(Activity activity) {
-        if (foregroundActivity == activity) {
-            CoreComponent component = container.getComponent(activity);
-            if (component == null) {
-                return;
-            }
-            final ServiceConnection connection = component.getServiceConnection();
-            foregroundActivity.unbindService(connection);
-            if (connection instanceof HyperionService.Connection){
-                ((HyperionService.Connection) connection).forceDisconnect();
-            }
-            component.getMenuController().onStop();
-            foregroundActivity = null;
+        CoreComponent component = container.getComponent(activity);
+        if (component == null) {
+            return;
         }
+        final ServiceConnection connection = component.getServiceConnection();
+        activity.unbindService(connection);
+        if (connection instanceof HyperionService.Connection) {
+            ((HyperionService.Connection) connection).forceDisconnect();
+        }
+        component.getMenuController().onStop();
     }
 }

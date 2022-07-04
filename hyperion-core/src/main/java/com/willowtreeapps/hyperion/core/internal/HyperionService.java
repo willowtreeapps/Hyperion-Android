@@ -34,7 +34,7 @@ public class HyperionService extends Service {
     private static final String ACTION_OPEN_MENU = "open-menu";
 
     private BroadcastReceiver actionOpenMenuReceiver = new OpenMenuReceiver();
-    private IBinder binder = new Binder();
+    private IBinder binder = new Binder(this);
     private NotificationManager notificationManager;
     private WeakReference<Activity> activity;
 
@@ -140,9 +140,17 @@ public class HyperionService extends Service {
         }
     }
 
-    final private class Binder extends android.os.Binder {
+    private final static class Binder extends android.os.Binder {
+
+        private final WeakReference<HyperionService> serviceRef;
+
+        private Binder(final HyperionService service) {
+            this.serviceRef = new WeakReference<>(service);
+        }
+
+        @Nullable
         HyperionService getService() {
-            return HyperionService.this;
+            return serviceRef.get();
         }
     }
 
@@ -150,6 +158,7 @@ public class HyperionService extends Service {
     static final class Connection implements ServiceConnection {
 
         private final Activity activity;
+        @Nullable
         private HyperionService service;
 
         @Inject
@@ -160,12 +169,16 @@ public class HyperionService extends Service {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             this.service = ((HyperionService.Binder) service).getService();
-            this.service.attach(activity);
+            if (this.service != null) {
+                this.service.attach(activity);
+            }
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            this.service.detach(activity);
+            if (this.service != null) {
+                this.service.detach(activity);
+            }
             service = null;
         }
 
