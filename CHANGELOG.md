@@ -1,4 +1,4 @@
-### August 15, 2022 - v0.9.35
+### August 15, 2022 - v0.9.36
 
 - Allows for customization where Hyperion will launch, e.g. it can now be embedded in a new Activity or a BottomSheetFragment.
 - Fixes two memory leaks: one with how activities are destroyed, and the other is a leak in HyperionService described in #224.  (Fixes [#224](https://github.com/willowtreeapps/Hyperion-Android/issues/224))
