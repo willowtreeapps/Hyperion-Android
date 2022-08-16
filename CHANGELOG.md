@@ -1,3 +1,8 @@
+### August 15, 2022 - v0.9.36
+
+- Allows for customization where Hyperion will launch, e.g. it can now be embedded in a new Activity or a BottomSheetFragment.
+- Fixes two memory leaks: one with how activities are destroyed, and the other is a leak in HyperionService described in #224.  (Fixes [#224](https://github.com/willowtreeapps/Hyperion-Android/issues/224))
+
 ### September 29, 2021 - v0.9.34
 
 - Fixes PendingIntent flag crash when targeting API 31+ (Fixes [#228](https://github.com/willowtreeapps/Hyperion-Android/issues/228))
