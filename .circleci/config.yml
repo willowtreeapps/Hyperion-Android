@@ -71,8 +71,6 @@ jobs:
               gpg --import --batch $HOME/secring.gpg
               ./gradlew clean publish -Psonatype.username="$SONATYPE_USERNAME" -Psonatype.password="$SONATYPE_PASSWORD" -Psigning.keyId=0E7A8B89 -Psigning.password="$MAVEN_CENTRAL_KEY_PASSPHRASE" -Psigning.secretKeyRingFile=$HOME/secring.gpg -Porg.gradle.parallel=false -Porg.gradle.daemon=false
             fi
-      - deploy:
-          command: |
 
 workflows:
   version: 2
