@@ -1,5 +1,5 @@
 apply plugin: 'signing'
-apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: "com.vanniktech.maven.publish"
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
@@ -57,8 +57,8 @@ publishing {
             def snapshotsRepoUrl = 'https://oss.sonatype.org/content/repositories/snapshots'
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
-                username project.findProperty('sonatype.username')
-                password project.findProperty('sonatype.password')
+                username project.findProperty('ORG_GRADLE_PROJECT_mavenCentralUsername')
+                password project.findProperty('ORG_GRADLE_PROJECT_mavenCentralPassword')
             }
         }
     }
