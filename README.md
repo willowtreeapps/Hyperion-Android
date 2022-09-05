@@ -18,17 +18,20 @@ Please see our announcement [blog post](https://willowtreeapps.com/ideas/introdu
 ![Demo Attribute inspector](https://images.ctfassets.net/3cttzl4i3k1h/1KhiROG0wcSi8QYa6iYGI0/0cd93ebf5a67012c09e16964032ea7e6/image2new.gif)
 
 ## Third-Party Plugins
+
 Be one of the first to create a third-party plugin. The plugin creation guide is a work in progress, but if you are feeling ambitious you can reference the plugins we have already created.
 
 To create your own plugin, implement the Plugin interface and expose the implementation as a service. The plugins made available in this repository leverage Google's [AutoService](https://github.com/google/auto/tree/master/service) annotation processor to generate the service metadata and simplify the process.
 
 ## How To Show Hyperion Plugin List
+
 Once Hyperion is integrated into your app, simply shake your phone to activate. If you are running your app on an emulator, you can manually open the menu by calling `Hyperion.open(Activity activity)`. You can also open the menu by selecting the foreground notification that appears while the client app is in the foreground.
 
 ### Conditional Startup
+
 Hyperion enables itself automatically for all Activities in your application. To disable for specific Activities, annotate them with `@HyperionIgnore`. To disable for all Activities, set a `meta-data` field in your `AndroidManifest.xml`:
 
-```
+```xml
     <meta-data
         android:name="com.willowtreeapps.hyperion.core.enableOnStart"
         android:value="false"/>
@@ -38,24 +41,28 @@ Hyperion enables itself automatically for all Activities in your application. To
 
 To embed the Hyperion Plugin Menu into your own Activity, acquire a `PluginViewFactory` from `Hyperion#getPluginViewFactory` and call `create(Activity)`:
 
-```
+```Java
 View pluginView = Hyperion.getPluginViewFactory().create(activity);
 ```
 
 See [FactoryActivity](hyperion-sample/src/main/java/com/willowtreeapps/hyperion/sample/FactoryActivity.java) for more details.
 
 ## Sample App
+
 Want to learn how to use Hyperion? The sample app will teach you!
 
 Build the example project by cloning the repo, run `./gradlew assemble` from the root directory, then open in Android Studio and run.
 
 ## Requirements
+
 min SDK 15
 
-Download
+### Download
+
 --------
 
 Download via Maven:
+
 ```xml
 <dependency>
   <groupId>com.willowtreeapps.hyperion</groupId>
@@ -63,18 +70,22 @@ Download via Maven:
   <version>0.9.34</version>
 </dependency>
 ```
+
 or Gradle:
+
 ```groovy
 debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.34'
 ```
 
 If you reference Hyperion from your code, you should also compile the no-op artifact for release variants. For most users, this will not be necessary:
+
 ```groovy
 releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.34'
 ```
 
-Usage
------
+### Usage
+
+--------
 
 Include the core library along with any number of plugins.
 
@@ -93,18 +104,22 @@ debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.34'
 ```
 
 ## Adding Plugins
+
 Hyperion plugins need to be added into the app at build time.
 By default, Hyperion automatically finds every plugin that is available in the project using the Java Service Locator.
 
 ## Contributing to Hyperion
+
 Contributions are welcome. Please see the [Contributing guidelines](CONTRIBUTING.md).
 
 Hyperion has adopted a [code of conduct](CODE_OF_CONDUCT.md) defined by the [Contributor Covenant](http://contributor-covenant.org), the same used by the [Swift language](https://swift.org) and countless other open source software teams.
 
 ## Plugin Descriptions
+
 The following is a list of all plugins that integrate with Hyperion. Please make a pull request if you would like to see your plugin here:
 
 ### Core Plugins
+
 - [Hyperion-Attr](/hyperion-attr) - Inspect views and adjust their attributes.
 - [Hyperion-Build-Config](/hyperion-build-config) - View application BuildConfig values.
 - [Hyperion-Crash](/hyperion-crash) - Show alternative activity when app crashes with the crash details. No UI for this module within drawer.
@@ -118,6 +133,7 @@ The following is a list of all plugins that integrate with Hyperion. Please make
 - [Hyperion-Timber](/hyperion-timber) - View Timber recorded log messages.
 
 ### Third Party Plugins
+
 - [Hyperion-Chuck](https://github.com/Commit451/Hyperion-Chuck) - Plugin which adds a button to inspect OkHttp traffic using [Chuck](https://github.com/jgilfelt/chuck)
 - [Hyperion-AppInfo](https://github.com/STAR-ZERO/Hyperion-AppInfo) - Plugin which shows screen of details about an application
 - [Hyperion-Simple-Item](https://github.com/takahirom/Hyperion-Simple-Item) - Plugin which adds simple menus
@@ -128,9 +144,11 @@ The following is a list of all plugins that integrate with Hyperion. Please make
 - [Hyperion-Host-Interceptor](https://github.com/MiSikora/Hyperion-Host-Interceptor) - Intercept OkHttp client host at runtime.
 
 ## License
+
 Hyperion is available under the MIT license. See the LICENSE file for more info.
 
-# About WillowTree!
+# About WillowTree
+
 ![WillowTree Logo](art/willowtree_logo.png)
 
 We build apps, responsive sites, bots—any digital product that lives on a screen—for the world’s leading companies. Our elite teams challenge themselves to build extraordinary experiences by bridging the latest strategy and design thinking with enterprise-grade software development.
