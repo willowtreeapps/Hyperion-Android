@@ -1,5 +1,5 @@
 apply plugin: 'signing'
-apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: 'com.vanniktech.maven.publish'
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
@@ -19,38 +19,45 @@ task javadocsJar(type: Jar) {
 def siteUrl = 'https://github.com/willowtreeapps/Hyperion-Android'
 def gitUrl = 'https://github.com/willowtreeapps/Hyperion-Android.git'
 
-publishing {
-    publications {
-        lib(MavenPublication) {
-            from components.android
-            artifact sourcesJar
-            artifact javadocsJar
+group = project.libraryGroup
+version = project.libraryVersion
 
-            pom {
-                name = project.name
-                description = 'App Debugging & Inspection Tool for Android'
-                url = siteUrl
-                licenses {
-                    license {
-                        name = 'The Apache Software License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution = 'repo'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'kritarie'
-                        name = 'Sean Amos'
-                    }
-                }
-                scm {
-                    connection = gitUrl
-                    developerConnection = gitUrl
-                    url = siteUrl
-                }
+mavenPublishing {
+    // // True enables both closing and releasing the plugin https://github.com/vanniktech/gradle-maven-publish-plugin/blob/master/docs/central.md
+    // ./gradlew publishAllPublicationsToMavenCentral
+    // ./gradlew closeAndReleaseRepository
+    // publishToMavenCentral("DEFAULT", true) to do both
+    publishToMavenCentral("DEFAULT")
+    signAllPublications()
+    pom {
+//        from components.android
+//        artifact sourcesJar
+//        artifact javadocsJar
+        name = project.name
+        description = 'App Debugging & Inspection Tool for Android'
+        url = siteUrl
+        licenses {
+            license {
+                name = 'The Apache Software License, Version 2.0'
+                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution = 'repo'
             }
         }
+        developers {
+            developer {
+                id = 'kritarie'
+                name = 'Sean Amos'
+            }
+        }
+        scm {
+            connection = gitUrl
+            developerConnection = gitUrl
+            url = siteUrl
+        }
     }
+}
+
+publishing {
     repositories {
         maven {
             def releasesRepoUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
@@ -62,8 +69,4 @@ publishing {
             }
         }
     }
-}
-
-signing {
-    sign publishing.publications.lib
 }
