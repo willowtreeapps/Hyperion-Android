@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: cimg/android:2022.08
+      - image: cimg/android:2023.02
     environment:
       JVM_OPTS: -Xmx4800m
     steps:
@@ -69,7 +69,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
               echo "$MAVEN_CENTRAL_SEC_RING" | base64 -d > $HOME/secring.gpg
               gpg --import --batch $HOME/secring.gpg
-              ./gradlew publish -PmavenCentralUsername="$SONATYPE_USERNAME" -PmavenCentralPassword="$SONATYPE_PASSWORD" -Psigning.keyId="$MAVEN_CENTRAL_KEY_ID" -Psigning.password="$MAVEN_CENTRAL_KEY_PASSPHRASE" -Psigning.secretKeyRingFile=$HOME/secring.gpg -Porg.gradle.parallel=false -Porg.gradle.daemon=false
+              ./gradlew publish -PmavenCentralUsername="$SONATYPE_USERNAME" -PmavenCentralPassword="$SONATYPE_PASSWORD" -Psigning.keyId="$MAVEN_CENTRAL_KEY_ID" -Psigning.password="$MAVEN_CENTRAL_KEY_PASSPHRASE" -Psigning.secretKeyRingFile=$HOME/secring.gpg -Porg.gradle.parallel=false -Porg.gradle.daemon=false --no-daemon
             fi
 
 workflows:
