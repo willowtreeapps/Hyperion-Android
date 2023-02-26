@@ -1,3 +1,7 @@
+### February 22, 2023 - v0.9.37
+
+- No user-facing functionality, this version is just a swap to a new publishing plugin with a new gpg key
+
 ### August 15, 2022 - v0.9.36
 
 - Allows for customization where Hyperion will launch, e.g. it can now be embedded in a new Activity or a BottomSheetFragment.
