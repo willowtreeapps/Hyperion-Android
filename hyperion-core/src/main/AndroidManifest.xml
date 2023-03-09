@@ -1,14 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.willowtreeapps.hyperion.core">
 
     <!--Required for API 28 and above-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application>
-        <provider
-            android:name=".internal.HyperionInitProvider"
-            android:authorities="${applicationId}.HyperionInitProvider"
-            android:exported="false" />
         <service
             android:name=".internal.HyperionService"
             android:exported="false"
@@ -16,6 +13,15 @@
         <activity
             android:name="com.willowtreeapps.hyperion.core.StandaloneActivity"
             android:exported="true" />
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="com.willowtreeapps.hyperion.core.internal.HyperionInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 
 </manifest>
