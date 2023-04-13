@@ -5,4 +5,5 @@
     <string name="hsp_plugin_subtitle">View and edit your app\'s key-value storage.</string>
     <string name="hsp_preference_edit_text">Preference Value</string>
     <string name="hsp_preference_edit_action_apply">Apply</string>
+    <string name="hsp_filter">Filter</string>
 </resources>

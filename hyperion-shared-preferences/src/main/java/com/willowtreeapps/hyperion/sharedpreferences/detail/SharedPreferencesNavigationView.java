@@ -53,6 +53,10 @@ public class SharedPreferencesNavigationView extends FrameLayout {
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(preferenceListener);
     }
 
+    void filter(String query) {
+        sharedPreferencesDetailAdapter.filter(query.toLowerCase());
+    }
+
     private class PreferenceListener implements OnSharedPreferenceChangeListener {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
