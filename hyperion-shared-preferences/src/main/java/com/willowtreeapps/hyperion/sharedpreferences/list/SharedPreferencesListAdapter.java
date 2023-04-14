@@ -14,6 +14,8 @@ import java.util.List;
 class SharedPreferencesListAdapter extends RecyclerView.Adapter<SharedPreferencesFileViewHolder> {
 
     private final List<String> preferences;
+    private List<String> filteredPreferences;
+    private boolean isFilterApplied;
 
     SharedPreferencesListAdapter(List<String> preferences) {
         this.preferences = new ArrayList<>(preferences);
@@ -29,11 +31,28 @@ class SharedPreferencesListAdapter extends RecyclerView.Adapter<SharedPreference
 
     @Override
     public void onBindViewHolder(@NonNull SharedPreferencesFileViewHolder holder, int position) {
-        holder.bind(preferences.get(position));
+        String pref = isFilterApplied ? filteredPreferences.get(position) : preferences.get(position);
+        holder.bind(pref);
     }
 
     @Override
     public int getItemCount() {
-        return preferences.size();
+        return isFilterApplied ? filteredPreferences.size() : preferences.size();
     }
+
+    void filter(String query) {
+        String filterQuery = query.toLowerCase();
+        isFilterApplied = !"".equals(query);
+        this.filteredPreferences = new ArrayList<>();
+        if (isFilterApplied) {
+            for (String pref : preferences) {
+                if (!pref.toLowerCase().contains(filterQuery)) continue;
+                filteredPreferences.add(pref);
+            }
+        } else {
+            filteredPreferences.addAll(preferences);
+        }
+        notifyDataSetChanged();
+    }
+
 }
