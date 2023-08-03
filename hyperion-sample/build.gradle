@@ -10,7 +10,7 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode buildVersionCode()
         versionName version
-        multiDexEnabled true
+        multiDexEnabled false
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -27,7 +27,7 @@ android {
             minifyEnabled false
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
         }
     }
 }
