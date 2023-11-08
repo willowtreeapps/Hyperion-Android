@@ -132,10 +132,13 @@ public class HyperionService extends Service {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            final Activity activity = HyperionService.this.activity.get();
-            if (activity != null) {
-                AppComponent.Holder.getInstance(HyperionService.this)
-                        .getPublicControl().open(activity);
+            WeakReference<Activity> ref = HyperionService.this.activity;
+            if (ref != null) {
+                final Activity activity = ref.get();
+                if (activity != null) {
+                    AppComponent.Holder.getInstance(HyperionService.this)
+                            .getPublicControl().open(activity);
+                }
             }
         }
     }
