@@ -4,12 +4,17 @@
 
     <!--Required for API 28 and above-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <application>
         <service
             android:name=".internal.HyperionService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="specialUse" >
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="service used to ensure debug menu notification is visible while app UI is visible and no longer than that" />
+        </service>
         <activity
             android:name="com.willowtreeapps.hyperion.core.StandaloneActivity"
             android:exported="true" />

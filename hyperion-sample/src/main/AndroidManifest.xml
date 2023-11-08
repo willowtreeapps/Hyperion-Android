@@ -2,6 +2,8 @@
     android:sharedUserId="com.willowtreeapps.hyperion.sample"
     package="com.willowtreeapps.hyperion.sample">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:name=".SampleApplication"
         android:allowBackup="true"
@@ -11,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
 
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

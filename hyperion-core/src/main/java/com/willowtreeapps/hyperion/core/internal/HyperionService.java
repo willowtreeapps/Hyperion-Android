@@ -111,7 +111,11 @@ public class HyperionService extends Service {
     public void onCreate() {
         super.onCreate();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        registerReceiver(actionOpenMenuReceiver, new IntentFilter(ACTION_OPEN_MENU));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(actionOpenMenuReceiver, new IntentFilter(ACTION_OPEN_MENU), RECEIVER_EXPORTED);
+        } else {
+            registerReceiver(actionOpenMenuReceiver, new IntentFilter(ACTION_OPEN_MENU));
+        }
     }
 
     @Override
