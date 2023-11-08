@@ -60,6 +60,7 @@ public class HyperionService extends Service {
                 .setTicker("")
                 .setSmallIcon(R.drawable.hype_logo)
                 .setOngoing(true)
+                .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
                 .setVibrate(new long[]{0});
 
         String contentTitle = getString(R.string.hype_notification_content_title);

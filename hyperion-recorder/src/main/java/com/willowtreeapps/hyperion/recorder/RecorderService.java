@@ -35,6 +35,7 @@ public class RecorderService extends Service {
                 .setTicker("")
                 .setSmallIcon(R.drawable.hr_icon)
                 .setOngoing(true)
+                .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
                 .setVibrate(new long[]{0});
 
         String contentTitle = getString(R.string.hr_notification_content_title);
