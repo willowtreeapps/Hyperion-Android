@@ -35,4 +35,13 @@ public final class Hyperion {
     public static void startActivity(Context context) {
         // no-op
     }
+
+    public static void enable() {
+        // no-op
+    }
+
+    public static void disable() {
+        // no-op
+    }
+
 }
