@@ -41,13 +41,14 @@ class SharedPreferencesListAdapter extends RecyclerView.Adapter<SharedPreference
     }
 
     void filter(String query) {
-        String filterQuery = query.toLowerCase();
-        isFilterApplied = !"".equals(query);
+        String filterQuery = query == null ? "" : query.toLowerCase();
+        isFilterApplied = !filterQuery.isEmpty();
         this.filteredPreferences = new ArrayList<>();
         if (isFilterApplied) {
             for (String pref : preferences) {
-                if (!pref.toLowerCase().contains(filterQuery)) continue;
-                filteredPreferences.add(pref);
+                if (pref.toLowerCase().contains(filterQuery)) {
+                    filteredPreferences.add(pref);
+                }
             }
         } else {
             filteredPreferences.addAll(preferences);

@@ -152,7 +152,7 @@ class SharedPreferencesDetailAdapter extends RecyclerView.Adapter<PreferenceView
 
 
     void filter(String query) {
-        filterQuery = query.toLowerCase();
+        filterQuery = query == null ? "" : query.toLowerCase();
         notifyDataSetChanged();
     }
 }
