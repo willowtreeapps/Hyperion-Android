@@ -17,6 +17,7 @@ import com.willowtreeapps.hyperion.sharedpreferences.detail.viewholder.StringSet
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +32,8 @@ class SharedPreferencesDetailAdapter extends RecyclerView.Adapter<PreferenceView
     private static final int VIEW_TYPE_STRING_SET = 6;
 
     private final SharedPreferences sharedPreferences;
+
+    private String filterQuery;
 
     SharedPreferencesDetailAdapter(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
@@ -127,7 +130,18 @@ class SharedPreferencesDetailAdapter extends RecyclerView.Adapter<PreferenceView
     }
 
     private Set<String> getKeys() {
-        return getSharedPreferencesMap().keySet();
+        Set<String> allKeys = getSharedPreferencesMap().keySet();
+        if (filterQuery != null) {
+            Set<String> filteredKeys = new HashSet<>();
+            for (String key : allKeys) {
+                if (key.toLowerCase().contains(filterQuery)) {
+                    filteredKeys.add(key);
+                }
+            }
+            return filteredKeys;
+        } else {
+            return allKeys;
+        }
     }
 
     private List<String> getKeysSorted() {
@@ -136,4 +150,9 @@ class SharedPreferencesDetailAdapter extends RecyclerView.Adapter<PreferenceView
         return sortedList;
     }
 
+
+    void filter(String query) {
+        filterQuery = query == null ? "" : query.toLowerCase();
+        notifyDataSetChanged();
+    }
 }
