@@ -78,6 +78,7 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
             RecordingManager.requestStart(getExtension().getActivityResults(), REQUEST_CODE);
         } catch (RecordingException ex) {
             ex.printStackTrace();
+            Toast.makeText(context, "Unable to start recording, check logs for details", Toast.LENGTH_LONG).show();
             // TODO
         }
     }
@@ -86,6 +87,8 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
         try {
             RecordingManager.stop();
         } catch (RecordingException ex) {
+            ex.printStackTrace();
+            Toast.makeText(view.getContext(), "Unable to stop recording, check logs for details", Toast.LENGTH_LONG).show();
             // TODO
         }
     }
@@ -109,6 +112,6 @@ class RecorderPluginModule extends PluginModule implements View.OnClickListener,
             return;
         }
 
-        RecordingManager.start(resultCode, data);
+        RecordingManager.start(view.getContext().getApplicationContext(), resultCode, data);
     }
 }

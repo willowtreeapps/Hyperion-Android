@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.willowtreeapps.hyperion.recorder">
 
+    <!--Required for API 28 and above-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+
     <application>
         <activity android:name=".RecordingsActivity"
             android:theme="@style/Theme.AppCompat.Light"/>
@@ -13,6 +17,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/hr_file_paths" />
         </provider>
+        <service
+            android:name=".RecorderService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
     </application>
 
 </manifest>

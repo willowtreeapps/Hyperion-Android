@@ -6,4 +6,8 @@
     <string name="hr_plugin_name">Recorder</string>
     <string name="hr_plugin_subtitle">Record, save, and share a video of your app.</string>
     <string name="hr_recordings">Videos</string>
+    <string name="hr_notification_content_title">Hyperion Recorder</string>
+    <string name="hr_notification_content_text"></string>
+    <string name="hr_notification_subtext">Screen recording is in progress</string>
+    <string name="hr_notification_action_stop_recording">Stop recording</string>
 </resources>

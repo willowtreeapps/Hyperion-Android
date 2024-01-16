@@ -60,6 +60,7 @@ public class HyperionService extends Service {
                 .setTicker("")
                 .setSmallIcon(R.drawable.hype_logo)
                 .setOngoing(true)
+                .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
                 .setVibrate(new long[]{0});
 
         String contentTitle = getString(R.string.hype_notification_content_title);
@@ -111,7 +112,11 @@ public class HyperionService extends Service {
     public void onCreate() {
         super.onCreate();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        registerReceiver(actionOpenMenuReceiver, new IntentFilter(ACTION_OPEN_MENU));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(actionOpenMenuReceiver, new IntentFilter(ACTION_OPEN_MENU), RECEIVER_EXPORTED);
+        } else {
+            registerReceiver(actionOpenMenuReceiver, new IntentFilter(ACTION_OPEN_MENU));
+        }
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.willowtreeapps.hyperion.recorder;
 
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.MediaRecorder;
@@ -10,6 +13,8 @@ import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -20,6 +25,7 @@ import com.willowtreeapps.hyperion.plugin.v1.ActivityResults;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -29,6 +35,7 @@ final class RecordingManager {
     private static final String TAG = "RecordingManager";
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final CopyOnWriteArrayList<OnRecordingChangedListener> listeners = new CopyOnWriteArrayList<>();
+    private static RecorderServiceConnection connection;
     private static MediaRecorder mediaRecorder;
     private static MediaProjectionManager projectionManager;
     private static MediaProjection mediaProjection;
@@ -92,7 +99,20 @@ final class RecordingManager {
         activityResults.startActivityForResult(projectionManager.createScreenCaptureIntent(), requestCode);
     }
 
-    static void start(int resultCode, Intent data) {
+    static void start(Context context, int resultCode, Intent data) {
+        if (connection != null) {
+            // Another recording session is in progress or trying to start
+            return;
+        }
+        connection = new RecorderServiceConnection(context, resultCode, data);
+        context.bindService(
+                new Intent(context, RecorderService.class),
+                connection,
+                Context.BIND_AUTO_CREATE
+        );
+    }
+
+    private static void onServiceReady(int resultCode, Intent data) {
         mediaProjectionCallback = new MediaProjectionCallback();
         mediaProjection = projectionManager.getMediaProjection(resultCode, data);
         mediaProjection.registerCallback(mediaProjectionCallback, null);
@@ -123,6 +143,7 @@ final class RecordingManager {
         } catch (RuntimeException ex) {
             throw new RecordingException("Failed to stop media recorder.", ex);
         } finally {
+            stopService();
             setRecording(false);
         }
     }
@@ -142,6 +163,21 @@ final class RecordingManager {
             mediaProjection.unregisterCallback(mediaProjectionCallback);
             mediaProjection.stop();
             mediaProjection = null;
+        }
+    }
+
+    private static void stopService() {
+        RecorderServiceConnection oldConnection = connection;
+        connection = null;
+        if (oldConnection != null) {
+            Context context = oldConnection.boundContext.get();
+            if (context != null) {
+                try {
+                    context.unbindService(oldConnection);
+                } catch (IllegalArgumentException e) {
+                    // already unbonded
+                }
+            }
         }
     }
 
@@ -176,6 +212,7 @@ final class RecordingManager {
             }
             mediaProjection = null;
             stopScreenSharing();
+            stopService();
             setRecording(false);
         }
     }
@@ -184,4 +221,46 @@ final class RecordingManager {
         void onRecordingChanged(boolean recording);
     }
 
+    final static class RecorderServiceConnection implements ServiceConnection {
+
+        private final int resultCode;
+        private final Intent data;
+
+        private final WeakReference<Context> boundContext;
+
+        RecorderServiceConnection(Context context, int resultCode, Intent data) {
+            boundContext = new WeakReference<>(context);
+            this.resultCode = resultCode;
+            this.data = data;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            if (connection == this) {
+                onServiceReady(resultCode, data);
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            if (connection == this && isRecording()) {
+                try {
+                    stop();
+                } catch (RecordingException e) {
+                    Log.w(TAG, "unable to stop recording after RecordingService disconnected", e);
+                }
+            }
+        }
+
+        @Override
+        public void onBindingDied(ComponentName name) {
+            if (connection == this && isRecording()) {
+                try {
+                    stop();
+                } catch (RecordingException e) {
+                    Log.w(TAG, "unable to stop recording after RecordingService death", e);
+                }
+            }
+        }
+    }
 }
