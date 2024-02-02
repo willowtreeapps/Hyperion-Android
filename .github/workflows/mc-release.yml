@@ -1,0 +1,146 @@
+name: Build & Release to Maven Central
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      JVM_OPTS: -Xmx4800m
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Restore Dependencies From Cache
+        id: cache-dependencies-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.gradle/caches
+          key: jars-${{ checksum "build.gradle" }}-gradle-${{ checksum "hyperion-core/build.gradle" }}
+
+      - name: Build Dependencies
+        run: ./gradlew androidDependencies
+
+      - name: Save Dependencies To Cache
+        id: cache-dependencies-save
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ steps.cache-dependencies-restore.outputs.cache-primary-key }}
+
+      - name: Set version variable
+        run: |
+          VERSION_NAME=$(echo "${{ github.ref_name }}" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_ENV"
+
+      - name: Clean & Build
+        env:
+          VERSION_CODE: ${{ github.run_number }}
+          VERSION_NAME: ${{ env.version_name }}
+        run: ./gradlew clean assemble
+
+      - name: Lint Release
+        run: ./gradlew lintRelease
+
+      - name: Store Core Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: core
+          path: hyperion-core/build/outputs/
+
+      - name: Store Core No-Op Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-no-op
+          path: hyperion-core-no-op/build/outputs/
+
+      - name: Store Plugin Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin
+          path: hyperion-plugin/build/outputs/
+
+      - name: Store Attr Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: attr
+          path: hyperion-attr/build/outputs/
+
+      - name: Store Attr Appcompat V7 Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: attr-appcompat-v7
+          path: hyperion-attr-appcompat-v7/build/outputs/
+
+      - name: Store Attr Design Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: attr-design
+          path: hyperion-attr-design/build/outputs/
+
+      - name: Store Attr Recyclerview Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: attr-recyclerview
+          path: hyperion-attr-recyclerview/build/outputs/
+
+      - name: Store Attr Support V4 Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: attr-support-v4
+          path: hyperion-attr-support-v4/build/outputs/
+
+      - name: Store Disk Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: disk
+          path: hyperion-disk/build/outputs/
+
+      - name: Store Measurement Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: measurement
+          path: hyperion-measurement/build/outputs/
+
+      - name: Store Phoenix Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: phoenix
+          path: hyperion-phoenix/build/outputs/
+
+      - name: Store Recorder Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: recorder
+          path: hyperion-recorder/build/outputs/
+
+      - name: Deploy To Maven Central
+        run: |
+          echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
+          gpg --import --batch $HOME/secring.gpg
+          ./gradlew clean publish \
+          -PmavenCentralUsername=${{ secrets.SONATYPE_USERNAME }} \
+          -PmavenCentralPassword=${{ secrets.SONATYPE_PASSWORD }} \
+          -Psigning.keyId=${{ secrets.MAVEN_CENTRAL_KEY_ID }} \
+          -Psigning.password=${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }} \
+          -Psigning.secretKeyRingFile=$HOME/secring.gpg \
+          -Porg.gradle.parallel=false \
+          -Porg.gradle.daemon=false \
+          --no-daemon
+
+      - name: Create Github Release
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+

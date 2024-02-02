@@ -4,7 +4,10 @@ project.ext.set("minSdkVersion", 15)
 project.ext.set("targetSdkVersion", 34)
 
 project.ext.set("libraryGroup", 'com.willowtreeapps.hyperion')
-project.ext.set("libraryVersion", '0.9.37')
+project.ext.set("libraryVersion", System.getenv("VERSION_NAME") ?: "0.0.0")
+//113 was the last versionCode used on Play Store before implementing CI with github actions
+//versionCode is now auto-incremented by using github actions build number plus the original value
+project.ext.set("libraryVersionCode", Integer.valueOf(System.getenv("VERSION_CODE") ?: "0") + 113)
 
 project.ext.set("versionAutoService", "1.0-rc4")
 project.ext.set("versionDagger", "2.24")
@@ -39,12 +42,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-def Integer buildVersionCode() {
-    if (project.hasProperty('versionCode')) {
-        return project.properties.versionCode.toInteger()
-    } else {
-        return 9999
-    }
 }
