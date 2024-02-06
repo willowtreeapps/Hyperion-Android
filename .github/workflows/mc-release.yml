@@ -21,28 +21,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Restore Dependencies From Cache
-        id: cache-dependencies-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: ~/.gradle/caches
-          key: jars-${{ checksum "build.gradle" }}-gradle-${{ checksum "hyperion-core/build.gradle" }}
-
-      - name: Build Dependencies
-        run: ./gradlew androidDependencies
-
-      - name: Save Dependencies To Cache
-        id: cache-dependencies-save
-        uses: actions/cache/save@v4
-        with:
-          path: ~/.gradle/caches
-          key: ${{ steps.cache-dependencies-restore.outputs.cache-primary-key }}
-
-      - name: Set version variable
-        run: |
-          VERSION_NAME=$(echo "${{ github.ref_name }}" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
-          echo "version_name=$VERSION_NAME" >> "$GITHUB_ENV"
-
       - name: Build
         env:
           VERSION_NAME: ${{ env.version_name }}
