@@ -43,85 +43,13 @@ jobs:
           VERSION_NAME=$(echo "${{ github.ref_name }}" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
           echo "version_name=$VERSION_NAME" >> "$GITHUB_ENV"
 
-      - name: Clean & Build
+      - name: Build
         env:
           VERSION_NAME: ${{ env.version_name }}
-        run: ./gradlew clean assemble
+        run: ./gradlew assemble
 
       - name: Lint Release
         run: ./gradlew lintRelease
-
-      - name: Store Core Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: core
-          path: hyperion-core/build/outputs/
-
-      - name: Store Core No-Op Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: core-no-op
-          path: hyperion-core-no-op/build/outputs/
-
-      - name: Store Plugin Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: plugin
-          path: hyperion-plugin/build/outputs/
-
-      - name: Store Attr Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: attr
-          path: hyperion-attr/build/outputs/
-
-      - name: Store Attr Appcompat V7 Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: attr-appcompat-v7
-          path: hyperion-attr-appcompat-v7/build/outputs/
-
-      - name: Store Attr Design Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: attr-design
-          path: hyperion-attr-design/build/outputs/
-
-      - name: Store Attr Recyclerview Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: attr-recyclerview
-          path: hyperion-attr-recyclerview/build/outputs/
-
-      - name: Store Attr Support V4 Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: attr-support-v4
-          path: hyperion-attr-support-v4/build/outputs/
-
-      - name: Store Disk Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: disk
-          path: hyperion-disk/build/outputs/
-
-      - name: Store Measurement Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: measurement
-          path: hyperion-measurement/build/outputs/
-
-      - name: Store Phoenix Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: phoenix
-          path: hyperion-phoenix/build/outputs/
-
-      - name: Store Recorder Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: recorder
-          path: hyperion-recorder/build/outputs/
 
       - name: Deploy To Maven Central
         run: |
