@@ -8,7 +8,6 @@ android {
         applicationId "com.willowtreeapps.hyperion.sample"
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
-        versionCode project.libraryVersionCode
         versionName version
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

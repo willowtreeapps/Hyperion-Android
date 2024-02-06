@@ -45,7 +45,6 @@ jobs:
 
       - name: Clean & Build
         env:
-          VERSION_CODE: ${{ github.run_number }}
           VERSION_NAME: ${{ env.version_name }}
         run: ./gradlew clean assemble
 
