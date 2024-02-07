@@ -34,10 +34,10 @@ jobs:
           echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
           gpg --import --batch $HOME/secring.gpg
           ./gradlew clean publish \
-          -PmavenCentralUsername=${{ secrets.SONATYPE_USERNAME }} \
-          -PmavenCentralPassword=${{ secrets.SONATYPE_PASSWORD }} \
-          -Psigning.keyId=${{ secrets.MAVEN_CENTRAL_KEY_ID }} \
-          -Psigning.password=${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }} \
+          -PmavenCentralUsername="${{ secrets.SONATYPE_USERNAME }}" \
+          -PmavenCentralPassword="${{ secrets.SONATYPE_PASSWORD }}" \
+          -Psigning.keyId="${{ secrets.MAVEN_CENTRAL_KEY_ID }}" \
+          -Psigning.password="${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }}" \
           -Psigning.secretKeyRingFile=$HOME/secring.gpg \
           -Porg.gradle.parallel=false \
           -Porg.gradle.daemon=false \
