@@ -2,8 +2,13 @@ name: Build & Release to Maven Central
 
 on:
   push:
+    branches:
+      - develop
     tags:
       - 'v*.*.*'
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   build:
@@ -29,6 +34,11 @@ jobs:
       - name: Lint Release
         run: ./gradlew lintRelease
 
+      - name: Extract Branch Name
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      # Check if the branch name matches the pattern "tags/v*.*.*" using regex
       - name: Deploy To Maven Central
         run: |
           echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
@@ -42,10 +52,12 @@ jobs:
           -Porg.gradle.parallel=false \
           -Porg.gradle.daemon=false \
           --no-daemon
+        if: success() && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
       - name: Create Github Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
+        if: success() && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
