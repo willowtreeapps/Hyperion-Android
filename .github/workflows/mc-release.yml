@@ -33,7 +33,6 @@ jobs:
 
       - name: Lint Release
         run: ./gradlew lintRelease;
-        if: ${{ success() && steps.check_if_pr_merge.outputs.is_pr_merge == 'true' }}
 
       - name: Check for Release Tag
         id: check_if_release-tag
