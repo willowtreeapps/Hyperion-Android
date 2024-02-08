@@ -2,8 +2,11 @@ name: Build & Release to Maven Central
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   build:
@@ -29,19 +32,29 @@ jobs:
       - name: Lint Release
         run: ./gradlew lintRelease
 
+      - name: Extract Branch Name
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      # Check if the branch name matches the pattern "tags/v*.*.*" using regex
       - name: Deploy To Maven Central
         run: |
-          echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
-          gpg --import --batch $HOME/secring.gpg
-          ./gradlew clean publish \
-          -PmavenCentralUsername="${{ secrets.SONATYPE_USERNAME }}" \
-          -PmavenCentralPassword="${{ secrets.SONATYPE_PASSWORD }}" \
-          -Psigning.keyId="${{ secrets.MAVEN_CENTRAL_KEY_ID }}" \
-          -Psigning.password="${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }}" \
-          -Psigning.secretKeyRingFile=$HOME/secring.gpg \
-          -Porg.gradle.parallel=false \
-          -Porg.gradle.daemon=false \
-          --no-daemon
+          if [[ $BRANCH_NAME =~ ^tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
+            gpg --import --batch $HOME/secring.gpg
+            ./gradlew clean publish \
+            -PmavenCentralUsername="${{ secrets.SONATYPE_USERNAME }}" \
+            -PmavenCentralPassword="${{ secrets.SONATYPE_PASSWORD }}" \
+            -Psigning.keyId="${{ secrets.MAVEN_CENTRAL_KEY_ID }}" \
+            -Psigning.password="${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }}" \
+            -Psigning.secretKeyRingFile=$HOME/secring.gpg \
+            -Porg.gradle.parallel=false \
+            -Porg.gradle.daemon=false \
+            --no-daemon
+          fi
+
+
+
 
       - name: Create Github Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
