@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - develop
+    tags:
+      - 'v*.*.*'
   pull_request:
     branches:
       - develop
@@ -39,19 +41,18 @@ jobs:
       # Check if the branch name matches the pattern "tags/v*.*.*" using regex
       - name: Deploy To Maven Central
         run: |
-          if [[ $BRANCH_NAME =~ ^tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
-            gpg --import --batch $HOME/secring.gpg
-            ./gradlew clean publish \
-            -PmavenCentralUsername="${{ secrets.SONATYPE_USERNAME }}" \
-            -PmavenCentralPassword="${{ secrets.SONATYPE_PASSWORD }}" \
-            -Psigning.keyId="${{ secrets.MAVEN_CENTRAL_KEY_ID }}" \
-            -Psigning.password="${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }}" \
-            -Psigning.secretKeyRingFile=$HOME/secring.gpg \
-            -Porg.gradle.parallel=false \
-            -Porg.gradle.daemon=false \
-            --no-daemon
-          fi
+          echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
+          gpg --import --batch $HOME/secring.gpg
+          ./gradlew clean publish \
+          -PmavenCentralUsername="${{ secrets.SONATYPE_USERNAME }}" \
+          -PmavenCentralPassword="${{ secrets.SONATYPE_PASSWORD }}" \
+          -Psigning.keyId="${{ secrets.MAVEN_CENTRAL_KEY_ID }}" \
+          -Psigning.password="${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }}" \
+          -Psigning.secretKeyRingFile=$HOME/secring.gpg \
+          -Porg.gradle.parallel=false \
+          -Porg.gradle.daemon=false \
+          --no-daemon
+        if: steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
 
 
@@ -61,4 +62,5 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
+        if: steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
