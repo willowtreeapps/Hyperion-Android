@@ -32,7 +32,12 @@ jobs:
         run: ./gradlew assemble
 
       - name: Lint Release
-        run: ./gradlew lintRelease
+        run: ./gradlew lintRelease;
+        if: ${{ success() && steps.check_if_pr_merge.outputs.is_pr_merge == 'true' }}
+
+      - name: Check for Release Tag
+        id: check_if_release-tag
+        run: echo "is_release=$(if [[ "${{ github.ref }}" == refs/tags/v*.*.* ]]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_OUTPUT
 
       - name: Deploy To Maven Central
         run: |
@@ -47,12 +52,12 @@ jobs:
           -Porg.gradle.parallel=false \
           -Porg.gradle.daemon=false \
           --no-daemon
-        if: ${{ success() && github.ref == 'tags/v*.*.*' }}
+        if: ${{ success() && steps.check_if_release-tag.outputs.is_release == 'true' }}
 
       - name: Create Github Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
-        if: ${{ success() && github.ref == 'tags/v*.*.*' }}
+        if: ${{ success() && steps.check_if_release-tag.outputs.is_release == 'true' }}
 
