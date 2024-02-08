@@ -52,15 +52,12 @@ jobs:
           -Porg.gradle.parallel=false \
           -Porg.gradle.daemon=false \
           --no-daemon
-        if: ${{ success() }} && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
-
-
-
+        if: success() && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
       - name: Create Github Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
-        if: ${{ success() }} && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
+        if: success() && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
