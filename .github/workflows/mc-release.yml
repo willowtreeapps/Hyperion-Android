@@ -26,6 +26,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set version variable
+        run: |
+          VERSION_NAME=$(echo "${{ github.ref_name }}" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_ENV"
+
       - name: Build
         env:
           VERSION_NAME: ${{ env.version_name }}
