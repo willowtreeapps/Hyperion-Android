@@ -52,7 +52,7 @@ jobs:
           -Porg.gradle.parallel=false \
           -Porg.gradle.daemon=false \
           --no-daemon
-        if: steps.extract_branch.outputs.branch == 'tags/v*.*.*'
+        if: ${{ success() }} && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
 
 
@@ -62,5 +62,5 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
-        if: steps.extract_branch.outputs.branch == 'tags/v*.*.*'
+        if: ${{ success() }} && steps.extract_branch.outputs.branch == 'tags/v*.*.*'
 
