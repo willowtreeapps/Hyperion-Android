@@ -45,6 +45,8 @@ jobs:
         run: ./gradlew lintRelease;
 
       - name: Deploy To Maven Central
+        env:
+          VERSION_NAME: ${{ env.version_name }}
         run: |
           echo ${{ secrets.MAVEN_CENTRAL_SEC_RING }} | base64 -d > $HOME/secring.gpg
           gpg --import --batch $HOME/secring.gpg
