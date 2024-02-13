@@ -11,6 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Print tags
+        run: |
+          echo "$(git tag --sort=creatordate | tail -n 2 | head -n 1)" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+'
+
       - name: Set old version
         id: set_old_version
         run: |
