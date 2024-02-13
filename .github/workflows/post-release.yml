@@ -1,6 +1,8 @@
 name: Post Release
 
-on: [workflow_dispatch]
+on:
+  release:
+    types: [ published ]
 
 jobs:
   update-readme:
