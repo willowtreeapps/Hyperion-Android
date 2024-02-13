@@ -13,7 +13,7 @@ jobs:
 
       - name: Print tags
         run: |
-          echo git tag --sort=creatordate
+          echo "$(git tag --sort=creatordate)"
           echo "$(git tag --sort=creatordate | tail -n 2 | head -n 1)" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+'
 
       - name: Set old version
