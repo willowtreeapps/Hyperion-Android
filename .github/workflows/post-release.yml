@@ -1,0 +1,50 @@
+name: Post Release
+
+on: [workflow_dispatch]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set old version
+        id: set_old_version
+        run: |
+          OLD_VERSION=$(echo "$(git tag --sort=creatordate | tail -n 2 | head -n 1)" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "old_version=$OLD_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Set new version
+        id: set_new_version
+        run: |
+          NEW_VERSION=$(echo "${{ github.ref_name }}" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Update README - Maven
+        uses: MathieuSoysal/file-updater-for-release@v1.0.3
+        with:
+          files: README.md
+          prefix: "<version>"
+          suffix: "</version>"
+          version: ${{ steps.set_new_version.outputs.new_version }}
+          old-version: ${{ steps.set_old_version.outputs.old_version }}
+          with-checkout: false
+
+      - name: Update README - Groovy
+        uses: MathieuSoysal/file-updater-for-release@v1.0.3
+        with:
+          files: README.md
+          prefix: "hyperion:hyperion-*:"
+          version: ${{ steps.set_new_version.outputs.new_version }}
+          old-version: ${{ steps.set_old_version.outputs.old_version }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: update readme
+          title: Update readme
+          body: Update readme to reflect release changes
+          branch: update-readme
+          base: main
