@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Print tags
         run: |
@@ -36,7 +38,6 @@ jobs:
           suffix: "</version>"
           version: ${{ steps.set_new_version.outputs.new_version }}
           old-version: ${{ steps.set_old_version.outputs.old_version }}
-          with-checkout: false
 
       - name: Update README - Groovy
         uses: MathieuSoysal/file-updater-for-release@v1.0.3
