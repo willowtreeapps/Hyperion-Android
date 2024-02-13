@@ -49,4 +49,4 @@ jobs:
           title: Update readme
           body: Update readme to reflect release changes
           branch: update-readme
-          base: main
+          base: develop
